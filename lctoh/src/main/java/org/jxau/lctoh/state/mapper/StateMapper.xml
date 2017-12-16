@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:需与接口的完全限定名保持一致 -->
+<mapper namespace="org.jxau.lctoh.state.mapper.StateMapper">
+
+	<!--根据状态码查询状态信息 -->
+	<select id="findStateByStateId" parameterType="Integer" resultType="State">
+		select 
+			state_id as stateId,
+			state_info as stateInfo,
+			state_update_time as stateUpdateTime
+		from 
+			state
+		where
+			state_id=#{stateId}
+	</select>
+	
+	<!-- 根据状态Id更新状态信息 -->
+	<update id="updateState"  parameterType="State" >
+		update 
+			state
+		set
+			state_info=#{stateInfo} ,
+			state_update_time=#{stateUpdateTime}
+		where
+			state_id=#{stateId}
+	</update>
+	
+	<!-- 根据状态Id更新状态信息 -->
+	<update id="updateStateByMap"  parameterType="Map" >
+		update 
+			state
+		set
+			state_info=#{stateInfo} ,
+			state_update_time=#{stateUpdateTime}
+		where
+			state_id=#{stateId}
+	</update>
+	
+	
+	
+	
+	
+	
+</mapper>
