@@ -61,6 +61,7 @@ public class EncodingFilter implements Filter
                 return new String(value.getBytes("iso8859-1"),characterEncoding);
             }
         }), resp);
+       
     }
     public void init(FilterConfig fConfig) throws ServletException
     {
