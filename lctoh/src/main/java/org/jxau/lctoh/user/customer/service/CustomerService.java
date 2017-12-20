@@ -17,11 +17,13 @@ public class CustomerService {
 	@Autowired
 	private UserDao userDao;
 	/**
-	 * 管理员登陆
+	 * 客户登陆
 	 * @param userId  用户识别码
-	 * @return Admin 管理员
+	 * @return Customer 管理员
+	 * @throws UserException
+	 * @throws Exception
 	 */
-	public Customer login (User user) throws UserException{
+	public Customer login (User user) throws UserException,Exception{
 		
 		User _user=userDao.findUserByUserAccount(user.getUserAccount());
 		if(_user==null) throw new UserException("账号不存在");
