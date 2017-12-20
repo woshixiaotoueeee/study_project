@@ -17,8 +17,6 @@ public class UserDao extends BaseDao{
 	public void setUserMapper(UserMapper userMapper) {
 		this.userMapper = userMapper;
 	}
-
-
 	@Override
 	public void puttMapper() {
 		userMapper=getMapper(UserMapper.class);
