@@ -18,8 +18,10 @@ public class AdminService {
 	 * 管理员登陆
 	 * @param userId  用户识别码
 	 * @return Admin 管理员
+	 * @throws UserException
+	 * @throws Exception
 	 */
-	public Admin login (User user) throws UserException{
+	public Admin login (User user) throws UserException,Exception{
 		
 		User _user=userDao.findUserByUserAccount(user.getUserAccount());
 		if(_user==null) throw new UserException("账号不存在");
