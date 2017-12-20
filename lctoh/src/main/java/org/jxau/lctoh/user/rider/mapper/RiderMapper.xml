@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:需与接口的完全限定名保持一致 -->
+<mapper namespace="org.jxau.lctoh.user.rider.mapper.RiderMapper">
+	<resultMap type="Rider" id="RiderResultMap">
+	    <id property="riderId" column="rider_id"/>
+		<result property="riderUpdateTime" column="rider_update_time"/>
+		<result property="riderLongitude" column="rider_longitude"/>
+		<result property="riderLatitude" column="rider_latitude"/>
+		<association property="riderUser" column="rider_user_id" select="org.jxau.lctoh.user.basis.mapper.UserMapper.findUserByUserId"/>
+		<association property="riderState" column="rider_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
+	</resultMap>
+	
+	<!--根据管理员识别码查询用户信息-->
+	<select id="findRiderByUserId" parameterType="String" resultMap="RiderResultMap">
+		select 
+			rider.rider_id,
+			rider.rider_longitude,
+			rider.rider_latitude,
+			rider.rider_update_time,
+			rider.rider_user_id,
+			rider.rider_state_id
+		from rider
+		where rider.rider_user_id=#{userId}
+	</select>
+	
+	<!--根据用户账号查询用户信息-->
+	<select id="findRiderByRiderId" parameterType="String" resultMap="RiderResultMap">
+		select 
+			rider.rider_id,
+			rider.rider_longitude,
+			rider.rider_latitude,
+			rider.rider_update_time,
+			rider.rider_user_id,
+			rider.rider_state_id
+		from rider
+		where rider.rider_id=#{riderId}
+	</select>
+	
+</mapper>

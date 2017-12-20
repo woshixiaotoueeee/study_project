@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:需与接口的完全限定名保持一致 -->
+<mapper namespace="org.jxau.lctoh.user.admin.mapper.AdminMapper">
+	<resultMap type="Admin" id="AdminResultMap">
+	    <id property="adminId" column="admin_id"/>
+		<result property="adminUpdateTime" column="admin_update_time"/>
+		<association property="adminUser" column="admin_user_id" select="org.jxau.lctoh.user.basis.mapper.UserMapper.findUserByUserId"/>
+		<association property="adminState" column="admin_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
+	</resultMap>
+	
+	<!--根据管理员识别码查询用户信息-->
+	<select id="findAdminByUserId" parameterType="String" resultMap="AdminResultMap">
+		select 
+			admin.admin_id,
+			admin.admin_update_time,
+			admin.admin_state_id,
+			admin.admin_user_id
+		from admin
+		where admin.admin_user_id=#{userId}
+	</select>
+	
+	<!--根据用户账号查询用户信息-->
+	<select id="findAdminByAdminId" parameterType="String" resultMap="AdminResultMap">
+		select 
+			admin.admin_id,
+			admin.admin_update_time,
+			admin.admin_state_id,
+			admin.admin_user_id
+		from admin
+		where admin.admin_id=#{adminId}
+	</select>
+	
+</mapper>
