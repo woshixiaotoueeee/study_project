@@ -6,6 +6,7 @@ import org.jxau.lctoh.user.basis.domain.User;
 import org.jxau.lctoh.user.basis.exception.UserException;
 import org.jxau.lctoh.user.basis.service.UserService;
 import org.jxau.lctoh.user.customer.service.CustomerService;
+import org.jxau.lctoh.user.rider.service.RiderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,16 +23,22 @@ public class UserController {
 	@Autowired
 	private AdminService adminService;
 	
+	@Autowired
+	private RiderService riderService;
+	
 	
 	@ResponseBody
 	@RequestMapping(value="/login",produces="text/html;charset=utf-8")
 	public String login(){
 		User user=new User();
 		user.setUserAccount("100001");
-		user.setUserPassword("11111");
+		user.setUserPassword("100001");
 		try {
 			customerService.login(user);
 		} catch (UserException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
@@ -41,7 +48,23 @@ public class UserController {
 		} catch (UserException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
 		}
+		
+		
+		try {
+			riderService.login(user);
+		} catch (UserException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		
+		
 		
 		return "index";
 	}
