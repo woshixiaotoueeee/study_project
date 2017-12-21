@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
+import org.jxau.lctoh.position.province.domain.City;
 import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.user.basis.domain.User;
 import org.springframework.context.annotation.Scope;
@@ -24,8 +25,8 @@ public class Restaurant {
 	private Date restaurantUpdateTime;		//最近更新时间
 	private State restaurantState;			//店家状态
 	private User restaurantUser;			//对应用户
-	private restaurant_category_id;			//所属分类
-	private restaurant_city_id;				//所属城市
+	private RestaurantCategory restaurantCategory;//所属分类
+	private City restaurantCity;			//所属城市
 	
 	
 	
