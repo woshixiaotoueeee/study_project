@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:需与接口的完全限定名保持一致 -->
+<mapper namespace="org.jxau.lctoh.position.region.mapper.ProvinceMapper">
+	<resultMap type="Province" id="ProvinceResultMap">
+	    <id property="provinceId" column="province_id"/>
+	    <result property="provinceName" column="province_name"/>
+		<result property="provinceUpdateTime" column="province_update_time"/>
+		<association property="provinceState" column="province_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
+	</resultMap>
+
+	
+	<!--根据省份识别码查询省份信息-->
+	<select id="findProvinceByProvinceId" parameterType="String" resultMap="ProvinceResultMap">
+		select 
+			province.province_id,
+			province.province_name,
+			province.province_update_time,
+			province.province_state_id
+		from province
+		where province.province_id=#{provinceId}
+	</select>
+	<!-- 根据省份名查找省份 -->
+	<select id="findProvinceByProvinceName" parameterType="String" resultMap="ProvinceResultMap">
+		select 
+			province.province_id,
+			province.province_name,
+			province.province_update_time,
+			province.province_state_id
+		from province
+		where province.province_name  like CONCAT(CONCAT('%', #{provinceName}), '%')
+	</select>
+	
+	<!-- 查找所有省份 -->
+	<select id="findProvinceAll" resultMap="ProvinceResultMap">
+		select 
+			province.province_id,
+			province.province_name,
+			province.province_update_time,
+			province.province_state_id
+		from province
+	</select>
+	<!-- 根据状态码查找省份 -->
+	<select id="findProvinceByProvinceName" parameterType="Integer" resultMap="ProvinceResultMap">
+		select 
+			province.province_id,
+			province.province_name,
+			province.province_update_time,
+			province.province_state_id
+		from province
+		where province.province_state_id=#{provinceStateId}
+	</select>
+	
+</mapper>
