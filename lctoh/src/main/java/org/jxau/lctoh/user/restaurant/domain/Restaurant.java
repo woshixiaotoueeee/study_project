@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
-import org.jxau.lctoh.position.province.domain.City;
+import org.jxau.lctoh.position.region.domain.City;
 import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.user.basis.domain.User;
 import org.springframework.context.annotation.Scope;
