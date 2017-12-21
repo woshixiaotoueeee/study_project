@@ -1,11 +1,19 @@
 package org.jxau.lctoh.user.basis.controller;
 
 
+import java.util.Map;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+
+import org.jxau.lctoh.user.admin.domain.Admin;
 import org.jxau.lctoh.user.admin.service.AdminService;
 import org.jxau.lctoh.user.basis.domain.User;
 import org.jxau.lctoh.user.basis.exception.UserException;
 import org.jxau.lctoh.user.basis.service.UserService;
+import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.customer.service.CustomerService;
+import org.jxau.lctoh.user.rider.domain.Rider;
 import org.jxau.lctoh.user.rider.service.RiderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,44 +37,65 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value="/login",produces="text/html;charset=utf-8")
-	public String login(){
+	public String login(HttpSession session){
+		
+		Integer type =0;
+		
 		User user=new User();
 		user.setUserAccount("100001");
 		user.setUserPassword("100001");
-		try {
-			customerService.login(user);
-		} catch (UserException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
+		
+		switch(type){
+			case 1:
+				try {
+					Customer customer=customerService.login(user);
+					session.setAttribute("customer", customer);
+				} catch (UserException e) {
+					return e.getMessage();
+				} catch (Exception e) {
+					return "未知错误，请联系管理员";
+				}
+				break;
+			case 2:
+				try {
+					Admin admin=adminService.login(user);
+					session.setAttribute("admin", admin);
+				} catch (UserException e) {
+					return e.getMessage();
+				} catch (Exception e) {
+					return "未知错误，请联系管理员";
+				}
+				break;
+			case 3:
+				try {
+					Rider rider=riderService.login(user);
+					session.setAttribute("rider", rider);
+					ServletContext servletContext=session.getServletContext();
+					Map riderMap=(Map)servletContext.getAttribute("riderMap");
+					riderMap.put(rider.getRiderId(), rider);
+					synchronized(this){
+						servletContext.setAttribute("riderMap", riderMap);
+					}
+				} catch (UserException e) {
+					return e.getMessage();
+				} catch (Exception e) {
+					return "未知错误，请联系管理员";
+				}
+				break;
+			case 4:
+				try {
+					riderService.login(user);
+					//throw new UserException("店家登陆尚未实现");
+				} catch (UserException e) {
+					return e.getMessage();
+				} catch (Exception e) {
+					return "未知错误，请联系管理员";
+				}
+				break;
+			default : return "身份不明";
 		}
 		
-		try {
-			adminService.login(user);
-		} catch (UserException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
-		}
-		
-		
-		try {
-			riderService.login(user);
-		} catch (UserException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
-		}
-		
-		
-		
-		return "index";
+		return "1";
 	}
 	
 	
