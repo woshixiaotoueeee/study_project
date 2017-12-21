@@ -28,6 +28,12 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+	
+	<listener>
+	    <listener-class>org.jxau.lctoh.listener.ConfigListener</listener-class>
+	</listener>
+
+
 	<!-- 使用tomcat自带的servlet进行处理(不让springmvc出来静态资源) -->
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
