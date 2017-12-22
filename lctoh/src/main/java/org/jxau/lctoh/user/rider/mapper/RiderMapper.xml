@@ -13,7 +13,7 @@
 		<association property="riderState" column="rider_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
 	</resultMap>
 	
-	<!--根据管理员识别码查询用户信息-->
+	<!--根据用户识别码查询用户信息-->
 	<select id="findRiderByUserId" parameterType="String" resultMap="RiderResultMap">
 		select 
 			rider.rider_id,
@@ -26,7 +26,7 @@
 		where rider.rider_user_id=#{userId}
 	</select>
 	
-	<!--根据用户账号查询用户信息-->
+	<!--根据骑手识别码查询用户信息-->
 	<select id="findRiderByRiderId" parameterType="String" resultMap="RiderResultMap">
 		select 
 			rider.rider_id,
@@ -37,6 +37,19 @@
 			rider.rider_state_id
 		from rider
 		where rider.rider_id=#{riderId}
+	</select>
+	
+	<!--根据骑手识别码查询用户信息-->
+	<select id="findRiderByRiderStateId" parameterType="Integer" resultMap="RiderResultMap">
+		select 
+			rider.rider_id,
+			rider.rider_longitude,
+			rider.rider_latitude,
+			rider.rider_update_time,
+			rider.rider_user_id,
+			rider.rider_state_id
+		from rider
+		where rider.rider_state_id=#{riderStateId}
 	</select>
 	
 </mapper>
