@@ -21,9 +21,9 @@ public class RiderDao extends BaseDao {
 	}
 	
 	/**
-	 * 根据用户识别码查询管理员信息
+	 * 根据用户识别码查询骑手信息
 	 * @param userId  用户识别码
-	 * @return Rider 管理员
+	 * @return Rider 骑手
 	 */
 	public Rider findRiderByUserId(String userId){
 		return riderMapper.findRiderByUserId(userId);
@@ -31,9 +31,9 @@ public class RiderDao extends BaseDao {
 	
 	
 	/**
-	 * 根据管理员识别码查询管理员信息
-	 * @param riderId  管理员识别码
-	 * @return Rider 管理员
+	 * 根据骑手识别码查询骑手信息
+	 * @param riderId  骑手识别码
+	 * @return Rider 骑手
 	 */
 	public Rider findRiderByRiderId(String riderId){
 		return riderMapper.findRiderByRiderId(riderId);
