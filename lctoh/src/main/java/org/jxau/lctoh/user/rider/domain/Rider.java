@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component;
 @Alias("Rider")
 @Scope("prototype")
 public class Rider {
-	private String riderId;
-	private Date riderUpdateTime;
-	private User riderUser;
-	private BigDecimal riderLongitude;
-	private BigDecimal riderLatitude;
-	private State riderState;
+	private String riderId;			//骑手识别码
+	private Date riderUpdateTime;	//最近更新时间
+	private User riderUser;			//所属用户
+	private BigDecimal riderLongitude;//经度
+	private BigDecimal riderLatitude;//纬度
+	private State riderState;		//状态
 	public String getRiderId() {
 		return riderId;
 	}
