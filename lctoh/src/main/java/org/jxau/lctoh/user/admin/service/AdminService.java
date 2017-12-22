@@ -1,5 +1,6 @@
 package org.jxau.lctoh.user.admin.service;
 
+import org.jxau.lctoh.tool.config.Config;
 import org.jxau.lctoh.user.admin.dao.AdminDao;
 import org.jxau.lctoh.user.admin.domain.Admin;
 import org.jxau.lctoh.user.basis.dao.UserDao;
@@ -24,15 +25,15 @@ public class AdminService {
 	public Admin login (User user) throws UserException,Exception{
 		
 		User _user=userDao.findUserByUserAccount(user.getUserAccount());
-		if(_user==null) throw new UserException("账号不存在");
+		if(_user==null) throw new UserException(Config.accountError);
 		if(!(_user.getUserPassword().equals(user.getUserPassword())))
-			throw new UserException("密码错误");
+			throw new UserException(Config.passwordError);
 		Admin admin=adminDao.findAdminByUserId(_user.getUserId());
-		if(admin==null)throw new UserException("抱歉，你的账号没有该权限");
+		if(admin==null)throw new UserException(Config.powerError);
 		
 		/**后期可能需要修改*/
 		if(admin.getAdminState().getStateId()!=10002)
-			throw new UserException("抱歉，你的账号可能未激活或者被锁定无法登陆");
+			throw new UserException(Config.loginStateError);
 		return admin;
 	}
 	
