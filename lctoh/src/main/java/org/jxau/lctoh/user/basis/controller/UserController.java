@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.jxau.lctoh.tool.config.Config;
 import org.jxau.lctoh.user.admin.domain.Admin;
 import org.jxau.lctoh.user.admin.service.AdminService;
 import org.jxau.lctoh.user.basis.domain.User;
@@ -36,7 +37,7 @@ public class UserController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value="/login",produces="text/html;charset=utf-8")
+	@RequestMapping(value="/login",produces=Config.produces)
 	public String login(HttpSession session){
 		
 		Integer type =0;
@@ -49,37 +50,37 @@ public class UserController {
 			case 1:
 				try {
 					Customer customer=customerService.login(user);
-					session.setAttribute("customer", customer);
+					session.setAttribute(Config.customerSession, customer);
 				} catch (UserException e) {
 					return e.getMessage();
 				} catch (Exception e) {
-					return "未知错误，请联系管理员";
+					return Config.notKnowError;
 				}
 				break;
 			case 2:
 				try {
 					Admin admin=adminService.login(user);
-					session.setAttribute("admin", admin);
+					session.setAttribute(Config.adminSession, admin);
 				} catch (UserException e) {
 					return e.getMessage();
 				} catch (Exception e) {
-					return "未知错误，请联系管理员";
+					return Config.notKnowError;
 				}
 				break;
 			case 3:
 				try {
 					Rider rider=riderService.login(user);
-					session.setAttribute("rider", rider);
+					session.setAttribute(Config.riderSession, rider);
 					ServletContext servletContext=session.getServletContext();
-					Map riderMap=(Map)servletContext.getAttribute("riderMap");
+					Map riderMap=(Map)servletContext.getAttribute(Config.riderContext);
 					riderMap.put(rider.getRiderId(), rider);
 					synchronized(this){
-						servletContext.setAttribute("riderMap", riderMap);
+						servletContext.setAttribute(Config.riderContext, riderMap);
 					}
 				} catch (UserException e) {
 					return e.getMessage();
 				} catch (Exception e) {
-					return "未知错误，请联系管理员";
+					return Config.notKnowError;
 				}
 				break;
 			case 4:
@@ -89,10 +90,10 @@ public class UserController {
 				} catch (UserException e) {
 					return e.getMessage();
 				} catch (Exception e) {
-					return "未知错误，请联系管理员";
+					return Config.notKnowError;
 				}
 				break;
-			default : return "身份不明";
+			default : return Config.notKnowUserError;
 		}
 		
 		return "1";
@@ -101,7 +102,7 @@ public class UserController {
 	
 	
 	
-	@RequestMapping(value="/test",produces="text/html;charset=utf-8")
+	@RequestMapping(value="/test",produces=Config.produces)
 	public String test(){
 		
 		userService.login(new User());
