@@ -30,9 +30,9 @@ public class Config {
 	
 	
 	
-	/**成功*/
+	/**成功响应编码*/
 	public final static String success="1";
-	/**失败*/
+	/**失败响应编码*/
 	public final static String fail="0";
 	
 	
