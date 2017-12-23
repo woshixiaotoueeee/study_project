@@ -27,9 +27,96 @@ public class Restaurant {
 	private User restaurantUser;			//对应用户
 	private RestaurantCategory restaurantCategory;//所属分类
 	private City restaurantCity;			//所属城市
-	
-	
-	
-	
-	
+	public String getRestaurantId() {
+		return restaurantId;
+	}
+	public String getRestaurantName() {
+		return restaurantName;
+	}
+	public String getRestaurantPhone() {
+		return restaurantPhone;
+	}
+	public String getRestaurantImage() {
+		return restaurantImage;
+	}
+	public BigDecimal getRestaurantLongitude() {
+		return restaurantLongitude;
+	}
+	public BigDecimal getRestaurantLatitude() {
+		return restaurantLatitude;
+	}
+	public String getRestaurantNotice() {
+		return restaurantNotice;
+	}
+	public BigDecimal getRestaurantDistance() {
+		return restaurantDistance;
+	}
+	public Date getRestaurantUpdateTime() {
+		return restaurantUpdateTime;
+	}
+	public State getRestaurantState() {
+		return restaurantState;
+	}
+	public User getRestaurantUser() {
+		return restaurantUser;
+	}
+	public RestaurantCategory getRestaurantCategory() {
+		return restaurantCategory;
+	}
+	public City getRestaurantCity() {
+		return restaurantCity;
+	}
+	public void setRestaurantId(String restaurantId) {
+		this.restaurantId = restaurantId;
+	}
+	public void setRestaurantName(String restaurantName) {
+		this.restaurantName = restaurantName;
+	}
+	public void setRestaurantPhone(String restaurantPhone) {
+		this.restaurantPhone = restaurantPhone;
+	}
+	public void setRestaurantImage(String restaurantImage) {
+		this.restaurantImage = restaurantImage;
+	}
+	public void setRestaurantLongitude(BigDecimal restaurantLongitude) {
+		this.restaurantLongitude = restaurantLongitude;
+	}
+	public void setRestaurantLatitude(BigDecimal restaurantLatitude) {
+		this.restaurantLatitude = restaurantLatitude;
+	}
+	public void setRestaurantNotice(String restaurantNotice) {
+		this.restaurantNotice = restaurantNotice;
+	}
+	public void setRestaurantDistance(BigDecimal restaurantDistance) {
+		this.restaurantDistance = restaurantDistance;
+	}
+	public void setRestaurantUpdateTime(Date restaurantUpdateTime) {
+		this.restaurantUpdateTime = restaurantUpdateTime;
+	}
+	public void setRestaurantState(State restaurantState) {
+		this.restaurantState = restaurantState;
+	}
+	public void setRestaurantUser(User restaurantUser) {
+		this.restaurantUser = restaurantUser;
+	}
+	public void setRestaurantCategory(RestaurantCategory restaurantCategory) {
+		this.restaurantCategory = restaurantCategory;
+	}
+	public void setRestaurantCity(City restaurantCity) {
+		this.restaurantCity = restaurantCity;
+	}
+	@Override
+	public String toString() {
+		return "Restaurant [restaurantId=" + restaurantId + ", restaurantName="
+				+ restaurantName + ", restaurantPhone=" + restaurantPhone
+				+ ", restaurantImage=" + restaurantImage
+				+ ", restaurantLongitude=" + restaurantLongitude
+				+ ", restaurantLatitude=" + restaurantLatitude
+				+ ", restaurantNotice=" + restaurantNotice
+				+ ", restaurantDistance=" + restaurantDistance
+				+ ", restaurantUpdateTime=" + restaurantUpdateTime
+				+ ", restaurantState=" + restaurantState + ", restaurantUser="
+				+ restaurantUser + ", restaurantCategory=" + restaurantCategory
+				+ ", restaurantCity=" + restaurantCity + "]";
+	}
 }
