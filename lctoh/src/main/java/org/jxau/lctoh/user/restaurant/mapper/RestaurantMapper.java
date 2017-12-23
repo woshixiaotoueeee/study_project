@@ -3,17 +3,24 @@ package org.jxau.lctoh.user.restaurant.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.jxau.lctoh.user.restaurant.domain.RestaurantCategory;
 
-public interface RestaurantCategoryMapper {
+public interface RestaurantMapper {
 	
 	/**
-	 * 根据分类识别码查询分类信息
-	 * @param restaurantCategoryId
-	 * @return
+	 * 根据店家识别码查询店家信息
+	 * @param restaurantId
+	 * @return Restaurant
 	 */
-	public RestaurantCategory findRestaurantCategoryByRestaurantCategoryId(@Param("restaurantCategoryId")String restaurantCategoryId);
+	public Restaurant findRestaurantByRestaurantId(@Param("restaurantId")String restaurantId);
 	
+	/**
+	 * 根据店家识别码查询店家信息
+	 * @param restaurantId
+	 * @return Restaurant
+	 */
+	public Restaurant findRestaurantByRestaurantId(@Param("restaurantId")String restaurantId);
 	
 	/**
 	 * 根据分类名查询分类信息

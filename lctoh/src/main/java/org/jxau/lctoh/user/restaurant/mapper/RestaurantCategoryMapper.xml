@@ -4,8 +4,44 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace:需与接口的完全限定名保持一致 -->
 <mapper namespace="org.jxau.lctoh.user.restaurant.mapper.RestaurantCategoryMapper">
+	<resultMap type="RestaurantCategory" id="RestaurantCategoryResultMap">
+	    <id property="restaurantCategoryId" column="restaurant_category_id"/>
+		<result property="restaurantCategoryName" column="restaurant_category_name"/>
+		<result property="restaurantCategoryUpdateTime" column="restaurant_category_update_time"/>
+		<association property="restaurantCategoryState" column="restaurant_category_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
+	</resultMap>
 	
 	
+	<!--根据分类识别码查询分类信息-->
+	<select id="findRestaurantCategoryByRestaurantCategoryId" parameterType="String" resultMap="RestaurantCategoryResultMap">
+		select 
+			restaurant_category.restaurant_category_id,
+			restaurant_category.restaurant_category_name,
+			restaurant_category.restaurant_category_update_time,
+			restaurant_category.restaurant_category_state_id
+		from restaurant_category
+		where restaurant_category.restaurant_category_id=#{restaurantCategoryId}
+	</select>
+
+	<!--根据分类名查询分类信息-->
+	<select id="findRestaurantCategoryByRestaurantCategoryName" parameterType="String" resultMap="RestaurantCategoryResultMap">
+		select 
+			restaurant_category.restaurant_category_id,
+			restaurant_category.restaurant_category_name,
+			restaurant_category.restaurant_category_update_time,
+			restaurant_category.restaurant_category_state_id
+		from restaurant_category
+		where restaurant_category.restaurant_category_name like CONCAT(CONCAT('%', #{restaurantCategoryId}), '%')
+	</select>
 	
-	
+	<!--根据分类状态查询分类信息-->
+	<select id="findRestaurantCategoryByRestaurantCategoryName" parameterType="Integer" resultMap="RestaurantCategoryResultMap">
+		select 
+			restaurant_category.restaurant_category_id,
+			restaurant_category.restaurant_category_name,
+			restaurant_category.restaurant_category_update_time,
+			restaurant_category.restaurant_category_state_id
+		from restaurant_category
+		where restaurant_category.restaurant_category_state_id =#{restaurantCategoryStateId}
+	</select>
 </mapper>
