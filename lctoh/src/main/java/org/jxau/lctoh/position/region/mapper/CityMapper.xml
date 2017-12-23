@@ -5,6 +5,81 @@
 <!-- namespace:需与接口的完全限定名保持一致 -->
 <mapper namespace="org.jxau.lctoh.position.region.mapper.CityMapper">
 	
+	<resultMap type="City" id="CityResultMap">
+	    <id property="cityId" column="city_id"/>
+	    <result property="cityName" column="city_name"/>
+		<result property="cityUpdateTime" column="city_update_time"/>
+		<association property="cityState" column="city_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
+		<association property="cityProvince" column="city_province_id" select="org.jxau.lctoh.position.region.mapper.ProvinceMapper.findProvinceByProvinceId"/>
+	</resultMap>
+
+	<!--根据城市识别码查询城市信息-->
+	<select id="findCityByCityId" parameterType="String" resultMap="CityResultMap">
+		select
+			city.city_id,
+			city.city_name,
+			city.city_update_time,
+			city.city_state_id,
+			city.city_province_id
+		from
+			city
+		where
+			city.city_id =#{cityId}
+	</select>
+	
+	<!--根据城市名查找城市信息-->
+	<select id="findCityByCityName" parameterType="String" resultMap="CityResultMap">
+		select
+			city.city_id,
+			city.city_name,
+			city.city_update_time,
+			city.city_state_id,
+			city.city_province_id
+		from
+			city
+		where
+			city.city_name like CONCAT(CONCAT('%', #{cityName}), '%')
+	</select>
+	
+	<!--查找所有城市-->
+	<select id="findCityAll" resultMap="CityResultMap">
+		select
+			city.city_id,
+			city.city_name,
+			city.city_update_time,
+			city.city_state_id,
+			city.city_province_id
+		from
+			city
+	</select>
+
+	<!--根据状态码查找城市-->
+	<select id="findCityByCityStateId" parameterType="Integer" resultMap="CityResultMap">
+		select
+			city.city_id,
+			city.city_name,
+			city.city_update_time,
+			city.city_state_id,
+			city.city_province_id
+		from
+			city
+		where
+			city.city_state_id =#{cityStateId}
+	</select>
+
+	<!--根据状态码查找城市-->
+	<select id="findCityByProvinceId" parameterType="String" resultMap="CityResultMap">
+		select
+			city.city_id,
+			city.city_name,
+			city.city_update_time,
+			city.city_state_id,
+			city.city_province_id
+		from
+			city
+		where
+			city.city_province_id =#{provinceId}
+	</select>
 	
 	
 	
