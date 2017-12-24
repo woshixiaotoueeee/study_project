@@ -16,18 +16,21 @@ public interface RestaurantMapper {
 	public Restaurant findRestaurantByRestaurantId(@Param("restaurantId")String restaurantId);
 	
 	/**
-	 * 根据店家识别码查询店家信息
+	 * 根据用户识别码查询店家信息
 	 * @param restaurantId
 	 * @return Restaurant
 	 */
-	public Restaurant findRestaurantByRestaurantId(@Param("restaurantId")String restaurantId);
+	public Restaurant findRestaurantByRestaurantUserId(@Param("restaurantUserId")String restaurantUserId);
+	
+	
+	
 	
 	/**
 	 * 根据分类名查询分类信息
 	 * @param restaurantCategoryName
 	 * @return List<RestaurantCategory>
 	 */
-	public List<RestaurantCategory> findRestaurantCategoryByRestaurantCategoryName(@Param("restaurantCategoryName")String restaurantCategoryName);
+//	public List<RestaurantCategory> findRestaurantCategoryByRestaurantCategoryName(@Param("restaurantCategoryName")String restaurantCategoryName);
 	
 	
 	
@@ -36,7 +39,7 @@ public interface RestaurantMapper {
 	 * @param restaurantCategoryStateId
 	 * @return List<RestaurantCategory>
 	 */
-	public List<RestaurantCategory> findRestaurantCategoryByRestaurantCategoryStateId(@Param("restaurantCategoryStateId")String restaurantCategoryStateId);
+//	public List<RestaurantCategory> findRestaurantCategoryByRestaurantCategoryStateId(@Param("restaurantCategoryStateId")String restaurantCategoryStateId);
 	
 	
 	
