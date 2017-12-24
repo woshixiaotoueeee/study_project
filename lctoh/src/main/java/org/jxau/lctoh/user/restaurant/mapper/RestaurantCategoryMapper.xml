@@ -20,7 +20,9 @@
 			restaurant_category.restaurant_category_update_time,
 			restaurant_category.restaurant_category_state_id
 		from restaurant_category
-		where restaurant_category.restaurant_category_id=#{restaurantCategoryId}
+		where 
+			restaurant_category.restaurant_category_delete_or_not=1
+			and restaurant_category.restaurant_category_id=#{restaurantCategoryId}
 	</select>
 
 	<!--根据分类名查询分类信息-->
@@ -31,17 +33,21 @@
 			restaurant_category.restaurant_category_update_time,
 			restaurant_category.restaurant_category_state_id
 		from restaurant_category
-		where restaurant_category.restaurant_category_name like CONCAT(CONCAT('%', #{restaurantCategoryId}), '%')
+		where 
+			restaurant_category.restaurant_category_delete_or_not=1
+			and restaurant_category.restaurant_category_name like CONCAT(CONCAT('%', #{restaurantCategoryId}), '%')
 	</select>
 	
 	<!--根据分类状态查询分类信息-->
-	<select id="findRestaurantCategoryByRestaurantCategoryName" parameterType="Integer" resultMap="RestaurantCategoryResultMap">
+	<select id="findRestaurantCategoryByRestaurantCategoryStateId" parameterType="Integer" resultMap="RestaurantCategoryResultMap">
 		select 
 			restaurant_category.restaurant_category_id,
 			restaurant_category.restaurant_category_name,
 			restaurant_category.restaurant_category_update_time,
 			restaurant_category.restaurant_category_state_id
 		from restaurant_category
-		where restaurant_category.restaurant_category_state_id =#{restaurantCategoryStateId}
+		where 
+			restaurant_category.restaurant_category_delete_or_not=1
+			and restaurant_category.restaurant_category_state_id =#{restaurantCategoryStateId}
 	</select>
 </mapper>
