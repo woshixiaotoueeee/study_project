@@ -20,7 +20,9 @@
 			province.province_update_time,
 			province.province_state_id
 		from province
-		where province.province_id=#{provinceId}
+		where 
+			province.province_delete_or_not=1
+			and province.province_id=#{provinceId}
 	</select>
 	<!-- 根据省份名查找省份 -->
 	<select id="findProvinceByProvinceName" parameterType="String" resultMap="ProvinceResultMap">
@@ -30,7 +32,9 @@
 			province.province_update_time,
 			province.province_state_id
 		from province
-		where province.province_name  like CONCAT(CONCAT('%', #{provinceName}), '%')
+		where
+			province.province_delete_or_not=1
+			and province.province_name  like CONCAT(CONCAT('%', #{provinceName}), '%')
 	</select>
 	
 	<!-- 查找所有省份 -->
@@ -41,16 +45,20 @@
 			province.province_update_time,
 			province.province_state_id
 		from province
+		where 
+			province.province_delete_or_not=1
 	</select>
 	<!-- 根据状态码查找省份 -->
-	<select id="findProvinceByProvinceName" parameterType="Integer" resultMap="ProvinceResultMap">
+	<select id="findProvinceByProvinceStateId" parameterType="Integer" resultMap="ProvinceResultMap">
 		select 
 			province.province_id,
 			province.province_name,
 			province.province_update_time,
 			province.province_state_id
 		from province
-		where province.province_state_id=#{provinceStateId}
+		where
+			province.province_delete_or_not=1
+			and province.province_state_id=#{provinceStateId}
 	</select>
 	
 </mapper>
