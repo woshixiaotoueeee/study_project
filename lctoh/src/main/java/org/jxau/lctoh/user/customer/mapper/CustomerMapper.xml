@@ -29,7 +29,9 @@
 			customer.customer_state_id,
 			customer.customer_user_id
 		from customer
-		where customer.customer_user_id=#{customerUserId}
+		where 
+			customer.customer_delete_or_not=1
+			and customer.customer_user_id=#{customerUserId}
 	</select>
 	<!--根据客户识别码查询用户信息-->
 	<select id="findCustomerByCustomerId" parameterType="String" resultMap="CustomerResultMap">
@@ -42,7 +44,9 @@
 			customer.customer_state_id,
 			customer.customer_user_id
 		from customer
-		where customer.customer_id=#{customerId}
+		where 
+			customer.customer_delete_or_not=1
+			and customer.customer_id=#{customerId}
 	</select>
 	
 </mapper>
