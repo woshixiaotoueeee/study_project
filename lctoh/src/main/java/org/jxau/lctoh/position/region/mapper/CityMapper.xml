@@ -24,7 +24,8 @@
 		from
 			city
 		where
-			city.city_id =#{cityId}
+			city.city_delete_or_not=1
+			and city.city_id =#{cityId}
 	</select>
 	
 	<!--根据城市名查找城市信息-->
@@ -38,7 +39,8 @@
 		from
 			city
 		where
-			city.city_name like CONCAT(CONCAT('%', #{cityName}), '%')
+			city.city_delete_or_not=1
+			and city.city_name like CONCAT(CONCAT('%', #{cityName}), '%')
 	</select>
 	
 	<!--查找所有城市-->
@@ -51,6 +53,8 @@
 			city.city_province_id
 		from
 			city
+		where
+			city.city_delete_or_not=1
 	</select>
 
 	<!--根据状态码查找城市-->
@@ -64,7 +68,8 @@
 		from
 			city
 		where
-			city.city_state_id =#{cityStateId}
+			city.city_delete_or_not=1
+			and city.city_state_id =#{cityStateId}
 	</select>
 
 	<!--根据状态码查找城市-->
@@ -78,7 +83,8 @@
 		from
 			city
 		where
-			city.city_province_id =#{provinceId}
+			city.city_delete_or_not=1
+			and city.city_province_id =#{provinceId}
 	</select>
 	
 	
