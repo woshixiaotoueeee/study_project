@@ -23,7 +23,9 @@
 			rider.rider_user_id,
 			rider.rider_state_id
 		from rider
-		where rider.rider_user_id=#{userId}
+		where 
+			rider.rider_delete_or_not=1
+			and rider.rider_user_id=#{userId}
 	</select>
 	
 	<!--根据骑手识别码查询用户信息-->
@@ -36,7 +38,9 @@
 			rider.rider_user_id,
 			rider.rider_state_id
 		from rider
-		where rider.rider_id=#{riderId}
+		where  
+			rider.rider_delete_or_not=1
+			and rider.rider_id=#{riderId}
 	</select>
 	
 	<!--根据骑手识别码查询用户信息-->
@@ -49,7 +53,9 @@
 			rider.rider_user_id,
 			rider.rider_state_id
 		from rider
-		where rider.rider_state_id=#{riderStateId}
+		where  
+			rider.rider_delete_or_not=1
+			and rider.rider_state_id=#{riderStateId}
 	</select>
 	
 </mapper>
