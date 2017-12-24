@@ -22,6 +22,7 @@ public class Restaurant {
 	private BigDecimal restaurantLatitude;	//经度
 	private String restaurantNotice;		//公告
 	private BigDecimal restaurantDistance;	//距离
+	private BigDecimal restaurantDeliveryFee;//配送费
 	private Date restaurantUpdateTime;		//最近更新时间
 	private State restaurantState;			//店家状态
 	private User restaurantUser;			//对应用户
@@ -105,6 +106,12 @@ public class Restaurant {
 	public void setRestaurantCity(City restaurantCity) {
 		this.restaurantCity = restaurantCity;
 	}
+	public BigDecimal getRestaurantDeliveryFee() {
+		return restaurantDeliveryFee;
+	}
+	public void setRestaurantDeliveryFee(BigDecimal restaurantDeliveryFee) {
+		this.restaurantDeliveryFee = restaurantDeliveryFee;
+	}
 	@Override
 	public String toString() {
 		return "Restaurant [restaurantId=" + restaurantId + ", restaurantName="
@@ -114,6 +121,7 @@ public class Restaurant {
 				+ ", restaurantLatitude=" + restaurantLatitude
 				+ ", restaurantNotice=" + restaurantNotice
 				+ ", restaurantDistance=" + restaurantDistance
+				+ ", restaurantDeliveryFee=" + restaurantDeliveryFee
 				+ ", restaurantUpdateTime=" + restaurantUpdateTime
 				+ ", restaurantState=" + restaurantState + ", restaurantUser="
 				+ restaurantUser + ", restaurantCategory=" + restaurantCategory
