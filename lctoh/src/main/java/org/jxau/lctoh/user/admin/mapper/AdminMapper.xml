@@ -19,7 +19,9 @@
 			admin.admin_state_id,
 			admin.admin_user_id
 		from admin
-		where admin.admin_user_id=#{userId}
+		where 
+			admin.admin_delete_or_not=1
+			and admin.admin_user_id=#{userId}
 	</select>
 	
 	<!--根据用户账号查询用户信息-->
@@ -30,7 +32,9 @@
 			admin.admin_state_id,
 			admin.admin_user_id
 		from admin
-		where admin.admin_id=#{adminId}
+		where 
+			admin.admin_delete_or_not=1
+			and admin.admin_id=#{adminId}
 	</select>
 	
 </mapper>
