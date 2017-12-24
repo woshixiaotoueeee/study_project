@@ -16,6 +16,7 @@ public class User {
 	private String userId;			//用户识别码
 	private String userAccount;		//账号
 	private String userPassword;	//密码
+	private String userSex;			//性别
 	private String userEmail;		//邮箱
 	private String userPhone;		//电话
 	private Date userUpdateTime;	//最近更新时间
@@ -23,6 +24,12 @@ public class User {
 	
 	public String getUserId() {
 		return userId;
+	}
+	public String getUserSex() {
+		return userSex;
+	}
+	public void setUserSex(String userSex) {
+		this.userSex = userSex;
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -66,9 +73,11 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userAccount=" + userAccount
-				+ ", userPassword=" + userPassword + ", userEmail=" + userEmail
-				+ ", userPhone=" + userPhone + ", userUpdateTime="
-				+ userUpdateTime + ", userCode=" + userCode + "]";
+				+ ", userPassword=" + userPassword + ", userSex=" + userSex
+				+ ", userEmail=" + userEmail + ", userPhone=" + userPhone
+				+ ", userUpdateTime=" + userUpdateTime + ", userCode="
+				+ userCode + "]";
 	}
+	
 	
 }
