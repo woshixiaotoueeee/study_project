@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
-import org.jxau.lctoh.user.restaurant.domain.RestaurantCategory;
 
 public interface RestaurantMapper {
 	

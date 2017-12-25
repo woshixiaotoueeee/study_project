@@ -6,11 +6,10 @@ import org.jxau.lctoh.user.basis.domain.User;
 import org.jxau.lctoh.user.basis.exception.UserException;
 import org.jxau.lctoh.user.restaurant.dao.RestaurantDao;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
-import org.jxau.lctoh.user.rider.domain.Rider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("RiderService")
+@Service("RestaurantService")
 public class RestaurantService {
 	@Autowired
 	private UserDao userDao;

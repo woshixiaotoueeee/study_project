@@ -21,7 +21,7 @@ public class LocationController {
 		/**
 		 * 判断定位信息是否为空
 		 * */
-		if(location==null||location.getLatitude()==null||location.getLongitude()==null){
+		if(location==null||location.getCity()==null||location.getLatitude()==null||location.getLongitude()==null){
 			return ErrorMSG.fail;
 		}
 		session.setAttribute(ConversationMSG.locationSession, location);

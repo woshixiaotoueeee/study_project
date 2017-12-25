@@ -14,8 +14,7 @@ public class ConfigListener implements ServletContextListener {
 
 	@Override
 	public void contextDestroyed(ServletContextEvent servletContextEvent) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override

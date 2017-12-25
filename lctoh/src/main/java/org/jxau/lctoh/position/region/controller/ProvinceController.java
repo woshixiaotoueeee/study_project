@@ -1,8 +1,7 @@
 package org.jxau.lctoh.position.region.controller;
 
-import javax.servlet.http.HttpSession;
 
-import org.jxau.lctoh.position.location.domain.Location;
+
 import org.jxau.lctoh.position.region.service.ProvinceService;
 import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.config.EncodingConfig;

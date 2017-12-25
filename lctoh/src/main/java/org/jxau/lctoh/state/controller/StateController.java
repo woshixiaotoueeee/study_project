@@ -1,6 +1,5 @@
 package org.jxau.lctoh.state.controller;
 
-import java.util.Date;
 
 import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.state.service.StateService;
