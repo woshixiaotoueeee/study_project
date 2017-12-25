@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.jxau.lctoh.position.region.domain.City;
-import org.jxau.lctoh.position.region.domain.Province;
 
 public interface CityMapper {
 	/**

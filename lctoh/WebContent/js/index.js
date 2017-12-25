@@ -46,7 +46,7 @@ window.onload = function () {
 			var mk = new BMap.Marker(pt);
 			map.addOverlay(mk);
 			map.panTo(pt);
-			if(confirm('你的位置为：'+_location.province+_location.city+_location.info+'是否确认?')){
+			if(confirm('你的位置为：'+_location.province+'   '+_location.city+'   '+_location.info+'是否确认?')){
 				Loction(_location);
 			}
 		});        
@@ -87,7 +87,7 @@ function dingwei(){
 			}
 			_location.longitude=r.point.lng;
 			_location.latitude=r.point.lat;
-			if(confirm('你的位置为：'+_location.province+_location.city+_location.info+'是否确认?')){
+			if(confirm('你的位置为：'+_location.province+'   '+_location.city+'   '+_location.info+'是否确认?')){
 				Loction(_location);
 			}
 		}

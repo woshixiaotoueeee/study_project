@@ -1,7 +1,6 @@
 package org.jxau.lctoh.user.customer.mapper;
 
 import org.apache.ibatis.annotations.Param;
-import org.jxau.lctoh.user.basis.domain.User;
 import org.jxau.lctoh.user.customer.domain.Customer;
 
 

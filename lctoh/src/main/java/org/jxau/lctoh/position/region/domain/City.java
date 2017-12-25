@@ -1,7 +1,6 @@
 package org.jxau.lctoh.position.region.domain;
 
 import java.util.Date;
-import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 import org.jxau.lctoh.state.domain.State;
