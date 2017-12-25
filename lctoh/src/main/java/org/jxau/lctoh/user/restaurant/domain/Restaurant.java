@@ -2,10 +2,12 @@ package org.jxau.lctoh.user.restaurant.domain;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 import org.jxau.lctoh.position.region.domain.City;
 import org.jxau.lctoh.state.domain.State;
+import org.jxau.lctoh.trade.dish.domain.DishCategory;
 import org.jxau.lctoh.user.basis.domain.User;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -28,6 +30,13 @@ public class Restaurant {
 	private User restaurantUser;			//对应用户
 	private RestaurantCategory restaurantCategory;//所属分类
 	private City restaurantCity;			//所属城市
+	private List<DishCategory> dishCategory;//拥有的菜肴分类
+	public List<DishCategory> getDishCategory() {
+		return dishCategory;
+	}
+	public void setDishCategory(List<DishCategory> dishCategory) {
+		this.dishCategory = dishCategory;
+	}
 	public String getRestaurantId() {
 		return restaurantId;
 	}
@@ -125,6 +134,8 @@ public class Restaurant {
 				+ ", restaurantUpdateTime=" + restaurantUpdateTime
 				+ ", restaurantState=" + restaurantState + ", restaurantUser="
 				+ restaurantUser + ", restaurantCategory=" + restaurantCategory
-				+ ", restaurantCity=" + restaurantCity + "]";
+				+ ", restaurantCity=" + restaurantCity + ", dishCategory="
+				+ dishCategory + "]";
 	}
+	
 }

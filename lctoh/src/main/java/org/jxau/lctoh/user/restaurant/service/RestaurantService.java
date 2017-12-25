@@ -1,40 +1,43 @@
-package org.jxau.lctoh.user.admin.service;
+package org.jxau.lctoh.user.restaurant.service;
 
 import org.jxau.lctoh.tool.config.ErrorMSG;
-import org.jxau.lctoh.user.admin.dao.AdminDao;
-import org.jxau.lctoh.user.admin.domain.Admin;
 import org.jxau.lctoh.user.basis.dao.UserDao;
 import org.jxau.lctoh.user.basis.domain.User;
 import org.jxau.lctoh.user.basis.exception.UserException;
+import org.jxau.lctoh.user.restaurant.dao.RestaurantDao;
+import org.jxau.lctoh.user.restaurant.domain.Restaurant;
+import org.jxau.lctoh.user.rider.domain.Rider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-@Service("AdminService")
-public class AdminService {
-	@Autowired
-	private AdminDao adminDao;
+
+@Service("RiderService")
+public class RestaurantService {
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private RestaurantDao restaurantDao;
 	
 	/**
 	 * 管理员登陆
-	 * @param userId  用户识别码
-	 * @return Admin 管理员
+	 * @param user  用户
+	 * @return Restaurant 店家
 	 * @throws UserException
 	 * @throws Exception
 	 */
-	public Admin login (User user) throws UserException,Exception{
+	public Restaurant login(User user) throws UserException,Exception{
 		
 		User _user=userDao.findUserByUserAccount(user.getUserAccount());
 		if(_user==null) throw new UserException(ErrorMSG.accountError);
 		if(!(_user.getUserPassword().equals(user.getUserPassword())))
 			throw new UserException(ErrorMSG.passwordError);
-		Admin admin=adminDao.findAdminByUserId(_user.getUserId());
-		if(admin==null)throw new UserException(ErrorMSG.powerError);
+		Restaurant restaurant=restaurantDao.findRestaurantByUserId(_user.getUserId());
+		if(restaurant==null)throw new UserException(ErrorMSG.powerError);
 		
 		/**后期可能需要修改*/
-		if(admin.getAdminState().getStateId()!=10002)
+		if(restaurant.getRestaurantState().getStateId()!=70001)
 			throw new UserException(ErrorMSG.loginStateError);
-		return admin;
+		return restaurant;
+		
 	}
-	
 }
+

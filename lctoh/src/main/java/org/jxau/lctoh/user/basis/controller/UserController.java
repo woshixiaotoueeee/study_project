@@ -6,7 +6,9 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
-import org.jxau.lctoh.tool.config.Config;
+import org.jxau.lctoh.tool.config.ConversationMSG;
+import org.jxau.lctoh.tool.config.ErrorMSG;
+import org.jxau.lctoh.tool.config.EncodingConfig;
 import org.jxau.lctoh.user.admin.domain.Admin;
 import org.jxau.lctoh.user.admin.service.AdminService;
 import org.jxau.lctoh.user.basis.domain.User;
@@ -14,6 +16,7 @@ import org.jxau.lctoh.user.basis.exception.UserException;
 import org.jxau.lctoh.user.basis.service.UserService;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.customer.service.CustomerService;
+import org.jxau.lctoh.user.restaurant.service.RestaurantService;
 import org.jxau.lctoh.user.rider.domain.Rider;
 import org.jxau.lctoh.user.rider.service.RiderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +37,20 @@ public class UserController {
 	
 	@Autowired
 	private RiderService riderService;
-	
+
+	@Autowired
+	private RestaurantService restaurantService;
 	
 	@ResponseBody
-	@RequestMapping(value="/login",produces=Config.produces)
-	public String login(HttpSession session){
+	@RequestMapping(value="/login",produces=EncodingConfig.produces)
+	public String login(User user,HttpSession session){
+		//验证信息
+		if(user==null){
+			
+		}
+		
 		
 		Integer type =0;
-		
-		User user=new User();
 		user.setUserAccount("100001");
 		user.setUserPassword("100001");
 		
@@ -50,59 +58,58 @@ public class UserController {
 			case 1:
 				try {
 					Customer customer=customerService.login(user);
-					session.setAttribute(Config.customerSession, customer);
+					session.setAttribute(ConversationMSG.customerSession, customer);
 				} catch (UserException e) {
 					return e.getMessage();
 				} catch (Exception e) {
-					return Config.notKnowError;
+					return ErrorMSG.notKnowError;
 				}
 				break;
 			case 2:
 				try {
 					Admin admin=adminService.login(user);
-					session.setAttribute(Config.adminSession, admin);
+					session.setAttribute(ConversationMSG.adminSession, admin);
 				} catch (UserException e) {
 					return e.getMessage();
 				} catch (Exception e) {
-					return Config.notKnowError;
+					return ErrorMSG.notKnowError;
 				}
 				break;
 			case 3:
 				try {
 					Rider rider=riderService.login(user);
-					session.setAttribute(Config.riderSession, rider);
+					session.setAttribute(ConversationMSG.riderSession, rider);
 					ServletContext servletContext=session.getServletContext();
-					Map riderMap=(Map)servletContext.getAttribute(Config.riderContext);
+					Map riderMap=(Map)servletContext.getAttribute(ConversationMSG.riderContext);
 					riderMap.put(rider.getRiderId(), rider);
 					synchronized(this){
-						servletContext.setAttribute(Config.riderContext, riderMap);
+						servletContext.setAttribute(ConversationMSG.riderContext, riderMap);
 					}
 				} catch (UserException e) {
 					return e.getMessage();
 				} catch (Exception e) {
-					return Config.notKnowError;
+					return ErrorMSG.notKnowError;
 				}
 				break;
 			case 4:
 				try {
-					riderService.login(user);
-					//throw new UserException("店家登陆尚未实现");
+					restaurantService.login(user);
 				} catch (UserException e) {
 					return e.getMessage();
 				} catch (Exception e) {
-					return Config.notKnowError;
+					return ErrorMSG.notKnowError;
 				}
 				break;
-			default : return Config.notKnowUserError;
+			default : return ErrorMSG.notKnowUserError;
 		}
 		
-		return "1";
+		return ErrorMSG.success;
 	}
 	
 	
 	
 	
-	@RequestMapping(value="/test",produces=Config.produces)
+	@RequestMapping(value="/test",produces=EncodingConfig.produces)
 	public String test(){
 		
 		userService.login(new User());

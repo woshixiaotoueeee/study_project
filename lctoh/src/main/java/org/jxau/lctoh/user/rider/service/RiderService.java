@@ -1,6 +1,6 @@
 package org.jxau.lctoh.user.rider.service;
 
-import org.jxau.lctoh.tool.config.Config;
+import org.jxau.lctoh.tool.config.ErrorMSG;
 import org.jxau.lctoh.user.basis.dao.UserDao;
 import org.jxau.lctoh.user.basis.domain.User;
 import org.jxau.lctoh.user.basis.exception.UserException;
@@ -26,15 +26,15 @@ public class RiderService {
 	public Rider login (User user) throws UserException,Exception{
 		
 		User _user=userDao.findUserByUserAccount(user.getUserAccount());
-		if(_user==null) throw new UserException(Config.accountError);
+		if(_user==null) throw new UserException(ErrorMSG.accountError);
 		if(!(_user.getUserPassword().equals(user.getUserPassword())))
-			throw new UserException(Config.passwordError);
+			throw new UserException(ErrorMSG.passwordError);
 		Rider rider=riderDao.findRiderByUserId(_user.getUserId());
-		if(rider==null)throw new UserException(Config.powerError);
+		if(rider==null)throw new UserException(ErrorMSG.powerError);
 		
 		/**后期可能需要修改*/
 		if(rider.getRiderState().getStateId()!=10002)
-			throw new UserException(Config.loginStateError);
+			throw new UserException(ErrorMSG.loginStateError);
 		return rider;
 	}
 }
