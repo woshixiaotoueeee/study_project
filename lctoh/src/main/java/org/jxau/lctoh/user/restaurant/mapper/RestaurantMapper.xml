@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:需与接口的完全限定名保持一致 -->
+<mapper namespace="org.jxau.lctoh.user.restaurant.mapper.RestaurantMapper">
+	<resultMap type="Restaurant" id="RestaurantResultMap">
+	    <id property="restaurantId" column="restaurant_id"/>
+		<result property="restaurantName" column="restaurant_name"/>
+		<result property="restaurantPhone" column="restaurant_phone"/>
+		<result property="restaurantImage" column="restaurant_image"/>
+		<result property="restaurantLongitude" column="restaurant_longitude"/>
+		<result property="restaurantLatitude" column="restaurant_latitude"/>
+		<result property="restaurantNotice" column="restaurant_notice"/>
+		<result property="restaurantDistance" column="restaurant_distance"/>
+		<result property="restaurantDeliveryFee" column="restaurant_deliveryfee"/>
+		<result property="restaurantUpdateTime" column="restaurant_update_time"/>
+		<association property="restaurantState" column="restaurant_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
+		<association property="restaurantUser" column="restaurant_user_id" select="org.jxau.lctoh.user.basis.mapper.UserMapper.findUserByUserId"/>
+		<association property="restaurantCategory" column="restaurant_category_id" select="org.jxau.lctoh.user.restaurant.mapper.RestaurantCategoryMapper.findRestaurantCategoryById"/>
+		<association property="restaurantCity" column="restaurant_city_id" select="org.jxau.lctoh.position.region.mapper.CityMapper.findCityByCityId"/>
+	</resultMap>
+
+	<!--根据店家识别码查询分类信息-->
+	<select id="findRestaurantByRestaurantId" parameterType="String" resultMap="RestaurantResultMap">
+		select 
+			restaurant.restaurant_id,
+			restaurant.restaurant_name,
+			restaurant.restaurant_phone,
+			restaurant.restaurant_image,
+			restaurant.restaurant_longitude,
+			restaurant.restaurant_latitude,
+			restaurant.restaurant_notice,
+			restaurant.restaurant_distance,
+			restaurant.restaurant_update_time,
+			restaurant.restaurant_state_id,
+			restaurant.restaurant_user_id,
+			restaurant.restaurant_category_id,
+			restaurant.restaurant_city_id,
+			restaurant.restaurant_deliveryfee
+		from restaurant
+		where 
+			restaurant.restaurant.restaurant_delete_or_not=1
+			and restaurant.restaurant_id=#{restaurantId}
+	</select>
+	
+	
+	<!--根据用户识别码查询店家信息-->
+	<select id="findRestaurantByUserId" parameterType="String" resultMap="RestaurantResultMap">
+		select 
+			restaurant.restaurant_id,
+			restaurant.restaurant_name,
+			restaurant.restaurant_phone,
+			restaurant.restaurant_image,
+			restaurant.restaurant_longitude,
+			restaurant.restaurant_latitude,
+			restaurant.restaurant_notice,
+			restaurant.restaurant_distance,
+			restaurant.restaurant_update_time,
+			restaurant.restaurant_state_id,
+			restaurant.restaurant_user_id,
+			restaurant.restaurant_category_id,
+			restaurant.restaurant_city_id,
+			restaurant.restaurant_deliveryfee
+		from restaurant
+		where 
+			restaurant.restaurant.restaurant_delete_or_not=1
+			and restaurant.restaurant_user_id=#{userId}
+	</select>
+	
+	
+	<!--根据分类及识别码及城市识别码查询店家信息-->
+	<select id="findRestaurantByRestaurantCategoryIdAndCityId" resultMap="RestaurantResultMap">
+		select 
+			restaurant.restaurant_id,
+			restaurant.restaurant_name,
+			restaurant.restaurant_phone,
+			restaurant.restaurant_image,
+			restaurant.restaurant_longitude,
+			restaurant.restaurant_latitude,
+			restaurant.restaurant_notice,
+			restaurant.restaurant_distance,
+			restaurant.restaurant_update_time,
+			restaurant.restaurant_state_id,
+			restaurant.restaurant_user_id,
+			restaurant.restaurant_category_id,
+			restaurant.restaurant_city_id,
+			restaurant.restaurant_deliveryfee
+		from restaurant
+		where 
+			restaurant.restaurant.restaurant_delete_or_not=1
+			and restaurant.restaurant_category_id=#{restaurantCategoryId}
+			and restaurant.restaurant_city_id=#{cityId}
+	</select>
+	<!--根据城市识别码查询店家信息-->
+	<select id="findRestaurantByCityId" parameterType="String" resultMap="RestaurantResultMap">
+		select 
+			restaurant.restaurant_id,
+			restaurant.restaurant_name,
+			restaurant.restaurant_phone,
+			restaurant.restaurant_image,
+			restaurant.restaurant_longitude,
+			restaurant.restaurant_latitude,
+			restaurant.restaurant_notice,
+			restaurant.restaurant_distance,
+			restaurant.restaurant_update_time,
+			restaurant.restaurant_state_id,
+			restaurant.restaurant_user_id,
+			restaurant.restaurant_category_id,
+			restaurant.restaurant_city_id,
+			restaurant.restaurant_deliveryfee
+		from restaurant
+		where 
+			restaurant.restaurant.restaurant_delete_or_not=1
+			and restaurant.restaurant_city_id=#{cityId}
+	</select>
+	
+	<!--根据店名及城市识别码查询店家信息-->
+	<select id="findRestaurantByRestaurantNameAndCityId" resultMap="RestaurantResultMap">
+		select 
+			restaurant.restaurant_id,
+			restaurant.restaurant_name,
+			restaurant.restaurant_phone,
+			restaurant.restaurant_image,
+			restaurant.restaurant_longitude,
+			restaurant.restaurant_latitude,
+			restaurant.restaurant_notice,
+			restaurant.restaurant_distance,
+			restaurant.restaurant_update_time,
+			restaurant.restaurant_state_id,
+			restaurant.restaurant_user_id,
+			restaurant.restaurant_category_id,
+			restaurant.restaurant_city_id,
+			restaurant.restaurant_deliveryfee
+		from restaurant
+		where 
+			restaurant.restaurant.restaurant_delete_or_not=1
+			and restaurant.restaurant_city_id=#{cityId}
+			and restaurant.restaurant_name like CONCAT(CONCAT('%', #{restaurantName}), '%')
+	</select>
+	
+</mapper>

@@ -16,7 +16,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jxau.lctoh.tool.config.Config;
+import org.jxau.lctoh.tool.config.EncodingConfig;
+
+
 
 
 /**
@@ -60,7 +62,7 @@ public class EncodingFilter implements Filter
                 String value = (String) method.invoke(req, args);
                 if(value == null)
                     return null;
-                return new String(value.getBytes(Config.charEncoding),characterEncoding);
+                return new String(value.getBytes(EncodingConfig.charEncoding),characterEncoding);
             }
         }), resp);
        
@@ -68,6 +70,6 @@ public class EncodingFilter implements Filter
     public void init(FilterConfig fConfig) throws ServletException
     {
 //        使用配置类文件中配置的编码
-    	characterEncoding = Config.characterEncoding;
+    	characterEncoding = EncodingConfig.characterEncoding;
     }
 }

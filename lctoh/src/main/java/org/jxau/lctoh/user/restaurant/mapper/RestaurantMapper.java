@@ -17,30 +17,33 @@ public interface RestaurantMapper {
 	
 	/**
 	 * 根据用户识别码查询店家信息
-	 * @param restaurantId
+	 * @param userId
 	 * @return Restaurant
 	 */
-	public Restaurant findRestaurantByRestaurantUserId(@Param("restaurantUserId")String restaurantUserId);
+	public Restaurant findRestaurantByUserId(@Param("userId")String userId);
 	
+	/**
+	 * 根据分类及识别码及城市识别码查询店家信息
+	 * @param restaurantCategoryId
+	 * @param cityId
+	 * @return
+	 */
+	public List<Restaurant> findRestaurantByRestaurantCategoryIdAndCityId(@Param("restaurantCategoryId")String restaurantCategoryId,@Param("cityId")String cityId);
 	
+	/**
+	 * 根据城市识别码查询店家信息
+	 * @param cityId
+	 * @return
+	 */
+	public List<Restaurant> findRestaurantByCityId(@Param("cityId")String cityId);
 	
 	
 	/**
-	 * 根据分类名查询分类信息
-	 * @param restaurantCategoryName
-	 * @return List<RestaurantCategory>
+	 * 根据店名及城市识别码查询店家信息
+	 * @param restaurantName
+	 * @param cityId
+	 * @return
 	 */
-//	public List<RestaurantCategory> findRestaurantCategoryByRestaurantCategoryName(@Param("restaurantCategoryName")String restaurantCategoryName);
-	
-	
-	
-	/**
-	 * 根据分类状态查询分类信息
-	 * @param restaurantCategoryStateId
-	 * @return List<RestaurantCategory>
-	 */
-//	public List<RestaurantCategory> findRestaurantCategoryByRestaurantCategoryStateId(@Param("restaurantCategoryStateId")String restaurantCategoryStateId);
-	
-	
+	public List<Restaurant> findRestaurantByRestaurantNameAndCityId(@Param("restaurantName")String restaurantName,@Param("cityId")String cityId);
 	
 }

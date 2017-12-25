@@ -9,27 +9,27 @@ public interface RestaurantCategoryMapper {
 	
 	/**
 	 * 根据分类识别码查询分类信息
-	 * @param restaurantCategoryId
+	 * @param id
 	 * @return
 	 */
-	public RestaurantCategory findRestaurantCategoryByRestaurantCategoryId(@Param("restaurantCategoryId")String restaurantCategoryId);
+	public RestaurantCategory findRestaurantCategoryById(@Param("id")String id);
 	
 	
 	/**
 	 * 根据分类名查询分类信息
-	 * @param restaurantCategoryName
+	 * @param name
 	 * @return List<RestaurantCategory>
 	 */
-	public List<RestaurantCategory> findRestaurantCategoryByRestaurantCategoryName(@Param("restaurantCategoryName")String restaurantCategoryName);
+	public List<RestaurantCategory> findRestaurantCategoryByName(@Param("name")String name);
 	
 	
 	
 	/**
 	 * 根据分类状态查询分类信息
-	 * @param restaurantCategoryStateId
+	 * @param stateId
 	 * @return List<RestaurantCategory>
 	 */
-	public List<RestaurantCategory> findRestaurantCategoryByRestaurantCategoryStateId(@Param("restaurantCategoryStateId")String restaurantCategoryStateId);
+	public List<RestaurantCategory> findRestaurantCategoryByStateId(@Param("stateId")String stateId);
 	
 	
 	

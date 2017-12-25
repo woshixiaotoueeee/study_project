@@ -13,7 +13,7 @@
 	
 	
 	<!--根据分类识别码查询分类信息-->
-	<select id="findRestaurantCategoryByRestaurantCategoryId" parameterType="String" resultMap="RestaurantCategoryResultMap">
+	<select id="findRestaurantCategoryById" parameterType="String" resultMap="RestaurantCategoryResultMap">
 		select 
 			restaurant_category.restaurant_category_id,
 			restaurant_category.restaurant_category_name,
@@ -22,11 +22,11 @@
 		from restaurant_category
 		where 
 			restaurant_category.restaurant_category_delete_or_not=1
-			and restaurant_category.restaurant_category_id=#{restaurantCategoryId}
+			and restaurant_category.restaurant_category_id=#{id}
 	</select>
 
 	<!--根据分类名查询分类信息-->
-	<select id="findRestaurantCategoryByRestaurantCategoryName" parameterType="String" resultMap="RestaurantCategoryResultMap">
+	<select id="findRestaurantCategoryByName" parameterType="String" resultMap="RestaurantCategoryResultMap">
 		select 
 			restaurant_category.restaurant_category_id,
 			restaurant_category.restaurant_category_name,
@@ -35,11 +35,11 @@
 		from restaurant_category
 		where 
 			restaurant_category.restaurant_category_delete_or_not=1
-			and restaurant_category.restaurant_category_name like CONCAT(CONCAT('%', #{restaurantCategoryId}), '%')
+			and restaurant_category.restaurant_category_name like CONCAT(CONCAT('%', #{name}), '%')
 	</select>
 	
 	<!--根据分类状态查询分类信息-->
-	<select id="findRestaurantCategoryByRestaurantCategoryStateId" parameterType="Integer" resultMap="RestaurantCategoryResultMap">
+	<select id="findRestaurantCategoryByStateId" parameterType="Integer" resultMap="RestaurantCategoryResultMap">
 		select 
 			restaurant_category.restaurant_category_id,
 			restaurant_category.restaurant_category_name,
@@ -48,6 +48,6 @@
 		from restaurant_category
 		where 
 			restaurant_category.restaurant_category_delete_or_not=1
-			and restaurant_category.restaurant_category_state_id =#{restaurantCategoryStateId}
+			and restaurant_category.restaurant_category_state_id =#{stateId}
 	</select>
 </mapper>
