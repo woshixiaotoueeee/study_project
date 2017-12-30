@@ -1,9 +1,13 @@
 package org.jxau.lctoh.user.customer.service;
 
 
+import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.config.ErrorMSG;
+import org.jxau.lctoh.user.admin.domain.Admin;
 import org.jxau.lctoh.user.basis.dao.UserDao;
+import org.jxau.lctoh.user.basis.dao.VerificationCodeDao;
 import org.jxau.lctoh.user.basis.domain.User;
+import org.jxau.lctoh.user.basis.domain.VerificationCode;
 import org.jxau.lctoh.user.basis.exception.UserException;
 import org.jxau.lctoh.user.customer.dao.CustomerDao;
 import org.jxau.lctoh.user.customer.domain.Customer;
@@ -14,12 +18,13 @@ import org.springframework.stereotype.Service;
 public class CustomerService {
 	@Autowired
 	private CustomerDao customerDao;
-	
+	@Autowired
+	private VerificationCodeDao verificationCodeDao;
 	@Autowired
 	private UserDao userDao;
 	/**
 	 * 客户登陆
-	 * @param userId  用户识别码
+	 * @param user  用户
 	 * @return Customer 管理员
 	 * @throws UserException
 	 * @throws Exception
@@ -39,7 +44,31 @@ public class CustomerService {
 		return customer;
 	}
 	
-	
+	/**
+	 * 客户登陆
+	 * @param userAccount  用户账号
+	 * @param code  验证码
+	 * @return Customer 管理员
+	 * @throws UserException
+	 * @throws Exception
+	 */
+	public Customer loginByCode(String userAccount,String code) throws UserException,Exception{
+		
+		User _user=userDao.findUserByUserAccount(userAccount);
+		if(_user==null) throw new UserException(ErrorMSG.accountError);
+		
+		VerificationCode verificationCode=verificationCodeDao.findVerificationCodeById(_user.getUserId());
+		if(verificationCode==null||verificationCode.getVerificationCode().equals(code))throw new UserException(ErrorMSG.codeError);
+		if(Tools.getTimeDifferenceFromNowDate(verificationCode.getVerificationCodeUpdateTime())>ErrorMSG.timeExpire)
+			throw new UserException(ErrorMSG.timeExpireError);
+		Customer customer=customerDao.findCustomerByUserId(_user.getUserId());
+		if(customer==null)throw new UserException(ErrorMSG.powerError);
+		
+		/**后期可能需要修改*/
+		if(customer.getCustomerState().getStateId()!=20002)
+			throw new UserException(ErrorMSG.loginStateError);
+		return customer;
+	}
 	
 	
 	

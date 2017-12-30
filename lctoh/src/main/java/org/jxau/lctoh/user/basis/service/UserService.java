@@ -24,4 +24,8 @@ public class UserService {
 		u.setUserId("1111111111111111111111111111");
 		System.out.println(userDao.addUser(u));
 	}
+	
+	
+	
+	
 }

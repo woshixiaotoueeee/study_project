@@ -27,16 +27,6 @@ public class LocationController {
 			return ErrorMSG.fail;
 		}
 		session.setAttribute(ConversationMSG.locationSession, location);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		return ErrorMSG.success;
 	}
 	
