@@ -2,6 +2,8 @@ package org.jxau.lctoh.tool;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Date;
+import java.util.Random;
 
 import org.springframework.stereotype.Component;
 
@@ -59,4 +61,38 @@ public class Tools {
 	       return null;  
 	}
 	
+	
+	
+	
+	/** 
+     * 获取随机字符串 a-z,A-Z,0-9 
+     *  
+     * @param length 
+     *            长度 
+     * @return 
+     */  
+    public static String getRandomString(int length) {  
+        String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";  
+        Random random = new Random();  
+        StringBuffer sb = new StringBuffer();  
+  
+        for (int i = 0; i < length; ++i) {  
+            int number = random.nextInt(62);// [0,62)  
+            sb.append(str.charAt(number));  
+        }  
+        return sb.toString();  
+    }
+	
+    /**
+     * 得到传入时间与当前时间的时间差
+     * @param date
+     * @return
+     */
+    public static Long getTimeDifferenceFromNowDate(Date date) {
+    	Date nowDate=new Date();
+    	return nowDate.getTime()-date.getTime();
+    }
+    
+    
+    
 }

@@ -20,8 +20,17 @@ public class EmailConfing {
 	public final static String mailSmtPort = "587";
 	/**调式模式*/
 	public final static Boolean debug=true;
-	/**调式模式*/
+	/**sendTile*/
 	public final static String sendTile="联创点餐平台";
+	
+	
+	/**popTile*/
+	public final static String popTile="尊敬的用户";
+	
+	/**sendMSGCodeTile*/
+	public final static String sendMSGCodeTile="验证码";
+	/**验证码邮件内容*/
+	public final static String  sendMSGCodeInfo ="你的验证码是：";
 	
 	
 	

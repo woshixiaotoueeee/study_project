@@ -6,14 +6,18 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.config.ConversationMSG;
 import org.jxau.lctoh.tool.config.ErrorMSG;
 import org.jxau.lctoh.tool.config.EncodingConfig;
+import org.jxau.lctoh.tool.domain.ResponseData;
 import org.jxau.lctoh.user.admin.domain.Admin;
 import org.jxau.lctoh.user.admin.service.AdminService;
 import org.jxau.lctoh.user.basis.domain.User;
 import org.jxau.lctoh.user.basis.exception.UserException;
+import org.jxau.lctoh.user.basis.exception.VerificationCodeException;
 import org.jxau.lctoh.user.basis.service.UserService;
+import org.jxau.lctoh.user.basis.service.VerificationCodeService;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.customer.service.CustomerService;
 import org.jxau.lctoh.user.restaurant.service.RestaurantService;
@@ -40,17 +44,33 @@ public class UserController {
 
 	@Autowired
 	private RestaurantService restaurantService;
-	
+	@Autowired
+	private VerificationCodeService verificationCodeService;
+	@Autowired
+	private ResponseData responseData;
+	/**
+	 * 账号密码登陆
+	 * @param user 登陆账号密码
+	 * @param session
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/login",produces=EncodingConfig.produces)
-	public String login(User user,HttpSession session){
+	public String login(User user,Integer type,HttpSession session){
+		if(type==null){
+			return ErrorMSG.notKnowUserError;
+		}
 		//验证信息
 		if(user==null){
-			
+			return ErrorMSG.accountAndPasswordIsNullError;
 		}
-		
-		
-		Integer type =0;
+		if(user.getUserAccount()==null){
+			return ErrorMSG.accountIsNullError;
+		}
+		if(user.getUserPassword()==null){
+			return ErrorMSG.passwordIsNullError;
+		}
+		type=0;
 		user.setUserAccount("100001");
 		user.setUserPassword("100001");
 		
@@ -107,7 +127,91 @@ public class UserController {
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping(value="/loginByCode",produces=EncodingConfig.produces)
+	public String loginByCode(String userAccount,String code,Integer type,HttpSession session){
+		
+		if(type==null){
+			return ErrorMSG.notKnowUserError;
+		}
+		//验证信息
+		
+		if(userAccount==null){
+			return ErrorMSG.accountIsNullError;
+		}
+		if(code==null){
+			return ErrorMSG.codeError;
+		}
+		type=0;
+		userAccount="100001";
+		
+		switch(type){
+			case 1:
+				try {
+					Customer customer=customerService.loginByCode(userAccount,code);
+					session.setAttribute(ConversationMSG.customerSession, customer);
+				} catch (UserException e) {
+					return e.getMessage();
+				} catch (Exception e) {
+					return ErrorMSG.notKnowError;
+				}
+				break;
+			case 2:
+				try {
+					Admin admin=adminService.loginByCode(userAccount,code);
+					session.setAttribute(ConversationMSG.adminSession, admin);
+				} catch (UserException e) {
+					return e.getMessage();
+				} catch (Exception e) {
+					return ErrorMSG.notKnowError;
+				}
+				break;
+			case 3:
+				try {
+					Rider rider=riderService.loginByCode(userAccount,code);
+					session.setAttribute(ConversationMSG.riderSession, rider);
+					ServletContext servletContext=session.getServletContext();
+					Map riderMap=(Map)servletContext.getAttribute(ConversationMSG.riderContext);
+					riderMap.put(rider.getRiderId(), rider);
+					synchronized(this){
+						servletContext.setAttribute(ConversationMSG.riderContext, riderMap);
+					}
+				} catch (UserException e) {
+					return e.getMessage();
+				} catch (Exception e) {
+					return ErrorMSG.notKnowError;
+				}
+				break;
+			case 4:
+				try {
+					restaurantService.loginByCode(userAccount,code);
+				} catch (UserException e) {
+					return e.getMessage();
+				} catch (Exception e) {
+					return ErrorMSG.notKnowError;
+				}
+				break;
+			default : return ErrorMSG.notKnowUserError;
+		}
+		return ErrorMSG.success;
+	}
 	
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/getCode",produces=EncodingConfig.produces)
+	public String getCode(String userAccount){
+		if(userAccount==null){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.accountIsNullError));
+		}
+		try {
+			return Tools.gson.toJson(responseData.successInfo(verificationCodeService.setCode(userAccount)));
+		} catch (VerificationCodeException e) {
+			return Tools.gson.toJson(responseData.failInfo(e.getMessage()));
+		}catch(Exception e){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowError));
+		}
+	}
 	
 	@RequestMapping(value="/test",produces=EncodingConfig.produces)
 	public String test(){

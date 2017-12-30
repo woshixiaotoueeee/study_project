@@ -60,7 +60,7 @@ public class EmailService {
      * @return
      * @throws Exception
      */
-    public static MimeMessage createMimeMessage(Session session, String sendMail, String receiveMail,String popTile,String sendMSGTile,String sendMSGInfo) throws Exception {
+    private static MimeMessage createMimeMessage(Session session, String sendMail, String receiveMail,String popTile,String sendMSGTile,String sendMSGInfo) throws Exception {
         // 1. 创建一封邮件
         MimeMessage message = new MimeMessage(session);
         // 2. From: 发件人（昵称有广告嫌疑，避免被邮件服务器误认为是滥发广告以至返回失败，请修改昵称）
