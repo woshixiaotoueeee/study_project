@@ -11,6 +11,8 @@ import org.jxau.lctoh.tool.config.ConversationMSG;
 import org.jxau.lctoh.tool.config.EncodingConfig;
 import org.jxau.lctoh.tool.config.ErrorMSG;
 
+
+
 @Controller
 @RequestMapping("/LocationController") 
 public class LocationController {
@@ -25,6 +27,16 @@ public class LocationController {
 			return ErrorMSG.fail;
 		}
 		session.setAttribute(ConversationMSG.locationSession, location);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		return ErrorMSG.success;
 	}
 	
@@ -41,4 +53,6 @@ public class LocationController {
 		}
 		return Tools.gson.toJson(location);
 	}
+	
+	
 }
