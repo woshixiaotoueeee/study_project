@@ -17,6 +17,8 @@ public class ErrorMSG {
 	public final static String accountError="账号不存在";
 	/**密码错误信息*/
 	public final static String passwordError="密码错误";
+	/**两次密码不同*/
+	public final static String passwordNotSameError="两次密码不同";
 	/**权限错误信息*/
 	public final static String powerError="抱歉，你没有权限";
 	/**登陆状态错误信息*/
@@ -29,10 +31,18 @@ public class ErrorMSG {
 	public final static String codeError="验证码有误";
 	/**验证码失效*/
 	public final static String timeExpireError="验证码已失效";
-	
+	/**联系方式错误*/
+	public final static String phoneError="联系方式为空";
 	/**邮件发送失败*/
 	public final static String emailSendError="邮件发送失败";
-	
+	/**邮箱格式错误*/
+	public final static String emailError="邮箱格式错误";
+	/**邮箱为空*/
+	public final static String emailIsNullError="邮箱为空";
+	/**邮箱存在*/
+	public final static String emailExistenceError="邮箱已被注册";
+	/**性别为空*/
+	public final static String sexIsNullError="请选择性别";
 	/**成功响应编码*/
 	public final static String success="1";
 	/**失败响应编码*/

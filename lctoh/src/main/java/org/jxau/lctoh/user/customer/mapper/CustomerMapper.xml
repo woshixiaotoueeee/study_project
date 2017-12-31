@@ -49,4 +49,29 @@
 			and customer.customer_id=#{customerId}
 	</select>
 	
+	
+	
+	
+	<!-- 添加用户信息 -->
+	<insert id="addaddCustomer" parameterType="Customer" >
+		insert into 
+		customer (
+			customer.customer_id,
+			customer.customer_nickname,
+			customer.customer_portrait,
+			customer.customer_balance,
+			customer.customer_update_time,
+			customer.customer_state_id,
+			customer.customer_user_id
+		)
+		values(
+			#{customerId}, 
+			#{customerNickname},
+			#{customerPortrait},
+			#{customerBalance},
+			#{customerUpdateTime}, 
+			#{customerState.stateId}, 
+			#{customerUser.userId}
+		)
+	</insert>
 </mapper>

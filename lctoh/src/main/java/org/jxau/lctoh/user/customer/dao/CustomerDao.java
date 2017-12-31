@@ -1,5 +1,7 @@
 package org.jxau.lctoh.user.customer.dao;
 
+import java.util.Date;
+
 import org.jxau.lctoh.tool.base.BaseDao;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.customer.mapper.CustomerMapper;
@@ -30,5 +32,10 @@ public class CustomerDao extends BaseDao {
 	/**根据客户识别码查询用户信息*/
 	public Customer findCustomerByCustomerId(String customerId){
 		return customerMapper.findCustomerByCustomerId(customerId);
+	}
+	/**添加用户*/
+	public Integer addCustomer(Customer customer) {
+		customer.setCustomerUpdateTime(new Date());
+		return customerMapper.addCustomer(customer);
 	}
 }
