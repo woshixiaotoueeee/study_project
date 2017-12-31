@@ -213,11 +213,48 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value="/test",produces=EncodingConfig.produces)
-	public String test(){
+	/**
+	 * 注册
+	 * */
+	@ResponseBody
+	@RequestMapping(value="/register",produces=EncodingConfig.produces)
+	public String register(User user,String _userPassword){
+		//验证信息
+		if(user==null){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowError));
+		}
+		if(user.getUserPassword()==null){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.passwordIsNullError));
+		}
+		if(user.getUserSex()==null){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.sexIsNullError));
+		}
+		if(user.getUserPhone()==null){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.phoneError));
+		}
+		if(user.getUserEmail()==null){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailIsNullError));
+		}
+		/*
+		 * 邮箱格式判断
+		if(user.getUserEmail()==null){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailError));
+		}
+		*/
+		if(!user.getUserPassword().equals(_userPassword)){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.passwordNotSameError));
+		}
 		
-		userService.login(new User());
-		
-		return null;
+		try{
+			user=customerService.register(user);
+		}catch(UserException e){
+			return Tools.gson.toJson(responseData.failInfo(e.getMessage()));
+		}catch(Exception e){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowError));
+		}
+		return Tools.gson.toJson(responseData.successInfo(user));
 	}
+	
+	
+	
 }

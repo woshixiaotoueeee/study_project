@@ -12,5 +12,7 @@ public interface CustomerMapper {
 	public Customer findCustomerByUserId(@Param("customerUserId")String customerUserId);
 	/**根据客户识别码查询用户信息*/
 	public Customer findCustomerByCustomerId(@Param("customerId")String customerId);
+	/**添加客户*/
+	public Integer addCustomer(Customer customer);
 	
 }

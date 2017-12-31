@@ -1,5 +1,8 @@
 package org.jxau.lctoh.user.customer.domain;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 import org.apache.ibatis.type.Alias;
 import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.user.basis.domain.User;
@@ -16,8 +19,8 @@ public class Customer{
 	private String customerId;			//客户识别码
 	private String customerNickname;	//昵称
 	private String customerPortrait;	//头像
-	private String customerBalance;		//余额
-	private String customerUpdateTime;	//最近更新时间
+	private BigDecimal customerBalance;		//余额
+	private Date customerUpdateTime;	//最近更新时间
 	private State customerState;		//状态信息
 	public String getCustomerId() {
 		return customerId;
@@ -37,16 +40,16 @@ public class Customer{
 	public void setCustomerPortrait(String customerPortrait) {
 		this.customerPortrait = customerPortrait;
 	}
-	public String getCustomerBalance() {
+	public BigDecimal getCustomerBalance() {
 		return customerBalance;
 	}
-	public void setCustomerBalance(String customerBalance) {
+	public void setCustomerBalance(BigDecimal customerBalance) {
 		this.customerBalance = customerBalance;
 	}
-	public String getCustomerUpdateTime() {
+	public Date getCustomerUpdateTime() {
 		return customerUpdateTime;
 	}
-	public void setCustomerUpdateTime(String customerUpdateTime) {
+	public void setCustomerUpdateTime(Date customerUpdateTime) {
 		this.customerUpdateTime = customerUpdateTime;
 	}
 	public State getCustomerState() {
@@ -71,6 +74,6 @@ public class Customer{
 				+ ", customerState=" + customerState + "]";
 	}
 	
+	public Customer(){}
 	
-
 }

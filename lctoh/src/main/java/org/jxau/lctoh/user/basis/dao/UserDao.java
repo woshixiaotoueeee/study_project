@@ -69,6 +69,7 @@ public class UserDao extends BaseDao{
 	 * @return Integer 添加数量
 	 */
 	public Integer addUser(User user){
+		user.setUserUpdateTime(new Date());
 		return userMapper.addUser(user);
 	}
 	
