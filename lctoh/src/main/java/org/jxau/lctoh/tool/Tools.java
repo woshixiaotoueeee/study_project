@@ -3,8 +3,10 @@ package org.jxau.lctoh.tool;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
+import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
@@ -129,7 +131,7 @@ public class Tools {
   	 * @param x2
   	 * @return
   	 */
-  	public static double getDistance(double y1, double x1, double y2, double x2)
+  	public static double getDistance(double x1,double y1, double x2, double y2)
   	{
   	   double radLat1 = rad(y1);
   	   double radLat2 = rad(y2);
@@ -141,5 +143,26 @@ public class Tools {
   	   //s=Math.round(s);//去除小数？
   	   return s;
   	}
+  	/**
+  	 * 冒泡排序
+  	 * */
+  	public static List<Restaurant> maoPaoSort(List<Restaurant> list){
+  		Restaurant restaurant;
+  		for(int i=0;i<list.size();i++){
+  			for(int j=0;j<list.size()-i;j++){
+  	  			if(list.get(j).getRestaurantDistance().doubleValue()>
+  	  					list.get(j+1).getRestaurantDistance().doubleValue()){
+  	  				restaurant=list.get(j);
+  	  				list.set(j, list.get(j+1));
+  	  				list.set(j+1, restaurant);
+  	  			}
+  	  		}
+  		}
+  		return list;
+  	}
+  	
+  	
+  	
+  	
  
 }
