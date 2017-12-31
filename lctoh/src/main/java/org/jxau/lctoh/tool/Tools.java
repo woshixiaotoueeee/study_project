@@ -82,7 +82,27 @@ public class Tools {
         }  
         return sb.toString();  
     }
-	
+    /** 
+     * 获取随机字符串数字0-9 
+     *  
+     * @param length 
+     *            长度 
+     * @return 
+     */  
+    public static String getRandomNumberString(int length) {  
+        String str = "0123456789";  
+        Random random = new Random();  
+        StringBuffer sb = new StringBuffer();  
+  
+        for (int i = 0; i < length; ++i) { 
+        	
+            int number = random.nextInt(10);// [0,10)  
+            if(!(i==0&&number==0)){
+            	sb.append(str.charAt(number));
+            }
+        }  
+        return sb.toString();  
+    }
     /**
      * 得到传入时间与当前时间的时间差
      * @param date
@@ -95,4 +115,31 @@ public class Tools {
     
     
     
+    /**辅助计算两点距离*/
+    private static double EARTH_RADIUS = 6378.137;//地球半径
+	private static double rad(double d)
+	{
+	   return d * Math.PI / 180.0;
+	}
+  	/**
+  	 * 计算两个点的距离（米）
+  	 * @param y1
+  	 * @param x1
+  	 * @param y2
+  	 * @param x2
+  	 * @return
+  	 */
+  	public static double getDistance(double y1, double x1, double y2, double x2)
+  	{
+  	   double radLat1 = rad(y1);
+  	   double radLat2 = rad(y2);
+  	   double a = radLat1 - radLat2;
+  	   double b = rad(x1) - rad(x2);
+  	   double s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a/2),2) + 
+  	   Math.cos(radLat1)*Math.cos(radLat2)*Math.pow(Math.sin(b/2),2)));
+  	   s = s * EARTH_RADIUS;
+  	   //s=Math.round(s);//去除小数？
+  	   return s;
+  	}
+ 
 }
