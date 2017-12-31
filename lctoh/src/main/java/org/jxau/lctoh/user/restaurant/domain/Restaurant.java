@@ -21,7 +21,7 @@ public class Restaurant {
 	private String restaurantPhone;			//店家联系方式
 	private String restaurantImage;			//店家图片
 	private BigDecimal restaurantLongitude;	//经度
-	private BigDecimal restaurantLatitude;	//经度
+	private BigDecimal restaurantLatitude;	//纬度
 	private String restaurantNotice;		//公告
 	private BigDecimal restaurantDistance;	//距离
 	private BigDecimal restaurantDeliveryFee;//配送费

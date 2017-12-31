@@ -43,6 +43,11 @@ public class ErrorMSG {
 	public final static String emailExistenceError="邮箱已被注册";
 	/**性别为空*/
 	public final static String sexIsNullError="请选择性别";
+	
+	/**参数为空*/
+	public final static String parameterIsNullError="参数为空";
+	/**查询为空*/
+	public final static String gerInfoIsNullError="查询为空";
 	/**成功响应编码*/
 	public final static String success="1";
 	/**失败响应编码*/
