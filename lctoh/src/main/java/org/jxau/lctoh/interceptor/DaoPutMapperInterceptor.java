@@ -12,11 +12,10 @@ import org.springframework.stereotype.Component;
 
 /** 
  * 配合工具包中的方法给dao层中的mapper接口动态赋值 
- * @author Bird 
- * 
+ * @author qdt_PC
  */  
 @Aspect 
-@Component
+@Component("DaoPutMapperInterceptor")
 public class DaoPutMapperInterceptor {  
 	
 	/**为除了putMapper()的所有方法配置AOP*/

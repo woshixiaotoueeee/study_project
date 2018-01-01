@@ -19,7 +19,8 @@ import org.jxau.lctoh.tool.config.EncodingConfig;
 
 /**
  * 解决部分中文编码问题
- * */
+ * @author qdt_PC
+ */
 @WebFilter("/*")
 public class EncodingFilter implements Filter
 {

@@ -2,7 +2,7 @@ package org.jxau.lctoh.trade.dish.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
+
 import org.jxau.lctoh.tool.base.BaseDao;
 import org.jxau.lctoh.trade.dish.domain.Dish;
 import org.jxau.lctoh.trade.dish.mapper.DishMapper;
