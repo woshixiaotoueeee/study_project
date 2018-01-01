@@ -25,8 +25,6 @@ public class DaoPutMapperInterceptor {
     /**为除了putMapper()的所有方法配置AOP*/
     @Pointcut("!(execution(* org.jxau.lctoh.*.*.dao.*.puttMapper(..)))&&execution(* org.jxau.lctoh.*.*.dao.*.*(..))")  
     private void notPutMapper_2(){}//定义一个切入点  
-    
-    
     @Around("notPutMapper_2()")  
     public Object doBasicProfiling_2(ProceedingJoinPoint pjp) throws Throwable{
     	/*
