@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:需与接口的完全限定名保持一致 -->
+<mapper namespace="org.jxau.lctoh.trade.dish.mapper.DishCategoryMapper">
+	<resultMap type="DishCategory" id="DishCategoryResultMap">
+	    <id property="dishCategoryId" column="dish_category_id"/>
+		<result property="dishCategoryName" column="dish_category_name"/>
+		<result property="dishCategoryUpdateTime" column="dish_category_update_time"/>
+		<association property="dishCategoryState" column="dish_category_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
+		<association property="dishCategoryRestaurantId" column="dish_category_restaurant_id" select="org.jxau.lctoh.user.restaurant.mapper.RestaurantMapper.findRestaurantByRestaurantId"/>
+	</resultMap>
+
+	<!--根据菜肴分类识别码查询分类信息-->
+	<select id="findDishCategoryById" parameterType="String" resultMap="DishCategoryResultMap">
+		select 
+			dish_category.dish_category_id,
+			dish_category.dish_category_name,
+			dish_category.dish_category_state_id,
+			dish_category.dish_category_update_time,
+			dish_category.dish_category_restaurant_id,
+		from dish_category
+		where 
+			dish_category.dish_category_delete_or_not=1
+			dish_category.dish_category_id=#{dishCategoryId}
+	</select>
+	
+	
+	<!--根据店家识别码查询分类信息-->
+	<select id="findDishCategoryByRestaurantId" parameterType="String" resultMap="DishCategoryResultMap">
+		select 
+			dish_category.dish_category_id,
+			dish_category.dish_category_name,
+			dish_category.dish_category_state_id,
+			dish_category.dish_category_update_time,
+			dish_category.dish_category_restaurant_id,
+		from dish_category
+		where 
+			dish_category.dish_category_delete_or_not=1
+			dish_category.dish_category_restaurant_id=#{restaurantId}
+	</select>
+	
+	
+	
+</mapper>

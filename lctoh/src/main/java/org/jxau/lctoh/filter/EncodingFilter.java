@@ -37,14 +37,14 @@ public class EncodingFilter implements Filter
         final HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         
-//        设置post请求的编码
+        //设置post请求的编码
         req.setCharacterEncoding(characterEncoding);
         
-//        设置响应的编码
+        //设置响应的编码
         resp.setCharacterEncoding(characterEncoding);
         resp.setContentType("text/html;charset=".concat(characterEncoding));
         
-//        解决get请求乱码
+        //解决get请求乱码
         chain.doFilter((ServletRequest) Proxy.newProxyInstance(EncodingFilter.class.getClassLoader(),req.getClass().getInterfaces(),new InvocationHandler()
         {
             @Override
@@ -69,7 +69,7 @@ public class EncodingFilter implements Filter
     }
     public void init(FilterConfig fConfig) throws ServletException
     {
-//        使用配置类文件中配置的编码
+    	//使用配置类文件中配置的编码
     	characterEncoding = EncodingConfig.characterEncoding;
     }
 }
