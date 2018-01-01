@@ -1,9 +1,7 @@
 package org.jxau.lctoh.tool.exception;
 
 public class GetInfoException  extends Exception{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	public GetInfoException() {

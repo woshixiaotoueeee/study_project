@@ -42,4 +42,31 @@ public class VerificationCodeService {
 		}
 		return verificationCode;
 	}
+	
+	/**
+	 * 根据邮箱设置验证码
+	 * @param userEmail
+	 * @return
+	 * @throws VerificationCodeException
+	 */
+	public VerificationCode setCodeByUserEmail(String userEmail) throws VerificationCodeException {
+		User _user=userDao.findUserByUserEmail(userEmail);
+		if(_user==null)throw new VerificationCodeException(ErrorMSG.accountError);
+		
+		verificationCode.setVerificationCode(Tools.getRandomString(6));
+		verificationCode.setVerificationCodeId(_user.getUserId());
+		try {
+			verificationCodeDao.replaceVerificationCode(verificationCode);
+		} catch (Exception e) {
+			throw new VerificationCodeException(ErrorMSG.notKnowError);
+		}
+		
+		try {
+			emailService.sendEmail(_user.getUserEmail(), EmailConfing.popTile, EmailConfing.sendMSGCodeTile, EmailConfing.sendMSGCodeInfo.concat(verificationCode.getVerificationCode()));
+		} catch (Exception e) {
+			throw new VerificationCodeException(ErrorMSG.emailSendError);
+		}
+		return verificationCode;
+		
+	}
 }

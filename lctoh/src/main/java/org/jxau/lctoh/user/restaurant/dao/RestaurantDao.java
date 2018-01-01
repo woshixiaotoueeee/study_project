@@ -3,6 +3,7 @@ package org.jxau.lctoh.user.restaurant.dao;
 import java.util.List;
 
 import org.jxau.lctoh.tool.base.BaseDao;
+import org.jxau.lctoh.trade.dish.mapper.DishCategoryMapper;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.jxau.lctoh.user.restaurant.mapper.RestaurantMapper;
 import org.springframework.stereotype.Repository;
@@ -10,7 +11,14 @@ import org.springframework.stereotype.Repository;
 public class RestaurantDao extends BaseDao {
 	
 	private RestaurantMapper restaurantMapper;
+	private DishCategoryMapper dishCategoryMapper;
 	
+	public DishCategoryMapper getDishCategoryMapper() {
+		return dishCategoryMapper;
+	}
+	public void setDishCategoryMapper(DishCategoryMapper dishCategoryMapper) {
+		this.dishCategoryMapper = dishCategoryMapper;
+	}
 	public RestaurantMapper getRestaurantMapper() {
 		return restaurantMapper;
 	}
@@ -20,6 +28,7 @@ public class RestaurantDao extends BaseDao {
 	@Override
 	public void puttMapper() {
 		restaurantMapper=this.getMapper(RestaurantMapper.class);
+		dishCategoryMapper=this.getMapper(DishCategoryMapper.class);
 	}
 	
 	
@@ -33,7 +42,9 @@ public class RestaurantDao extends BaseDao {
 		/**
 		 * 设置菜肴分类信息
 		 * */
-		
+		if(restaurant!=null){
+			restaurant.setDishCategory(dishCategoryMapper.findDishCategoryByRestaurantId(restaurantId));
+		}
 		return restaurant;
 	}
 	
@@ -47,6 +58,9 @@ public class RestaurantDao extends BaseDao {
 		/**
 		 * 设置菜肴分类信息
 		 * */
+		if(restaurant!=null){
+			restaurant.setDishCategory(dishCategoryMapper.findDishCategoryByRestaurantId(restaurant.getRestaurantId()));
+		}
 		return restaurant;
 	}
 	

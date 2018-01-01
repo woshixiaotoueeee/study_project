@@ -19,6 +19,7 @@ public class ConfigListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
+		//系统启动时创建一个储存骑手信息的Map
 		Map<String,Rider> riderMap=new LinkedHashMap<String,Rider>();
 		servletContextEvent.getServletContext().setAttribute(ConversationMSG.riderContext, riderMap);;
 	}

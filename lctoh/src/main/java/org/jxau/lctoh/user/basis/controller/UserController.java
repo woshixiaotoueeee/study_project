@@ -20,6 +20,7 @@ import org.jxau.lctoh.user.basis.service.UserService;
 import org.jxau.lctoh.user.basis.service.VerificationCodeService;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.customer.service.CustomerService;
+import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.jxau.lctoh.user.restaurant.service.RestaurantService;
 import org.jxau.lctoh.user.rider.domain.Rider;
 import org.jxau.lctoh.user.rider.service.RiderService;
@@ -73,7 +74,7 @@ public class UserController {
 		type=0;
 		user.setUserAccount("100001");
 		user.setUserPassword("100001");
-		
+		//判断登陆的角色
 		switch(type){
 			case 1:
 				try {
@@ -113,7 +114,8 @@ public class UserController {
 				break;
 			case 4:
 				try {
-					restaurantService.login(user);
+					Restaurant restaurant=restaurantService.login(user);
+					session.setAttribute(ConversationMSG.restaurantSession, restaurant);
 				} catch (UserException e) {
 					return e.getMessage();
 				} catch (Exception e) {
@@ -127,6 +129,14 @@ public class UserController {
 	}
 	
 	
+	/**
+	 * 根据 账号 验证码 登陆
+	 * @param userAccount
+	 * @param code
+	 * @param type
+	 * @param session
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/loginByCode",produces=EncodingConfig.produces)
 	public String loginByCode(String userAccount,String code,Integer type,HttpSession session){
@@ -184,7 +194,8 @@ public class UserController {
 				break;
 			case 4:
 				try {
-					restaurantService.loginByCode(userAccount,code);
+					Restaurant restaurant=restaurantService.loginByCode(userAccount,code);
+					session.setAttribute(ConversationMSG.restaurantSession, restaurant);
 				} catch (UserException e) {
 					return e.getMessage();
 				} catch (Exception e) {
@@ -197,10 +208,81 @@ public class UserController {
 	}
 	
 	
-	
+	/**
+	 * 根据 账号 验证码 登陆
+	 * @param userAccount
+	 * @param code
+	 * @param type
+	 * @param session
+	 * @return
+	 */
 	@ResponseBody
-	@RequestMapping(value="/getCode",produces=EncodingConfig.produces)
-	public String getCode(String userAccount){
+	@RequestMapping(value="/verificationByCode",produces=EncodingConfig.produces)
+	public String verificationByCode(String userEmail,String code,HttpSession session){
+		//验证信息
+		if(userEmail==null){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailIsNullError));
+		}
+		if(code==null){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.codeIsNullError));
+		}
+		/*
+		 * 邮箱格式验证
+		if(userEmail==null){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailIsNullError));
+		}
+		*/
+		try {
+			User user=userService.findByEmailAndCode(userEmail,code);
+			session.setAttribute(ConversationMSG.userSession, user);
+		} catch (UserException e) {
+			// TODO Auto-generated catch block
+			return Tools.gson.toJson(responseData.failInfo(e.getMessage()));
+		}catch (Exception e) {
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowError));
+		}
+		return Tools.gson.toJson(responseData.successInfo(null));
+	}
+	
+	
+	
+	/**
+	 * 修改密码
+	 * @param password
+	 * @param _password
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/updatePassword",produces=EncodingConfig.produces)
+	public String updatePassword(String password,String _password,HttpSession session){
+		//验证信息
+		if(password==null){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.passwordIsNullError));
+		}
+		if(!password.equals(_password)){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.passwordNotSameError));
+		}
+		User user=(User)session.getAttribute(ConversationMSG.userSession);
+		if(user==null){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowError));
+		}
+		user.setUserPassword(password);
+		try {
+			return Tools.gson.toJson(responseData.successInfo(userService.updateUser(user)));
+		} catch (UserException e) {
+			return Tools.gson.toJson(responseData.failInfo(e.getMessage()));
+		} catch (Exception e) {
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowError));
+		}
+	}
+	
+	/**
+	 * 根据账号获取验证码
+	 * */
+	@ResponseBody
+	@RequestMapping(value="/getCodeByUserAccount",produces=EncodingConfig.produces)
+	public String getCodeByUserAccount(String userAccount){
 		if(userAccount==null){
 			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.accountIsNullError));
 		}
@@ -212,6 +294,32 @@ public class UserController {
 			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowError));
 		}
 	}
+	
+	/**
+	 * 根据账号获取验证码
+	 * */
+	@ResponseBody
+	@RequestMapping(value="/getCodeByUserEmail",produces=EncodingConfig.produces)
+	public String getCodeByUserEmail(String userEmail){
+		if(userEmail==null){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailIsNullError));
+		}
+		/*
+		 * 邮箱格式验证
+		if(userEmail==null){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailError));
+		}
+		*/
+		try {
+			return Tools.gson.toJson(responseData.successInfo(verificationCodeService.setCodeByUserEmail(userEmail)));
+		} catch (VerificationCodeException e) {
+			return Tools.gson.toJson(responseData.failInfo(e.getMessage()));
+		}catch(Exception e){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowError));
+		}
+	}
+	
+	
 	
 	/**
 	 * 注册
@@ -254,7 +362,5 @@ public class UserController {
 		}
 		return Tools.gson.toJson(responseData.successInfo(user));
 	}
-	
-	
 	
 }
