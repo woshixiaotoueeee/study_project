@@ -40,7 +40,7 @@
 			restaurant.restaurant_deliveryfee
 		from restaurant
 		where 
-			restaurant.restaurant.restaurant_delete_or_not=1
+			restaurant.restaurant_delete_or_not=1
 			and restaurant.restaurant_id=#{restaurantId}
 	</select>
 	
@@ -64,7 +64,7 @@
 			restaurant.restaurant_deliveryfee
 		from restaurant
 		where 
-			restaurant.restaurant.restaurant_delete_or_not=1
+			restaurant.restaurant_delete_or_not=1
 			and restaurant.restaurant_user_id=#{userId}
 	</select>
 	
@@ -88,7 +88,7 @@
 			restaurant.restaurant_deliveryfee
 		from restaurant
 		where 
-			restaurant.restaurant.restaurant_delete_or_not=1
+			restaurant.restaurant_delete_or_not=1
 			and restaurant.restaurant_category_id=#{restaurantCategoryId}
 			and restaurant.restaurant_city_id=#{cityId}
 	</select>
@@ -111,7 +111,7 @@
 			restaurant.restaurant_deliveryfee
 		from restaurant
 		where 
-			restaurant.restaurant.restaurant_delete_or_not=1
+			restaurant.restaurant_delete_or_not=1
 			and restaurant.restaurant_city_id=#{cityId}
 	</select>
 	
@@ -134,7 +134,7 @@
 			restaurant.restaurant_deliveryfee
 		from restaurant
 		where 
-			restaurant.restaurant.restaurant_delete_or_not=1
+			restaurant.restaurant_delete_or_not=1
 			and restaurant.restaurant_city_id=#{cityId}
 			and restaurant.restaurant_name like CONCAT(CONCAT('%', #{restaurantName}), '%')
 	</select>
