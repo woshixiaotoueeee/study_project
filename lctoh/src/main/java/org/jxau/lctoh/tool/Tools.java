@@ -148,7 +148,7 @@ public class Tools {
   	 * */
   	public static List<Restaurant> maoPaoSort(List<Restaurant> list){
   		Restaurant restaurant;
-  		for(int i=0;i<list.size();i++){
+  		for(int i=1;i<list.size();i++){
   			for(int j=0;j<list.size()-i;j++){
   	  			if(list.get(j).getRestaurantDistance().doubleValue()>
   	  					list.get(j+1).getRestaurantDistance().doubleValue()){
