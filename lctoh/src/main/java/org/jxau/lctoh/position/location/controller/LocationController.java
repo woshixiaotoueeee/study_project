@@ -13,10 +13,21 @@ import org.jxau.lctoh.tool.config.ErrorMSG;
 
 
 
+/**
+ * 定位信息操作Controller
+ * @author qdt_PC
+ */
 @Controller
 @RequestMapping("/LocationController") 
 public class LocationController {
-	/**定位*/
+	
+	
+	/**
+	 * 定位
+	 * @param location 定位信息
+	 * @param session
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/setLocation",produces=EncodingConfig.produces)
 	public String setLocation(Location location,HttpSession session){
@@ -26,11 +37,16 @@ public class LocationController {
 		if(location==null||location.getCity()==null||location.getLatitude()==null||location.getLongitude()==null){
 			return ErrorMSG.fail;
 		}
+		//设置定位信息
 		session.setAttribute(ConversationMSG.locationSession, location);
 		return ErrorMSG.success;
 	}
 	
-	/**前台获取定位信息的接口*/
+	/**
+	 * 前台获取定位信息的接口
+	 * @param session
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/getLocation",produces=EncodingConfig.produces)
 	public String getLocation(HttpSession session){

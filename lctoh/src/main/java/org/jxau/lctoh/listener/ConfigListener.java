@@ -10,9 +10,16 @@ import javax.servlet.ServletContextListener;
 import org.jxau.lctoh.tool.config.ConversationMSG;
 import org.jxau.lctoh.user.rider.domain.Rider;
 
+/**
+ * 在系统启动的时候给系统创建一个储存骑手位置的Map
+ * @author qdt_PC
+ */
 public class ConfigListener implements ServletContextListener {
 	@Override
 	public void contextDestroyed(ServletContextEvent servletContextEvent) {}
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContextListener#contextInitialized(javax.servlet.ServletContextEvent)
+	 */
 	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		//系统启动时创建一个储存骑手信息的Map

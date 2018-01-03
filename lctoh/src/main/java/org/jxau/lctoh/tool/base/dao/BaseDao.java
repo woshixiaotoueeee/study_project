@@ -1,4 +1,4 @@
-package org.jxau.lctoh.tool.base;
+package org.jxau.lctoh.tool.base.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -17,7 +17,7 @@ public class DishCategory {
 	private String dishCategoryName;		//菜肴分类名
 	private State dishCategoryState;		//分类状态
 	private Date dishCategoryUpdateTime;	//最近更新时间
-	private Restaurant dishCategoryRestaurantId;//所属店家
+	private Restaurant dishCategoryRestaurant;//所属店家
 	private List<Dish> dishList;			//分类所拥有的菜肴
 	public String getDishCategoryId() {
 		return dishCategoryId;
@@ -31,8 +31,8 @@ public class DishCategory {
 	public Date getDishCategoryUpdateTime() {
 		return dishCategoryUpdateTime;
 	}
-	public Restaurant getDishCategoryRestaurantId() {
-		return dishCategoryRestaurantId;
+	public Restaurant getDishCategoryRestaurant() {
+		return dishCategoryRestaurant;
 	}
 	public List<Dish> getDishList() {
 		return dishList;
@@ -49,8 +49,8 @@ public class DishCategory {
 	public void setDishCategoryUpdateTime(Date dishCategoryUpdateTime) {
 		this.dishCategoryUpdateTime = dishCategoryUpdateTime;
 	}
-	public void setDishCategoryRestaurantId(Restaurant dishCategoryRestaurantId) {
-		this.dishCategoryRestaurantId = dishCategoryRestaurantId;
+	public void setDishCategoryRestaurant(Restaurant dishCategoryRestaurant) {
+		this.dishCategoryRestaurant = dishCategoryRestaurant;
 	}
 	public void setDishList(List<Dish> dishList) {
 		this.dishList = dishList;
@@ -61,7 +61,7 @@ public class DishCategory {
 				+ ", dishCategoryName=" + dishCategoryName
 				+ ", dishCategoryState=" + dishCategoryState
 				+ ", dishCategoryUpdateTime=" + dishCategoryUpdateTime
-				+ ", dishCategoryRestaurantId=" + dishCategoryRestaurantId
+				+ ", dishCategoryRestaurant=" + dishCategoryRestaurant
 				+ ", dishList=" + dishList + "]";
 	}
 	
