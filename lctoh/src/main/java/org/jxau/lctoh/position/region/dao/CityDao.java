@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.jxau.lctoh.position.region.domain.City;
 import org.jxau.lctoh.position.region.mapper.CityMapper;
-import org.jxau.lctoh.tool.base.BaseDao;
+import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.springframework.stereotype.Repository;
 @Repository("CityDao")
 public class CityDao extends BaseDao {

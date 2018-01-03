@@ -7,7 +7,7 @@ import java.util.List;
 import org.jxau.lctoh.position.region.domain.Province;
 import org.jxau.lctoh.position.region.mapper.CityMapper;
 import org.jxau.lctoh.position.region.mapper.ProvinceMapper;
-import org.jxau.lctoh.tool.base.BaseDao;
+import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.springframework.stereotype.Repository;
 
 @Repository("ProvinceDao")

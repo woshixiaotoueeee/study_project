@@ -9,7 +9,7 @@
 		<result property="dishCategoryName" column="dish_category_name"/>
 		<result property="dishCategoryUpdateTime" column="dish_category_update_time"/>
 		<association property="dishCategoryState" column="dish_category_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
-		<association property="dishCategoryRestaurantId" column="dish_category_restaurant_id" select="org.jxau.lctoh.user.restaurant.mapper.RestaurantMapper.findRestaurantByRestaurantId"/>
+		<association property="dishCategoryRestaurant" column="dish_category_restaurant_id" select="org.jxau.lctoh.user.restaurant.mapper.RestaurantMapper.findRestaurantByRestaurantId"/>
 	</resultMap>
 
 	<!--根据菜肴分类识别码查询分类信息-->

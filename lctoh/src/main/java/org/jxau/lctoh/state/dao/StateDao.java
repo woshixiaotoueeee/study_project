@@ -5,7 +5,7 @@ import java.util.Date;
 
 import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.state.mapper.StateMapper;
-import org.jxau.lctoh.tool.base.BaseDao;
+import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.springframework.stereotype.Repository;
 
 @Repository("StateDao")

@@ -7,7 +7,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.jxau.lctoh.tool.Tools;
-import org.jxau.lctoh.tool.base.BaseDao;
+import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.springframework.stereotype.Component;
 
 /** 
