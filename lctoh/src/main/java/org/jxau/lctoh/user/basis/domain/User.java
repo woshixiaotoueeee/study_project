@@ -5,10 +5,11 @@ import java.util.Date;
 import org.apache.ibatis.type.Alias;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
 /**
  * 基础用户类
- * 
- * */
+ * @author qdt_PC
+ */
 @Component
 @Alias("User")
 @Scope("prototype")

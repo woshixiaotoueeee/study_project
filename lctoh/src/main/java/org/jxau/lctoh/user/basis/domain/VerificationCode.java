@@ -6,6 +6,10 @@ import org.apache.ibatis.type.Alias;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+/**
+ * 验证码基础类
+ * @author qdt_PC
+ */
 @Component
 @Alias("VerificationCode")
 @Scope("prototype")
