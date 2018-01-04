@@ -1,8 +1,10 @@
 package org.jxau.lctoh.tool.config;
 
 import org.springframework.stereotype.Component;
-
-/**通用常量池*/
+/**
+ * 用于会话信息 键 的通用常量池
+ * @author qdt_PC
+ */
 @Component("ConversationMSG")
 public class ConversationMSG {
 

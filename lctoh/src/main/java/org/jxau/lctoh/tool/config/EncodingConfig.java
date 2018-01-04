@@ -1,8 +1,10 @@
 package org.jxau.lctoh.tool.config;
 
 import org.springframework.stereotype.Component;
-
-/**通用常量池*/
+/**
+ * 编码格式通用常量池
+ * @author qdt_PC
+ */
 @Component("EncodingConfig")
 public class EncodingConfig {
 	/**设置的编码*/

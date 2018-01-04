@@ -3,9 +3,11 @@ package org.jxau.lctoh.tool.base.dao;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 /**
  * 基础Dao层类，封装了一些基础抽象方法
- * */
+ * @author qdt_PC
+ */
 @Repository("BaseDao")
 public abstract class BaseDao {
 	
@@ -14,11 +16,11 @@ public abstract class BaseDao {
 	
 	/**
 	 * 获取接口的代理类
-	 * @param c mapper接口的class
+	 * @param mapperClass mapper接口的class
 	 * @return	对应mapper实现类
 	 */
-	protected <T> T getMapper(Class<T> c){
-		return sqlSession.getMapper(c);
+	protected <T> T getMapper(Class<T> mapperClass){
+		return sqlSession.getMapper(mapperClass);
 	}
 	
 	
