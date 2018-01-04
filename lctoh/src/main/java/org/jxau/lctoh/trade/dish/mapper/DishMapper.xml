@@ -32,7 +32,7 @@
 		from dish
 		where 
 			dish.dish_delete_or_not=1
-			dish.dish_id=#{dishId}
+			and dish.dish_id=#{dishId}
 	</select>
 	
 	<!--根据菜肴分类识别码查询菜肴信息-->
@@ -50,6 +50,12 @@
 		from dish
 		where 
 			dish.dish_delete_or_not=1
-			dish.dish_category_id=#{dishCategoryId}
+			and dish.dish_category_id=#{dishCategoryId}
 	</select>
+	
+	<!--(dish left join dish_category on dish.dish_category_id=dish_category.dish_category_id) left join restaurant on dish_category.dish_category_restaurant_id=restaurant.restaurant_id
+-->
+	
+ 
+	
 </mapper>
