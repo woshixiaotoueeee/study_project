@@ -43,7 +43,7 @@
 			and address.address_id =#{addressId}
 	</select>
 	
-	<!--根据地址识别码查询地址信息-->
+	<!--根据客户识别码识别码查询地址信息-->
 	<select id="findAddressByCustomerId" parameterType="String" resultMap="AddressResultMap">
 		select
 			address.address_id,
@@ -63,5 +63,53 @@
 			address.address_delete_or_not=1
 			and address.address_customer_id =#{customerId}
 	</select>
+	
+	
+	<!--更改地址数据-->
+	<update id="updateAddress" parameterType="Address">
+		update 
+			address
+		set
+			address.address_name=#{addressName},
+			address.address_province=#{addressProvince},
+			address.address_city=#{addressCity},
+			address.address_info=#{addressInfo},
+			address.address_phone=#{addressPhone},
+			address.address_latitude=#{addressLatitude},
+			address.address_longitude=#{addressLongitude},
+			address.address_update_time=#{addressUpdateTime},
+			address.address_state_id=#{addressState.stateId},
+			address.address_customer_id=#{addressCustomer.customerId}
+		where
+			address.address_id=#{addressId}
+	</update>
+	
+	<!--插入一个地址-->
+	<insert id="addAddress" parameterType="Address">
+		insert into address(
+			address_id,
+			address_name,
+			address_province,
+			address_city,
+			address_info,
+			address_phone,
+			address_latitude,
+			address_longitude,
+			address_update_time,
+			address_state_id,
+			address_customer_id)
+		values(
+			#{addressId},
+			#{addressName},
+			#{addressProvince},
+			#{addressCity},
+			#{addressInfo},
+			#{addressPhone},
+			#{addressLatitude},
+			#{addressLongitude},
+			#{addressUpdateTime},
+			#{addressState.stateId},
+			#{addressCustomer.customerId})
+	</insert>
 	
 </mapper>
