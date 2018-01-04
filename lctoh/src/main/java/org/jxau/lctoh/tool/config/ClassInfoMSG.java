@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * 部分实体类默认信息
+ * @author qdt_PC
+ */
 @Component("ClassInfoMSG")
 public class ClassInfoMSG {
 	/**默认昵称*/
@@ -13,6 +17,6 @@ public class ClassInfoMSG {
 	/**默认账户余额*/
 	public final static BigDecimal customerBalance=BigDecimal.valueOf(100);
 	/**客户默认状态*/
-	public final static Integer customerStateId=20002;
+	public final static Integer customerStateId=20002;//激活
 	
 }

@@ -1,5 +1,9 @@
 package org.jxau.lctoh.tool.exception;
 
+/**
+ * 获取信息出现异常对应的异常类
+ * @author qdt_PC
+ */
 public class GetInfoException  extends Exception{
 	
 	private static final long serialVersionUID = 1L;

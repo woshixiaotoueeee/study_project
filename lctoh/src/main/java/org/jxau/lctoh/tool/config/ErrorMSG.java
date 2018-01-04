@@ -1,8 +1,10 @@
 package org.jxau.lctoh.tool.config;
 
 import org.springframework.stereotype.Component;
-
-/**通用常量池*/
+/**
+ * 错误信息通用常量池
+ * @author qdt_PC
+ */
 @Component("ErrorMSG")
 public class ErrorMSG {
 
@@ -52,16 +54,9 @@ public class ErrorMSG {
 	public final static String parameterIsNullError="参数为空";
 	/**查询为空*/
 	public final static String gerInfoIsNullError="查询为空";
-	/**成功响应编码*/
-	public final static String success="1";
+	/**获取定位信息失败*/
+	public final static String getLocationFail="获取定位信息失败";
 	/**失败响应编码*/
-	public final static String fail="0";
-	
-	/**验证码时效*/
-	public final static Integer timeExpire=1000*60*5;
-	
-	
-	
-	
+	public final static Integer fail=0;
 	
 }

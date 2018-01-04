@@ -1,8 +1,10 @@
 package org.jxau.lctoh.tool.config;
 
 import org.springframework.stereotype.Component;
-
-/**通用常量池*/
+/**
+ * 一些邮件信息常用的通用常量池
+ * @author qdt_PC
+ */
 @Component("EmailConfing")
 public class EmailConfing {
 	/**服务器邮箱账号*/

@@ -14,6 +14,9 @@ import org.jxau.lctoh.tool.config.EncodingConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author qdt_PC
+ */
 @Service("EmailService")
 public class EmailService {
 	@Autowired
@@ -57,7 +60,7 @@ public class EmailService {
      * @param popTile 收件人简称
      * @param sendMSGTile 邮件标题
      * @param sendMSGInfo 邮件内容
-     * @return
+     * @return MimeMessage
      * @throws Exception
      */
     private static MimeMessage createMimeMessage(Session session, String sendMail, String receiveMail,String popTile,String sendMSGTile,String sendMSGInfo) throws Exception {
