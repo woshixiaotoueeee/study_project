@@ -3,10 +3,13 @@ package org.jxau.lctoh.user.basis.dao;
 
 import java.util.Date;
 
-import org.jxau.lctoh.tool.base.BaseDao;
+import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.user.basis.domain.User;
 import org.jxau.lctoh.user.basis.mapper.UserMapper;
 import org.springframework.stereotype.Repository;
+/**
+ * @author qdt_PC
+ */
 @Repository("UserDao")
 public class UserDao extends BaseDao{
 	private UserMapper userMapper;
