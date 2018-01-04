@@ -1,11 +1,11 @@
 package org.jxau.lctoh.user.basis.service;
 
 
-import java.util.Date;
+
 
 import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.config.ErrorMSG;
-import org.jxau.lctoh.user.admin.domain.Admin;
+import org.jxau.lctoh.tool.config.SuccessMSG;
 import org.jxau.lctoh.user.basis.dao.UserDao;
 import org.jxau.lctoh.user.basis.dao.VerificationCodeDao;
 import org.jxau.lctoh.user.basis.domain.User;
@@ -34,7 +34,7 @@ public class UserService {
 		if(_user==null) throw new UserException(ErrorMSG.accountError);
 		VerificationCode verificationCode=verificationCodeDao.findVerificationCodeById(_user.getUserId());
 		if(verificationCode==null||!(verificationCode.getVerificationCode().equals(code)))throw new UserException(ErrorMSG.codeError);
-		if(Tools.getTimeDifferenceFromNowDate(verificationCode.getVerificationCodeUpdateTime())>ErrorMSG.timeExpire)
+		if(Tools.getTimeDifferenceFromNowDate(verificationCode.getVerificationCodeUpdateTime())>SuccessMSG.timeExpire)
 			throw new UserException(ErrorMSG.timeExpireError);
 		return _user;
 	}
