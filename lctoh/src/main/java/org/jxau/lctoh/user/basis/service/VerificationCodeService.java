@@ -22,7 +22,12 @@ public class VerificationCodeService {
 	private VerificationCode verificationCode;
 	@Autowired
 	private EmailService emailService;
-	/**设置验证码*/
+	/**
+	 * 根据账号设置设置验证码
+	 * @param userAccount
+	 * @return
+	 * @throws VerificationCodeException
+	 */
 	public VerificationCode setCode(String userAccount) throws VerificationCodeException{
 		User _user=userDao.findUserByUserAccount(userAccount);
 		if(_user==null)throw new VerificationCodeException(ErrorMSG.accountError);
