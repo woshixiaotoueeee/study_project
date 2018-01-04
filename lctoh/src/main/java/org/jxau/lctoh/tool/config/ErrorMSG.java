@@ -55,7 +55,7 @@ public class ErrorMSG {
 	/**查询为空*/
 	public final static String gerInfoIsNullError="查询为空";
 	/**获取定位信息失败*/
-	public final static String getLocationFail="获取定位信息失败";
+	public final static String getLocationFail="未定位或定位信息失效导致获取定位信息失败，请重新定位";
 	/**失败响应编码*/
 	public final static Integer fail=0;
 	

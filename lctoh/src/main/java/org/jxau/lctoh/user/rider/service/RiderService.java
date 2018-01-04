@@ -2,6 +2,7 @@ package org.jxau.lctoh.user.rider.service;
 
 import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.config.ErrorMSG;
+import org.jxau.lctoh.tool.config.SuccessMSG;
 import org.jxau.lctoh.user.basis.dao.UserDao;
 import org.jxau.lctoh.user.basis.dao.VerificationCodeDao;
 import org.jxau.lctoh.user.basis.domain.User;
@@ -11,6 +12,9 @@ import org.jxau.lctoh.user.rider.dao.RiderDao;
 import org.jxau.lctoh.user.rider.domain.Rider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+/**
+ * @author qdt_PC
+ */
 @Service("RiderService")
 public class RiderService {
 	@Autowired
@@ -56,7 +60,7 @@ public class RiderService {
 		if(_user==null) throw new UserException(ErrorMSG.accountError);
 		VerificationCode verificationCode=verificationCodeDao.findVerificationCodeById(_user.getUserId());
 		if(verificationCode==null||verificationCode.getVerificationCode().equals(code))throw new UserException(ErrorMSG.codeError);
-		if(Tools.getTimeDifferenceFromNowDate(verificationCode.getVerificationCodeUpdateTime())>ErrorMSG.timeExpire)
+		if(Tools.getTimeDifferenceFromNowDate(verificationCode.getVerificationCodeUpdateTime())>SuccessMSG.timeExpire)
 			throw new UserException(ErrorMSG.timeExpireError);
 		Rider rider=riderDao.findRiderByUserId(_user.getUserId());
 		if(rider==null)throw new UserException(ErrorMSG.powerError);

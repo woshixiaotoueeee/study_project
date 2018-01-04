@@ -5,6 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.jxau.lctoh.user.restaurant.domain.RestaurantCategory;
 
+/**
+ * @author qdt_PC
+ */
 public interface RestaurantCategoryMapper {
 	
 	/**

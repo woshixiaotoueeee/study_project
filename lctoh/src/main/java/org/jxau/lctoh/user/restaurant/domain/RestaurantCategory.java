@@ -7,6 +7,10 @@ import org.jxau.lctoh.state.domain.State;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+/**
+ * 店家分类实体类
+ * @author qdt_PC
+ */
 @Component
 @Alias("RestaurantCategory")
 @Scope("prototype")

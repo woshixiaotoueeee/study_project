@@ -3,10 +3,13 @@ package org.jxau.lctoh.user.restaurant.dao;
 import java.util.List;
 
 
-import org.jxau.lctoh.tool.base.BaseDao;
+import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.user.restaurant.domain.RestaurantCategory;
 import org.jxau.lctoh.user.restaurant.mapper.RestaurantCategoryMapper;
 import org.springframework.stereotype.Repository;
+/**
+ * @author qdt_PC
+ */
 @Repository("RestaurantCategoryDao")
 public class RestaurantCategoryDao extends BaseDao {
 	private RestaurantCategoryMapper restaurantCategoryMapper;
@@ -22,7 +25,6 @@ public class RestaurantCategoryDao extends BaseDao {
 			RestaurantCategoryMapper restaurantCategoryMapper) {
 		this.restaurantCategoryMapper = restaurantCategoryMapper;
 	}
-	
 	
 
 	/**
@@ -43,9 +45,6 @@ public class RestaurantCategoryDao extends BaseDao {
 	public List<RestaurantCategory> findRestaurantCategoryByName(String name){
 		return restaurantCategoryMapper.findRestaurantCategoryByName(name);
 	}
-	
-	
-	
 	/**
 	 * 根据分类状态查询分类信息
 	 * @param stateId

@@ -2,11 +2,14 @@ package org.jxau.lctoh.user.customer.dao;
 
 import java.util.Date;
 
-import org.jxau.lctoh.tool.base.BaseDao;
+import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.customer.mapper.CustomerMapper;
 import org.springframework.stereotype.Repository;
 
+/**
+ * @author qdt_PC
+ */
 @Repository("CustomerDao")
 public class CustomerDao extends BaseDao {
 	
@@ -15,11 +18,9 @@ public class CustomerDao extends BaseDao {
 	public CustomerMapper getCustomerMapper() {
 		return customerMapper;
 	}
-
 	public void setCustomerMapper(CustomerMapper customerMapper) {
 		this.customerMapper = customerMapper;
 	}
-
 	@Override
 	public void puttMapper() {
 		customerMapper=getMapper(CustomerMapper.class);
