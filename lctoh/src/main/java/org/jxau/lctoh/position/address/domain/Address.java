@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @author qdt_PC
  */
 @Component
-@Alias("Cart")
+@Alias("Address")
 @Scope("prototype")
 public class Address {
 	private String addressId;			//地址识别码
@@ -22,7 +22,7 @@ public class Address {
 	private String addressProvince;		//地址省份
 	private String addressCity;			//城市
 	private String addressInfo;			//地址详细信息
-	private String address_phone;		//地址联系电话
+	private String addressPhone;		//地址联系电话
 	private BigDecimal addressLatitude;	//纬度
 	private BigDecimal addressLongitude;//经度
 	private Date addressUpdateTime;		//最近更新时间
@@ -43,8 +43,8 @@ public class Address {
 	public String getAddressInfo() {
 		return addressInfo;
 	}
-	public String getAddress_phone() {
-		return address_phone;
+	public String getAddressPhone() {
+		return addressPhone;
 	}
 	public BigDecimal getAddressLatitude() {
 		return addressLatitude;
@@ -76,8 +76,8 @@ public class Address {
 	public void setAddressInfo(String addressInfo) {
 		this.addressInfo = addressInfo;
 	}
-	public void setAddress_phone(String address_phone) {
-		this.address_phone = address_phone;
+	public void setAddressPhone(String addressPhone) {
+		this.addressPhone = addressPhone;
 	}
 	public void setAddressLatitude(BigDecimal addressLatitude) {
 		this.addressLatitude = addressLatitude;
@@ -99,7 +99,7 @@ public class Address {
 		return "Address [addressId=" + addressId + ", addressName="
 				+ addressName + ", addressProvince=" + addressProvince
 				+ ", addressCity=" + addressCity + ", addressInfo="
-				+ addressInfo + ", address_phone=" + address_phone
+				+ addressInfo + ", addressPhone=" + addressPhone
 				+ ", addressLatitude=" + addressLatitude
 				+ ", addressLongitude=" + addressLongitude
 				+ ", addressUpdateTime=" + addressUpdateTime
