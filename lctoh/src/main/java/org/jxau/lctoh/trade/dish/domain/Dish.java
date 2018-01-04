@@ -8,6 +8,10 @@ import org.jxau.lctoh.state.domain.State;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+/**
+ * 菜肴
+ * @author qdt_PC
+ */
 @Component
 @Alias("Dish")
 @Scope("prototype")

@@ -9,6 +9,10 @@ import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+/**
+ * 菜肴分类
+ * @author qdt_PC
+ */
 @Component
 @Alias("DishCategory")
 @Scope("prototype")

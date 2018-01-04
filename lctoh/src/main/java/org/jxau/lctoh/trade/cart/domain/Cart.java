@@ -11,6 +11,10 @@ import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+/**
+ * 购物车
+ * @author qdt_PC
+ */
 @Component
 @Alias("Cart")
 @Scope("prototype")
@@ -20,6 +24,7 @@ public class Cart {
 	 */
 	private Restaurant restaurant;
 	//private BigDecimal total;
+	/**购物车中的条目*/
 	private Map<String ,CartItem> map=new LinkedHashMap<String,CartItem>();
 	public Restaurant getRestaurant() {
 		return restaurant;
@@ -33,6 +38,11 @@ public class Cart {
 	public void setMap(Map<String, CartItem> map) {
 		this.map = map;
 	}
+	
+	/**
+	 * 根据购物车中商品计算总价
+	 * @return BigDecimal
+	 */
 	public BigDecimal getTotal(){
 		BigDecimal sum=new BigDecimal("0");
 		for(CartItem cartItem : map.values()){
@@ -58,6 +68,13 @@ public class Cart {
 		}
 		//商品在购物车中没有条目
 		else{
+			/*
+			 * 判断购物车中的商家标记是否存在
+			 * 	不存在 则添加然后将商品放入购物车
+			 * 	存在则判断是否相同
+			 * 		不同则清空购物车重新设置商家标记
+			 * 		相同则直接将商品放入购物车
+			 * */
 			if(restaurant==null||restaurant.getRestaurantId()==null){
 				restaurant=cartItem.getDish().getDishCategory().getDishCategoryRestaurant();
 			}else if(!(restaurant.getRestaurantId().equals(cartItem.getDish().getDishCategory().getDishCategoryRestaurant().getRestaurantId()))){

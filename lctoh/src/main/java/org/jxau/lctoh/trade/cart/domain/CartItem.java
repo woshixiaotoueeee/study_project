@@ -7,12 +7,16 @@ import org.jxau.lctoh.trade.dish.domain.Dish;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+/**
+ * 购物车条目
+ * @author qdt_PC
+ */
 @Component
 @Alias("CartItem")
 @Scope("prototype")
 public class CartItem {
-	private Dish dish;//商品
-	private Integer dishCount;// 数量的属性，在条目中默认是1
+	private Dish dish;			//商品
+	private Integer dishCount;	// 数量的属性，在条目中默认是1
 	private BigDecimal subtotal;//小计
 	public Dish getDish() {
 		return dish;
