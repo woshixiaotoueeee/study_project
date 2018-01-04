@@ -3,10 +3,10 @@ package org.jxau.lctoh.user.basis.mapper;
 import org.apache.ibatis.annotations.Param;
 import org.jxau.lctoh.user.basis.domain.VerificationCode;
 
-
 /**
  * 用户类代理接口
- * */
+ * @author qdt_PC
+ */
 public interface VerificationCodeMapper {
 
 	/**
