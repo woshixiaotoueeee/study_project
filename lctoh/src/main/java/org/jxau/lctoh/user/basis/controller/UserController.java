@@ -7,9 +7,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.jxau.lctoh.tool.Tools;
+import org.jxau.lctoh.tool.base.controller.BaseController;
 import org.jxau.lctoh.tool.config.ConversationMSG;
 import org.jxau.lctoh.tool.config.ErrorMSG;
 import org.jxau.lctoh.tool.config.EncodingConfig;
+import org.jxau.lctoh.tool.config.SuccessMSG;
 import org.jxau.lctoh.tool.domain.ResponseData;
 import org.jxau.lctoh.user.admin.domain.Admin;
 import org.jxau.lctoh.user.admin.service.AdminService;
@@ -29,26 +31,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * @author qdt_PC
+ */
 @Controller
 @RequestMapping("/UserController")
-public class UserController {
+public class UserController extends BaseController{
 	@Autowired
 	private UserService userService;
-	
 	@Autowired
 	private CustomerService customerService;
 	@Autowired
 	private AdminService adminService;
-	
 	@Autowired
 	private RiderService riderService;
-
 	@Autowired
 	private RestaurantService restaurantService;
 	@Autowired
 	private VerificationCodeService verificationCodeService;
-	@Autowired
-	private ResponseData responseData;
+	
 	/**
 	 * 账号密码登陆
 	 * @param user 登陆账号密码
@@ -59,41 +60,41 @@ public class UserController {
 	@RequestMapping(value="/login",produces=EncodingConfig.produces)
 	public String login(User user,Integer type,HttpSession session){
 		if(type==null){
-			return ErrorMSG.notKnowUserError;
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowUserError));
 		}
 		//验证信息
 		if(user==null){
-			return ErrorMSG.accountAndPasswordIsNullError;
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.accountAndPasswordIsNullError));
 		}
 		if(user.getUserAccount()==null){
-			return ErrorMSG.accountIsNullError;
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.accountIsNullError));
 		}
 		if(user.getUserPassword()==null){
-			return ErrorMSG.passwordIsNullError;
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.passwordIsNullError));
 		}
-		type=0;
-		user.setUserAccount("100001");
-		user.setUserPassword("100001");
+		
 		//判断登陆的角色
 		switch(type){
 			case 1:
 				try {
 					Customer customer=customerService.login(user);
 					session.setAttribute(ConversationMSG.customerSession, customer);
+					responseData.successInfo(SuccessMSG.customerSuccessUrl);
 				} catch (UserException e) {
-					return e.getMessage();
+					responseData.failInfo(e.getMessage());
 				} catch (Exception e) {
-					return ErrorMSG.notKnowError;
+					responseData.failInfo(ErrorMSG.notKnowError);
 				}
 				break;
 			case 2:
 				try {
 					Admin admin=adminService.login(user);
 					session.setAttribute(ConversationMSG.adminSession, admin);
+					responseData.successInfo(SuccessMSG.adminSuccessUrl);
 				} catch (UserException e) {
-					return e.getMessage();
+					responseData.failInfo(e.getMessage());
 				} catch (Exception e) {
-					return ErrorMSG.notKnowError;
+					responseData.failInfo(ErrorMSG.notKnowError);
 				}
 				break;
 			case 3:
@@ -106,26 +107,28 @@ public class UserController {
 					synchronized(this){
 						servletContext.setAttribute(ConversationMSG.riderContext, riderMap);
 					}
-				} catch (UserException e) {
-					return e.getMessage();
+					responseData.successInfo(SuccessMSG.riderSuccessUrl);
+				}  catch (UserException e) {
+					responseData.failInfo(e.getMessage());
 				} catch (Exception e) {
-					return ErrorMSG.notKnowError;
+					responseData.failInfo(ErrorMSG.notKnowError);
 				}
 				break;
 			case 4:
 				try {
 					Restaurant restaurant=restaurantService.login(user);
 					session.setAttribute(ConversationMSG.restaurantSession, restaurant);
-				} catch (UserException e) {
-					return e.getMessage();
+					responseData.successInfo(SuccessMSG.restaurantSuccessUrl);
+				}  catch (UserException e) {
+					responseData.failInfo(e.getMessage());
 				} catch (Exception e) {
-					return ErrorMSG.notKnowError;
+					responseData.failInfo(ErrorMSG.notKnowError);
 				}
 				break;
-			default : return ErrorMSG.notKnowUserError;
+			default : responseData.failInfo(ErrorMSG.notKnowUserError);
 		}
 		
-		return ErrorMSG.success;
+		return Tools.gson.toJson(responseData);
 	}
 	
 	
@@ -142,38 +145,37 @@ public class UserController {
 	public String loginByCode(String userAccount,String code,Integer type,HttpSession session){
 		
 		if(type==null){
-			return ErrorMSG.notKnowUserError;
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowUserError));
 		}
 		//验证信息
-		
 		if(userAccount==null){
-			return ErrorMSG.accountIsNullError;
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.accountIsNullError));
 		}
 		if(code==null){
-			return ErrorMSG.codeError;
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.codeError));
 		}
-		type=0;
-		userAccount="100001";
 		
 		switch(type){
 			case 1:
 				try {
 					Customer customer=customerService.loginByCode(userAccount,code);
 					session.setAttribute(ConversationMSG.customerSession, customer);
+					responseData.successInfo(SuccessMSG.customerSuccessUrl);
 				} catch (UserException e) {
-					return e.getMessage();
+					responseData.failInfo(e.getMessage());
 				} catch (Exception e) {
-					return ErrorMSG.notKnowError;
+					responseData.failInfo(ErrorMSG.notKnowError);
 				}
 				break;
 			case 2:
 				try {
 					Admin admin=adminService.loginByCode(userAccount,code);
 					session.setAttribute(ConversationMSG.adminSession, admin);
+					responseData.successInfo(SuccessMSG.adminSuccessUrl);
 				} catch (UserException e) {
-					return e.getMessage();
+					responseData.failInfo(e.getMessage());
 				} catch (Exception e) {
-					return ErrorMSG.notKnowError;
+					responseData.failInfo(ErrorMSG.notKnowError);
 				}
 				break;
 			case 3:
@@ -186,30 +188,32 @@ public class UserController {
 					synchronized(this){
 						servletContext.setAttribute(ConversationMSG.riderContext, riderMap);
 					}
+					responseData.successInfo(SuccessMSG.riderSuccessUrl);
 				} catch (UserException e) {
-					return e.getMessage();
+					responseData.failInfo(e.getMessage());
 				} catch (Exception e) {
-					return ErrorMSG.notKnowError;
+					responseData.failInfo(ErrorMSG.notKnowError);
 				}
 				break;
 			case 4:
 				try {
 					Restaurant restaurant=restaurantService.loginByCode(userAccount,code);
 					session.setAttribute(ConversationMSG.restaurantSession, restaurant);
+					responseData.successInfo(SuccessMSG.restaurantSuccessUrl);
 				} catch (UserException e) {
-					return e.getMessage();
+					responseData.failInfo(e.getMessage());
 				} catch (Exception e) {
-					return ErrorMSG.notKnowError;
+					responseData.failInfo(ErrorMSG.notKnowError);
 				}
 				break;
-			default : return ErrorMSG.notKnowUserError;
+			default : responseData.failInfo(ErrorMSG.notKnowUserError);
 		}
-		return ErrorMSG.success;
+		return Tools.gson.toJson(responseData);
 	}
 	
 	
 	/**
-	 * 根据 账号 验证码 登陆
+	 * 根据 邮箱 验证码  ‘登陆’
 	 * @param userAccount
 	 * @param code
 	 * @param type
@@ -235,13 +239,13 @@ public class UserController {
 		try {
 			User user=userService.findByEmailAndCode(userEmail,code);
 			session.setAttribute(ConversationMSG.userSession, user);
+			responseData.successInfo(SuccessMSG.sendEmailSuccess);
 		} catch (UserException e) {
-			// TODO Auto-generated catch block
-			return Tools.gson.toJson(responseData.failInfo(e.getMessage()));
+			responseData.failInfo(e.getMessage());
 		}catch (Exception e) {
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowError));
+			responseData.failInfo(ErrorMSG.notKnowError);
 		}
-		return Tools.gson.toJson(responseData.successInfo(null));
+		return Tools.gson.toJson(responseData);
 	}
 	
 	
@@ -269,12 +273,13 @@ public class UserController {
 		}
 		user.setUserPassword(password);
 		try {
-			return Tools.gson.toJson(responseData.successInfo(userService.updateUser(user)));
+			responseData.successInfo(userService.updateUser(user));
 		} catch (UserException e) {
-			return Tools.gson.toJson(responseData.failInfo(e.getMessage()));
+			responseData.failInfo(e.getMessage());
 		} catch (Exception e) {
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowError));
+			responseData.failInfo(ErrorMSG.notKnowError);
 		}
+		return Tools.gson.toJson(responseData);
 	}
 	
 	/**
@@ -287,16 +292,17 @@ public class UserController {
 			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.accountIsNullError));
 		}
 		try {
-			return Tools.gson.toJson(responseData.successInfo(verificationCodeService.setCode(userAccount)));
+			responseData.successInfo(verificationCodeService.setCode(userAccount));
 		} catch (VerificationCodeException e) {
-			return Tools.gson.toJson(responseData.failInfo(e.getMessage()));
+			responseData.failInfo(e.getMessage());
 		}catch(Exception e){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowError));
+			responseData.failInfo(ErrorMSG.notKnowError);
 		}
+		return Tools.gson.toJson(responseData);
 	}
 	
 	/**
-	 * 根据账号获取验证码
+	 * 根据邮箱获取验证码
 	 * */
 	@ResponseBody
 	@RequestMapping(value="/getCodeByUserEmail",produces=EncodingConfig.produces)
@@ -311,12 +317,13 @@ public class UserController {
 		}
 		*/
 		try {
-			return Tools.gson.toJson(responseData.successInfo(verificationCodeService.setCodeByUserEmail(userEmail)));
+			responseData.successInfo(verificationCodeService.setCodeByUserEmail(userEmail));
 		} catch (VerificationCodeException e) {
-			return Tools.gson.toJson(responseData.failInfo(e.getMessage()));
+			responseData.failInfo(e.getMessage());
 		}catch(Exception e){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowError));
+			responseData.failInfo(ErrorMSG.notKnowError);
 		}
+		return Tools.gson.toJson(responseData);
 	}
 	
 	
@@ -355,12 +362,13 @@ public class UserController {
 		
 		try{
 			user=customerService.register(user);
+			responseData.successInfo(user);
 		}catch(UserException e){
-			return Tools.gson.toJson(responseData.failInfo(e.getMessage()));
+			responseData.failInfo(e.getMessage());
 		}catch(Exception e){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowError));
+			responseData.failInfo(ErrorMSG.notKnowError);
 		}
-		return Tools.gson.toJson(responseData.successInfo(user));
+		return Tools.gson.toJson(responseData);
 	}
 	
 }
