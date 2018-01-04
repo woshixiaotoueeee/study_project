@@ -8,6 +8,7 @@ import org.jxau.lctoh.position.region.dao.CityDao;
 import org.jxau.lctoh.position.region.domain.City;
 import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.config.ErrorMSG;
+import org.jxau.lctoh.tool.config.SuccessMSG;
 import org.jxau.lctoh.tool.exception.GetInfoException;
 import org.jxau.lctoh.user.basis.dao.UserDao;
 import org.jxau.lctoh.user.basis.dao.VerificationCodeDao;
@@ -69,7 +70,7 @@ public class RestaurantService {
 		if(_user==null) throw new UserException(ErrorMSG.accountError);
 		VerificationCode verificationCode=verificationCodeDao.findVerificationCodeById(_user.getUserId());
 		if(verificationCode==null||verificationCode.getVerificationCode().equals(code))throw new UserException(ErrorMSG.codeError);
-		if(Tools.getTimeDifferenceFromNowDate(verificationCode.getVerificationCodeUpdateTime())>ErrorMSG.timeExpire)
+		if(Tools.getTimeDifferenceFromNowDate(verificationCode.getVerificationCodeUpdateTime())>SuccessMSG.timeExpire)
 			throw new UserException(ErrorMSG.timeExpireError);
 		Restaurant restaurant=restaurantDao.findRestaurantByUserId(_user.getUserId());
 		if(restaurant==null)throw new UserException(ErrorMSG.powerError);
@@ -129,6 +130,16 @@ public class RestaurantService {
 			listRestaurant.set(i, restaurant);
 		}
 		return Tools.maoPaoSort(listRestaurant);
+	}
+
+
+	/**
+	 * 根据店家ID得到参观信息
+	 * @param restaurantId
+	 * @return
+	 */
+	public Restaurant findRestaurantService(String restaurantId) {
+		return restaurantDao.findRestaurantByRestaurantId(restaurantId);
 	}
 	
 	

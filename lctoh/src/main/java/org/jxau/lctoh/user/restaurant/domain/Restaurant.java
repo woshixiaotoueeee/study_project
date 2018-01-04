@@ -12,6 +12,10 @@ import org.jxau.lctoh.user.basis.domain.User;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+/**
+ * 店家信息实体类
+ * @author qdt_PC
+ */
 @Component
 @Alias("Restaurant")
 @Scope("prototype")

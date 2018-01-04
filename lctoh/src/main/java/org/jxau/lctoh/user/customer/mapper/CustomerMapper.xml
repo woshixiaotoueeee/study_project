@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace:需与接口的完全限定名保持一致 -->
 <mapper namespace="org.jxau.lctoh.user.customer.mapper.CustomerMapper">
-	
+	<!-- 数据库表与实体类相对应的resultMap -->
 	<resultMap type="Customer" id="CustomerResultMap">
 	    <id property="customerId" column="customer_id"/>
 	    <result property="customerNickname" column="customer_nickname"/>
@@ -14,8 +14,6 @@
 		<association property="customerUser" column="customer_user_id" select="org.jxau.lctoh.user.basis.mapper.UserMapper.findUserByUserId"/>
 		<association property="customerState" column="customer_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
 	</resultMap>
-	
-	
 	
 	
 	<!--根据用户识别码查询用户信息-->
@@ -48,9 +46,6 @@
 			customer.customer_delete_or_not=1
 			and customer.customer_id=#{customerId}
 	</select>
-	
-	
-	
 	
 	<!-- 添加用户信息 -->
 	<insert id="addaddCustomer" parameterType="Customer" >

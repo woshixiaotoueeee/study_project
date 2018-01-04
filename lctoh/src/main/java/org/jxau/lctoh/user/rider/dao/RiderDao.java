@@ -1,10 +1,13 @@
 package org.jxau.lctoh.user.rider.dao;
 
 
-import org.jxau.lctoh.tool.base.BaseDao;
+import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.user.rider.domain.Rider;
 import org.jxau.lctoh.user.rider.mapper.RiderMapper;
 import org.springframework.stereotype.Repository;
+/**
+ * @author qdt_PC
+ */
 @Repository("RiderDao")
 public class RiderDao extends BaseDao {
 	

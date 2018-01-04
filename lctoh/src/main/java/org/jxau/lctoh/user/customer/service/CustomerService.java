@@ -6,6 +6,7 @@ import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.config.ClassInfoMSG;
 import org.jxau.lctoh.tool.config.ErrorMSG;
+import org.jxau.lctoh.tool.config.SuccessMSG;
 import org.jxau.lctoh.user.admin.domain.Admin;
 import org.jxau.lctoh.user.basis.dao.UserDao;
 import org.jxau.lctoh.user.basis.dao.VerificationCodeDao;
@@ -20,11 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author qdt_PC
- *
- */
-/**
- * @author qdt_PC
- *
  */
 @Service("CustomerService")
 public class CustomerService {
@@ -73,7 +69,7 @@ public class CustomerService {
 		
 		VerificationCode verificationCode=verificationCodeDao.findVerificationCodeById(_user.getUserId());
 		if(verificationCode==null||verificationCode.getVerificationCode().equals(code))throw new UserException(ErrorMSG.codeError);
-		if(Tools.getTimeDifferenceFromNowDate(verificationCode.getVerificationCodeUpdateTime())>ErrorMSG.timeExpire)
+		if(Tools.getTimeDifferenceFromNowDate(verificationCode.getVerificationCodeUpdateTime())>SuccessMSG.timeExpire)
 			throw new UserException(ErrorMSG.timeExpireError);
 		Customer customer=customerDao.findCustomerByUserId(_user.getUserId());
 		if(customer==null)throw new UserException(ErrorMSG.powerError);
@@ -86,10 +82,11 @@ public class CustomerService {
 	
 	
 	
-	
-	
-	
-	
+	/**
+	 * 根据客户ID查询客户信息
+	 * @param customerUserId
+	 * @return Customer
+	 */
 	public Customer findCustomerByUserId(String customerUserId){
 		return customerDao.findCustomerByUserId(customerUserId);
 	}
@@ -98,7 +95,7 @@ public class CustomerService {
 	/**
 	 * 注册
 	 * @param user
-	 * @return
+	 * @return User
 	 * @throws UserException
 	 */
 	@Transactional(rollbackFor=Exception.class) //指定回滚,遇到异常Exception时回滚
@@ -109,12 +106,12 @@ public class CustomerService {
 		/**
 		 * 省略电话号码验证
 		 * */
+		//补全信息
 		user.setUserId(Tools.getRandomString(32));
 		user.setUserCode(Tools.getRandomString(32));
 		user.setUserAccount(Tools.getRandomNumberString(10));
-		
 		userDao.addUser(user);
-		
+		//补全基本信息
 		Customer customer=new Customer();
 		customer.setCustomerUser(user);
 		customer.setCustomerId(Tools.getRandomString(32));
@@ -122,12 +119,9 @@ public class CustomerService {
 		customer.setCustomerNickname(ClassInfoMSG.customerNickname);
 		customer.setCustomerPortrait(ClassInfoMSG.customerPortrait);
 		customer.setCustomerState(stateDao.findStateByStateId(ClassInfoMSG.customerStateId));
-		
 		customerDao.addCustomer(customer);
 		
 		return user;
 	}
 	
-	
-
 }

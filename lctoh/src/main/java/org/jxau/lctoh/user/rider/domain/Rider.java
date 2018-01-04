@@ -9,6 +9,10 @@ import org.jxau.lctoh.user.basis.domain.User;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+/**
+ * 骑手
+ * @author qdt_PC
+ */
 @Component
 @Alias("Rider")
 @Scope("prototype")

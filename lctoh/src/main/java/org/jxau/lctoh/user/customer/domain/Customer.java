@@ -8,9 +8,11 @@ import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.user.basis.domain.User;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
 /**
  * 客户类
- * */
+ * @author qdt_PC
+ */
 @Component
 @Alias("Customer")
 @Scope("prototype")

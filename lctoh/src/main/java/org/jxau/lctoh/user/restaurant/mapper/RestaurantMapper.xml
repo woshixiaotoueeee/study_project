@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace:需与接口的完全限定名保持一致 -->
 <mapper namespace="org.jxau.lctoh.user.restaurant.mapper.RestaurantMapper">
+	<!-- 数据库表与实体类对应的resultMap -->
 	<resultMap type="Restaurant" id="RestaurantResultMap">
 	    <id property="restaurantId" column="restaurant_id"/>
 		<result property="restaurantName" column="restaurant_name"/>

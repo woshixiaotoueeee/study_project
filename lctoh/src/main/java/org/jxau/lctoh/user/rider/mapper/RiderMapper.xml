@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace:需与接口的完全限定名保持一致 -->
 <mapper namespace="org.jxau.lctoh.user.rider.mapper.RiderMapper">
+	<!-- 数据库表与实体类相对应的resultMap-->
 	<resultMap type="Rider" id="RiderResultMap">
 	    <id property="riderId" column="rider_id"/>
 		<result property="riderUpdateTime" column="rider_update_time"/>

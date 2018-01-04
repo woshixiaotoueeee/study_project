@@ -7,7 +7,8 @@ import org.jxau.lctoh.user.rider.domain.Rider;
 
 /**
  * 管理员类代理接口
- * */
+ * @author qdt_PC
+ */
 public interface RiderMapper {
 
 	/**
