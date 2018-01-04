@@ -7,6 +7,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 
+/**
+ * 定位信息类
+ * @author qdt_PC
+ */
 @Component
 @Alias("Location")
 @Scope("prototype")

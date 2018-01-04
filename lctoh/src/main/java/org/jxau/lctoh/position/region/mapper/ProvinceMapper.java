@@ -5,6 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.jxau.lctoh.position.region.domain.Province;
 
+/**
+ * @author qdt_PC
+ */
 public interface ProvinceMapper {
 	
 	/**
@@ -30,7 +33,7 @@ public interface ProvinceMapper {
 	/**
 	 * 根据状态码查找省份
 	 * @param provinceStateId
-	 * @return Province  
+	 * @return List<Province>  
 	 */
 	public List<Province> findProvinceByProvinceStateId(@Param("provinceStateId")Integer provinceStateId);
 	

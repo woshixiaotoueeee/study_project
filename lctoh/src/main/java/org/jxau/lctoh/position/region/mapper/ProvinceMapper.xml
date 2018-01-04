@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace:需与接口的完全限定名保持一致 -->
 <mapper namespace="org.jxau.lctoh.position.region.mapper.ProvinceMapper">
+	<!-- 数据库表与实体类相对应的resultMap -->
 	<resultMap type="Province" id="ProvinceResultMap">
 	    <id property="provinceId" column="province_id"/>
 	    <result property="provinceName" column="province_name"/>
