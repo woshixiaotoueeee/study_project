@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.jxau.lctoh.trade.dish.domain.Dish;
 import org.springframework.stereotype.Service;
+/**
+ * @author qdt_PC
+ */
 @Service("DishService")
 public class DishService {
 	

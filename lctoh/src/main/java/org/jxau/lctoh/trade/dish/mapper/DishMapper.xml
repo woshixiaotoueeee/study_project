@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace:需与接口的完全限定名保持一致 -->
 <mapper namespace="org.jxau.lctoh.trade.dish.mapper.DishMapper">
+	<!-- 数据库表与实体类相对应的resultMap -->
 	<resultMap type="Dish" id="DishResultMap">
 	    <id property="dishId" column="dish_id"/>
 	    <result property="dishName" column="dish_name"/>
@@ -16,11 +17,6 @@
 		<association property="dishCategory" column="dish_category_id" select="org.jxau.lctoh.trade.dish.mapper.DishCategoryMapper.findDishCategoryById"/>
 	</resultMap>
 	
-	
-
-
-
-
 	<!--根据菜肴识别码查询菜肴信息-->
 	<select id="findDishByDishId" parameterType="String" resultMap="DishResultMap">
 		select 

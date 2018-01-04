@@ -1,5 +1,8 @@
 package org.jxau.lctoh.trade.cart.exception;
 
+/**
+ * @author qdt_PC
+ */
 public class CartException extends Exception {
 	/**
 	 * 

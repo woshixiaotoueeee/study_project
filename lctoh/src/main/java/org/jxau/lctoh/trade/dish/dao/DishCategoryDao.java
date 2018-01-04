@@ -4,12 +4,15 @@ import java.util.List;
 
 
 
-import org.jxau.lctoh.tool.base.BaseDao;
+import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.trade.dish.domain.DishCategory;
 import org.jxau.lctoh.trade.dish.mapper.DishCategoryMapper;
 import org.jxau.lctoh.trade.dish.mapper.DishMapper;
 import org.springframework.stereotype.Repository;
 
+/**
+ * @author qdt_PC
+ */
 @Repository("DishCategoryDao")
 public class DishCategoryDao  extends BaseDao {
 
@@ -43,11 +46,29 @@ public class DishCategoryDao  extends BaseDao {
 	 */
 	public DishCategory findDishCategoryById(String dishCategoryId){
 		DishCategory dishCategory=dishCategoryMapper.findDishCategoryById(dishCategoryId);
-		/**菜肴*/
-		if(dishCategory!=null){
-			dishCategory.setDishList(dishMapper.findDishByDishCategoryId(dishCategoryId));
-		}
+		if(dishCategory==null)return dishCategory;
+		return loadDiahCategoryDishList(dishCategory);
+	}
+	
+	/**
+	 * 加载单个菜肴分类下的菜肴信息
+	 * @param dishCategory
+	 * @return DishCategory
+	 */
+	private DishCategory loadDiahCategoryDishList(DishCategory dishCategory) {
+		dishCategory.setDishList(dishMapper.findDishByDishCategoryId(dishCategory.getDishCategoryId()));
 		return dishCategory;
+	}
+	/**
+	 * 加载多个菜肴分类下的菜肴信息
+	 * @param dishCategoryList
+	 * @return  List<DishCategory> 
+	 */
+	private List<DishCategory> loadDiahCategoryListDishList(List<DishCategory>  dishCategoryList) {
+		for(int i=0;i<dishCategoryList.size();i++){
+			dishCategoryList.set(i, loadDiahCategoryDishList(dishCategoryList.get(i)));
+		}
+		return dishCategoryList;
 	}
 	
 	/**
@@ -56,14 +77,8 @@ public class DishCategoryDao  extends BaseDao {
 	 * @return DishCategory
 	 */
 	public List<DishCategory> findDishCategoryByRestaurantId(String restaurantId){
-		List<DishCategory> dishCategoryList=dishCategoryMapper.findDishCategoryByRestaurantId(restaurantId);;
-		if(dishCategoryList!=null){
-			DishCategory dishCategory;
-			for(int i=0;i<dishCategoryList.size();i++){
-				dishCategory=dishCategoryList.get(i);
-				dishCategory.setDishList(dishMapper.findDishByDishCategoryId(dishCategory.getDishCategoryId()));
-			}
-		}
-		return dishCategoryMapper.findDishCategoryByRestaurantId(restaurantId);
+		List<DishCategory> dishCategoryList=dishCategoryMapper.findDishCategoryByRestaurantId(restaurantId);
+		if(dishCategoryList==null)return dishCategoryList;
+		return loadDiahCategoryListDishList(dishCategoryList);
 	}
 }
