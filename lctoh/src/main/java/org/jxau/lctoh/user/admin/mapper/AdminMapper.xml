@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace:需与接口的完全限定名保持一致 -->
 <mapper namespace="org.jxau.lctoh.user.admin.mapper.AdminMapper">
+	<!-- 数据库表与实体类相对应的resultMap -->
 	<resultMap type="Admin" id="AdminResultMap">
 	    <id property="adminId" column="admin_id"/>
 		<result property="adminUpdateTime" column="admin_update_time"/>

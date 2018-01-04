@@ -5,7 +5,8 @@ import org.jxau.lctoh.user.admin.domain.Admin;
 
 /**
  * 管理员类代理接口
- * */
+ * @author qdt_PC
+ */
 public interface AdminMapper {
 
 	/**
