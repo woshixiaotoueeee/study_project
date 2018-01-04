@@ -8,6 +8,10 @@ import org.jxau.lctoh.state.domain.State;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+/**
+ * 省份信息类
+ * @author qdt_PC
+ */
 @Component
 @Alias("Province")
 @Scope("prototype")

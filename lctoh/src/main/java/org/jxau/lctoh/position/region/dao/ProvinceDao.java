@@ -4,12 +4,16 @@ import java.util.List;
 
 
 
+
 import org.jxau.lctoh.position.region.domain.Province;
 import org.jxau.lctoh.position.region.mapper.CityMapper;
 import org.jxau.lctoh.position.region.mapper.ProvinceMapper;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.springframework.stereotype.Repository;
 
+/**
+ * @author qdt_PC
+ */
 @Repository("ProvinceDao")
 public class ProvinceDao extends BaseDao {
 	
@@ -45,10 +49,32 @@ public class ProvinceDao extends BaseDao {
 	public Province findProvinceByProvinceId(String provinceId){
 		Province province= provinceMapper.findProvinceByProvinceId(provinceId);
 		if(province==null)return province;
+		return loadProvinceCityList(province);
+	}
+	
+	
+	/**
+	 * 为单个省份加载城市信息
+	 * @param province 需要加载城市信息的省份
+	 * @return Province
+	 */
+	private Province loadProvinceCityList(Province province) {
 		province.setCityList(cityMapper.findCityByProvinceId(province.getProvinceId()));
 		return province;
 	}
 	
+	
+	/**
+	 * 为多个省份加载城市信息
+	 * @param provinceList 需要加载城市信息的省份
+	 * @return List<Province>
+	 */
+	private List<Province> loadProvinceListCityList(List<Province> provinceList) {
+		for(int i=0;i<provinceList.size();i++){
+			provinceList.set(i,loadProvinceCityList(provinceList.get(i)));
+		}
+		return provinceList;
+	}
 	/**
 	 * 根据省份名查找省份
 	 * @param provinceName
@@ -57,11 +83,7 @@ public class ProvinceDao extends BaseDao {
 	public List<Province> findProvinceByProvinceName(String provinceName){
 		List<Province> provinceList=provinceMapper.findProvinceByProvinceName(provinceName);
 		if(provinceList==null)return provinceList;
-		for(int i=0;i<provinceList.size();i++){
-			Province province=provinceList.get(i);
-			province.setCityList(cityMapper.findCityByProvinceId(province.getProvinceId()));
-		}
-		return provinceList;
+		return loadProvinceListCityList(provinceList);
 	}
 	
 	/**
@@ -71,26 +93,18 @@ public class ProvinceDao extends BaseDao {
 	public List<Province> findProvinceAll(){
 		List<Province> provinceList=provinceMapper.findProvinceAll();
 		if(provinceList==null)return provinceList;
-		for(int i=0;i<provinceList.size();i++){
-			Province province=provinceList.get(i);
-			province.setCityList(cityMapper.findCityByProvinceId(province.getProvinceId()));
-		}
-		return provinceList;
+		return loadProvinceListCityList(provinceList);
 	}
 	
 	/**
 	 * 根据状态码查找省份
 	 * @param provinceStateId
-	 * @return Province  
+	 * @return List<Province>  
 	 */
 	public List<Province> findProvinceByProvinceStateId(Integer provinceStateId){
 		List<Province> provinceList=provinceMapper.findProvinceByProvinceStateId(provinceStateId);
 		if(provinceList==null)return provinceList;
-		for(int i=0;i<provinceList.size();i++){
-			Province province=provinceList.get(i);
-			province.setCityList(cityMapper.findCityByProvinceId(province.getProvinceId()));
-		}
-		return provinceList;
+		return loadProvinceListCityList(provinceList);
 	}
 	
 	

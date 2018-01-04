@@ -7,6 +7,9 @@ import org.jxau.lctoh.position.region.domain.City;
 import org.jxau.lctoh.position.region.mapper.CityMapper;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.springframework.stereotype.Repository;
+/**
+ * @author qdt_PC
+ */
 @Repository("CityDao")
 public class CityDao extends BaseDao {
 	
@@ -61,7 +64,7 @@ public class CityDao extends BaseDao {
 	}
 	
 	/**
-	 * 根据状态码查找城市
+	 * 根据省份识别码查找城市
 	 * @param provinceId
 	 * @return List<City>  
 	 */

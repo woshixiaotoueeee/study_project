@@ -5,6 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.jxau.lctoh.position.region.domain.City;
 
+/**
+ * @author qdt_PC
+ */
 public interface CityMapper {
 	/**
 	 * 根据城市识别码查找城市
@@ -35,7 +38,7 @@ public interface CityMapper {
 	public List<City> findCityByCityStateId(@Param("cityStateId")Integer cityStateId);
 	
 	/**
-	 * 根据状态码查找城市
+	 * 根据省份识别码查找城市
 	 * @param provinceId
 	 * @return List<City>  
 	 */
