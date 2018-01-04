@@ -1,5 +1,8 @@
 package org.jxau.lctoh.user.basis.exception;
 
+/**
+ * @author qdt_PC
+ */
 public class UserException  extends Exception{
 	/**
 	 * 
