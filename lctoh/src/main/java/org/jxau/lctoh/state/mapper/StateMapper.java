@@ -6,7 +6,8 @@ import org.jxau.lctoh.state.domain.State;
 
 /**
  * 状态类代理接口
- * */
+ * @author qdt_PC
+ */
 public interface StateMapper {
 	
 	

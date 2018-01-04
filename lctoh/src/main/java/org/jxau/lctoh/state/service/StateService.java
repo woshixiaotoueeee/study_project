@@ -5,6 +5,9 @@ import org.jxau.lctoh.state.domain.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author qdt_PC
+ */
 @Service("StateService")
 public class StateService {
 	@Autowired

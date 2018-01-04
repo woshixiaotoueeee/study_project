@@ -11,13 +11,15 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 /**
  * 小小工具类
- * 内有一些使用小方法
- * */
+ * 内有一些实用小方法
+ * @author qdt_PC
+ */
 @Component("Tools")
 public class Tools {
-	
+	/**用于实体类对象与json字符串之间的转换*/
 	public static Gson gson;
 	/**得到一个单例gson对象*/
 	static{
@@ -69,9 +71,8 @@ public class Tools {
 	/** 
      * 获取随机字符串 a-z,A-Z,0-9 
      *  
-     * @param length 
-     *            长度 
-     * @return 
+     * @param length  长度 
+     * @return String
      */  
     public static String getRandomString(int length) {  
         String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";  
@@ -87,8 +88,7 @@ public class Tools {
     /** 
      * 获取随机字符串数字0-9 
      *  
-     * @param length 
-     *            长度 
+     * @param length 长度 
      * @return 
      */  
     public static String getRandomNumberString(int length) {  
@@ -108,7 +108,7 @@ public class Tools {
     /**
      * 得到传入时间与当前时间的时间差
      * @param date
-     * @return
+     * @return Long
      */
     public static Long getTimeDifferenceFromNowDate(Date date) {
     	Date nowDate=new Date();
@@ -143,9 +143,13 @@ public class Tools {
   	   //s=Math.round(s);//去除小数？
   	   return s;
   	}
+  	
+  	
   	/**
-  	 * 冒泡排序
-  	 * */
+  	 * 对店家信息按距离远近进行冒泡排序
+  	 * @param list
+  	 * @return List<Restaurant> 
+  	 */
   	public static List<Restaurant> maoPaoSort(List<Restaurant> list){
   		Restaurant restaurant;
   		for(int i=1;i<list.size();i++){
