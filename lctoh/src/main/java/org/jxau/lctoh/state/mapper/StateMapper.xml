@@ -28,6 +28,12 @@
 			state_id=#{stateId}
 	</update>
 	
+	
+	
+	
+	
+	
+	
 	<!-- 根据状态Id更新状态信息 -->
 	<update id="updateStateByMap"  parameterType="Map" >
 		update 
@@ -38,10 +44,5 @@
 		where
 			state_id=#{stateId}
 	</update>
-	
-	
-	
-	
-	
 	
 </mapper>
