@@ -73,10 +73,24 @@
 	
 	<!-- 添加用户信息 -->
 	<insert id="addUser" parameterType="User" >
-		insert into user 
-		(user_id,user_account,user_password,user_sex,user_email,user_phone,user_update_time,user_code)
-		values
-		(#{userId}, #{userAccount}, #{userPassword},#{userSex},#{userEmail}, #{userPhone}, #{userUpdateTime}, #{userCode})
+		insert into user(
+			user_id,
+			user_account,
+			user_password,
+			user_sex,
+			user_email,
+			user_phone,
+			user_update_time,
+			user_code)
+		values(
+			#{userId},
+			#{userAccount},
+			#{userPassword},
+			#{userSex},
+			#{userEmail}, 
+			#{userPhone}, 
+			#{userUpdateTime}, 
+			#{userCode})
 	</insert>
 	
 	
