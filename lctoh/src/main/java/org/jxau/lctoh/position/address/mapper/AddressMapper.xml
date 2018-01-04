@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:需与接口的完全限定名保持一致 -->
+<mapper namespace="org.jxau.lctoh.position.address.mapper.AddressMapper">
+	
+	
+	<!-- 数据库表与实体类相对应的resultMap -->
+	<resultMap type="Address" id="AddressResultMap">
+	    <id property="addressId" column="address_id"/>
+	    <result property="addressName" column="address_name"/>
+		<result property="addressProvince" column="address_province"/>
+		<result property="addressCity" column="address_city"/>
+	    <result property="addressInfo" column="address_info"/>
+	    <result property="addressPhone" column="address_phone"/>
+	    <result property="addressLatitude" column="address_latitude"/>
+	    <result property="addressLongitude" column="address_longitude"/>
+		<result property="addressUpdateTime" column="address_update_time"/>
+		<association property="addressState" column="address_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
+		<association property="addressCustomer" column="address_customer_id" select="org.jxau.lctoh.user.customer.mapper.CustomerMapper.findCustomerByCustomerId"/>
+	</resultMap>
+	
+	
+	<!--根据地址识别码查询地址信息-->
+	<select id="findAddressByAddressId" parameterType="String" resultMap="AddressResultMap">
+		select
+			address.address_id,
+			address.address_name,
+			address.address_province,
+			address.address_city,
+			address.address_info,
+			address.address_phone,
+			address.address_latitude,
+			address.address_longitude,
+			address.address_update_time,
+			address.address_state_id,
+			address.address_customer_id
+		from
+			address
+		where
+			address.address_delete_or_not=1
+			and address.address_id =#{addressId}
+	</select>
+	
+	<!--根据地址识别码查询地址信息-->
+	<select id="findAddressByCustomerId" parameterType="String" resultMap="AddressResultMap">
+		select
+			address.address_id,
+			address.address_name,
+			address.address_province,
+			address.address_city,
+			address.address_info,
+			address.address_phone,
+			address.address_latitude,
+			address.address_longitude,
+			address.address_update_time,
+			address.address_state_id,
+			address.address_customer_id
+		from
+			address
+		where
+			address.address_delete_or_not=1
+			and address.address_customer_id =#{customerId}
+	</select>
+	
+</mapper>
