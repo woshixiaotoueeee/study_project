@@ -2,6 +2,7 @@ package org.jxau.lctoh.user.admin.service;
 
 import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.config.ErrorMSG;
+import org.jxau.lctoh.tool.config.SuccessMSG;
 import org.jxau.lctoh.user.admin.dao.AdminDao;
 import org.jxau.lctoh.user.admin.domain.Admin;
 import org.jxau.lctoh.user.basis.dao.UserDao;
@@ -11,6 +12,9 @@ import org.jxau.lctoh.user.basis.domain.VerificationCode;
 import org.jxau.lctoh.user.basis.exception.UserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+/**
+ * @author qdt_PC
+ */
 @Service("AdminService")
 public class AdminService {
 	@Autowired
@@ -25,9 +29,8 @@ public class AdminService {
 	 * @param user  用户
 	 * @return Admin 管理员
 	 * @throws UserException
-	 * @throws Exception
 	 */
-	public Admin login (User user) throws UserException,Exception{
+	public Admin login (User user) throws UserException{
 		
 		User _user=userDao.findUserByUserAccount(user.getUserAccount());
 		if(_user==null) throw new UserException(ErrorMSG.accountError);
@@ -47,15 +50,14 @@ public class AdminService {
 	 * @param code  验证码
 	 * @return Admin 管理员
 	 * @throws UserException
-	 * @throws Exception
 	 */
-	public Admin loginByCode (String userAccount,String code) throws UserException,Exception{
+	public Admin loginByCode (String userAccount,String code) throws UserException{
 		
 		User _user=userDao.findUserByUserAccount(userAccount);
 		if(_user==null) throw new UserException(ErrorMSG.accountError);
 		VerificationCode verificationCode=verificationCodeDao.findVerificationCodeById(_user.getUserId());
 		if(verificationCode==null||!(verificationCode.getVerificationCode().equals(code)))throw new UserException(ErrorMSG.codeError);
-		if(Tools.getTimeDifferenceFromNowDate(verificationCode.getVerificationCodeUpdateTime())>ErrorMSG.timeExpire)
+		if(Tools.getTimeDifferenceFromNowDate(verificationCode.getVerificationCodeUpdateTime())>SuccessMSG.timeExpire)
 			throw new UserException(ErrorMSG.timeExpireError);
 		Admin admin=adminDao.findAdminByUserId(_user.getUserId());
 		if(admin==null)throw new UserException(ErrorMSG.powerError);
