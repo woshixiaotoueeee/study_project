@@ -5,10 +5,13 @@ import java.util.Date;
 
 
 
-import org.jxau.lctoh.tool.base.BaseDao;
+import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.user.basis.domain.VerificationCode;
 import org.jxau.lctoh.user.basis.mapper.VerificationCodeMapper;
 import org.springframework.stereotype.Repository;
+/**
+ * @author qdt_PC
+ */
 @Repository("VerificationCodeDao")
 public class VerificationCodeDao extends BaseDao{
 	private VerificationCodeMapper verificationCodeMapper;
@@ -34,7 +37,7 @@ public class VerificationCodeDao extends BaseDao{
 	}
 	
 	/**
-	 * 
+	 * 更新验证码信息
 	 * @param verificationCode
 	 * @return Integer 
 	 */
