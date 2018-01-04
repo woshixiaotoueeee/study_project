@@ -84,15 +84,11 @@ public class RestaurantController extends BaseController {
 		if(restaurantId==null){
 			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.parameterIsNullError));
 		}
-		/*
 		try {
 			responseData.successInfo(restaurantService.findRestaurantService(restaurantId));
-		} catch (GetInfoException e) {
-			responseData.failInfo(e.getMessage());
 		}catch (Exception e) {
 			responseData.failInfo(ErrorMSG.notKnowError);
 		}
-		*/
 		return Tools.gson.toJson(responseData);
 	}
 }
