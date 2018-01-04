@@ -8,6 +8,9 @@ import org.jxau.lctoh.state.mapper.StateMapper;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.springframework.stereotype.Repository;
 
+/**
+ * @author qdt_PC
+ */
 @Repository("StateDao")
 public class StateDao extends BaseDao {
 	
@@ -21,8 +24,6 @@ public class StateDao extends BaseDao {
 	public void setStateMappeer(StateMapper stateMappeer) {
 		this.stateMappeer = stateMappeer;
 	}
-
-	
 	@Override
 	public void puttMapper() {
 		stateMappeer=getMapper(StateMapper.class);

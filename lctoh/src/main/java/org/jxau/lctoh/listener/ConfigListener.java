@@ -15,8 +15,12 @@ import org.jxau.lctoh.user.rider.domain.Rider;
  * @author qdt_PC
  */
 public class ConfigListener implements ServletContextListener {
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContextListener#contextDestroyed(javax.servlet.ServletContextEvent)
+	 */
 	@Override
 	public void contextDestroyed(ServletContextEvent servletContextEvent) {}
+	
 	/* (non-Javadoc)
 	 * @see javax.servlet.ServletContextListener#contextInitialized(javax.servlet.ServletContextEvent)
 	 */

@@ -24,6 +24,11 @@ public class DaoPutMapperInterceptor {
     /**为除了putMapper()的所有方法配置AOP*/
     @Pointcut("!(execution(* org.jxau.lctoh.*.*.dao.*.puttMapper(..)))&&execution(* org.jxau.lctoh.*.*.dao.*.*(..))")  
     private void notPutMapper_2(){}//定义一个切入点  
+    /**
+     * @param pjp
+     * @return
+     * @throws Throwable
+     */
     @Around("notPutMapper_2()")  
     public Object doBasicProfiling_2(ProceedingJoinPoint pjp) throws Throwable{
     	/*
@@ -45,6 +50,11 @@ public class DaoPutMapperInterceptor {
         System.out.println("完成环绕通知"+pjp.getSignature().getName()); 
         return object;  
     }  
+    /**
+     * @param pjp
+     * @return
+     * @throws Throwable
+     */
     @Around("notPutMapper()")  
     public Object doBasicProfiling(ProceedingJoinPoint pjp) throws Throwable{
     	/*
