@@ -1,9 +1,13 @@
 package org.jxau.lctoh.trade.cart.domain;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
+import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.trade.dish.domain.Dish;
+import org.jxau.lctoh.trade.order.domain.Order;
+import org.jxau.lctoh.trade.order.domain.OrderItem;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -46,5 +50,19 @@ public class CartItem {
 				+ subtotal + "]";
 	}
 	
+	/**
+	 * 根据购物车条目生成订单条目
+	 * @param order
+	 * @return
+	 */
+	public OrderItem toOrderItem(Order order){
+		OrderItem orderItem=new OrderItem();
+		orderItem.setOrderItemid(Tools.getRandomString(32));
+		orderItem.setOrderItemSum(subtotal);
+		orderItem.setOrderItemCount(dishCount);
+		orderItem.setOrderItemDish(dish);
+		orderItem.setOrderItemOrder(order);
+		return orderItem;
+	}
 	
 }

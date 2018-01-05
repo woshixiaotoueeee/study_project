@@ -48,7 +48,14 @@ public class ErrorMSG {
 	/**验证码为空*/
 	public final static String codeIsNullError="请选择性别";
 	
+	/**计算购物车价格*/
+	public final static String putCartTotalError="计算购物车总价失败";
 	
+	/**购物车添加商品失败*/
+	public final static String addCartDishError="购物车添加商品失败";
+	
+	/**购物车更改商品数量失败*/
+	public final static String updateCartDishError="购物车更改商品数量失败";
 	
 	/**参数为空*/
 	public final static String parameterIsNullError="参数为空";

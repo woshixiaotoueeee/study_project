@@ -1,15 +1,26 @@
 package org.jxau.lctoh.trade.cart.domain;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.type.Alias;
+import org.jxau.lctoh.state.domain.State;
+import org.jxau.lctoh.tool.Tools;
+import org.jxau.lctoh.tool.config.ErrorMSG;
 import org.jxau.lctoh.trade.cart.exception.CartException;
+import org.jxau.lctoh.trade.order.domain.HarvestAddress;
+import org.jxau.lctoh.trade.order.domain.Order;
+import org.jxau.lctoh.trade.order.domain.OrderItem;
+import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
 
 /**
  * 购物车
@@ -23,7 +34,7 @@ public class Cart {
 	 * 携带一个标记位
 	 */
 	private Restaurant restaurant;
-	//private BigDecimal total;
+	private BigDecimal total;
 	/**购物车中的条目*/
 	private Map<String ,CartItem> map=new LinkedHashMap<String,CartItem>();
 	public Restaurant getRestaurant() {
@@ -39,21 +50,33 @@ public class Cart {
 		this.map = map;
 	}
 	
+	
+	
 	/**
 	 * 根据购物车中商品计算总价
 	 * @return BigDecimal
 	 */
 	public BigDecimal getTotal(){
-		BigDecimal sum=new BigDecimal("0");
-		for(CartItem cartItem : map.values()){
-			sum=sum.add(cartItem.getSubtotal());
-		}
-		return sum;
+		return total;
 	}
+	
+	public void putTotal() throws CartException{
+		try{
+			BigDecimal sum=restaurant.getRestaurantDeliveryFee();
+			for(CartItem cartItem : map.values()){
+				sum=sum.add(cartItem.getSubtotal());
+			}
+			total=sum;
+		}catch(Exception e){
+			throw new CartException(ErrorMSG.putCartTotalError);
+		}
+	}
+	
 	/**
 	 * 添加商品
+	 * @throws Exception 
 	 */
-	public void addDish(CartItem cartItem){
+	public void addDish(CartItem cartItem) throws Exception{
 		/**
 		 * 判断添加的商品在购物车中是否存在
 		 */
@@ -63,7 +86,7 @@ public class Cart {
 			CartItem _cartItem=map.get(cartItem.getDish().getDishId());
 			//存在条目的数量+1
 			_cartItem.setDishCount(_cartItem.getDishCount()+cartItem.getDishCount());
-			_cartItem.putSubtotal();;
+			_cartItem.putSubtotal();
 			map.put(cartItem.getDish().getDishId(), _cartItem);
 		}
 		//商品在购物车中没有条目
@@ -83,17 +106,19 @@ public class Cart {
 			}
 			map.put(cartItem.getDish().getDishId(), cartItem);
 		}
+		this.putTotal();
 	}
 	
 	/**
 	 * 更新购物车
-	 * @throws CartException 
+	 * @throws Exception 
 	 */
-	public void updateDish(CartItem cartItem) throws CartException{
+	public void updateDish(CartItem cartItem) throws Exception{
 		if(restaurant==null||(!(restaurant.getRestaurantId().equals(cartItem.getDish().getDishCategory().getDishCategoryRestaurant().getRestaurantId())))){
-			throw new CartException("购物车物品更新失败");
+			throw new Exception();
 		}
 		map.put(cartItem.getDish().getDishId(), cartItem);
+		this.putTotal();
 	}
 	/**
 	 * 购物车中存在多个条目
@@ -112,7 +137,32 @@ public class Cart {
 		map.clear();
 	}
 	
-	public void toOrder(){
-		
+	
+	/**
+	 * 根据购物车生成订单
+	 * @param orderCustomer
+	 * @param harvestAddress
+	 * @return Order
+	 */
+	public Order toOrder(Customer orderCustomer,HarvestAddress harvestAddress){
+		// 创建订单对象
+		Order order = new Order();
+		order.setOrderId(Tools.getRandomString(32));// 设置订单编号
+		order.setOrderCreatTime(new Date());		// 下单时间
+		order.setOrderPrice(total);					//订单价格
+		State orderState=new State();
+		orderState.setStateId(100001);				//订单状态
+		order.setOrderState(orderState);			//设置未付款状态
+		order.setOrderCustomer(orderCustomer);		//订单所属用户
+		order.setOrderHarvestAddress(harvestAddress);//配送地址
+		order.setOrderRestaurant(restaurant);		//订单所属餐馆
+		// 创建订单条目
+		List<OrderItem> orderItemList = new ArrayList<OrderItem>();
+		order.setOrderPrice(this.getTotal());
+		for(CartItem cartItem:map.values()){
+			orderItemList.add(cartItem.toOrderItem(order));
+		}
+		order.setOrderItemList(orderItemList);
+		return order;
 	}
 }
