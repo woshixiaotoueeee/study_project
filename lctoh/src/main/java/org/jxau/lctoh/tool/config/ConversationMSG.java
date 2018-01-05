@@ -22,5 +22,7 @@ public class ConversationMSG {
 	public final static String riderContext="riderMap";
 	/**验证信息存于Session对应的键*/
 	public final static String userSession="user";
+	/**购物车信息存于Session对应的键*/
+	public final static String cartSession="cart";
 	
 }

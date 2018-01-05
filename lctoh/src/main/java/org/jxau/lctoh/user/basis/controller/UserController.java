@@ -13,6 +13,7 @@ import org.jxau.lctoh.tool.config.ErrorMSG;
 import org.jxau.lctoh.tool.config.EncodingConfig;
 import org.jxau.lctoh.tool.config.SuccessMSG;
 import org.jxau.lctoh.tool.domain.ResponseData;
+import org.jxau.lctoh.trade.cart.domain.Cart;
 import org.jxau.lctoh.user.admin.domain.Admin;
 import org.jxau.lctoh.user.admin.service.AdminService;
 import org.jxau.lctoh.user.basis.domain.User;
@@ -79,6 +80,7 @@ public class UserController extends BaseController{
 				try {
 					Customer customer=customerService.login(user);
 					session.setAttribute(ConversationMSG.customerSession, customer);
+					session.setAttribute(ConversationMSG.cartSession, new Cart());
 					responseData.successInfo(SuccessMSG.customerSuccessUrl);
 				} catch (UserException e) {
 					responseData.failInfo(e.getMessage());

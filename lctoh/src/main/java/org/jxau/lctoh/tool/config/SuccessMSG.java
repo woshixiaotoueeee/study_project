@@ -28,4 +28,7 @@ public class SuccessMSG {
 	/**邮件发送成功*/
 	public final static String sendEmailSuccess="验证通过";
 	
+	/**操作成功*/
+	public final static String successMSG="操作成功";
+	
 }

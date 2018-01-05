@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderItem {
 	private String orderItemid;			//订单条目ID
-	private BigDecimal orderItemSum;		//条目小计
+	private BigDecimal orderItemSum;	//条目小计
 	private Integer orderItemCount;		//条目中商品数量
 	private Dish orderItemDish;			//条目商品信息
 	private Order orderItemOrder;		//条目所属订单
