@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:需与接口的完全限定名保持一致 -->
+<mapper namespace="org.jxau.lctoh.trade.order.mapper.HarvestAddressMapper">
+	<!-- 数据库表与实体类相对应的resultMap -->
+	<resultMap type="HarvestAddress" id="HarvestAddressResultMap">
+	    <id property="harvestAddressId" column="harvest_address_id"/>
+	    <result property="harvestAddressName" column="harvest_address_name"/>
+		<result property="harvestAddressProvince" column="harvest_address_province"/>
+		<result property="harvestAddressCity" column="harvest_address_city"/>
+	    <result property="harvestAddressInfo" column="harvest_address_info"/>
+	    <result property="harvestAddressPhone" column="harvest_address_phone"/>
+	    <result property="harvestAddressLatitude" column="harvest_address_latitude"/>
+	    <result property="harvestAddressLongitude" column="harvest_address_longitude"/>
+		<result property="harvestAddressUpdateTime" column="harvest_address_update_time"/>
+	</resultMap>
+	
+	<!--根据配送地址识别码查询地址信息-->
+	<select id="findHarvestAddressByhaid" parameterType="String" resultMap="HarvestAddressResultMap">
+		select
+			harvest_address.harvest_address_id,
+			harvest_address.harvest_address_name,
+			harvest_address.harvest_address_province,
+			harvest_address.harvest_address_city,
+			harvest_address.harvest_address_phone,
+			harvest_address.harvest_address_info,
+			harvest_address.harvest_address_latitude,
+			harvest_address.harvest_address_longitude,
+			harvest_address.harvest_address_update_time
+		from
+			harvest_address
+		where
+			harvest_address.harvest_address_delete_or_not=1
+			and harvest_address.harvest_address_id =#{harvestAddressId}
+	</select>
+	
+	<!--更改配送地址数据-->
+	<update id="updateHarvestAddress" parameterType="HarvestAddress">
+		update 
+			harvest_address
+		set
+			harvest_address.harvest_address_name=#{harvestAddressName},
+			harvest_address.harvest_address_province=#{harvestAddressProvince},
+			harvest_address.harvest_address_city=#{harvestAddressCity},
+			harvest_address.harvest_address_phone=#{harvestAddressPhone},
+			harvest_address.harvest_address_info=#{harvestAddressInfo},
+			harvest_address.harvest_address_latitude=#{harvestAddressLatitude},
+			harvest_address.harvest_address_longitude=#{harvestAddressLongitude},
+			harvest_address.harvest_address_update_time=#{harvestAddressUpdateTime}
+		where
+			harvest_address.harvest_address_id =#{harvestAddressId}
+	</update>
+
+	<!--插入一个配送地址-->
+	<insert id="addHarvestAddress" parameterType="HarvestAddress">
+		insert into harvest_address(
+			harvest_address_id,
+			harvest_address_name,
+			harvest_address_province,
+			harvest_address_city,
+			harvest_address_phone,
+			harvest_address_info,
+			harvest_address_latitude,
+			harvest_address_longitude,
+			harvest_address_update_time
+		values(
+			#{harvestAddressId},
+			#{harvestAddressName},
+			#{harvestAddressProvince},
+			#{harvestAddressCity},
+			#{harvestAddressInfo},
+			#{harvestAddressPhone},
+			#{harvestAddressLatitude},
+			#{harvestAddressLongitude},
+			#{harvestAddressUpdateTime}
+	</insert>
+	
+</mapper>

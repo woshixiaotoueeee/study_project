@@ -30,6 +30,13 @@ public interface AddressMapper {
 	 * @param adrdess
 	 * @return Integer
 	 */
-	public Integer updateAddress(Address adrdess);
+	public Integer updateAddress(Address address);
 	
+	
+	/**
+	 * 添加一个地址
+	 * @param adrdess
+	 * @return Integer
+	 */
+	public Integer addAddress(Address address);
 }

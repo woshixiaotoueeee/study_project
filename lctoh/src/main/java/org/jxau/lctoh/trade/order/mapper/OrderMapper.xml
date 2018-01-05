@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:需与接口的完全限定名保持一致 -->
+<mapper namespace="org.jxau.lctoh.trade.order.mapper.OrderMapper">
+	<!-- 数据库表与实体类相对应的resultMap -->
+	<resultMap type="Order" id="OrderResultMap">
+	    <id property="orderId" column="order_id"/>
+	    <result property="orderCreatTime" column="order_creat_time"/>
+		<result property="order_price" column="orderPrice"/>
+		<result property="orderUpdateTiame" column="order_update_tiame"/>
+		<result property="orderDeliveryTime" column="order_delivery_time"/>
+		<association property="orderState" column="order_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
+		<association property="orderCustomer" column="order_customer_id" select="org.jxau.lctoh.user.customer.mapper.CustomerMapper.findCustomerByCustomerId"/>
+		<association property="orderRestaurant" column="order_restaurant_id" select="org.jxau.lctoh.user.restaurant.mapper.RestaurantMapper.findRestaurantByRestaurantId"/>
+		<association property="orderHarvestAddress" column="orderId" select="org.jxau.lctoh.trade.order.mapper.HarvestAddressMapper.findHarvestAddressByhaid"/>
+	</resultMap>
+	
+	
+	<!--根据订单识别码查询订单-->
+	<select id="findOrderByOrderId" parameterType="String" resultMap="OrderResultMap">
+		select
+			order.order_id,
+			order.order_creat_time,
+			order.order_price,
+			order.order_update_tiame,
+			order.order_delivery_time,
+			order.order_state_id,
+			order.order_customer_id,
+			order.order_restaurant_id
+		from
+			order
+		where
+			order.order_delete_or_not=1
+			and order.order_id =#{orderId}
+	</select>
+
+	<!--根据客户识别码查询订单-->
+	<select id="findOrderByCustmerId" parameterType="String" resultMap="OrderResultMap">
+		select
+			order.order_id,
+			order.order_creat_time,
+			order.order_price,
+			order.order_update_tiame,
+			order.order_delivery_time,
+			order.order_state_id,
+			order.order_customer_id,
+			order.order_restaurant_id
+		from
+			order
+		where
+			order.order_delete_or_not=1
+			and order.order_customer_id =#{custmerId}
+	</select>
+	
+	<!--根据店家识别码查询订单-->
+	<select id="findOrderByRestaurantId" parameterType="String" resultMap="OrderResultMap">
+		select
+			order.order_id,
+			order.order_creat_time,
+			order.order_price,
+			order.order_update_tiame,
+			order.order_delivery_time,
+			order.order_state_id,
+			order.order_customer_id,
+			order.order_restaurant_id
+		from
+			order
+		where
+			order.order_delete_or_not=1
+			and order.order_restaurant_id =#{restaurantId}
+	</select>
+
+	
+	<!--更新订单-->
+	<update id="updateOrder" parameterType="Order">
+		update 
+			order
+		set
+			order.order_creat_time=#{orderCreatTime},
+			order.order_price=#{orderPrice},
+			order.order_update_tiame=#{orderUpdateTiame},
+			order.order_delivery_time=#{orderDeliveryTime},
+			order.order_state_id=#{orderState.sateId},
+			order.order_customer_id=#{orderCustomer.customerId},
+			order.order_restaurant_id=#{orderRestaurant.restaurantId}
+		where
+			 order.order_id =#{orderId}
+	</update>
+	
+	<!--添加订单-->
+	<insert id="addOrder" parameterType="Order">
+		insert into order(
+			order.order_id,
+			order.order_creat_time,
+			order.order_price,
+			order.order_update_tiame,
+			order.order_delivery_time,
+			order.order_state_id,
+			order.order_customer_id,
+			order.order_restaurant_id
+		values(
+			#{orderId},
+			#{orderCreatTime},
+			#{orderPrice},
+			#{orderUpdateTiame},
+			#{orderDeliveryTime},
+			#{orderState.sateId},
+			#{orderCustomer.customerId},
+			#{orderRestaurant.restaurantId}
+		}
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+</mapper>

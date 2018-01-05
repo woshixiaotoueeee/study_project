@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:需与接口的完全限定名保持一致 -->
+<mapper namespace="org.jxau.lctoh.trade.order.mapper.OrderItemMapper">
+	<!-- 数据库表与实体类相对应的resultMap -->
+	<resultMap type="OrderItem" id="OrderItemResultMap">
+	    <id property="orderItemid" column="order_item_id"/>
+	    <result property="orderItemSum" column="order_item_sum"/>
+		<result property="orderItemCount" column="order_item_count"/>
+		<result property="orderItemUpdateTime" column="order_item_update_time"/>
+		<association property="orderItemDish" column="order_item_dish_id" select="org.jxau.lctoh.trade.dish.mapper.DishMapper.findDishByDishId"/>
+		<association property="orderItemOrder" column="order_item_order_id" select="org.jxau.lctoh.trade.order.mapper.OrderMapper.findOrderByOrderId"/>
+	</resultMap>
+	
+	<!--根据订单识别码查询订单条目-->
+	<select id="findOrderItemByOrderId" parameterType="String" resultMap="OrderItemResultMap">
+		select
+			order_item.order_item_id,
+			order_item.order_item_sum,
+			order_item.order_item_count,
+			order_item.order_item_order_id,
+			order_item.order_item_dish_id,
+			order_item.order_item_update_time
+		from
+			order_item
+		where
+			order_item.order_item_delete_or_not=1
+			and order_item.order_item_order_id =#{orderId}
+	</select>
+	
+	
+	<!--根据订单条目识别码查询订单-->
+	<select id="findOrderItemByOrderItemId" parameterType="String" resultMap="OrderItemResultMap">
+		select
+			order_item.order_item_id,
+			order_item.order_item_sum,
+			order_item.order_item_count,
+			order_item.order_item_order_id,
+			order_item.order_item_dish_id,
+			order_item.order_item_update_time
+		from
+			order_item
+		where
+			order_item.order_item_delete_or_not=1
+			and order_item.order_item_id =#{orderItemId}
+	</select>
+	
+	
+	<!--更新订单条目-->
+	<update id="updateOrderItem" parameterType="OrderItem">
+		update 
+			order_item
+		set
+			order_item.order_item_sum=#{orderItemSum},
+			order_item.order_item_count=#{orderItemCount},
+			order_item.order_item_order_id=#{orderItemOrder.orderId},
+			order_item.order_item_dish_id=#{orderItemDish.dishId},
+			order_item.order_item_update_time=#{orderItemUpdateTime}
+		where
+			 order_item.order_item_id =#{orderItemId}
+	</update>
+	
+	<!--添加订单条目-->
+	<insert id="addOrderItem" parameterType="OrderItem">
+		insert into order_item(
+			order_item.order_item_id,
+			order_item.order_item_sum,
+			order_item.order_item_count,
+			order_item.order_item_order_id,
+			order_item.order_item_dish_id,
+			order_item.order_item_update_time
+		values(
+			#{orderItemId},
+			#{orderItemSum},
+			#{orderItemCount},
+			#{orderItemOrder.orderId},
+			#{orderItemDish.dishId},
+			#{orderItemUpdateTime}
+		}
+	</insert>
+	
+	
+	
+</mapper>

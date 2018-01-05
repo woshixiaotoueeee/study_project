@@ -111,4 +111,8 @@ public class Cart {
 	public void clear(){
 		map.clear();
 	}
+	
+	public void toOrder(){
+		
+	}
 }
