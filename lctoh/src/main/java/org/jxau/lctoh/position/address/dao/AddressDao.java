@@ -5,6 +5,7 @@ import java.util.List;
 
 
 
+
 import org.jxau.lctoh.position.address.domain.Address;
 import org.jxau.lctoh.position.address.mapper.AddressMapper;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
@@ -52,10 +53,18 @@ public class AddressDao extends BaseDao{
 	 * @param adrdess
 	 * @return Integer
 	 */
-	public Integer updateAddress(Address adrdess){
-		adrdess.setAddressUpdateTime(new Date());
-		return addressMapper.updateAddress(adrdess);
+	public Integer updateAddress(Address address){
+		address.setAddressUpdateTime(new Date());
+		return addressMapper.updateAddress(address);
 	}
-	
+	/**
+	 * 添加一个地址
+	 * @param adrdess
+	 * @return Integer
+	 */
+	public Integer addAddress(Address address){
+		address.setAddressUpdateTime(new Date());
+		return addressMapper.addAddress(address);
+	}
 
 }

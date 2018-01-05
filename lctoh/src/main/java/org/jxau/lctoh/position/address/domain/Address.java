@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 import org.jxau.lctoh.state.domain.State;
+import org.jxau.lctoh.trade.order.domain.HarvestAddress;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -105,6 +106,31 @@ public class Address {
 				+ ", addressUpdateTime=" + addressUpdateTime
 				+ ", addressState=" + addressState + ", addressCustomer="
 				+ addressCustomer + "]";
+	}
+	
+	
+	public HarvestAddress toHarvestAddress(){
+		HarvestAddress harvestAddress=new HarvestAddress();
+		harvestAddress.setHarvestAddressName(addressName);
+		harvestAddress.setHarvestAddressProvince(addressProvince);
+		harvestAddress.setHarvestAddressCity(addressCity);
+		harvestAddress.setHarvestAddressInfo(addressInfo);
+		harvestAddress.setHarvestAddressPhone(addressPhone);
+		harvestAddress.setHarvestAddressLatitude(addressLatitude);
+		harvestAddress.setHarvestAddressLongitude(addressLongitude);
+		return harvestAddress;
+	}
+	public HarvestAddress toHarvestAddress(String harvestAddressId){
+		HarvestAddress harvestAddress=new HarvestAddress();
+		harvestAddress.setHarvestAddressId(harvestAddressId);
+		harvestAddress.setHarvestAddressName(addressName);
+		harvestAddress.setHarvestAddressProvince(addressProvince);
+		harvestAddress.setHarvestAddressCity(addressCity);
+		harvestAddress.setHarvestAddressInfo(addressInfo);
+		harvestAddress.setHarvestAddressPhone(addressPhone);
+		harvestAddress.setHarvestAddressLatitude(addressLatitude);
+		harvestAddress.setHarvestAddressLongitude(addressLongitude);
+		return harvestAddress;
 	}
 	
 }
