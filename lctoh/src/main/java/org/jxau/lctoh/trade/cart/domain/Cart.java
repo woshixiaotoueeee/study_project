@@ -129,11 +129,16 @@ public class Cart {
 	
 	/**
 	 * 删除商品、清空购物车
+	 * @throws CartException 
 	 */
-	public void deleteDish(String did){
-		map.remove(did);
+	public void deleteDish(String dishId) throws CartException{
+		map.remove(dishId);
+		this.putTotal();
+		
 	} 
 	public void clear(){
+		restaurant=null;
+		total=null;
 		map.clear();
 	}
 	
