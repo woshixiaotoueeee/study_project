@@ -12,7 +12,6 @@ import org.jxau.lctoh.tool.config.ConversationMSG;
 import org.jxau.lctoh.tool.config.ErrorMSG;
 import org.jxau.lctoh.tool.config.EncodingConfig;
 import org.jxau.lctoh.tool.config.SuccessMSG;
-import org.jxau.lctoh.tool.domain.ResponseData;
 import org.jxau.lctoh.trade.cart.domain.Cart;
 import org.jxau.lctoh.user.admin.domain.Admin;
 import org.jxau.lctoh.user.admin.service.AdminService;
