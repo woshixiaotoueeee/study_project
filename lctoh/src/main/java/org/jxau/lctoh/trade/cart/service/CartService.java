@@ -6,6 +6,9 @@ import org.jxau.lctoh.trade.cart.domain.CartItem;
 import org.jxau.lctoh.trade.cart.exception.CartException;
 import org.jxau.lctoh.trade.dish.dao.DishDao;
 import org.jxau.lctoh.trade.dish.domain.Dish;
+import org.jxau.lctoh.trade.order.dao.OrderDao;
+import org.jxau.lctoh.trade.order.domain.Order;
+import org.jxau.lctoh.user.customer.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,8 @@ public class CartService {
 	@Autowired
 	private DishDao dishDao;
 	
+	@Autowired
+	private OrderDao orderDao;
 	
 	/**
 	 * 添加菜肴至购物车
@@ -61,6 +66,16 @@ public class CartService {
 		}
 		return cart;
 	}
-
+	
+	
+	public void  cartToOrder(Cart cart,Customer orderCustomer,String harvestAddressId){
+		
+		
+		
+		
+		//Order order=cart.toOrder(orderCustomer, harvestAddress);
+		//orderDao.addOrder(order);
+	}
+	
 	
 }

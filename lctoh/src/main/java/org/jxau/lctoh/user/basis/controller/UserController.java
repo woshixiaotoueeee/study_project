@@ -232,12 +232,10 @@ public class UserController extends BaseController{
 		if(code==null){
 			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.codeIsNullError));
 		}
-		/*
-		 * 邮箱格式验证
-		if(userEmail==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailIsNullError));
+		if(userEmail.matches("\\w+@\\w+\\.\\w+")){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailError));
+			
 		}
-		*/
 		try {
 			User user=userService.findByEmailAndCode(userEmail,code);
 			session.setAttribute(ConversationMSG.userSession, user);
@@ -312,12 +310,10 @@ public class UserController extends BaseController{
 		if(userEmail==null){
 			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailIsNullError));
 		}
-		/*
-		 * 邮箱格式验证
-		if(userEmail==null){
+		if(userEmail.matches("\\w+@\\w+\\.\\w+")){
 			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailError));
+			
 		}
-		*/
 		try {
 			responseData.successInfo(verificationCodeService.setCodeByUserEmail(userEmail));
 		} catch (VerificationCodeException e) {
@@ -352,12 +348,10 @@ public class UserController extends BaseController{
 		if(user.getUserEmail()==null){
 			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailIsNullError));
 		}
-		/*
-		 * 邮箱格式判断
-		if(user.getUserEmail()==null){
+		if(user.getUserEmail().matches("\\w+@\\w+\\.\\w+")){
 			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailError));
+			
 		}
-		*/
 		if(!user.getUserPassword().equals(_userPassword)){
 			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.passwordNotSameError));
 		}

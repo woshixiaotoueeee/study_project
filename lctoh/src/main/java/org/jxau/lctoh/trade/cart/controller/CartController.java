@@ -47,7 +47,7 @@ public class CartController extends BaseController{
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/findDishByDishId",produces=EncodingConfig.produces)
+	@RequestMapping(value="/addDishCart",produces=EncodingConfig.produces)
 	public String addDishCart(String dishId,Integer dishCount,HttpSession session){
 		Cart cart=(Cart)session.getAttribute(ConversationMSG.cartSession);
 		if(cart==null||dishCount==null||dishId==null){
@@ -82,6 +82,47 @@ public class CartController extends BaseController{
 			} catch (CartException e) {
 				responseData.successInfo(e.getMessage());
 			}
+		}
+		return Tools.gson.toJson(responseData);
+	}
+	
+	/**
+	 * 更新购物车中商品数量
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/deleteDishCart",produces=EncodingConfig.produces)
+	public String deleteDishCart(String dishId,HttpSession session){
+		Cart cart=(Cart)session.getAttribute(ConversationMSG.cartSession);
+		if(cart==null||dishId==null){
+			responseData.failInfo(ErrorMSG.notKnowError);
+		}else{
+			try {
+				cart.deleteDish(dishId);
+				session.setAttribute(ConversationMSG.cartSession, cart);
+				responseData.successInfo(SuccessMSG.successMSG);
+			} catch (Exception e) {
+				responseData.successInfo(ErrorMSG.deleteCartDishError);
+			}
+		}
+		return Tools.gson.toJson(responseData);
+	}
+	
+	
+	/**
+	 * 根据购物车生成订单
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/cartToOrder",produces=EncodingConfig.produces)
+	public String cartToOrder(String harvestAddressId,HttpSession session){
+		Cart cart=(Cart)session.getAttribute(ConversationMSG.cartSession);
+		if(cart==null||harvestAddressId==null){
+			responseData.failInfo(ErrorMSG.notKnowError);
+		}else{
+			
 		}
 		return Tools.gson.toJson(responseData);
 	}

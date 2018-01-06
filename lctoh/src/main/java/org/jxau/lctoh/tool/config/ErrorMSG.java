@@ -66,4 +66,8 @@ public class ErrorMSG {
 	/**失败响应编码*/
 	public final static Integer fail=0;
 	
+	
+	/**删除购物车条目菜肴失败*/
+	public final static String deleteCartDishError="删除购物车条目菜肴失败";
+	
 }
