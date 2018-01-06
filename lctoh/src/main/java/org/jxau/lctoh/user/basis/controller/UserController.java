@@ -12,6 +12,7 @@ import org.jxau.lctoh.tool.config.ConversationMSG;
 import org.jxau.lctoh.tool.config.ErrorMSG;
 import org.jxau.lctoh.tool.config.EncodingConfig;
 import org.jxau.lctoh.tool.config.SuccessMSG;
+import org.jxau.lctoh.tool.domain.ResponseData;
 import org.jxau.lctoh.trade.cart.domain.Cart;
 import org.jxau.lctoh.user.admin.domain.Admin;
 import org.jxau.lctoh.user.admin.service.AdminService;
@@ -231,7 +232,7 @@ public class UserController extends BaseController{
 		if(code==null){
 			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.codeIsNullError));
 		}
-		if(userEmail.matches("\\w+@\\w+\\.\\w+")){
+		if(!userEmail.matches("\\w+@\\w+\\.\\w+")){
 			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailError));
 			
 		}
@@ -309,7 +310,7 @@ public class UserController extends BaseController{
 		if(userEmail==null){
 			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailIsNullError));
 		}
-		if(userEmail.matches("\\w+@\\w+\\.\\w+")){
+		if(!userEmail.matches("\\w+@\\w+\\.\\w+")){
 			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailError));
 			
 		}
@@ -347,7 +348,7 @@ public class UserController extends BaseController{
 		if(user.getUserEmail()==null){
 			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailIsNullError));
 		}
-		if(user.getUserEmail().matches("\\w+@\\w+\\.\\w+")){
+		if(!user.getUserEmail().matches("\\w+@\\w+\\.\\w+")){
 			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailError));
 			
 		}
