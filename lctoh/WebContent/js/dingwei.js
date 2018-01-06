@@ -1,6 +1,6 @@
 var map;//百度地图对象
 var _location=new Object();
-window.onload = function () {
+window.onload = function (){
 	// 百度地图API功能
 	map = new BMap.Map("allmap");//初始化地图
 	var point = new BMap.Point(116.331398,39.897445);
@@ -54,7 +54,52 @@ window.onload = function () {
 	//自动定位城市
 	var myCity = new BMap.LocalCity();
 	myCity.get(myFun);
+	
+	//显示位置数据
+	$('#show_wei').click(function(){
+		 //ajax 获取数据	
+			var data=$.post(
+					projectDirectory+"/ProvinceController/getAllProvince",				
+					function(t_data){	
+						alert('位置省市');
+						alert(t_data[4].provinceName+t_data[4].cityList[0].cityName);				
+				},"JSON")
+			 .error(
+					 function(data) {
+						alert('erro'); 
+			});			
+	})
+	//商家的省份，城市联动    运用了ajax连接后台数据
+	var posiData=$.post(
+					projectDirectory+"/ProvinceController/getAllProvince",					
+					function(positionData){	
+						//省份数据
+						for(i in positionData){ //i为 省份的下标
+					       //添加省份数据，option的value值为省份数据的id 
+					        $('#province ').append('<option value="'+positionData[i].provinceId+'">'+positionData[i].provinceName+'</option>'); 					        
+					    }
+						//positionData[i].cityList[0].cityName
+						//城市随省份联动  通过id相关联
+						$('#province').change(function(){							
+					       for(i in positionData){
+					            if(positionData[i].provinceId==$(this).val()){
+					            	 $('#cityList').html('');	
+					            	for(j in positionData[i].cityList){	//城市city	           		 		                         
+							             $('#cityList').append('<option>'+positionData[i].cityList[j].cityName+'</option>');
+					            	}					            						                            
+					            }
+					        }
+						})
+						
+				},"JSON")
+			 .error(
+					 function(posiData) {
+						alert('erro'); 
+			});		
+
+	
 };
+
 
 //自动定位
 function dingwei(){
@@ -110,8 +155,7 @@ function Loction(_location){
 		})
 	 .error(
 			 function(data) {
-				 alert(data);alert('erro'); 
-	});
-		
+				alert('erro'); 
+	});	
 }	
 
