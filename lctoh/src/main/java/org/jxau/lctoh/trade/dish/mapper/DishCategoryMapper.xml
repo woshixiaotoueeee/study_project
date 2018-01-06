@@ -20,11 +20,11 @@
 			dish_category.dish_category_name,
 			dish_category.dish_category_state_id,
 			dish_category.dish_category_update_time,
-			dish_category.dish_category_restaurant_id,
+			dish_category.dish_category_restaurant_id
 		from dish_category
 		where 
 			dish_category.dish_category_delete_or_not=1
-			dish_category.dish_category_id=#{dishCategoryId}
+			and dish_category.dish_category_id=#{dishCategoryId}
 	</select>
 	
 	
@@ -35,11 +35,11 @@
 			dish_category.dish_category_name,
 			dish_category.dish_category_state_id,
 			dish_category.dish_category_update_time,
-			dish_category.dish_category_restaurant_id,
+			dish_category.dish_category_restaurant_id
 		from dish_category
 		where 
 			dish_category.dish_category_delete_or_not=1
-			dish_category.dish_category_restaurant_id=#{restaurantId}
+			and dish_category.dish_category_restaurant_id=#{restaurantId}
 	</select>
 	
 	
