@@ -38,6 +38,8 @@
         <property name="minIdle" value="${minIdle}" />
         <!-- 获取连接最大等待时间 -->
         <property name="maxWait" value="${maxWait}" />
+        <property name="timeBetweenEvictionRunsMillis" value="10000" />  
+        <property name="minEvictableIdleTimeMillis" value="10000" />
     </bean>
 
     <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
@@ -60,15 +62,65 @@
         <property name="typeAliasesPackage" value="org/jxau/lctoh" />
     </bean>
     
+    
     <!-- mybatis spring sqlSessionTemplate,使用时直接让spring注入即可 -->
-    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="close" scope="prototype">
         <constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
     </bean>
-
+	
+	
+	
+	
+	
+	
+	<!-- 事务管理器 -->  
+	<bean id="transactionManager"  
+	    class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+	    <!-- 数据源 -->  
+	    <property name="dataSource" ref="dataSource" />  
+	</bean>  
+	<!-- 通知 -->  
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">  
+	    <tx:attributes>  
+	        <!-- 传播行为 -->  
+	        <tx:method name="save*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>  
+	        <tx:method name="insert*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>  
+	        <tx:method name="add*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>  
+	        <tx:method name="create*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>  
+	        <tx:method name="delete*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>  
+	        <tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>  
+	        <tx:method name="find*" propagation="SUPPORTS" read-only="true" />  
+	        <tx:method name="select*" propagation="SUPPORTS" read-only="true" />  
+	        <tx:method name="get*" propagation="SUPPORTS" read-only="true" />  
+	        <tx:method name="list*" propagation="SUPPORTS" read-only="true" />  
+	    </tx:attributes>  
+	</tx:advice>  
+	<!-- 切面 -->  
+	<aop:config>  
+	    <aop:advisor advice-ref="txAdvice"  
+	        pointcut="!(execution(* org.jxau.lctoh.*.dao.*.puttMapper(..)))&amp;&amp;execution(* org.jxau.lctoh.*.dao.*.*(..))"/>  
+	</aop:config>  
+	
+	<aop:config>  
+	    <aop:advisor advice-ref="txAdvice"  
+	        pointcut="!(execution(* org.jxau.lctoh.*.*.dao.*.puttMapper(..)))&amp;&amp;execution(* org.jxau.lctoh.*.*.dao.*.*(..))"/>  
+	</aop:config>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+    <!-- 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
     
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+	 -->
 </beans>
