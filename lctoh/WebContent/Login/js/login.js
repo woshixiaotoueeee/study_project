@@ -100,10 +100,6 @@
     $('.set_password .close_p').click(function(){
          $('.set_password').css('display','none'); 
      })
-    $('#set_login').click(function(){
-      alert('登录成功');
-      $('.set_password').css('display','none');
-    })
     /* .............设置密码的事件..............  */
     /*..............与后台交互数据................*/
     //获取前台数据对象
@@ -154,57 +150,90 @@
     //获取验证码
     var request_email={};
     $("#get_code").click(function(){   //userEmail:"123456@qq.com";		//邮箱(字符串)
-	   //code:"123456";					//验证码（字符串）
+	         //code:"123456";					//验证码（字符串）
     	request_email.userEmail=$('.find_password .email').val();
-    	if(request_email.Account==''){
+    	if(request_email.userEmail==''){
     		alert('邮箱不能为空');
     	}
     	else{
     		var userData=$.post(
     	   			projectDirectory+"/UserController/getCodeByUserEmail",    			
     	   			request_email,
-        			function(data){ //{"state":0,"responseInfo":"邮箱为空"}   	   			
-    	   				alert(data);
-/*    	   				if(data.state==0){
+        			function(data){ //{"state":0,"responseInfo":"邮箱格式不正确"}   	   			    	   				
+    	   				if(data.state==0){
     	   					alert(data.responseInfo);
     	   				}
     	   				else if(data.state==1){
-    	   					alert(data.responseInfo);  	   					   	   					
-    	   				}*/
-        		})
+    	   					alert('获取验证码成功');  	   					   	   					
+    	   				}
+        		},'JSON')
         	 .error(
         			 function(userData) {
         				 alert('erro'); 
         	});
     	}
      })
+     //判断验证码和邮箱是否对应
     $("#confirm_btn").click(function(){
     	//获取账号，密码，类型type
     	request_email.userEmail=$('.find_password .email').val();
     	request_email.code=$('.find_password .email_code').val();
-    	if(request_email.Account==''||request_email.code==''){
-    		alert('邮箱及验证码不能为空');
+    	if(request_email.userEmail==''||request_email.code==''){
+    		 alert('邮箱及验证码不能为空');
     	}
     	else{
     		//ajax  userEmail
-    	   	var userData=$.post(
-    	   			projectDirectory+"/UserController/getCodeByUserEmail",    			
-    	   			request_email.Account,
-        			function(data){ //{"state":0,"responseInfo":"邮箱为空"}
-    	   				/*alert(data);*/
-    	   				alert(data.state);
-    	   				if(data.state==0){
+    	   	var emailData=$.post(
+    	   			projectDirectory+"/UserController/verificationByCode",   			
+    	   			request_email,
+        			function(data){  //{"state":0,"responseInfo":"邮箱为空"}   	   				
+    	   			   if(data.state==0){
     	   					alert(data.responseInfo);
     	   				}
-    	   				else if(data.state==1){
-    	   					alert(data.responseInfo);  	   					
-    	   					
-    	   					
+    	   			   else if(data.state==1){   	   				  
+    	   					alert(data.responseInfo);
+    	   				    $('.find_password').css('display','none'); 
+    	   					$('.set_password').css('display','block');    	   				   
     	   				}
         		},'JSON')
         	 .error(
-        			 function(userData) {
-        				 alert('erro'); 
+        			 function(emailData) {
+        				 alert('erro 未知错误，请联系管理员'); 
+        	});
+    	}  	
+    })
+    //.................设置密码对应。。。。。。。。
+    var set_password={
+    	password:123,
+    	_password:123
+    } 
+    $('.set_password').css('display','block');  
+    $("#set_login").click(function(){
+    	//获取账号，密码，类型type
+    	set_password.password=$('.set_password .set_pw').val();
+    	set_password._password=$('.set_password .confirm_pw').val();
+    	if(set_password.password==''||set_password._password==''){
+    		 alert('密码不能为空');
+    	}
+    	else{
+    		//ajax  userEmail
+    	   	var set_p=$.post(
+    	   			projectDirectory+"/UserController/updatePassword",   			
+    	   			set_password,
+        			function(data){  //{"state":0,"responseInfo":"密码为空"}   	   				
+    	   			   if(data.state==0){    	   				    
+    	   					alert(data.responseInfo);
+    	   				}
+    	   			   else if(data.state==1){   
+    	   				    alert('设置密码成功');
+    	   					alert(data.responseInfo);  
+    	   			        $('.set_password').css('display','none');
+    	   			       // window.location.href=projectDirectory+data.responseInfo;
+    	   				}
+        		},'JSON')
+        	 .error(
+        			 function(set_p) {
+        				 alert('erro 未知错误，请联系管理员'); 
         	});
     	}  	
     })
