@@ -10,7 +10,7 @@ public class EmailConfing {
 	/**服务器邮箱账号*/
 	public final static String myEmailAccount = "1285739190@qq.com";
 	/**服务器邮箱密码*/
-	public final static String myEmailPassword = "zgusakqxxbcbgddh";
+	public final static String myEmailPassword = "nglvhtbpwrtchaca";
 	/**邮箱服务器*/
 	public final static String myEmailSMTPHost = "smtp.qq.com";
 	
