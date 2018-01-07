@@ -1,5 +1,6 @@
 package org.jxau.lctoh.tool.service;
 
+import java.security.GeneralSecurityException;
 import java.util.Date;
 import java.util.Properties;
 
@@ -14,6 +15,8 @@ import org.jxau.lctoh.tool.config.EncodingConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sun.mail.util.MailSSLSocketFactory;
+
 /**
  * @author qdt_PC
  */
@@ -22,10 +25,17 @@ public class EmailService {
 	@Autowired
 	Properties props;
 	
-	public void putprops(){
+	public void putprops() throws GeneralSecurityException{
 		props.setProperty("mail.transport.protocol", EmailConfing.mailTransportProtocol);   // 使用的协议（JavaMail规范要求）
 	    props.setProperty("mail.smtp.host", EmailConfing.myEmailSMTPHost);   // 发件人的邮箱的 SMTP 服务器地址
 	    props.setProperty("mail.smtp.auth", EmailConfing.mailSmtpAuth);  // 需要请求认证 
+	    props.setProperty("mail.auth", "true");
+	    
+	    MailSSLSocketFactory sf = new MailSSLSocketFactory();
+	    sf.setTrustAllHosts(true);
+	    props.put("mail.smtp.ssl.enable", "true");
+	    props.put("mail.smtp.ssl.socketFactory", sf); 
+
 	}
 	/**
 	 * receiveMailAccount对象发送一封邮件
