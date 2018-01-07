@@ -29,6 +29,7 @@
 			user_account as userAccount,
 			user_password as userPassword,
 			user_email as userEmail,
+			user_sex as userSex,
 			user_phone as userPhone,
 			user_update_time as userUpdateTime,
 			user_code as userCode
@@ -46,6 +47,7 @@
 			user_password as userPassword,
 			user_email as userEmail,
 			user_phone as userPhone,
+			user_sex as userSex,
 			user_update_time as userUpdateTime,
 			user_code as userCode
 		from user
