@@ -7,16 +7,18 @@
 
 	<!--根据验证码识别码获得验证码信息-->
 	<select id="findVerificationCodeById" parameterType="String" resultType="VerificationCode">
-		select
+		SELECT
 			verification_code.verification_code_id as verificationCodeId,
 			verification_code.verification_code as verificationCode,
 			verification_code.verification_code_update_time as verificationCodeUpdateTime
-		form
+		FROM
 			verification_code
-		where
-			verification_code.verification_code_id=#{id}
+		where 
+		verification_code.verification_code_id=#{id};
 	</select>
-	
+
+
+
 	<!-- 更新用户信息 -->
 	<insert id="replaceVerificationCode" parameterType="verificationCode" >
 		REPLACE INTO verification_code(
