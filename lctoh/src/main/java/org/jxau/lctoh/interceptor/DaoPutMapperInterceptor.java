@@ -39,12 +39,14 @@ public class DaoPutMapperInterceptor {
     	boolean flag=false;
         System.out.println("进入环绕通知"+pjp.getSignature().getName()); 
         Object obj=pjp.getTarget();
+        /*
         Field[] fields=obj.getClass().getDeclaredFields();
         for(int i=0;i<fields.length;i++){
         	if(Tools.getGetMethod(obj.getClass(), fields[i].getName()).invoke(obj, null)==null){
         		flag=true;
         	}
         }
+        */
         if(flag)((BaseDao)pjp.getThis()).puttMapper();
         Object object = pjp.proceed();//执行该方法 
         System.out.println("完成环绕通知"+pjp.getSignature().getName()); 
@@ -65,12 +67,14 @@ public class DaoPutMapperInterceptor {
     	boolean flag=false;
         System.out.println("进入环绕通知"+pjp.getSignature().getName()); 
         Object obj=pjp.getTarget();
+        /*
         Field[] fields=obj.getClass().getDeclaredFields();
         for(int i=0;i<fields.length;i++){
         	if(Tools.getGetMethod(obj.getClass(), fields[i].getName()).invoke(obj, null)==null){
         		flag=true;
         	}
         }
+        */
         if(flag)((BaseDao)pjp.getThis()).puttMapper();
         Object object = pjp.proceed();//执行该方法 
         System.out.println("完成环绕通知"+pjp.getSignature().getName()); 
