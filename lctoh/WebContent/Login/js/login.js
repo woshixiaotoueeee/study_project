@@ -207,7 +207,7 @@
     	password:123,
     	_password:123
     } 
-    $('.set_password').css('display','block');  
+     $('.set_password').css('display','block');  
     $("#set_login").click(function(){
     	//获取账号，密码，类型type
     	set_password.password=$('.set_password .set_pw').val();
@@ -226,9 +226,7 @@
     	   				}
     	   			   else if(data.state==1){   
     	   				    alert('设置密码成功');
-    	   					alert(data.responseInfo);  
-    	   			        $('.set_password').css('display','none');
-    	   			       // window.location.href=projectDirectory+data.responseInfo;
+    	   			        $('.set_password').css('display','none');   	   			       
     	   				}
         		},'JSON')
         	 .error(
