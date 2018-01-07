@@ -47,7 +47,8 @@ public class DaoPutMapperInterceptor {
         	}
         }
         */
-        if(flag)((BaseDao)pjp.getThis()).puttMapper();
+       // if(flag)
+        ((BaseDao)pjp.getThis()).puttMapper();
         Object object = pjp.proceed();//执行该方法 
         System.out.println("完成环绕通知"+pjp.getSignature().getName()); 
         return object;  
@@ -75,7 +76,8 @@ public class DaoPutMapperInterceptor {
         	}
         }
         */
-        if(flag)((BaseDao)pjp.getThis()).puttMapper();
+       // if(flag)
+        ((BaseDao)pjp.getThis()).puttMapper();
         Object object = pjp.proceed();//执行该方法 
         System.out.println("完成环绕通知"+pjp.getSignature().getName()); 
         return object;  
