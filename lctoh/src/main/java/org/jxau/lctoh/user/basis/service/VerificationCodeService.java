@@ -37,12 +37,14 @@ public class VerificationCodeService {
 		try {
 			verificationCodeDao.replaceVerificationCode(verificationCode);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new VerificationCodeException(ErrorMSG.notKnowError);
 		}
 		
 		try {
 			emailService.sendEmail(_user.getUserEmail(), EmailConfing.popTile, EmailConfing.sendMSGCodeTile, EmailConfing.sendMSGCodeInfo.concat(verificationCode.getVerificationCode()));
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new VerificationCodeException(ErrorMSG.emailSendError);
 		}
 		return verificationCode;
@@ -63,12 +65,14 @@ public class VerificationCodeService {
 		try {
 			verificationCodeDao.replaceVerificationCode(verificationCode);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new VerificationCodeException(ErrorMSG.notKnowError);
 		}
 		
 		try {
 			emailService.sendEmail(_user.getUserEmail(), EmailConfing.popTile, EmailConfing.sendMSGCodeTile, EmailConfing.sendMSGCodeInfo.concat(verificationCode.getVerificationCode()));
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new VerificationCodeException(ErrorMSG.emailSendError);
 		}
 		return verificationCode;
