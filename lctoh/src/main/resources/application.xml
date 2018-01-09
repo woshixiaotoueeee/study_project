@@ -83,6 +83,7 @@
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">  
 	    <tx:attributes>  
 	        <!-- 传播行为 -->  
+	         <tx:method name="put*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/> 
 	        <tx:method name="save*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>  
 	        <tx:method name="insert*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>  
 	        <tx:method name="add*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>  
