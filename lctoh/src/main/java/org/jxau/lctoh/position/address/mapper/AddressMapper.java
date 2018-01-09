@@ -39,4 +39,19 @@ public interface AddressMapper {
 	 * @return Integer
 	 */
 	public Integer addAddress(Address address);
+	
+	/**
+	 * 删除一个地址
+	 * @param address
+	 * @return Integer
+	 */
+	public Integer deleteAddress(Address address);
+	/**
+	 * 根据用户及地址状态查询地址
+	 * @param addressId
+	 * @return Address
+	 */
+	public List<Address> findAddressByCustomerIdAndState(@Param("customerId")String customerId,@Param("addressStateId")Integer addressStateId);
+	
+	
 }

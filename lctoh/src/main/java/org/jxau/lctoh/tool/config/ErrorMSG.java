@@ -69,5 +69,10 @@ public class ErrorMSG {
 	
 	/**删除购物车条目菜肴失败*/
 	public final static String deleteCartDishError="删除购物车条目菜肴失败";
+	/**地址有误*/
+	public final static String addressError="地址有误导致操作失败";
 	
+	
+	/**登陆状态过期*/
+	public final static String loginTimerOut="您可能为登陆或者登陆状态过期，请重新登陆";
 }

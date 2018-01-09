@@ -11,6 +11,7 @@ import org.jxau.lctoh.tool.config.SuccessMSG;
 import org.jxau.lctoh.trade.cart.domain.Cart;
 import org.jxau.lctoh.trade.cart.exception.CartException;
 import org.jxau.lctoh.trade.cart.service.CartService;
+import org.jxau.lctoh.user.customer.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -117,12 +118,19 @@ public class CartController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/cartToOrder",produces=EncodingConfig.produces)
-	public String cartToOrder(String harvestAddressId,HttpSession session){
+	public String cartToOrder(String addressId,HttpSession session){
 		Cart cart=(Cart)session.getAttribute(ConversationMSG.cartSession);
-		if(cart==null||harvestAddressId==null){
+		if(cart==null||addressId==null){
 			responseData.failInfo(ErrorMSG.notKnowError);
 		}else{
-			
+			try {
+				Customer orderCustomer=(Customer)session.getAttribute(ConversationMSG.customerSession);
+				cartService.putCartToOrder(cart, orderCustomer, addressId);
+			} catch (CartException e) {
+				responseData.failInfo(e.getMessage());
+			} catch (Exception e) {
+				responseData.failInfo(ErrorMSG.notKnowError);
+			}
 		}
 		return Tools.gson.toJson(responseData);
 	}
