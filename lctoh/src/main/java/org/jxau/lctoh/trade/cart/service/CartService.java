@@ -1,12 +1,17 @@
 package org.jxau.lctoh.trade.cart.service;
 
+import org.jxau.lctoh.position.address.dao.AddressDao;
+import org.jxau.lctoh.position.address.domain.Address;
+import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.config.ErrorMSG;
 import org.jxau.lctoh.trade.cart.domain.Cart;
 import org.jxau.lctoh.trade.cart.domain.CartItem;
 import org.jxau.lctoh.trade.cart.exception.CartException;
 import org.jxau.lctoh.trade.dish.dao.DishDao;
 import org.jxau.lctoh.trade.dish.domain.Dish;
+import org.jxau.lctoh.trade.order.dao.HarvestAddressDao;
 import org.jxau.lctoh.trade.order.dao.OrderDao;
+import org.jxau.lctoh.trade.order.dao.OrderItemDao;
 import org.jxau.lctoh.trade.order.domain.Order;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +28,12 @@ public class CartService {
 	
 	@Autowired
 	private OrderDao orderDao;
-	
+	@Autowired
+	private OrderItemDao orderItemDao;
+	@Autowired
+	private HarvestAddressDao harvestAddressDao;
+	@Autowired
+	private AddressDao addressDao;
 	/**
 	 * 添加菜肴至购物车
 	 * @param cart
@@ -68,13 +78,20 @@ public class CartService {
 	}
 	
 	
-	public void  cartToOrder(Cart cart,Customer orderCustomer,String harvestAddressId){
-		
-		
-		
-		
-		//Order order=cart.toOrder(orderCustomer, harvestAddress);
-		//orderDao.addOrder(order);
+	/**
+	 * 将购物车中的商品生成订单
+	 * @param cart
+	 * @param orderCustomer
+	 * @param addressId
+	 * @throws CartException
+	 */
+	public void  putCartToOrder(Cart cart,Customer orderCustomer,String addressId) throws CartException{
+		Address address=addressDao.findAddressByAddressId(addressId);
+		if(address==null)throw new CartException(ErrorMSG.addressError);
+		Order order=cart.toOrder(orderCustomer, address.toHarvestAddress(Tools.getRandomString(32)));
+		orderDao.addOrder(order);
+		harvestAddressDao.addHarvestAddress(order.getOrderHarvestAddress());
+		orderItemDao.addOrderItemList(order.getOrderItemList());
 	}
 	
 	

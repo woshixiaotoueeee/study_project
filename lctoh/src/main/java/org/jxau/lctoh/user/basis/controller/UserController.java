@@ -74,32 +74,20 @@ public class UserController extends BaseController{
 		}
 		
 		//判断登陆的角色
-		switch(type){
-			case 1:
-				try {
+		try{
+			switch(type){
+				case 1:
 					Customer customer=customerService.login(user);
 					session.setAttribute(ConversationMSG.customerSession, customer);
 					session.setAttribute(ConversationMSG.cartSession, new Cart());
 					responseData.successInfo(SuccessMSG.customerSuccessUrl);
-				} catch (UserException e) {
-					responseData.failInfo(e.getMessage());
-				} catch (Exception e) {
-					responseData.failInfo(ErrorMSG.notKnowError);
-				}
-				break;
-			case 2:
-				try {
+					break;
+				case 2:
 					Admin admin=adminService.login(user);
 					session.setAttribute(ConversationMSG.adminSession, admin);
 					responseData.successInfo(SuccessMSG.adminSuccessUrl);
-				} catch (UserException e) {
-					responseData.failInfo(e.getMessage());
-				} catch (Exception e) {
-					responseData.failInfo(ErrorMSG.notKnowError);
-				}
-				break;
-			case 3:
-				try {
+					break;
+				case 3:
 					Rider rider=riderService.login(user);
 					session.setAttribute(ConversationMSG.riderSession, rider);
 					ServletContext servletContext=session.getServletContext();
@@ -109,26 +97,19 @@ public class UserController extends BaseController{
 						servletContext.setAttribute(ConversationMSG.riderContext, riderMap);
 					}
 					responseData.successInfo(SuccessMSG.riderSuccessUrl);
-				}  catch (UserException e) {
-					responseData.failInfo(e.getMessage());
-				} catch (Exception e) {
-					responseData.failInfo(ErrorMSG.notKnowError);
-				}
-				break;
-			case 4:
-				try {
+					break;
+				case 4:
 					Restaurant restaurant=restaurantService.login(user);
 					session.setAttribute(ConversationMSG.restaurantSession, restaurant);
 					responseData.successInfo(SuccessMSG.restaurantSuccessUrl);
-				}  catch (UserException e) {
-					responseData.failInfo(e.getMessage());
-				} catch (Exception e) {
-					responseData.failInfo(ErrorMSG.notKnowError);
-				}
-				break;
-			default : responseData.failInfo(ErrorMSG.notKnowUserError);
+					break;
+				default : responseData.failInfo(ErrorMSG.notKnowUserError);
+			}
+		}catch (UserException e) {
+			responseData.failInfo(e.getMessage());
+		} catch (Exception e) {
+			responseData.failInfo(ErrorMSG.notKnowError);
 		}
-		
 		return Tools.gson.toJson(responseData);
 	}
 	
@@ -155,32 +136,19 @@ public class UserController extends BaseController{
 		if(code==null){
 			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.codeError));
 		}
-		
-		switch(type){
-			case 1:
-				try {
+		try{
+			switch(type){
+				case 1:
 					Customer customer=customerService.loginByCode(userAccount,code);
 					session.setAttribute(ConversationMSG.customerSession, customer);
 					responseData.successInfo(SuccessMSG.customerSuccessUrl);
-				} catch (UserException e) {
-					responseData.failInfo(e.getMessage());
-				} catch (Exception e) {
-					responseData.failInfo(ErrorMSG.notKnowError);
-				}
-				break;
-			case 2:
-				try {
+					break;
+				case 2:
 					Admin admin=adminService.loginByCode(userAccount,code);
 					session.setAttribute(ConversationMSG.adminSession, admin);
 					responseData.successInfo(SuccessMSG.adminSuccessUrl);
-				} catch (UserException e) {
-					responseData.failInfo(e.getMessage());
-				} catch (Exception e) {
-					responseData.failInfo(ErrorMSG.notKnowError);
-				}
-				break;
-			case 3:
-				try {
+					break;
+				case 3:
 					Rider rider=riderService.loginByCode(userAccount,code);
 					session.setAttribute(ConversationMSG.riderSession, rider);
 					ServletContext servletContext=session.getServletContext();
@@ -190,25 +158,20 @@ public class UserController extends BaseController{
 						servletContext.setAttribute(ConversationMSG.riderContext, riderMap);
 					}
 					responseData.successInfo(SuccessMSG.riderSuccessUrl);
-				} catch (UserException e) {
-					responseData.failInfo(e.getMessage());
-				} catch (Exception e) {
-					responseData.failInfo(ErrorMSG.notKnowError);
-				}
-				break;
-			case 4:
-				try {
+					break;
+				case 4:
 					Restaurant restaurant=restaurantService.loginByCode(userAccount,code);
 					session.setAttribute(ConversationMSG.restaurantSession, restaurant);
 					responseData.successInfo(SuccessMSG.restaurantSuccessUrl);
-				} catch (UserException e) {
-					responseData.failInfo(e.getMessage());
-				} catch (Exception e) {
-					responseData.failInfo(ErrorMSG.notKnowError);
-				}
-				break;
-			default : responseData.failInfo(ErrorMSG.notKnowUserError);
+					break;
+				default : responseData.failInfo(ErrorMSG.notKnowUserError);
+			}
+		}catch (UserException e) {
+			responseData.failInfo(e.getMessage());
+		} catch (Exception e) {
+			responseData.failInfo(ErrorMSG.notKnowError);
 		}
+		
 		return Tools.gson.toJson(responseData);
 	}
 	

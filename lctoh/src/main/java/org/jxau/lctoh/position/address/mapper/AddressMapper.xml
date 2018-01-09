@@ -64,6 +64,27 @@
 			and address.address_customer_id =#{customerId}
 	</select>
 	
+	<!--根据地址识别码查询地址信息-->
+	<select id="findAddressByCustomerIdAndState" resultMap="AddressResultMap">
+		select
+			address.address_id,
+			address.address_name,
+			address.address_province,
+			address.address_city,
+			address.address_info,
+			address.address_phone,
+			address.address_latitude,
+			address.address_longitude,
+			address.address_update_time,
+			address.address_state_id,
+			address.address_customer_id
+		from
+			address
+		where
+			address.address_delete_or_not=1
+			and address.address_customer_id =#{customerId}
+			and address.address_state_id =#{addressStateId}
+	</select>
 	
 	<!--更改地址数据-->
 	<update id="updateAddress" parameterType="Address">
@@ -111,5 +132,23 @@
 			#{addressState.stateId},
 			#{addressCustomer.customerId})
 	</insert>
+	
+	
+	<!--删除地址数据-->
+	<update id="deleteAddress" parameterType="String">
+		update 
+			address
+		set
+			address.address_delete_or_not=0,
+			address.address_update_time=#{addressUpdateTime}
+		where
+			address.address_id=#{addressId}
+	</update>
+	
+	
+	
+	
+	
+	
 	
 </mapper>

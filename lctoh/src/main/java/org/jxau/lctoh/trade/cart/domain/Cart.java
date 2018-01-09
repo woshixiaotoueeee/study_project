@@ -152,12 +152,14 @@ public class Cart {
 	public Order toOrder(Customer orderCustomer,HarvestAddress harvestAddress){
 		// 创建订单对象
 		Order order = new Order();
-		order.setOrderId(Tools.getRandomString(32));// 设置订单编号
+		order.setOrderId(harvestAddress.getHarvestAddressId());// 设置订单编号
 		order.setOrderCreatTime(new Date());		// 下单时间
-		order.setOrderPrice(total);					//订单价格
+		order.setOrderPrice(total);	
+		//订单价格
 		State orderState=new State();
 		orderState.setStateId(100001);				//订单状态
 		order.setOrderState(orderState);			//设置未付款状态
+		
 		order.setOrderCustomer(orderCustomer);		//订单所属用户
 		order.setOrderHarvestAddress(harvestAddress);//配送地址
 		order.setOrderRestaurant(restaurant);		//订单所属餐馆

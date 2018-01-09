@@ -108,7 +108,11 @@ public class Address {
 				+ addressCustomer + "]";
 	}
 	
-	
+	/**
+	 * 无ID生成配送地址
+	 * 生成的地址无ID
+	 * @return
+	 */
 	public HarvestAddress toHarvestAddress(){
 		HarvestAddress harvestAddress=new HarvestAddress();
 		harvestAddress.setHarvestAddressName(addressName);
@@ -120,16 +124,14 @@ public class Address {
 		harvestAddress.setHarvestAddressLongitude(addressLongitude);
 		return harvestAddress;
 	}
+	/**
+	 * 有ID生成配送地址
+	 * @param harvestAddressId
+	 * @return
+	 */
 	public HarvestAddress toHarvestAddress(String harvestAddressId){
-		HarvestAddress harvestAddress=new HarvestAddress();
+		HarvestAddress harvestAddress=this.toHarvestAddress();
 		harvestAddress.setHarvestAddressId(harvestAddressId);
-		harvestAddress.setHarvestAddressName(addressName);
-		harvestAddress.setHarvestAddressProvince(addressProvince);
-		harvestAddress.setHarvestAddressCity(addressCity);
-		harvestAddress.setHarvestAddressInfo(addressInfo);
-		harvestAddress.setHarvestAddressPhone(addressPhone);
-		harvestAddress.setHarvestAddressLatitude(addressLatitude);
-		harvestAddress.setHarvestAddressLongitude(addressLongitude);
 		return harvestAddress;
 	}
 	

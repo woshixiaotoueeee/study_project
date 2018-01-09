@@ -42,5 +42,10 @@ public interface OrderItemMapper {
 	 */
 	public Integer addOrderItem(OrderItem orderItem);
 	
-	
+	/**
+	 * 添加多个订单条目
+	 * @param orderItemList
+	 * @return Integer
+	 */
+	public Integer addOrderItemList(List<OrderItem> orderItemList);
 }
