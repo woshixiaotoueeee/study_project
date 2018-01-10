@@ -55,7 +55,7 @@ public class AddressController extends BaseController{
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/findAddressByAddressId",produces=EncodingConfig.produces)
+	@RequestMapping(value="/findAddressByCustomerId",produces=EncodingConfig.produces)
 	public String findAddressByCustomerId(String customerId){
 		if(customerId==null){
 			responseData.failInfo(ErrorMSG.parameterIsNullError);
@@ -137,7 +137,7 @@ public class AddressController extends BaseController{
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/updateAddress",produces=EncodingConfig.produces)
+	@RequestMapping(value="/addAddress",produces=EncodingConfig.produces)
 	public String addAddress(Address address,HttpSession session){
 		if(address==null||address.getAddressCity()==null||
 				address.getAddressName()==null||address.getAddressProvince()==null||
