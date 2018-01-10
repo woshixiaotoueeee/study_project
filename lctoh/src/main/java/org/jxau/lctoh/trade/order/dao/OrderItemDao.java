@@ -6,14 +6,13 @@ import java.util.List;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.trade.order.domain.OrderItem;
 import org.jxau.lctoh.trade.order.mapper.OrderItemMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 /**
  * @author qdt_PC
  */
 @Repository("OrderItemDao")
 public class OrderItemDao  extends BaseDao{
-	@Autowired
+	
 	private OrderItemMapper orderItemMapper;
 	
 	@Override

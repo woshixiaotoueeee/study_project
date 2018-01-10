@@ -3,7 +3,6 @@ package org.jxau.lctoh.trade.order.dao;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.trade.order.domain.Order;
 import org.jxau.lctoh.trade.order.mapper.OrderItemMapper;
