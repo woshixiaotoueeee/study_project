@@ -149,9 +149,26 @@
     })*/
     //获取验证码
     var request_email={};
+    var wait=60;  
+	function time(o) {   
+	  if (wait == 0) {     
+	  	o.removeAttribute("disabled");       
+	    o.value="获取验证码";    
+	     wait = 60;    
+	   } 
+	else {       
+	    o.setAttribute("disabled", true);     
+	    o.value="重新发送(" + wait + ")";     
+	    wait--;     
+	    setTimeout(function() {      time(o)     },     1000)    
+	    }  
+	 }
+	
     $("#get_code").click(function(){   //userEmail:"123456@qq.com";		//邮箱(字符串)
 	         //code:"123456";					//验证码（字符串）
     	request_email.userEmail=$('.find_password .email').val();
+    	var v = $(this).get(0);
+    	//time(v);
     	if(request_email.userEmail==''){
     		alert('邮箱不能为空');
     	}
@@ -164,7 +181,8 @@
     	   					alert(data.responseInfo);
     	   				}
     	   				else if(data.state==1){
-    	   					alert('获取验证码成功');  	   					   	   					
+    	   					alert('获取验证码成功');
+    	   					time(v);
     	   				}
         		},'JSON')
         	 .error(
