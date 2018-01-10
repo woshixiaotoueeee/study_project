@@ -7,9 +7,11 @@
 	<!-- 数据库表与实体类相对应的resultMap-->
 	<resultMap type="Rider" id="RiderResultMap">
 	    <id property="riderId" column="rider_id"/>
+	    <result property="riderName" column="rider_name"/>
 		<result property="riderUpdateTime" column="rider_update_time"/>
 		<result property="riderLongitude" column="rider_longitude"/>
 		<result property="riderLatitude" column="rider_latitude"/>
+		<association property="riderCity" column="rider_city_id" select="org.jxau.lctoh.position.region.mapper.CityMapper.findCityByCityId"/>
 		<association property="riderUser" column="rider_user_id" select="org.jxau.lctoh.user.basis.mapper.UserMapper.findUserByUserId"/>
 		<association property="riderState" column="rider_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
 	</resultMap>
@@ -18,10 +20,12 @@
 	<select id="findRiderByUserId" parameterType="String" resultMap="RiderResultMap">
 		select 
 			rider.rider_id,
+			rider.rider_name,
 			rider.rider_longitude,
 			rider.rider_latitude,
 			rider.rider_update_time,
 			rider.rider_user_id,
+			rider.rider_city_id,
 			rider.rider_state_id
 		from rider
 		where 
@@ -33,10 +37,12 @@
 	<select id="findRiderByRiderId" parameterType="String" resultMap="RiderResultMap">
 		select 
 			rider.rider_id,
+			rider.rider_name,
 			rider.rider_longitude,
 			rider.rider_latitude,
 			rider.rider_update_time,
 			rider.rider_user_id,
+			rider.rider_city_id,
 			rider.rider_state_id
 		from rider
 		where  
@@ -48,10 +54,12 @@
 	<select id="findRiderByRiderStateId" parameterType="Integer" resultMap="RiderResultMap">
 		select 
 			rider.rider_id,
+			rider.rider_name,
 			rider.rider_longitude,
 			rider.rider_latitude,
 			rider.rider_update_time,
 			rider.rider_user_id,
+			rider.rider_city_id,
 			rider.rider_state_id
 		from rider
 		where  
