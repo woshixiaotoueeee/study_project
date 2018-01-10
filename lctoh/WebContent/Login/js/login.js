@@ -1,5 +1,4 @@
- 
- 
+
   //客户登录后页面
  /* 
  var aBtn=document.getElementById('sign_btn');
@@ -39,8 +38,20 @@
         $('.password_p p').css('display','block');
       }
     })
+    //...................单选改变样式(字体颜色)。。。。。。。。。。。
+    var inpRad=$(".select_user input[name='user']");
+/*    $(".select_user input[name='user']").click(function(){
+    	 //alert(3);   	
+    	alert($(this).val());    	
+     });*/
+    for(var i=0;i<inpRad.length;i++){
+    	inpRad[i].index=i;
+        inpRad[i].onclick=function(){ 	
+        	$('.select_user span').eq(this.index).css('color','white').siblings().css('color','black');
+        }
+    }
   /* .............点击选择登录发生的事件..............  */
-/*  $("#sign_btn").click(function(){
+ /*  $("#sign_btn").click(function(){
             var val=$(".select_user input[name='user']:checked").val();
             //客户1  店家4  管理员2 骑手3
             if(val=='1'){
