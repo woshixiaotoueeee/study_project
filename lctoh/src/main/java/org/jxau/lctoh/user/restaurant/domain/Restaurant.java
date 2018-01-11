@@ -26,6 +26,8 @@ public class Restaurant {
 	private String restaurantImage;			//店家图片
 	private BigDecimal restaurantLongitude;	//经度
 	private BigDecimal restaurantLatitude;	//纬度
+	private String restaurantAddressInfo;	//店铺地址
+	
 	private String restaurantNotice;		//公告
 	private BigDecimal restaurantDistance;	//距离
 	private BigDecimal restaurantDeliveryFee;//配送费
@@ -35,6 +37,13 @@ public class Restaurant {
 	private RestaurantCategory restaurantCategory;//所属分类
 	private City restaurantCity;			//所属城市
 	private List<DishCategory> dishCategory;//拥有的菜肴分类
+	
+	public String getRestaurantAddressInfo() {
+		return restaurantAddressInfo;
+	}
+	public void setRestaurantAddressInfo(String restaurantAddressInfo) {
+		this.restaurantAddressInfo = restaurantAddressInfo;
+	}
 	public List<DishCategory> getDishCategory() {
 		return dishCategory;
 	}
@@ -132,6 +141,7 @@ public class Restaurant {
 				+ ", restaurantImage=" + restaurantImage
 				+ ", restaurantLongitude=" + restaurantLongitude
 				+ ", restaurantLatitude=" + restaurantLatitude
+				+ ", restaurantAddressInfo=" + restaurantAddressInfo
 				+ ", restaurantNotice=" + restaurantNotice
 				+ ", restaurantDistance=" + restaurantDistance
 				+ ", restaurantDeliveryFee=" + restaurantDeliveryFee
@@ -141,5 +151,6 @@ public class Restaurant {
 				+ ", restaurantCity=" + restaurantCity + ", dishCategory="
 				+ dishCategory + "]";
 	}
+	
 	
 }
