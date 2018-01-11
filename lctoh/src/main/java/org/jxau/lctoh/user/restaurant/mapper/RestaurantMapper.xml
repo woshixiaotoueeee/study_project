@@ -12,6 +12,7 @@
 		<result property="restaurantImage" column="restaurant_image"/>
 		<result property="restaurantLongitude" column="restaurant_longitude"/>
 		<result property="restaurantLatitude" column="restaurant_latitude"/>
+		<result property="restaurantAddressInfo" column="restaurant_address_info"/>
 		<result property="restaurantNotice" column="restaurant_notice"/>
 		<result property="restaurantDistance" column="restaurant_distance"/>
 		<result property="restaurantDeliveryFee" column="restaurant_deliveryfee"/>
@@ -31,6 +32,7 @@
 			restaurant.restaurant_image,
 			restaurant.restaurant_longitude,
 			restaurant.restaurant_latitude,
+			restaurant.restaurant_address_info,
 			restaurant.restaurant_notice,
 			restaurant.restaurant_distance,
 			restaurant.restaurant_update_time,
@@ -55,6 +57,7 @@
 			restaurant.restaurant_image,
 			restaurant.restaurant_longitude,
 			restaurant.restaurant_latitude,
+			restaurant.restaurant_address_info,
 			restaurant.restaurant_notice,
 			restaurant.restaurant_distance,
 			restaurant.restaurant_update_time,
@@ -79,6 +82,7 @@
 			restaurant.restaurant_image,
 			restaurant.restaurant_longitude,
 			restaurant.restaurant_latitude,
+			restaurant.restaurant_address_info,
 			restaurant.restaurant_notice,
 			restaurant.restaurant_distance,
 			restaurant.restaurant_update_time,
@@ -102,6 +106,7 @@
 			restaurant.restaurant_image,
 			restaurant.restaurant_longitude,
 			restaurant.restaurant_latitude,
+			restaurant.restaurant_address_info,
 			restaurant.restaurant_notice,
 			restaurant.restaurant_distance,
 			restaurant.restaurant_update_time,
@@ -125,6 +130,7 @@
 			restaurant.restaurant_image,
 			restaurant.restaurant_longitude,
 			restaurant.restaurant_latitude,
+			restaurant.restaurant_address_info,
 			restaurant.restaurant_notice,
 			restaurant.restaurant_distance,
 			restaurant.restaurant_update_time,
