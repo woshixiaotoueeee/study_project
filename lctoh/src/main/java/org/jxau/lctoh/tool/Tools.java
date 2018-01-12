@@ -29,6 +29,13 @@ public class Tools {
 		//gson=new Gson();
 	}
 	/**
+	 * 将Object转换成Gson类型的字符串
+	 * @return
+	 */
+	public static String ObjectToGsonString(Object obj){
+		return gson.toJson(obj);
+	}
+	/**
 	 * 反射获取set方法
 	 * 类需要序列化并且序列化ID必须为第一个属性
 	 * 除去第一个属性序列化ID

@@ -7,7 +7,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 
-import org.jxau.lctoh.tool.config.ConversationMSG;
+
+
+import org.jxau.lctoh.tool.config.conversation.ConversationConfig;
 import org.jxau.lctoh.user.rider.domain.Rider;
 
 /**
@@ -28,6 +30,6 @@ public class ConfigListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		//系统启动时创建一个储存骑手信息的Map
 		Map<String,Rider> riderMap=new LinkedHashMap<String,Rider>();
-		servletContextEvent.getServletContext().setAttribute(ConversationMSG.riderContext, riderMap);;
+		servletContextEvent.getServletContext().setAttribute(ConversationConfig.riderContext, riderMap);;
 	}
 }

@@ -1,12 +1,12 @@
-package org.jxau.lctoh.tool.config;
+package org.jxau.lctoh.tool.config.conversation;
 
 import org.springframework.stereotype.Component;
 /**
  * 用于会话信息 键 的通用常量池
  * @author qdt_PC
  */
-@Component("ConversationMSG")
-public class ConversationMSG {
+@Component("ConversationConfig")
+public class ConversationConfig {
 
 	/**定位信息存于Session对应的键*/
 	public final static String locationSession="location";

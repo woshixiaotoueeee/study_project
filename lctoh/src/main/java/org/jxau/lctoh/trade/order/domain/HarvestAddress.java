@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
-import org.jxau.lctoh.state.domain.State;
-import org.jxau.lctoh.user.customer.domain.Customer;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 

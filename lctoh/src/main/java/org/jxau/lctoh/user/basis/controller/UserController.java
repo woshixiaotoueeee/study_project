@@ -8,10 +8,10 @@ import javax.servlet.http.HttpSession;
 
 import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.base.controller.BaseController;
-import org.jxau.lctoh.tool.config.ConversationMSG;
-import org.jxau.lctoh.tool.config.ErrorMSG;
-import org.jxau.lctoh.tool.config.EncodingConfig;
-import org.jxau.lctoh.tool.config.SuccessMSG;
+import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
+import org.jxau.lctoh.tool.config.conversation.ConversationConfig;
+import org.jxau.lctoh.tool.config.error.ErrorMSG;
+import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
 import org.jxau.lctoh.trade.cart.domain.Cart;
 import org.jxau.lctoh.user.admin.domain.Admin;
 import org.jxau.lctoh.user.admin.service.AdminService;
@@ -60,57 +60,53 @@ public class UserController extends BaseController{
 	@RequestMapping(value="/login",produces=EncodingConfig.produces)
 	public String login(User user,Integer type,HttpSession session){
 		if(type==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowUserError));
-		}
-		//验证信息
-		if(user==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.accountAndPasswordIsNullError));
-		}
-		if(user.getUserAccount()==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.accountIsNullError));
-		}
-		if(user.getUserPassword()==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.passwordIsNullError));
-		}
-		
-		//判断登陆的角色
-		try{
-			switch(type){
-				case 1:
-					Customer customer=customerService.login(user);
-					session.setAttribute(ConversationMSG.customerSession, customer);
-					session.setAttribute(ConversationMSG.cartSession, new Cart());
-					responseData.successInfo(SuccessMSG.customerSuccessUrl);
-					break;
-				case 2:
-					Admin admin=adminService.login(user);
-					session.setAttribute(ConversationMSG.adminSession, admin);
-					responseData.successInfo(SuccessMSG.adminSuccessUrl);
-					break;
-				case 3:
-					Rider rider=riderService.login(user);
-					session.setAttribute(ConversationMSG.riderSession, rider);
-					ServletContext servletContext=session.getServletContext();
-					Map riderMap=(Map)servletContext.getAttribute(ConversationMSG.riderContext);
-					riderMap.put(rider.getRiderId(), rider);
-					synchronized(this){
-						servletContext.setAttribute(ConversationMSG.riderContext, riderMap);
-					}
-					responseData.successInfo(SuccessMSG.riderSuccessUrl);
-					break;
-				case 4:
-					Restaurant restaurant=restaurantService.login(user);
-					session.setAttribute(ConversationMSG.restaurantSession, restaurant);
-					responseData.successInfo(SuccessMSG.restaurantSuccessUrl);
-					break;
-				default : responseData.failInfo(ErrorMSG.notKnowUserError);
+			responseData.failInfo(ErrorMSG.notKnowUser);
+		}else if(user==null){
+			responseData.failInfo(ErrorMSG.accountAndPasswordIsNull);
+		}else if(user.getUserAccount()==null){
+			responseData.failInfo(ErrorMSG.accountIsNull);
+		}else if(user.getUserPassword()==null){
+			responseData.failInfo(ErrorMSG.passwordIsNull);
+		}else{
+			//判断登陆的角色
+			try{
+				switch(type){
+					case 1:
+						Customer customer=customerService.login(user);
+						session.setAttribute(ConversationConfig.customerSession, customer);
+						session.setAttribute(ConversationConfig.cartSession, new Cart());
+						responseData.successInfo(SuccessMSG.customerSuccessUrl);
+						break;
+					case 2:
+						Admin admin=adminService.login(user);
+						session.setAttribute(ConversationConfig.adminSession, admin);
+						responseData.successInfo(SuccessMSG.adminSuccessUrl);
+						break;
+					case 3:
+						Rider rider=riderService.login(user);
+						session.setAttribute(ConversationConfig.riderSession, rider);
+						ServletContext servletContext=session.getServletContext();
+						Map riderMap=(Map)servletContext.getAttribute(ConversationConfig.riderContext);
+						riderMap.put(rider.getRiderId(), rider);
+						synchronized(this){
+							servletContext.setAttribute(ConversationConfig.riderContext, riderMap);
+						}
+						responseData.successInfo(SuccessMSG.riderSuccessUrl);
+						break;
+					case 4:
+						Restaurant restaurant=restaurantService.login(user);
+						session.setAttribute(ConversationConfig.restaurantSession, restaurant);
+						responseData.successInfo(SuccessMSG.restaurantSuccessUrl);
+						break;
+					default : responseData.failInfo(ErrorMSG.notKnowUser);
+				}
+			}catch (UserException e) {
+				responseData.failInfo(e.getMessage());
+			} catch (Exception e) {
+				responseData.failInfo(ErrorMSG.notKnow);
 			}
-		}catch (UserException e) {
-			responseData.failInfo(e.getMessage());
-		} catch (Exception e) {
-			responseData.failInfo(ErrorMSG.notKnowError);
 		}
-		return Tools.gson.toJson(responseData);
+		return toGsonString();
 	}
 	
 	
@@ -125,54 +121,51 @@ public class UserController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="/loginByCode",produces=EncodingConfig.produces)
 	public String loginByCode(String userAccount,String code,Integer type,HttpSession session){
-		
-		if(type==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowUserError));
-		}
 		//验证信息
-		if(userAccount==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.accountIsNullError));
-		}
-		if(code==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.codeError));
-		}
-		try{
-			switch(type){
-				case 1:
-					Customer customer=customerService.loginByCode(userAccount,code);
-					session.setAttribute(ConversationMSG.customerSession, customer);
-					responseData.successInfo(SuccessMSG.customerSuccessUrl);
-					break;
-				case 2:
-					Admin admin=adminService.loginByCode(userAccount,code);
-					session.setAttribute(ConversationMSG.adminSession, admin);
-					responseData.successInfo(SuccessMSG.adminSuccessUrl);
-					break;
-				case 3:
-					Rider rider=riderService.loginByCode(userAccount,code);
-					session.setAttribute(ConversationMSG.riderSession, rider);
-					ServletContext servletContext=session.getServletContext();
-					Map riderMap=(Map)servletContext.getAttribute(ConversationMSG.riderContext);
-					riderMap.put(rider.getRiderId(), rider);
-					synchronized(this){
-						servletContext.setAttribute(ConversationMSG.riderContext, riderMap);
-					}
-					responseData.successInfo(SuccessMSG.riderSuccessUrl);
-					break;
-				case 4:
-					Restaurant restaurant=restaurantService.loginByCode(userAccount,code);
-					session.setAttribute(ConversationMSG.restaurantSession, restaurant);
-					responseData.successInfo(SuccessMSG.restaurantSuccessUrl);
-					break;
-				default : responseData.failInfo(ErrorMSG.notKnowUserError);
+		if(type==null){
+			responseData.failInfo(ErrorMSG.notKnowUser);
+		}else if(userAccount==null){
+			responseData.failInfo(ErrorMSG.accountIsNull);
+		}else if(code==null){
+			responseData.failInfo(ErrorMSG.codeError);
+		}else{
+			try{
+				switch(type){
+					case 1:
+						Customer customer=customerService.loginByCode(userAccount,code);
+						session.setAttribute(ConversationConfig.customerSession, customer);
+						responseData.successInfo(SuccessMSG.customerSuccessUrl);
+						break;
+					case 2:
+						Admin admin=adminService.loginByCode(userAccount,code);
+						session.setAttribute(ConversationConfig.adminSession, admin);
+						responseData.successInfo(SuccessMSG.adminSuccessUrl);
+						break;
+					case 3:
+						Rider rider=riderService.loginByCode(userAccount,code);
+						session.setAttribute(ConversationConfig.riderSession, rider);
+						ServletContext servletContext=session.getServletContext();
+						Map riderMap=(Map)servletContext.getAttribute(ConversationConfig.riderContext);
+						riderMap.put(rider.getRiderId(), rider);
+						synchronized(this){
+							servletContext.setAttribute(ConversationConfig.riderContext, riderMap);
+						}
+						responseData.successInfo(SuccessMSG.riderSuccessUrl);
+						break;
+					case 4:
+						Restaurant restaurant=restaurantService.loginByCode(userAccount,code);
+						session.setAttribute(ConversationConfig.restaurantSession, restaurant);
+						responseData.successInfo(SuccessMSG.restaurantSuccessUrl);
+						break;
+					default : responseData.failInfo(ErrorMSG.notKnowUser);
+				}
+			}catch (UserException e) {
+				responseData.failInfo(e.getMessage());
+			} catch (Exception e) {
+				responseData.failInfo(ErrorMSG.notKnow);
 			}
-		}catch (UserException e) {
-			responseData.failInfo(e.getMessage());
-		} catch (Exception e) {
-			responseData.failInfo(ErrorMSG.notKnowError);
 		}
-		
-		return Tools.gson.toJson(responseData);
+		return toGsonString();
 	}
 	
 	
@@ -189,25 +182,24 @@ public class UserController extends BaseController{
 	public String verificationByCode(String userEmail,String code,HttpSession session){
 		//验证信息
 		if(userEmail==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailIsNullError));
-		}
-		if(code==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.codeIsNullError));
-		}
-		if(!userEmail.matches("\\w+@\\w+\\.\\w+")){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailError));
+			responseData.failInfo(ErrorMSG.emailIsNull);
+		}else if(code==null){
+			responseData.failInfo(ErrorMSG.codeIsNullError);
+		}else if(!userEmail.matches("\\w+@\\w+\\.\\w+")){
+			responseData.failInfo(ErrorMSG.emailFormatError);
 			
+		}else{
+			try {
+				User user=userService.findByEmailAndCode(userEmail,code);
+				session.setAttribute(ConversationConfig.userSession, user);
+				responseData.successInfo(SuccessMSG.sendEmailSuccess);
+			} catch (UserException e) {
+				responseData.failInfo(e.getMessage());
+			}catch (Exception e) {
+				responseData.failInfo(ErrorMSG.notKnow);
+			}
 		}
-		try {
-			User user=userService.findByEmailAndCode(userEmail,code);
-			session.setAttribute(ConversationMSG.userSession, user);
-			responseData.successInfo(SuccessMSG.sendEmailSuccess);
-		} catch (UserException e) {
-			responseData.failInfo(e.getMessage());
-		}catch (Exception e) {
-			responseData.failInfo(ErrorMSG.notKnowError);
-		}
-		return Tools.gson.toJson(responseData);
+		return toGsonString();
 	}
 	
 	
@@ -222,26 +214,23 @@ public class UserController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="/updatePassword",produces=EncodingConfig.produces)
 	public String updatePassword(String password,String _password,HttpSession session){
+		User user=(User)session.getAttribute(ConversationConfig.userSession);
 		//验证信息
 		if(password==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.passwordIsNullError));
+			responseData.failInfo(ErrorMSG.passwordIsNull);
+		}else if(!password.equals(_password)){
+			responseData.failInfo(ErrorMSG.passwordNotSameError);
+		}else if(user==null){
+			responseData.failInfo(ErrorMSG.notKnow);
+		}else{
+			user.setUserPassword(password);
+			try {
+				responseData.successInfo(userService.updateUser(user));
+			} catch (Exception e) {
+				responseData.failInfo(ErrorMSG.operationFail);
+			}
 		}
-		if(!password.equals(_password)){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.passwordNotSameError));
-		}
-		User user=(User)session.getAttribute(ConversationMSG.userSession);
-		if(user==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowError));
-		}
-		user.setUserPassword(password);
-		try {
-			responseData.successInfo(userService.updateUser(user));
-		} catch (UserException e) {
-			responseData.failInfo(e.getMessage());
-		} catch (Exception e) {
-			responseData.failInfo(ErrorMSG.notKnowError);
-		}
-		return Tools.gson.toJson(responseData);
+		return toGsonString();
 	}
 	
 	/**
@@ -251,16 +240,17 @@ public class UserController extends BaseController{
 	@RequestMapping(value="/getCodeByUserAccount",produces=EncodingConfig.produces)
 	public String getCodeByUserAccount(String userAccount){
 		if(userAccount==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.accountIsNullError));
+			responseData.failInfo(ErrorMSG.accountIsNull);
+		}else{
+			try {
+				responseData.successInfo(verificationCodeService.setCode(userAccount));
+			} catch (VerificationCodeException e) {
+				responseData.failInfo(e.getMessage());
+			}catch(Exception e){
+				responseData.failInfo(ErrorMSG.operationFail);
+			}
 		}
-		try {
-			responseData.successInfo(verificationCodeService.setCode(userAccount));
-		} catch (VerificationCodeException e) {
-			responseData.failInfo(e.getMessage());
-		}catch(Exception e){
-			responseData.failInfo(ErrorMSG.notKnowError);
-		}
-		return Tools.gson.toJson(responseData);
+		return toGsonString();
 	}
 	
 	/**
@@ -270,20 +260,20 @@ public class UserController extends BaseController{
 	@RequestMapping(value="/getCodeByUserEmail",produces=EncodingConfig.produces)
 	public String getCodeByUserEmail(String userEmail){
 		if(userEmail==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailIsNullError));
-		}
-		if(!userEmail.matches("\\w+@\\w+\\.\\w+")){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailError));
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailIsNull));
+		}else if(!userEmail.matches("\\w+@\\w+\\.\\w+")){
+			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailFormatError));
 			
+		}else{
+			try {
+				responseData.successInfo(verificationCodeService.setCodeByUserEmail(userEmail));
+			} catch (VerificationCodeException e) {
+				responseData.failInfo(e.getMessage());
+			}catch(Exception e){
+				responseData.failInfo(ErrorMSG.operationFail);
+			}
 		}
-		try {
-			responseData.successInfo(verificationCodeService.setCodeByUserEmail(userEmail));
-		} catch (VerificationCodeException e) {
-			responseData.failInfo(e.getMessage());
-		}catch(Exception e){
-			responseData.failInfo(ErrorMSG.notKnowError);
-		}
-		return Tools.gson.toJson(responseData);
+		return toGsonString();
 	}
 	
 	
@@ -296,37 +286,30 @@ public class UserController extends BaseController{
 	public String register(User user,String _userPassword){
 		//验证信息
 		if(user==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.notKnowError));
+			responseData.failInfo(ErrorMSG.notKnow);
+		}else if(user.getUserPassword()==null){
+			responseData.failInfo(ErrorMSG.passwordIsNull);
+		}else if(user.getUserSex()==null){
+			responseData.failInfo(ErrorMSG.sexIsNull);
+		}else if(user.getUserPhone()==null){
+			responseData.failInfo(ErrorMSG.phoneIsNull);
+		}else if(user.getUserEmail()==null){
+			responseData.failInfo(ErrorMSG.emailIsNull);
+		}else if(!user.getUserEmail().matches("\\w+@\\w+\\.\\w+")){
+			responseData.failInfo(ErrorMSG.emailFormatError);
+		}else if(!user.getUserPassword().equals(_userPassword)){
+			responseData.failInfo(ErrorMSG.passwordNotSameError);
+		}else{
+			try{
+				user=customerService.register(user);
+				responseData.successInfo(user);
+			}catch(UserException e){
+				responseData.failInfo(e.getMessage());
+			}catch(Exception e){
+				responseData.failInfo(ErrorMSG.operationFail);
+			}
 		}
-		if(user.getUserPassword()==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.passwordIsNullError));
-		}
-		if(user.getUserSex()==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.sexIsNullError));
-		}
-		if(user.getUserPhone()==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.phoneError));
-		}
-		if(user.getUserEmail()==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailIsNullError));
-		}
-		if(!user.getUserEmail().matches("\\w+@\\w+\\.\\w+")){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.emailError));
-			
-		}
-		if(!user.getUserPassword().equals(_userPassword)){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.passwordNotSameError));
-		}
-		
-		try{
-			user=customerService.register(user);
-			responseData.successInfo(user);
-		}catch(UserException e){
-			responseData.failInfo(e.getMessage());
-		}catch(Exception e){
-			responseData.failInfo(ErrorMSG.notKnowError);
-		}
-		return Tools.gson.toJson(responseData);
+		return toGsonString();
 	}
 	
 }

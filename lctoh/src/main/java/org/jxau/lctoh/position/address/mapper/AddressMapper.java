@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.jxau.lctoh.position.address.domain.Address;
-import org.jxau.lctoh.position.region.domain.City;
 
 /**
  * @author qdt_PC

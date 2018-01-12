@@ -1,4 +1,4 @@
-package org.jxau.lctoh.tool.config;
+package org.jxau.lctoh.tool.config.successMSG;
 
 import org.springframework.stereotype.Component;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component("SuccessMSG")
 public class SuccessMSG {
 	/**成功响应编码*/
-	public final static Integer success=1;
+	public final static Integer successType=1;
 
 	/**验证码时效*/
 	public final static Integer timeExpire=1000*60*5;
@@ -30,5 +30,11 @@ public class SuccessMSG {
 	
 	/**操作成功*/
 	public final static String successMSG="操作成功";
+	/**删除成功*/
+	public final static String deleteSuccessMSG="删除成功";
+	/**添加成功*/
+	public final static String addSuccessMSG="添加成功";
+	/**修改成功*/
+	public final static String updateSuccessMSG="修改成功";
 	
 }

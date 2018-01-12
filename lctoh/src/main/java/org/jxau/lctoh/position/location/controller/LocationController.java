@@ -6,12 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.jxau.lctoh.position.location.domain.Location;
-import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.base.controller.BaseController;
-import org.jxau.lctoh.tool.config.ConversationMSG;
-import org.jxau.lctoh.tool.config.EncodingConfig;
-import org.jxau.lctoh.tool.config.ErrorMSG;
-import org.jxau.lctoh.tool.config.SuccessMSG;
+import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
+import org.jxau.lctoh.tool.config.conversation.ConversationConfig;
+import org.jxau.lctoh.tool.config.error.ErrorMSG;
+import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
+
 
 
 
@@ -37,11 +37,13 @@ public class LocationController  extends BaseController{
 		 * 判断定位信息是否为空
 		 * */
 		if(location==null||location.getCity()==null||location.getLatitude()==null||location.getLongitude()==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.parameterIsNullError));
+			responseData.failInfo(ErrorMSG.notKnow);
+		}else{
+			//设置定位信息
+			session.setAttribute(ConversationConfig.locationSession, location);
+			responseData.successInfo(SuccessMSG.locationSuccessMSG);
 		}
-		//设置定位信息
-		session.setAttribute(ConversationMSG.locationSession, location);
-		return Tools.gson.toJson(responseData.successInfo(SuccessMSG.locationSuccessMSG));
+		return toGsonString();
 	}
 	
 	/**
@@ -55,12 +57,12 @@ public class LocationController  extends BaseController{
 		/**
 		 * 判断定位信息是否为空
 		 * */
-		Object location =session.getAttribute(ConversationMSG.locationSession);
+		Object location =session.getAttribute(ConversationConfig.locationSession);
 		if(location==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.getLocationFail));
+			responseData.failInfo(ErrorMSG.getLocationFail);
+		}else{
+			responseData.successInfo(location);
 		}
-		return Tools.gson.toJson(responseData.successInfo(location));
+		return toGsonString();
 	}
-	
-	
 }

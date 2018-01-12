@@ -4,13 +4,10 @@ package org.jxau.lctoh.user.restaurant.controller;
 import javax.servlet.http.HttpSession;
 
 import org.jxau.lctoh.position.location.domain.Location;
-import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.base.controller.BaseController;
-import org.jxau.lctoh.tool.config.ConversationMSG;
-import org.jxau.lctoh.tool.config.EncodingConfig;
-import org.jxau.lctoh.tool.config.ErrorMSG;
-import org.jxau.lctoh.tool.domain.ResponseData;
-import org.jxau.lctoh.tool.exception.GetInfoException;
+import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
+import org.jxau.lctoh.tool.config.conversation.ConversationConfig;
+import org.jxau.lctoh.tool.config.error.ErrorMSG;
 import org.jxau.lctoh.user.restaurant.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,18 +33,16 @@ public class RestaurantController extends BaseController {
 	@RequestMapping(value="/getRestaurantCityId",produces=EncodingConfig.produces)
 	public String getRestaurantByCityId(String cityId,HttpSession session){
 		if(cityId==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.parameterIsNullError));
+			responseData.failInfo(ErrorMSG.notKnow);
+		}else{
+			try {
+				Location location =(Location)session.getAttribute(ConversationConfig.locationSession);
+				responseData.successInfo(restaurantService.getRestaueantByCityId(cityId, location));
+			} catch (Exception e) {
+				responseData.failInfo(ErrorMSG.selectFail);
+			}
 		}
-		Location location =(Location)session.getAttribute(ConversationMSG.locationSession);
-		if(location==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.getLocationFail));
-		}
-		try {
-			responseData.successInfo(restaurantService.getRestaueantByCityId(cityId, location));
-		} catch (Exception e) {
-			responseData.failInfo(ErrorMSG.notKnowError);
-		}
-		return Tools.gson.toJson(responseData);
+		return toGsonString();
 	}
 	
 	
@@ -59,18 +54,17 @@ public class RestaurantController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value="/getRestaurantByCityName",produces=EncodingConfig.produces)
 	public String getRestaurantByCityName(HttpSession session){
-		Location location =(Location)session.getAttribute(ConversationMSG.locationSession);
+		Location location =(Location)session.getAttribute(ConversationConfig.locationSession);
 		if(location==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.getLocationFail));
+			responseData.failInfo(ErrorMSG.getLocationFail);
+		}else{
+			try {
+				responseData.successInfo(restaurantService.getRestaueantByLocation(location));
+			}catch (Exception e) {
+				responseData.failInfo(ErrorMSG.selectFail);
+			}
 		}
-		try {
-			responseData.successInfo(restaurantService.getRestaueantByLocation(location));
-		} catch (GetInfoException e) {
-			responseData.failInfo(e.getMessage());
-		}catch (Exception e) {
-			responseData.failInfo(ErrorMSG.notKnowError);
-		}
-		return Tools.gson.toJson(responseData);
+		return toGsonString();
 	}
 	
 	/**
@@ -82,13 +76,14 @@ public class RestaurantController extends BaseController {
 	@RequestMapping(value="/getRestaurantByRestaurantId",produces=EncodingConfig.produces)
 	public String getRestaurantByRestaurantId(String restaurantId){
 		if(restaurantId==null){
-			return Tools.gson.toJson(responseData.failInfo(ErrorMSG.parameterIsNullError));
+			responseData.failInfo(ErrorMSG.notKnow);
+		}else{
+			try {
+				responseData.successInfo(restaurantService.findRestaurantService(restaurantId));
+			}catch (Exception e) {
+				responseData.failInfo(ErrorMSG.selectFail);
+			}
 		}
-		try {
-			responseData.successInfo(restaurantService.findRestaurantService(restaurantId));
-		}catch (Exception e) {
-			responseData.failInfo(ErrorMSG.notKnowError);
-		}
-		return Tools.gson.toJson(responseData);
+		return toGsonString();
 	}
 }

@@ -1,7 +1,6 @@
 package org.jxau.lctoh.trade.cart.domain;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 import org.jxau.lctoh.tool.Tools;

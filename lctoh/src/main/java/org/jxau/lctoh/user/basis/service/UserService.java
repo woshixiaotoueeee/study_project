@@ -4,8 +4,8 @@ package org.jxau.lctoh.user.basis.service;
 
 
 import org.jxau.lctoh.tool.Tools;
-import org.jxau.lctoh.tool.config.ErrorMSG;
-import org.jxau.lctoh.tool.config.SuccessMSG;
+import org.jxau.lctoh.tool.config.error.ErrorMSG;
+import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
 import org.jxau.lctoh.user.basis.dao.UserDao;
 import org.jxau.lctoh.user.basis.dao.VerificationCodeDao;
 import org.jxau.lctoh.user.basis.domain.User;
@@ -31,11 +31,11 @@ public class UserService {
 	 */
 	public User findByEmailAndCode(String userEmail, String code) throws UserException {
 		User _user=userDao.findUserByUserEmail(userEmail);
-		if(_user==null) throw new UserException(ErrorMSG.accountError);
+		if(_user==null) throw new UserException(ErrorMSG.accountInexistence);
 		VerificationCode verificationCode=verificationCodeDao.findVerificationCodeById(_user.getUserId());
 		if(verificationCode==null||!(verificationCode.getVerificationCode().equals(code)))throw new UserException(ErrorMSG.codeError);
 		if(Tools.getTimeDifferenceFromNowDate(verificationCode.getVerificationCodeUpdateTime())>SuccessMSG.timeExpire)
-			throw new UserException(ErrorMSG.timeExpireError);
+			throw new UserException(ErrorMSG.codeTimeExpire);
 		return _user;
 	}
 
@@ -46,12 +46,8 @@ public class UserService {
 	 * @return
 	 * @throws UserException 
 	 */
-	public Integer updateUser(User user) throws UserException {
-		try{
-			return userDao.updateUser(user);
-		}catch(Exception e){
-			throw new UserException(ErrorMSG.notKnowError);
-		}
+	public Integer updateUser(User user) {
+		return userDao.updateUser(user);
 	}
 	
 	

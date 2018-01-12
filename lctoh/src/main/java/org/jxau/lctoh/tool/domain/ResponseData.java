@@ -1,8 +1,9 @@
 package org.jxau.lctoh.tool.domain;
 
 import org.apache.ibatis.type.Alias;
-import org.jxau.lctoh.tool.config.ErrorMSG;
-import org.jxau.lctoh.tool.config.SuccessMSG;
+import org.jxau.lctoh.tool.Tools;
+import org.jxau.lctoh.tool.config.error.ErrorMSG;
+import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -45,7 +46,7 @@ public class ResponseData {
 	 * @return ResponseData
 	 */
 	public ResponseData successInfo(Object obj){
-		state=SuccessMSG.success;
+		state=SuccessMSG.successType;
 		responseInfo=obj;
 		return this;
 	}
@@ -55,8 +56,12 @@ public class ResponseData {
 	 * @return ResponseData
 	 */
 	public ResponseData failInfo(Object obj){
-		state=ErrorMSG.fail;
+		state=ErrorMSG.failType;
 		responseInfo=obj;
 		return this;
+	}
+	
+	public String toGsonString(){
+		return Tools.ObjectToGsonString(this);
 	}
 }

@@ -1,8 +1,8 @@
 package org.jxau.lctoh.user.rider.service;
 
 import org.jxau.lctoh.tool.Tools;
-import org.jxau.lctoh.tool.config.ErrorMSG;
-import org.jxau.lctoh.tool.config.SuccessMSG;
+import org.jxau.lctoh.tool.config.error.ErrorMSG;
+import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
 import org.jxau.lctoh.user.basis.dao.UserDao;
 import org.jxau.lctoh.user.basis.dao.VerificationCodeDao;
 import org.jxau.lctoh.user.basis.domain.User;
@@ -30,16 +30,15 @@ public class RiderService {
 	 * @param userId  用户识别码
 	 * @return Admin 管理员
 	 * @throws UserException
-	 * @throws Exception
 	 */
-	public Rider login (User user) throws UserException,Exception{
+	public Rider login (User user) throws UserException{
 		
 		User _user=userDao.findUserByUserAccount(user.getUserAccount());
-		if(_user==null) throw new UserException(ErrorMSG.accountError);
+		if(_user==null) throw new UserException(ErrorMSG.accountInexistence);
 		if(!(_user.getUserPassword().equals(user.getUserPassword())))
 			throw new UserException(ErrorMSG.passwordError);
 		Rider rider=riderDao.findRiderByUserId(_user.getUserId());
-		if(rider==null)throw new UserException(ErrorMSG.powerError);
+		if(rider==null)throw new UserException(ErrorMSG.noPower);
 		
 		/**后期可能需要修改*/
 		if(rider.getRiderState().getStateId()!=10002)
@@ -52,18 +51,17 @@ public class RiderService {
 	 * @param code  验证码
 	 * @return Admin 管理员
 	 * @throws UserException
-	 * @throws Exception
 	 */
-	public Rider loginByCode (String userAccount,String code) throws UserException,Exception{
+	public Rider loginByCode (String userAccount,String code) throws UserException{
 		
 		User _user=userDao.findUserByUserAccount(userAccount);
-		if(_user==null) throw new UserException(ErrorMSG.accountError);
+		if(_user==null) throw new UserException(ErrorMSG.accountInexistence);
 		VerificationCode verificationCode=verificationCodeDao.findVerificationCodeById(_user.getUserId());
 		if(verificationCode==null||verificationCode.getVerificationCode().equals(code))throw new UserException(ErrorMSG.codeError);
 		if(Tools.getTimeDifferenceFromNowDate(verificationCode.getVerificationCodeUpdateTime())>SuccessMSG.timeExpire)
-			throw new UserException(ErrorMSG.timeExpireError);
+			throw new UserException(ErrorMSG.codeTimeExpire);
 		Rider rider=riderDao.findRiderByUserId(_user.getUserId());
-		if(rider==null)throw new UserException(ErrorMSG.powerError);
+		if(rider==null)throw new UserException(ErrorMSG.noPower);
 		
 		/**后期可能需要修改*/
 		if(rider.getRiderState().getStateId()!=10002)

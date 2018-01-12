@@ -1,9 +1,8 @@
 package org.jxau.lctoh.trade.dish.controller;
 
-import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.base.controller.BaseController;
-import org.jxau.lctoh.tool.config.EncodingConfig;
-import org.jxau.lctoh.tool.config.ErrorMSG;
+import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
+import org.jxau.lctoh.tool.config.error.ErrorMSG;
 import org.jxau.lctoh.trade.dish.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,13 +26,16 @@ public class DishController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="/findDishByDishId",produces=EncodingConfig.produces)
 	public String findDishByDishId(String dishId){
-		if(dishId==null)return Tools.gson.toJson(responseData.failInfo(ErrorMSG.parameterIsNullError));
-		try{
-			responseData.successInfo(dishService.findDishByDishId(dishId));
-		}catch(Exception e){
-			responseData.failInfo(ErrorMSG.notKnowError);
+		if(dishId==null){
+			responseData.failInfo(ErrorMSG.notKnow);
+		}else{
+			try{
+				responseData.successInfo(dishService.findDishByDishId(dishId));
+			}catch(Exception e){
+				responseData.failInfo(ErrorMSG.selectFail);
+			}
 		}
-		return Tools.gson.toJson(responseData);
+		return toGsonString();
 	}
 	
 	/**
@@ -44,13 +46,16 @@ public class DishController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="/findDishByDishCategoryId",produces=EncodingConfig.produces)
 	public String findDishByDishCategoryId(String dishCategoryId){
-		if(dishCategoryId==null)return Tools.gson.toJson(responseData.failInfo(ErrorMSG.parameterIsNullError));
-		try{
-			responseData.successInfo(dishService.findDishByDishCategoryId(dishCategoryId));
-		}catch(Exception e){
-			responseData.failInfo(ErrorMSG.notKnowError);
+		if(dishCategoryId==null){
+			responseData.failInfo(ErrorMSG.notKnow);
+		}else{
+			try{
+				responseData.successInfo(dishService.findDishByDishCategoryId(dishCategoryId));
+			}catch(Exception e){
+				responseData.failInfo(ErrorMSG.selectFail);
+			}
 		}
-		return Tools.gson.toJson(responseData);
+		return toGsonString();
 	}
 	
 	/**
@@ -61,13 +66,16 @@ public class DishController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="/findDishByRestaurantId",produces=EncodingConfig.produces)
 	public String findDishByRestaurantId(String restaurantId){
-		if(restaurantId==null)return Tools.gson.toJson(responseData.failInfo(ErrorMSG.parameterIsNullError));
-		try{
-			responseData.successInfo(dishService.findDishByRestaurantId(restaurantId));
-		}catch(Exception e){
-			responseData.failInfo(ErrorMSG.notKnowError);
+		if(restaurantId==null){
+			responseData.failInfo(ErrorMSG.notKnow);
+		}else{
+			try{
+				responseData.successInfo(dishService.findDishByRestaurantId(restaurantId));
+			}catch(Exception e){
+				responseData.failInfo(ErrorMSG.selectFail);
+			}
 		}
-		return Tools.gson.toJson(responseData);
+		return toGsonString();
 	}
 	
 	
