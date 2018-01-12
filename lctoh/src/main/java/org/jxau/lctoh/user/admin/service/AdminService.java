@@ -1,8 +1,8 @@
 package org.jxau.lctoh.user.admin.service;
 
 import org.jxau.lctoh.tool.Tools;
-import org.jxau.lctoh.tool.config.ErrorMSG;
-import org.jxau.lctoh.tool.config.SuccessMSG;
+import org.jxau.lctoh.tool.config.error.ErrorMSG;
+import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
 import org.jxau.lctoh.user.admin.dao.AdminDao;
 import org.jxau.lctoh.user.admin.domain.Admin;
 import org.jxau.lctoh.user.basis.dao.UserDao;
@@ -33,11 +33,11 @@ public class AdminService {
 	public Admin login (User user) throws UserException{
 		
 		User _user=userDao.findUserByUserAccount(user.getUserAccount());
-		if(_user==null) throw new UserException(ErrorMSG.accountError);
+		if(_user==null) throw new UserException(ErrorMSG.accountInexistence);
 		if(!(_user.getUserPassword().equals(user.getUserPassword())))
 			throw new UserException(ErrorMSG.passwordError);
 		Admin admin=adminDao.findAdminByUserId(_user.getUserId());
-		if(admin==null)throw new UserException(ErrorMSG.powerError);
+		if(admin==null)throw new UserException(ErrorMSG.noPower);
 		
 		/**后期可能需要修改*/
 		if(admin.getAdminState().getStateId()!=10002)
@@ -54,13 +54,13 @@ public class AdminService {
 	public Admin loginByCode (String userAccount,String code) throws UserException{
 		
 		User _user=userDao.findUserByUserAccount(userAccount);
-		if(_user==null) throw new UserException(ErrorMSG.accountError);
+		if(_user==null) throw new UserException(ErrorMSG.accountInexistence);
 		VerificationCode verificationCode=verificationCodeDao.findVerificationCodeById(_user.getUserId());
 		if(verificationCode==null||!(verificationCode.getVerificationCode().equals(code)))throw new UserException(ErrorMSG.codeError);
 		if(Tools.getTimeDifferenceFromNowDate(verificationCode.getVerificationCodeUpdateTime())>SuccessMSG.timeExpire)
-			throw new UserException(ErrorMSG.timeExpireError);
+			throw new UserException(ErrorMSG.codeTimeExpire);
 		Admin admin=adminDao.findAdminByUserId(_user.getUserId());
-		if(admin==null)throw new UserException(ErrorMSG.powerError);
+		if(admin==null)throw new UserException(ErrorMSG.noPower);
 		
 		/**后期可能需要修改*/
 		if(admin.getAdminState().getStateId()!=10002)

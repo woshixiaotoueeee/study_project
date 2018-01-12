@@ -7,6 +7,7 @@ import org.jxau.lctoh.position.address.dao.AddressDao;
 import org.jxau.lctoh.position.address.domain.Address;
 import org.jxau.lctoh.state.dao.StateDao;
 import org.jxau.lctoh.state.domain.State;
+import org.jxau.lctoh.tool.config.defaultInformation.DefaultInformation;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,7 @@ public class AddressService{
 	 * @return Integer
 	 */
 	public Integer addAddress(Address address){
+		//补全状态信息
 		address.setAddressState(stateDao.findStateByStateId(60003));
 		return addressDao.addAddress(address);
 	}
@@ -76,21 +78,25 @@ public class AddressService{
 	 */
 	public void updateAddressState(Customer customer, String addressId) throws Exception {
 		/**
-		 * 先将所有用户的地址改为非默认地址
+		 * 先将用户的地址改为非默认地址
 		 * 再将现在选中的地址改为默认
 		 * */
-		List<Address> addressList= addressDao.findAddressByCustomerIdAndState(customer.getCustomerId(), 60002);
-		if(addressList==null||addressList.size()==0)throw new Exception();
-		Address address=addressList.get(0);
-		State state=address.getAddressState();
-		state.setStateId(60003);
-		address.setAddressState(state);
-		addressDao.updateAddress(address);
 		
+		//找到原先的默认地址并修改状态
+		List<Address> addressList= addressDao.findAddressByCustomerIdAndState(customer.getCustomerId(), DefaultInformation.addressdeFaultStateId);
+		if(addressList!=null&&addressList.size()!=0){
+			Address address=addressList.get(0);
+			State state=address.getAddressState();
+			state.setStateId(DefaultInformation.addressNotFaultStateId);
+			address.setAddressState(state);
+			addressDao.updateAddress(address);
+		};
+		
+		//找到现在所需要改为默认地址的地址并修改状态
 		Address _address=addressDao.findAddressByAddressId(addressId);
 		if(_address==null)throw new Exception();
 		State _state=_address.getAddressState();
-		_state.setStateId(60002);
+		_state.setStateId(DefaultInformation.addressdeFaultStateId);
 		_address.setAddressState(_state);
 		addressDao.updateAddress(_address);
 	}

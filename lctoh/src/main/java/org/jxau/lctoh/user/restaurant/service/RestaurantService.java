@@ -7,9 +7,8 @@ import org.jxau.lctoh.position.location.domain.Location;
 import org.jxau.lctoh.position.region.dao.CityDao;
 import org.jxau.lctoh.position.region.domain.City;
 import org.jxau.lctoh.tool.Tools;
-import org.jxau.lctoh.tool.config.ErrorMSG;
-import org.jxau.lctoh.tool.config.SuccessMSG;
-import org.jxau.lctoh.tool.exception.GetInfoException;
+import org.jxau.lctoh.tool.config.error.ErrorMSG;
+import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
 import org.jxau.lctoh.user.basis.dao.UserDao;
 import org.jxau.lctoh.user.basis.dao.VerificationCodeDao;
 import org.jxau.lctoh.user.basis.domain.User;
@@ -38,16 +37,15 @@ public class RestaurantService {
 	 * @param user  用户
 	 * @return Restaurant 店家
 	 * @throws UserException
-	 * @throws Exception
 	 */
-	public Restaurant login(User user) throws UserException,Exception{
+	public Restaurant login(User user) throws UserException{
 		
 		User _user=userDao.findUserByUserAccount(user.getUserAccount());
-		if(_user==null) throw new UserException(ErrorMSG.accountError);
+		if(_user==null) throw new UserException(ErrorMSG.accountInexistence);
 		if(!(_user.getUserPassword().equals(user.getUserPassword())))
 			throw new UserException(ErrorMSG.passwordError);
 		Restaurant restaurant=restaurantDao.findRestaurantByUserId(_user.getUserId());
-		if(restaurant==null)throw new UserException(ErrorMSG.powerError);
+		if(restaurant==null)throw new UserException(ErrorMSG.noPower);
 		
 		/**后期可能需要修改*/
 		if(restaurant.getRestaurantState().getStateId()!=70001)
@@ -62,18 +60,17 @@ public class RestaurantService {
 	 * @param user  用户
 	 * @return Restaurant 店家
 	 * @throws UserException
-	 * @throws Exception
 	 */
-	public Restaurant loginByCode(String userAccount,String code) throws UserException,Exception{
+	public Restaurant loginByCode(String userAccount,String code) throws UserException{
 		
 		User _user=userDao.findUserByUserAccount(userAccount);
-		if(_user==null) throw new UserException(ErrorMSG.accountError);
+		if(_user==null) throw new UserException(ErrorMSG.accountInexistence);
 		VerificationCode verificationCode=verificationCodeDao.findVerificationCodeById(_user.getUserId());
 		if(verificationCode==null||verificationCode.getVerificationCode().equals(code))throw new UserException(ErrorMSG.codeError);
 		if(Tools.getTimeDifferenceFromNowDate(verificationCode.getVerificationCodeUpdateTime())>SuccessMSG.timeExpire)
-			throw new UserException(ErrorMSG.timeExpireError);
+			throw new UserException(ErrorMSG.codeTimeExpire);
 		Restaurant restaurant=restaurantDao.findRestaurantByUserId(_user.getUserId());
-		if(restaurant==null)throw new UserException(ErrorMSG.powerError);
+		if(restaurant==null)throw new UserException(ErrorMSG.noPower);
 		
 		/**后期可能需要修改*/
 		if(restaurant.getRestaurantState().getStateId()!=70001)
@@ -93,7 +90,7 @@ public class RestaurantService {
 	 */
 	public List<Restaurant> getRestaueantByCityId(String cityId,Location location)throws Exception{
 		List<Restaurant> listRestaurant=restaurantDao.findRestaurantByCityId(cityId);
-		if(location==null){
+		if(location!=null){
 			Restaurant restaurant;
 			for(int i=0;i<listRestaurant.size();i++){
 				restaurant=listRestaurant.get(i);
@@ -104,8 +101,9 @@ public class RestaurantService {
 				restaurant.setRestaurantDistance(BigDecimal.valueOf(distance));
 				listRestaurant.set(i, restaurant);
 			}
+			listRestaurant=Tools.maoPaoSort(listRestaurant);
 		}
-		return Tools.maoPaoSort(listRestaurant);
+		return listRestaurant;
 	}
 
 
@@ -113,11 +111,11 @@ public class RestaurantService {
 	 * 根据location得到餐馆信息
 	 * @param location
 	 * @return
-	 * @throws Exception 
 	 */
-	public List<Restaurant> getRestaueantByLocation(Location location)throws GetInfoException{
+	public List<Restaurant> getRestaueantByLocation(Location location) {
 		List<City> cityList=cityDao.findCityByCityName(location.getCity());
-		if(cityList==null||cityList.size()==0)throw new GetInfoException(ErrorMSG.gerInfoIsNullError);
+		if(cityList==null||cityList.size()==0)
+			return null;
 		List<Restaurant> listRestaurant=restaurantDao.findRestaurantByCityId(cityList.get(0).getCityId());
 		Restaurant restaurant;
 		for(int i=0;i<listRestaurant.size();i++){

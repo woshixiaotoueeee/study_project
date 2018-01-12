@@ -1,4 +1,4 @@
-package org.jxau.lctoh.tool.config;
+package org.jxau.lctoh.tool.config.charEncoding;
 
 import org.springframework.stereotype.Component;
 /**

@@ -3,7 +3,7 @@ package org.jxau.lctoh.trade.cart.service;
 import org.jxau.lctoh.position.address.dao.AddressDao;
 import org.jxau.lctoh.position.address.domain.Address;
 import org.jxau.lctoh.tool.Tools;
-import org.jxau.lctoh.tool.config.ErrorMSG;
+import org.jxau.lctoh.tool.config.error.ErrorMSG;
 import org.jxau.lctoh.trade.cart.domain.Cart;
 import org.jxau.lctoh.trade.cart.domain.CartItem;
 import org.jxau.lctoh.trade.cart.exception.CartException;
@@ -42,15 +42,20 @@ public class CartService {
 	 * @throws CartException 
 	 */
 	public Cart addDishToCart(Cart cart, String dishId,Integer dishCount) throws CartException {
+		//找到想要添加的菜肴
 		Dish dish=dishDao.findDishByDishId(dishId);
+		if(dish==null)throw new CartException(ErrorMSG.selectFail);
+		//生成并补全订单条目
 		CartItem cartItem=new CartItem();
 		cartItem.setDish(dish);
 		cartItem.setDishCount(dishCount);
+		//计算价格
 		cartItem.putSubtotal();
 		try {
+			//添加
 			cart.addDish(cartItem);
 		} catch (Exception e) {
-			throw new CartException(ErrorMSG.addCartDishError);
+			throw new CartException(ErrorMSG.noDish);
 		}
 		return cart;
 	}
@@ -64,15 +69,20 @@ public class CartService {
 	 * @throws CartException 
 	 */
 	public Cart updateDishToCart(Cart cart, String dishId,Integer dishcount) throws CartException{
+		//找到想要添加的菜肴
 		Dish dish=dishDao.findDishByDishId(dishId);
+		if(dish==null)throw new CartException(ErrorMSG.noDish);
+		//生成并补全订单条目
 		CartItem cartItem=new CartItem();
 		cartItem.setDish(dish);
 		cartItem.setDishCount(dishcount);
+		//计算价格
 		cartItem.putSubtotal();
 		try {
+			//更新
 			cart.updateDish(cartItem);
 		} catch (Exception e) {
-			throw new CartException(ErrorMSG.updateCartDishError);
+			throw new CartException(ErrorMSG.updateFail);
 		}
 		return cart;
 	}

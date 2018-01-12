@@ -1,4 +1,4 @@
-package org.jxau.lctoh.tool.config;
+package org.jxau.lctoh.tool.config.msg;
 
 import org.springframework.stereotype.Component;
 /**
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
  * @author qdt_PC
  */
 @Component("EmailConfing")
-public class EmailConfing {
+public class EmailConfig {
 	/**服务器邮箱账号*/
 	public final static String myEmailAccount = "1285739190@qq.com";
 	/**服务器邮箱密码*/
@@ -25,6 +25,10 @@ public class EmailConfing {
 	/**sendTile*/
 	public final static String sendTile="联创点餐平台";
 	
+	/**是否验证*/
+	public final static String mailAuth="true";
+	/**mailSmtpSslEnable*/
+	public final static String mailSmtpSslEnable="ture";
 	
 	/**popTile*/
 	public final static String popTile="尊敬的用户";
@@ -33,12 +37,6 @@ public class EmailConfing {
 	public final static String sendMSGCodeTile="验证码";
 	/**验证码邮件内容*/
 	public final static String  sendMSGCodeInfo ="你的验证码是：";
-	
-	
-	
-	
-	
-	
 	
 
 }

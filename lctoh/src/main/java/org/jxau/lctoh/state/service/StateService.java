@@ -20,7 +20,6 @@ public class StateService {
 	 * @return State 状态类
 	 */
 	public State findStateByStateId(Integer stateId){
-		if(stateId==null)return null;
 		return statedao.findStateByStateId(stateId);
 	}
 	
@@ -30,7 +29,6 @@ public class StateService {
 	 * @return Integer 更新数据的条数
 	 */
 	public Integer updateState(State state){
-		if(state==null)return null;
 		return statedao.updateState(state);
 	}
 	

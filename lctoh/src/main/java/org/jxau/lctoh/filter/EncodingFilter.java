@@ -15,7 +15,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jxau.lctoh.tool.config.EncodingConfig;
+import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
 
 /**
  * 解决部分中文编码问题

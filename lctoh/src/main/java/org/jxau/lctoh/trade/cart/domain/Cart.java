@@ -10,8 +10,7 @@ import java.util.Map;
 
 import org.apache.ibatis.type.Alias;
 import org.jxau.lctoh.state.domain.State;
-import org.jxau.lctoh.tool.Tools;
-import org.jxau.lctoh.tool.config.ErrorMSG;
+import org.jxau.lctoh.tool.config.error.ErrorMSG;
 import org.jxau.lctoh.trade.cart.exception.CartException;
 import org.jxau.lctoh.trade.order.domain.HarvestAddress;
 import org.jxau.lctoh.trade.order.domain.Order;
@@ -68,7 +67,7 @@ public class Cart {
 			}
 			total=sum;
 		}catch(Exception e){
-			throw new CartException(ErrorMSG.putCartTotalError);
+			throw new CartException(ErrorMSG.putCartTotalFail);
 		}
 	}
 	
@@ -134,7 +133,6 @@ public class Cart {
 	public void deleteDish(String dishId) throws CartException{
 		map.remove(dishId);
 		this.putTotal();
-		
 	} 
 	public void clear(){
 		restaurant=null;
@@ -154,8 +152,7 @@ public class Cart {
 		Order order = new Order();
 		order.setOrderId(harvestAddress.getHarvestAddressId());// 设置订单编号
 		order.setOrderCreatTime(new Date());		// 下单时间
-		order.setOrderPrice(total);	
-		//订单价格
+		order.setOrderPrice(total);	//订单价格
 		State orderState=new State();
 		orderState.setStateId(100001);				//订单状态
 		order.setOrderState(orderState);			//设置未付款状态

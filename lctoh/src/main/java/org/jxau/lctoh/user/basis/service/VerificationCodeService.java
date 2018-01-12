@@ -1,8 +1,8 @@
 package org.jxau.lctoh.user.basis.service;
 
 import org.jxau.lctoh.tool.Tools;
-import org.jxau.lctoh.tool.config.EmailConfing;
-import org.jxau.lctoh.tool.config.ErrorMSG;
+import org.jxau.lctoh.tool.config.error.ErrorMSG;
+import org.jxau.lctoh.tool.config.msg.EmailConfig;
 import org.jxau.lctoh.tool.service.EmailService;
 import org.jxau.lctoh.user.basis.dao.UserDao;
 import org.jxau.lctoh.user.basis.dao.VerificationCodeDao;
@@ -30,22 +30,20 @@ public class VerificationCodeService {
 	 */
 	public VerificationCode setCode(String userAccount) throws VerificationCodeException{
 		User _user=userDao.findUserByUserAccount(userAccount);
-		if(_user==null)throw new VerificationCodeException(ErrorMSG.accountError);
+		if(_user==null)throw new VerificationCodeException(ErrorMSG.accountInexistence);
 		
 		verificationCode.setVerificationCode(Tools.getRandomString(6));
 		verificationCode.setVerificationCodeId(_user.getUserId());
 		try {
 			verificationCodeDao.replaceVerificationCode(verificationCode);
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new VerificationCodeException(ErrorMSG.notKnowError);
+			throw new VerificationCodeException(ErrorMSG.notKnow);
 		}
 		
 		try {
-			emailService.sendEmail(_user.getUserEmail(), EmailConfing.popTile, EmailConfing.sendMSGCodeTile, EmailConfing.sendMSGCodeInfo.concat(verificationCode.getVerificationCode()));
+			emailService.sendEmail(_user.getUserEmail(), EmailConfig.popTile, EmailConfig.sendMSGCodeTile, EmailConfig.sendMSGCodeInfo.concat(verificationCode.getVerificationCode()));
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new VerificationCodeException(ErrorMSG.emailSendError);
+			throw new VerificationCodeException(ErrorMSG.emailSendFail);
 		}
 		return verificationCode;
 	}
@@ -58,22 +56,21 @@ public class VerificationCodeService {
 	 */
 	public VerificationCode setCodeByUserEmail(String userEmail) throws VerificationCodeException {
 		User _user=userDao.findUserByUserEmail(userEmail);
-		if(_user==null)throw new VerificationCodeException(ErrorMSG.accountError);
+		if(_user==null)throw new VerificationCodeException(ErrorMSG.accountInexistence);
 		
 		verificationCode.setVerificationCode(Tools.getRandomString(6));
 		verificationCode.setVerificationCodeId(_user.getUserId());
 		try {
 			verificationCodeDao.replaceVerificationCode(verificationCode);
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new VerificationCodeException(ErrorMSG.notKnowError);
+			throw new VerificationCodeException(ErrorMSG.notKnow);
 		}
 		
 		try {
-			emailService.sendEmail(_user.getUserEmail(), EmailConfing.popTile, EmailConfing.sendMSGCodeTile, EmailConfing.sendMSGCodeInfo.concat(verificationCode.getVerificationCode()));
+			emailService.sendEmail(_user.getUserEmail(), EmailConfig.popTile, EmailConfig.sendMSGCodeTile, EmailConfig.sendMSGCodeInfo.concat(verificationCode.getVerificationCode()));
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new VerificationCodeException(ErrorMSG.emailSendError);
+			throw new VerificationCodeException(ErrorMSG.emailSendFail);
 		}
 		return verificationCode;
 		
