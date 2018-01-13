@@ -96,8 +96,8 @@ public class CustomerService {
 	 * @return User
 	 * @throws UserException
 	 */
-	@Transactional(rollbackFor=Exception.class) //指定回滚,遇到异常Exception时回滚
-	public User register(User user) throws UserException {
+	@Transactional(rollbackFor = Exception.class)    
+	public User addCustomerRegister(User user) throws UserException {
 		if(userDao.findUserByUserEmail(user.getUserEmail())!=null){
 			throw new UserException(ErrorMSG.emailExistence);
 		}
@@ -109,6 +109,7 @@ public class CustomerService {
 		user.setUserCode(Tools.getRandomString(32));
 		user.setUserAccount(Tools.getRandomNumberString(10));
 		userDao.addUser(user);
+		
 		//补全基本信息
 		Customer customer=new Customer();
 		customer.setCustomerUser(user);
@@ -118,6 +119,7 @@ public class CustomerService {
 		customer.setCustomerPortrait(DefaultInformation.customerPortrait);
 		customer.setCustomerState(stateDao.findStateByStateId(DefaultInformation.customerStateId));
 		customerDao.addCustomer(customer);
+		
 		return user;
 	}
 	
