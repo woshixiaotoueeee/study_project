@@ -48,7 +48,7 @@
 	</select>
 	
 	<!-- 添加用户信息 -->
-	<insert id="addaddCustomer" parameterType="Customer" >
+	<insert id="addCustomer" parameterType="Customer" >
 		insert into 
 		customer (
 			customer.customer_id,

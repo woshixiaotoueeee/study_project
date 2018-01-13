@@ -301,7 +301,7 @@ public class UserController extends BaseController{
 			responseData.failInfo(ErrorMSG.passwordNotSameError);
 		}else{
 			try{
-				user=customerService.register(user);
+				user=customerService.addCustomerRegister(user);
 				responseData.successInfo(user);
 			}catch(UserException e){
 				responseData.failInfo(e.getMessage());
