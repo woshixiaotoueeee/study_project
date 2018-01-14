@@ -38,8 +38,8 @@
         <property name="minIdle" value="${minIdle}" />
         <!-- 获取连接最大等待时间 -->
         <property name="maxWait" value="${maxWait}" />
-        <property name="timeBetweenEvictionRunsMillis" value="10000" />  
-        <property name="minEvictableIdleTimeMillis" value="10000" />
+        <property name="timeBetweenEvictionRunsMillis" value="100000" />  
+        <property name="minEvictableIdleTimeMillis" value="100000" />
     </bean>
 
     <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
@@ -96,16 +96,16 @@
 	        <tx:method name="list*" propagation="SUPPORTS" read-only="true" />  
 	    </tx:attributes>  
 	</tx:advice>  
-	<!-- 切面 -->  
+	<!-- 切面 
 	<aop:config>  
 	    <aop:advisor advice-ref="txAdvice"  
 	        pointcut="!(execution(* org.jxau.lctoh.*.dao.*.puttMapper(..)))&amp;&amp;execution(* org.jxau.lctoh.*.dao.*.*(..))"/>  
 	</aop:config>  
-	
 	<aop:config>  
 	    <aop:advisor advice-ref="txAdvice"  
 	        pointcut="!(execution(* org.jxau.lctoh.*.*.dao.*.puttMapper(..)))&amp;&amp;execution(* org.jxau.lctoh.*.*.dao.*.*(..))"/>  
 	</aop:config>
+	--> 
 	
 	
 	
@@ -115,7 +115,7 @@
 	
 	
 	
-	
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
     <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
     <!-- 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
