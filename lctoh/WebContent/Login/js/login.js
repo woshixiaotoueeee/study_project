@@ -1,11 +1,3 @@
-
-  //客户登录后页面
- /* 
- var aBtn=document.getElementById('sign_btn');
- aBtn.onclick=function(){
-  	alert(99);
-  	window.location.href="Customer.html";
-  }*/
   /*...........input获取焦点事件........*/
   $('.user').focus(function(){
     	$(this).attr('placeholder','');	
@@ -40,10 +32,6 @@
     })
     //...................单选改变样式(字体颜色)。。。。。。。。。。。
     var inpRad=$(".select_user input[name='user']");
-/*    $(".select_user input[name='user']").click(function(){
-    	 //alert(3);   	
-    	alert($(this).val());    	
-     });*/
     for(var i=0;i<inpRad.length;i++){
     	inpRad[i].index=i;
         inpRad[i].onclick=function(){ 	
@@ -76,7 +64,7 @@
     /* .............点击选择登录发生的事件..............  */
 
     /* .............点击注册发生的事件..............  */
-     $("#register").click(function(){
+/*     $("#register").click(function(){
             var val=$(".select_user input[name='user']:checked").val();
             if(val=='客户'){
                 alert("进入客户注册页面");             
@@ -92,24 +80,27 @@
                  return false;
             }
 
-        })
+        })*/
+    $("#register").click(function(){
+    	 window.location.href=projectDirectory+"/register/custmer_r.html";
+    })
     /* .............点击注册发生的事件..............  */
     /* .............点击忘记密码发生的事件..............  */
     $('#forget_pw').click(function(){
-        $('.find_password').css('display','block');    
+        $('.p_mask').eq(0).css('display','block');    
     })
     //关闭找回密码页
      $('.find_password .close_p').click(function(){
-         $('.find_password').css('display','none'); 
+         $('.p_mask').eq(0).css('display','none'); 
      })
     $('#cancel_btn').click(function(){
-       $('.find_password').css('display','none'); 
+       $('.p_mask').eq(0).css('display','none'); 
     })
     /* .............点击忘记密码发生的事件..............  */
     /* .............设置密码的事件..............  */
     //关闭设置密码页
     $('.set_password .close_p').click(function(){
-         $('.set_password').css('display','none'); 
+         $('.p_mask').eq(1).css('display','none'); 
      })
     /* .............设置密码的事件..............  */
     /*..............与后台交互数据................*/
@@ -129,7 +120,21 @@
     	obuser.userPassword=$('.password').val();
     	obuser.type=$(".select_user input[name='user']:checked").val();
     	if(obuser.userAccount==''||obuser.userPassword==''){
-    		alert('账号密码不能为空');
+    		/*alert('账号密码不能为空');*/
+    		layer.msg('账号密码不能为空');
+    		/*var ti=layer.open({
+         		type:1,
+         		title: '<span style="color:#c00;font-size:10px;padding:0;margin:0;">提示</span>', 
+                    ['提示','font-size:10px;height:20px;padding:0;line-height:20px'],
+         		closeBtn: 0,
+         		area:['300px','160px'],
+         		shade: 0,
+         		shadeClose:true,//点击遮罩层关闭
+         		content:'\<\div style="padding:10px;">账号密码不能为空\<\/div>'
+         	 })*/
+         /*    setTimeout(function(){
+         		layer.close(ti);
+         	  },1000);*/
     	}
     	else{
     		//ajax
@@ -221,8 +226,8 @@
     	   				}
     	   			   else if(data.state==1){   	   				  
     	   					alert(data.responseInfo);
-    	   				    $('.find_password').css('display','none'); 
-    	   					$('.set_password').css('display','block');    	   				   
+    	   				    $('.p_mask').eq(0).css('display','none'); 
+    	   				    $('.p_mask').eq(1).css('display','block');    	   				   
     	   				}
         		},'JSON')
         	 .error(
@@ -251,11 +256,11 @@
     	   			set_password,
         			function(data){  //{"state":0,"responseInfo":"密码为空"}   	   				
     	   			   if(data.state==0){    	   				    
-    	   					alert(data.responseInfo);
+    	   					alert(data.responseInfo);   	   		
     	   				}
     	   			   else if(data.state==1){   
     	   				    alert('设置密码成功');
-    	   			        $('.set_password').css('display','none');   	   			       
+    	   			        $('.p_mask').eq(1).css('display','none');   	   			       
     	   				}
         		},'JSON')
         	 .error(
