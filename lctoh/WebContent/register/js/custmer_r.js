@@ -1,55 +1,85 @@
    /* alert($(".sex input[name='sex']:checked").val()); */
     $('.register>input').focus(function(){
-    	$(this).attr('placeholder','');
-    	
+    	$(this).attr('placeholder','');	
     })
     /* .............正则表达式..............  */
-    //昵称
-    var  idna=/^[\w]{1,12}$/g;     
+    //昵称  只含有汉字、数字、字母、下划线,不能以下划线数字开头和结尾：
+    var  idna=/^(?!_)(?!.*?_$)[a-zA-Z_\u4e00-\u9fa5][a-zA-Z0-9_\u4e00-\u9fa5]{1,10}$/;     
     $('#idName').change(function(){
     	var nickname=$(this).val();
     	if(idna.test(nickname)){
-	       alert('昵称正确');
+	     /*  alert('昵称正确')*/
+        $('.password_p p').eq(0).css('display','none');
 	    }
+      else if(nickname==''){
+           $('.password_p p').eq(0).css('display','none'); 
+      }
 	    else{
-	    	alert('昵称不正确')
+	    	/*alert('昵称不正确')*/
+        $('.password_p p').eq(0).css('display','block');
 	    }
     })  
 
-    //密码
-    
+    //密码错误提示 
+     var  password_num=/^\w{6,16}$/;
+    $('.password').change(function(){
+      var pNu=$(this).val();
+      if(password_num.test(pNu)){
+          $('.password_p p').eq(1).css('display','none');
+      }
+      else if(pNu==''){
+           $('.password_p p').eq(1).css('display','none'); 
+      }
+      else{          
+        $('.password_p p').eq(1).css('display','block');
+      }
+    })
     //确认密码
-    
+    $('.r_password').change(function(){
+      var _pw=$(this).val();
+      var pw=$('.password').val()
+      if(_pw==pw){
+        $('.password_p p').eq(2).css('display','none');      
+      }
+      else if(_pw==''){
+           $('.password_p p').eq(2).css('display','none'); 
+      }
+      else{          
+         $('.password_p p').eq(2).css('display','block');
+      }
+    })
     //手机号码
     var  pnamber=/^1\d{10}$/;
     $('#phone_nu').change(function(){
     	var pNu=$(this).val();
     	if(pnamber.test(pNu)){
-	        alert('手机号正确')
+	         $('.password_p p').eq(3).css('display','none');
 	    }
-	    else{
-	    	alert('手机号不正确')
+      else if(pNu==''){
+           $('.password_p p').eq(3).css('display','none'); 
+      }
+	    else {
+	    	 $('.password_p p').eq(3).css('display','block');
 	    }
     }) 
     //邮箱email
+    var  email_nu=/^([a-zA-Z1-9_])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])*(\.(info|biz|com|edu|gov|net|am|bz|cn|cx|hk|jp|tw|vc|vn))$/;
+    $('.email').change(function(){
+      var pNu=$(this).val();
+      if(email_nu.test(pNu)){
+           $('.password_p p').eq(4).css('display','none');
+      }
+      else if(pNu==''){
+           $('.password_p p').eq(4).css('display','none'); 
+      }
+      else{
+         $('.password_p p').eq(4).css('display','block');
+      }
+    }) 
+    
     /* .............正则表达式..............  */
-    /* .............点击注册发生的事件..............  */
-    $("#btnSubmit").click(function(){
-     /*       var val=$(".sex input[name='sex']:checked").val();
-            if(val=='男'){
-                alert("为男性");             
-            }
-            else if(val=='女'){
-                alert('为女性');
-            }
-            else{
-                 alert('不男不女')
-                 return false;
-            }*/
-
-        })
-     /* .............点击注册发生的事件..............  */
-     /* .........点击注册与后台交互获取数据。。。。。。。*/ 
+    
+    /* .........点击注册与后台交互获取数据。。。。。。。*/ 
      $("#btnSubmit").click(function(){
     	 /*        后台所需数据
  		{
