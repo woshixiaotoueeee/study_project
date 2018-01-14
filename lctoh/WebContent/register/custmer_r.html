@@ -16,15 +16,19 @@
 	    <div class='register'>
 	       <h3>联创在线点餐平台</h3>
 	       <input type="text" placeholder="昵    称" id='idName'  onblur="this.placeholder='昵    称'">
-	       <input type="password" placeholder="密    码"  onblur="this.placeholder='密    码'" class='re_password' value=''>
-	       <p></p>
-	       <input type="password" placeholder="确认密码" onblur="this.placeholder='确认密码'" class='re_confimpw' value=''>
+	       <div class='password_p'><p>请输入正确的昵称</p></div>
+	       <input type="password" placeholder="密    码"  onblur="this.placeholder='密    码'" class='password'>
+	       <div class='password_p'><p>请输入6-16位密码，区分大小写，不能使用空格!</p></div>
+	       <input type="password" placeholder="确认密码" onblur="this.placeholder='确认密码'" class='r_password'>
+	       <div class='password_p'><p>两次密码不一样</p></div>
 	       <div class='sex'>
 	           <input type="radio" name='sex' checked value='男'>男 
 	           <input type="radio" name='sex' value='女'>女
 	       </div>
-	       <input type="text" id='phone_nu' placeholder="手机号码" onblur="this.placeholder='手机号码'" value=''>
-	       <input type="text"  placeholder="email" onblur="this.placeholder='email'" class='re_email' value=''>
+	       <input type="text" id='phone_nu' placeholder="手机号码" onblur="this.placeholder='手机号码'">
+	       <div class='password_p'><p>手机号为11位数字，不正确</p></div>
+	       <input type="text"  placeholder="email" onblur="this.placeholder='email'" class='email'>
+	       <div class='password_p'><p>邮箱格式不正确</p></div>
 	       <input type="button" value='注    册' id='btnSubmit'>
 	    </div>
 	</div>
