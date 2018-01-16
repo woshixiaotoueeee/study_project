@@ -24,6 +24,16 @@ public class ProvinceController extends BaseController{
 	/**
 	 * 获取所有省份信息
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为  List&lt;Province&gt; 类型对象具体属性参考 Province实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.position.region.domain.Province
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getAllProvince",produces=EncodingConfig.produces)

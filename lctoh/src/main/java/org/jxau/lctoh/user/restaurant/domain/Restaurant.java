@@ -20,23 +20,53 @@ import org.springframework.stereotype.Component;
 @Alias("Restaurant")
 @Scope("prototype")
 public class Restaurant {
-	private String restaurantId;			//店家识别码
-	private String restaurantName;			//店名
-	private String restaurantPhone;			//店家联系方式
-	private String restaurantImage;			//店家图片
-	private BigDecimal restaurantLongitude;	//经度
-	private BigDecimal restaurantLatitude;	//纬度
-	private String restaurantAddressInfo;	//店铺地址
-	
-	private String restaurantNotice;		//公告
-	private BigDecimal restaurantDistance;	//距离
-	private BigDecimal restaurantDeliveryFee;//配送费
-	private Date restaurantUpdateTime;		//最近更新时间
-	private State restaurantState;			//店家状态
-	private User restaurantUser;			//对应用户
-	private RestaurantCategory restaurantCategory;//所属分类
-	private City restaurantCity;			//所属城市
-	private List<DishCategory> dishCategory;//拥有的菜肴分类
+	/**店家识别码*/
+	private String restaurantId;
+	/**店名*/
+	private String restaurantName;
+	/**店家联系方式*/
+	private String restaurantPhone;	
+	/**店家图片*/
+	private String restaurantImage;
+	/**经度*/
+	private BigDecimal restaurantLongitude;
+	/**纬度*/
+	private BigDecimal restaurantLatitude;
+	/**店铺地址*/
+	private String restaurantAddressInfo;
+	/**公告*/
+	private String restaurantNotice;
+	/**距离*/
+	private BigDecimal restaurantDistance;
+	/**配送费*/
+	private BigDecimal restaurantDeliveryFee;
+	/**最近更新时间*/
+	private Date restaurantUpdateTime;
+	/**
+	 * 状态
+	 * @see org.jxau.lctoh.state.domain.State
+	 * */
+	private State restaurantState;
+	/**
+	 * 用户基础信息
+	 * @see org.jxau.lctoh.user.basis.domain.User
+	 * */
+	private User restaurantUser;
+	/**
+	 * 所属分类
+	 * @see org.jxau.lctoh.user.restaurant.domain.RestaurantCategory
+	 * */
+	private RestaurantCategory restaurantCategory;
+	/**
+	 * 所属城市
+	 * @see  org.jxau.lctoh.position.region.domain.City
+	 * */
+	private City restaurantCity;
+	/**
+	 * 拥有的菜肴分类
+	 * @see org.jxau.lctoh.trade.dish.domain.DishCategory
+	 * */
+	private List<DishCategory> dishCategory;
 	
 	public String getRestaurantAddressInfo() {
 		return restaurantAddressInfo;

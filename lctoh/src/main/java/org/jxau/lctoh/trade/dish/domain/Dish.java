@@ -16,15 +16,30 @@ import org.springframework.stereotype.Component;
 @Alias("Dish")
 @Scope("prototype")
 public class Dish {
-	private String dishId;			//识别码
-	private String dishName;		//菜肴名
-	private BigDecimal  dishPrice;	//菜肴价格
-	private String dishImage;		//菜肴图片
-	private Date dishUpdateTime;	//最近更新时间
-	private String dishIntro;		//菜肴见解
-	private Integer dishQuantity;	//库存
-	private State dishState;		//菜肴状态
-	private DishCategory dishCategory;//所属菜肴分类
+	/**识别码*/
+	private String dishId;
+	/**菜肴名*/
+	private String dishName;
+	/**菜肴价格*/
+	private BigDecimal  dishPrice;
+	/**菜肴图片*/
+	private String dishImage;
+	/**最近更新时间*/
+	private Date dishUpdateTime;
+	/**菜肴见解*/
+	private String dishIntro;
+	/**库存*/
+	private Integer dishQuantity;
+	/**
+	 * 菜肴状态
+	 * @see org.jxau.lctoh.state.domain.State
+	 * */
+	private State dishState;
+	/**
+	 * 所属菜肴分类
+	 * @see org.jxau.lctoh.trade.dish.domain.DishCategory
+	 * */
+	private DishCategory dishCategory;
 	public String getDishId() {
 		return dishId;
 	}

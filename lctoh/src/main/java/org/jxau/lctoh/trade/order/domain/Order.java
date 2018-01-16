@@ -14,16 +14,41 @@ import org.jxau.lctoh.user.restaurant.domain.Restaurant;
  * @author qdt_PC
  */
 public class Order {
-	private String orderId;	//订单D
-	private Date orderCreatTime;	//下单时间
-	private BigDecimal orderPrice;	//订单价格
-	private Date orderUpdateTiame;	//订单更新时间
-	private Date orderDeliveryTime;	//订单交付时间（完成）
-	private State orderState;		//订单状态
-	private HarvestAddress orderHarvestAddress;//配送地址
-	private Customer orderCustomer;	//订单所属用户
-	private Restaurant orderRestaurant;	//订单所属店家
-	private List<OrderItem> orderItemList;//订单下所有条目
+	/**订单ID*/
+	private String orderId;
+	/**下单时间*/
+	private Date orderCreatTime;
+	/**订单价格*/
+	private BigDecimal orderPrice;
+	/**订单更新时间*/
+	private Date orderUpdateTiame;
+	/**订单交付时间（完成）*/
+	private Date orderDeliveryTime;
+	/**
+	 * 订单状态
+	 * @see org.jxau.lctoh.state.domain.State
+	 * */
+	private State orderState;
+	/**
+	 * 配送地址
+	 * @see org.jxau.lctoh.trade.order.domain.HarvestAddress
+	 * */
+	private HarvestAddress orderHarvestAddress;
+	/**
+	 * 订单所属用户
+	 * @see org.jxau.lctoh.user.customer.domain.Customer
+	 * */
+	private Customer orderCustomer;
+	/**
+	 * 订单所属店家
+	 * @see org.jxau.lctoh.user.restaurant.domain.Restaurant
+	 * */
+	private Restaurant orderRestaurant;
+	/**
+	 * 订单下所有条目
+	 * @see org.jxau.lctoh.trade.order.domain.OrderItem
+	 * */
+	private List<OrderItem> orderItemList;
 	public String getOrderId() {
 		return orderId;
 	}

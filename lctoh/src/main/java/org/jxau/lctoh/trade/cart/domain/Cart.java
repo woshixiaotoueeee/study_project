@@ -31,10 +31,17 @@ import org.springframework.stereotype.Component;
 public class Cart {
 	/**
 	 * 携带一个标记位
+	 * @see org.jxau.lctoh.user.restaurant.domain.Restaurant
 	 */
 	private Restaurant restaurant;
+	/**
+	 * 购物车商品价格+配送费
+	 * */
 	private BigDecimal total;
-	/**购物车中的条目*/
+	/**
+	 * 购物车中的条目
+	 * @see org.jxau.lctoh.trade.cart.domain.CartItem
+	 * */
 	private Map<String ,CartItem> map=new LinkedHashMap<String,CartItem>();
 	public Restaurant getRestaurant() {
 		return restaurant;

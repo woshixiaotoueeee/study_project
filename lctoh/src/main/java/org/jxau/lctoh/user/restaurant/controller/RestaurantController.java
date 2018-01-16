@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * 店家操作接口
  * @author qdt_PC
  */
 @Controller
@@ -23,11 +24,21 @@ public class RestaurantController extends BaseController {
 	@Autowired
 	private RestaurantService restaurantService;
 	
+	
 	/**
 	 * 根据cityId获取餐馆信息
-	 * @param cityId
-	 * @param session
+	 * @param cityId 城市ID String 字符串
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为  List&lt;Restaurant&gt; 类型对象具体属性参考 Restaurant实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.user.restaurant.domain.Restaurant
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getRestaurantCityId",produces=EncodingConfig.produces)
@@ -45,11 +56,19 @@ public class RestaurantController extends BaseController {
 		return toGsonString();
 	}
 	
-	
 	/**
 	 * 根据cityName获取餐馆信息
-	 * @param session
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为  List&lt;Restaurant&gt; 类型对象具体属性参考 Restaurant实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.user.restaurant.domain.Restaurant
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getRestaurantByCityName",produces=EncodingConfig.produces)
@@ -69,8 +88,18 @@ public class RestaurantController extends BaseController {
 	
 	/**
 	 * 根据restaurantId获取餐馆信息
-	 * @param restaurantId
+	 * @param restaurantId 店家识别码 String 字符串
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为Restaurant类型对象具体属性参考 Restaurant实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.user.restaurant.domain.Restaurant
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getRestaurantByRestaurantId",produces=EncodingConfig.produces)

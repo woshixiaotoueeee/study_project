@@ -1,6 +1,8 @@
 package org.jxau.lctoh.position.address.controller;
 
 
+
+
 import javax.servlet.http.HttpSession;
 
 import org.jxau.lctoh.position.address.domain.Address;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * 用户地址操作前台接口
  * @author qdt_PC
  */
 @Controller
@@ -28,8 +31,18 @@ public class AddressController extends BaseController{
 	
 	/**
 	 * 根据地址识别码查询地址信息
-	 * @param addressId
-	 * @return
+	 * @param addressId 地址识别码	String 字符串
+	 * @return 
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为  Address 类型对象具体属性参考 Addresss实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.position.address.domain.Address
 	 */
 	@ResponseBody
 	@RequestMapping(value="/findAddressByAddressId",produces=EncodingConfig.produces)
@@ -48,8 +61,18 @@ public class AddressController extends BaseController{
 	
 	/**
 	 * 根据客户识别码查询地址信息
-	 * @param customerId
-	 * @return
+	 * @param customerId 客户识别码 String 字符串
+	 * @return 
+	 * <pre>
+	 * json字符串{	
+	 * 	说明：{			
+	 * 		Integer state;			//状态码（整形数字）	
+	 * 		Object responseInfo;	//成功：为  List&lt;Address&gt;类型对象可理解为Address数组,具体属性参考 Addresss实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.position.address.domain.Address
 	 */
 	@ResponseBody
 	@RequestMapping(value="/findAddressByCustomerId",produces=EncodingConfig.produces)
@@ -66,10 +89,34 @@ public class AddressController extends BaseController{
 		return toGsonString();
 	}
 	
+	
 	/**
 	 * 更新地址信息
 	 * @param adrdess
+	 * <pre>
+	 * address中需要的参数说明：
+	 * 		String addressId;			//地址识别码
+	 * 		String addressName;			//地址联系人
+	 *		String addressProvince;		//地址省份
+	 *		String addressCity;			//城市
+	 *		String addressInfo;			//地址详细信息
+	 *		String addressPhone;		//地址联系电话
+	 *		BigDecimal addressLatitude;	//纬度（数字）
+	 *		BigDecimal addressLongitude;//经度（数字）
+	 *		State addressState;			//地址状态（可能有点问题需要后期调试）
+	 *</pre>
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为操作成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.position.address.domain.Address
+	 * @see org.jxau.lctoh.state.domain.State
 	 */
 	@ResponseBody
 	@RequestMapping(value="/updateAddress",produces=EncodingConfig.produces)
@@ -104,8 +151,17 @@ public class AddressController extends BaseController{
 	
 	/**
 	 * 更新默认地址地址状态信息
-	 * @param adrdess
+	 * @param addressId 所需要设置为默认地址的地址识别码  String 字符串
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为操作成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
 	 */
 	@ResponseBody
 	@RequestMapping(value="/updateAddressState",produces=EncodingConfig.produces)
@@ -131,7 +187,26 @@ public class AddressController extends BaseController{
 	/**
 	 * 添加一个地址
 	 * @param adrdess
+	 *<pre>
+	 * address中需要的参数说明：
+	 * 		String addressName;			//地址联系人
+	 *		String addressProvince;		//地址省份
+	 *		String addressCity;			//城市
+	 *		String addressInfo;			//地址详细信息
+	 *		String addressPhone;		//地址联系电话
+	 *		BigDecimal addressLatitude;	//纬度（数字）
+	 *		BigDecimal addressLongitude;//经度（数字）
+	 *</pre>
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为操作成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
 	 */
 	@ResponseBody
 	@RequestMapping(value="/addAddress",produces=EncodingConfig.produces)
@@ -169,8 +244,17 @@ public class AddressController extends BaseController{
 	
 	/**
 	 * 删除一个地址
-	 * @param adrdess
-	 * @return Integer
+	 * @param addressId String 字符串  索要删除的地址的识别码
+	 * @return 
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为操作成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
 	 */
 	@ResponseBody
 	@RequestMapping(value="/deleteAddress",produces=EncodingConfig.produces)

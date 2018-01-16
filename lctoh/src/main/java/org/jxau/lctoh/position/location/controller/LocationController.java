@@ -1,5 +1,7 @@
 package org.jxau.lctoh.position.location.controller;
 
+
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -27,8 +29,26 @@ public class LocationController  extends BaseController{
 	/**
 	 * 定位
 	 * @param location 定位信息
-	 * @param session
+	 * <pre>
+	 * location 说明：{
+	 * 	省份  String province;
+	 *	城市  String city;
+	 *	详细地址信息 String info;
+	 *	经度 BigDecimal longitude ;
+	 *	纬度 BigDecimal latitude ;
+	 * }
+	 * </pre>
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为  Address 类型对象具体属性参考 Addresss实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.position.location.domain.Location
 	 */
 	@ResponseBody
 	@RequestMapping(value="/setLocation",produces=EncodingConfig.produces)
@@ -48,8 +68,17 @@ public class LocationController  extends BaseController{
 	
 	/**
 	 * 前台获取定位信息的接口
-	 * @param session
 	 * @return
+	 *	<pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为  Location 类型对象具体属性参考 Location实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 *  @see org.jxau.lctoh.position.location.domain.Location
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getLocation",produces=EncodingConfig.produces)

@@ -15,10 +15,17 @@ import org.springframework.stereotype.Component;
 @Alias("RestaurantCategory")
 @Scope("prototype")
 public class RestaurantCategory {
-	private String restaurantCategoryId;		//分类识别码
-	private String restaurantCategoryName;		//分类名
-	private Date restaurantCategoryUpdateTime;	//最近更新日期
-	private State restaurantCategoryState;		//分类状态
+	/**分类识别码*/
+	private String restaurantCategoryId;
+	/**分类名*/
+	private String restaurantCategoryName;
+	/**最近更新日期*/
+	private Date restaurantCategoryUpdateTime;
+	/**
+	 * 分类状态
+	 * @see org.jxau.lctoh.state.domain.State
+	 * */
+	private State restaurantCategoryState;
 	public String getRestaurantCategoryId() {
 		return restaurantCategoryId;
 	}
