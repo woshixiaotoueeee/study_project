@@ -50,11 +50,29 @@ public class UserController extends BaseController{
 	@Autowired
 	private VerificationCodeService verificationCodeService;
 	
+	
+	
 	/**
 	 * 账号密码登陆
 	 * @param user 登陆账号密码
-	 * @param session
+	 * <pre>
+	 * user说明{
+	 * 	userAccount:账号 String 字符串;
+		userPassword:密码 String 字符串;
+	 * }
+	 * </pre>
+	 * @param type Integer 整形数字 登陆选择
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：登录成功所需跳转的url String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.user.basis.domain.User
 	 */
 	@ResponseBody
 	@RequestMapping(value="/login",produces=EncodingConfig.produces)
@@ -109,14 +127,21 @@ public class UserController extends BaseController{
 		return toGsonString();
 	}
 	
-	
 	/**
 	 * 根据 账号 验证码 登陆
-	 * @param userAccount
-	 * @param code
-	 * @param type
-	 * @param session
+	 * @param userAccount String 字符串  账号
+	 * @param code String 字符串 验证码 
+	 * @param type Integer 整形数字 登陆选择
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：登录成功所需跳转的url String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
 	 */
 	@ResponseBody
 	@RequestMapping(value="/loginByCode",produces=EncodingConfig.produces)
@@ -169,13 +194,21 @@ public class UserController extends BaseController{
 	}
 	
 	
+	
 	/**
 	 * 根据 邮箱 验证码  ‘登陆’
-	 * @param userAccount
-	 * @param code
-	 * @param type
-	 * @param session
+	 * @param userEmail String 字符串  邮箱
+	 * @param code String 字符串 验证码 
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：登录成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
 	 */
 	@ResponseBody
 	@RequestMapping(value="/verificationByCode",produces=EncodingConfig.produces)
@@ -204,12 +237,21 @@ public class UserController extends BaseController{
 	
 	
 	
+	
 	/**
 	 * 修改密码
-	 * @param password
-	 * @param _password
-	 * @param session
+	 * @param password String 字符串 密码
+	 * @param _password String 字符串 确认密码
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：更改密码成功  String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
 	 */
 	@ResponseBody
 	@RequestMapping(value="/updatePassword",produces=EncodingConfig.produces)
@@ -235,7 +277,18 @@ public class UserController extends BaseController{
 	
 	/**
 	 * 根据账号获取验证码
-	 * */
+	 * @param userAccount String 字符串 账号
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：验证码
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 */
 	@ResponseBody
 	@RequestMapping(value="/getCodeByUserAccount",produces=EncodingConfig.produces)
 	public String getCodeByUserAccount(String userAccount){
@@ -253,9 +306,21 @@ public class UserController extends BaseController{
 		return toGsonString();
 	}
 	
+	
 	/**
 	 * 根据邮箱获取验证码
-	 * */
+	 * @param userEmail String 字符串 邮箱
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：验证码
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 */
 	@ResponseBody
 	@RequestMapping(value="/getCodeByUserEmail",produces=EncodingConfig.produces)
 	public String getCodeByUserEmail(String userEmail){
@@ -281,6 +346,30 @@ public class UserController extends BaseController{
 	/**
 	 * 注册
 	 * */
+	/**
+	 * 根据邮箱获取验证码
+	 * @param user User 注册信息
+	 * <pre>
+	 * user说明｛
+	 * 	userPassword String 字符串 密码 
+	 * 	userSex String 字符串 性别
+	 * 	userEmail String 字符串 邮箱
+	 * 	userPhone String 字符串 电话
+	 * ｝
+	 * </pre>
+	 * @param _userPassword String 确认密码
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：注册成功的用户信息user 参考user实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.user.basis.domain.User
+	 */
 	@ResponseBody
 	@RequestMapping(value="/register",produces=EncodingConfig.produces)
 	public String register(User user,String _userPassword){

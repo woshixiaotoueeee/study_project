@@ -14,14 +14,22 @@ import org.springframework.stereotype.Component;
 @Alias("User")
 @Scope("prototype")
 public class User {
-	private String userId;			//用户识别码
-	private String userAccount;		//账号
-	private String userPassword;	//密码
-	private String userSex;			//性别
-	private String userEmail;		//邮箱
-	private String userPhone;		//电话
-	private Date userUpdateTime;	//最近更新时间
-	private String userCode;		//激活码
+	/**用户识别码*/
+	private String userId;
+	/**账号*/
+	private String userAccount;
+	/**密码*/
+	private String userPassword;
+	/**性别*/
+	private String userSex;
+	/**邮箱*/
+	private String userEmail;
+	/**电话*/
+	private String userPhone;
+	/**最近更新时间*/
+	private Date userUpdateTime;
+	/**激活码*/
+	private String userCode;
 	
 	public String getUserId() {
 		return userId;
