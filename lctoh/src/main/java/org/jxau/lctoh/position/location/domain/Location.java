@@ -15,11 +15,16 @@ import org.springframework.stereotype.Component;
 @Alias("Location")
 @Scope("prototype")
 public class Location {
-	private String province;			//省份
-	private String city;				//城市
-	private String info;				//详细地址信息
-	private BigDecimal longitude ;		//经度
-	private BigDecimal latitude ;		//维度
+	/**省份*/
+	private String province;
+	/**城市*/
+	private String city;
+	/**详细地址信息*/
+	private String info;
+	/**经度*/
+	private BigDecimal longitude ;
+	/**纬度*/
+	private BigDecimal latitude ;
 	public String getProvince() {
 		return province;
 	}

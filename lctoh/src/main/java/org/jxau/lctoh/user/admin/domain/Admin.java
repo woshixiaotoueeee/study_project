@@ -16,9 +16,19 @@ import org.springframework.stereotype.Component;
 @Alias("Admin")
 @Scope("prototype")
 public class Admin {
+	/**
+	 * 用户基础信息
+	 * @see org.jxau.lctoh.user.basis.domain.User
+	 * */
 	private User adminUser;
+	/**管理员识别码*/
 	private String adminId;
+	/**最近更新时间*/
 	private Date adminUpdateTime;
+	/**
+	 * 管理员状态
+	 * @see org.jxau.lctoh.state.domain.State
+	 * */
 	private State adminState;
 	public User getAdminUser() {
 		return adminUser;

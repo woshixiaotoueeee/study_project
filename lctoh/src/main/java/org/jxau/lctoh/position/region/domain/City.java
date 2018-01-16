@@ -15,11 +15,22 @@ import org.springframework.stereotype.Component;
 @Alias("City")
 @Scope("prototype")
 public class City {
-	private String cityId;		//城市识别码
-	private String cityName;	//城市名
-	private Date cityUpdateTime;//最近更新时间
-	private State cityState;	//城市状态
-	private Province cityProvince;//城市所属省份
+	/**城市识别码*/
+	private String cityId;
+	/**城市名*/
+	private String cityName;
+	/**最近更新时间*/
+	private Date cityUpdateTime;
+	/**
+	 * 城市状态
+	 * @see org.jxau.lctoh.state.domain.State
+	 * */
+	private State cityState;
+	/**
+	 * 城市所属省份
+	 * @see org.jxau.lctoh.position.region.domain.Province
+	 * */
+	private Province cityProvince;
 	public String getCityId() {
 		return cityId;
 	}

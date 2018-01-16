@@ -18,17 +18,34 @@ import org.springframework.stereotype.Component;
 @Alias("Address")
 @Scope("prototype")
 public class Address {
-	private String addressId;			//地址识别码
-	private String addressName;			//地址联系人
-	private String addressProvince;		//地址省份
-	private String addressCity;			//城市
-	private String addressInfo;			//地址详细信息
-	private String addressPhone;		//地址联系电话
-	private BigDecimal addressLatitude;	//纬度
-	private BigDecimal addressLongitude;//经度
-	private Date addressUpdateTime;		//最近更新时间
-	private State addressState;			//地址状态
-	private Customer addressCustomer;	//地址所属用户
+	/**地址识别码*/
+	private String addressId;
+	/**地址联系人*/
+	private String addressName;
+	/**地址省份*/
+	private String addressProvince;
+	/**城市*/
+	private String addressCity;
+	/**地址详细信息*/
+	private String addressInfo;	
+	/**地址联系电话*/
+	private String addressPhone;
+	/**纬度*/
+	private BigDecimal addressLatitude;
+	/**经度*/
+	private BigDecimal addressLongitude;
+	/**最近更新时间*/
+	private Date addressUpdateTime;
+	/**
+	 * 地址状态
+	 * @see org.jxau.lctoh.state.domain.State
+	 * */
+	private State addressState;
+	/**
+	 * 地址所属用户
+	 * @see org.jxau.lctoh.user.customer.domain.Customer
+	 * */
+	private Customer addressCustomer;	
 	public String getAddressId() {
 		return addressId;
 	}

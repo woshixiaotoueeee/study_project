@@ -16,11 +16,22 @@ import org.springframework.stereotype.Component;
 @Alias("Province")
 @Scope("prototype")
 public class Province {
-	private String provinceId;		//省份识别码
-	private String provinceName;	//省名
-	private Date provinceUpdateTime;//最近更新时间
-	private State provinceState;	//省份状态
-	private List<City> cityList;	//省份城市
+	/**省份识别码*/
+	private String provinceId;
+	/**省名*/
+	private String provinceName;
+	/**最近更新时间*/
+	private Date provinceUpdateTime;//
+	/**
+	 * 省份状态
+	 * @see org.jxau.lctoh.state.domain.State
+	 * */
+	private State provinceState;
+	/**
+	 * 省份城市
+	 * @see org.jxau.lctoh.position.region.domain.City
+	 * */
+	private List<City> cityList;	//
 	public String getProvinceId() {
 		return provinceId;
 	}

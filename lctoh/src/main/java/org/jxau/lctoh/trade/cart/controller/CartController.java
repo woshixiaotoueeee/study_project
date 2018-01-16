@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * 购物车相关操作
  * @author qdt_PC
  */
 @Controller
@@ -25,6 +26,12 @@ public class CartController extends BaseController{
 	@Autowired
 	private CartService cartService;
 	
+	/**
+	 * 获取session中的购物车
+	 * @param session
+	 * @return
+	 * @throws CartException
+	 */
 	private Cart getCartInSession(HttpSession session) throws CartException{
 		Cart cart=(Cart) session.getAttribute(ConversationConfig.cartSession);
 		if(cart==null)throw new CartException(ErrorMSG.cartTimerOut);
@@ -33,8 +40,17 @@ public class CartController extends BaseController{
 	
 	/**
 	 * 获取购物车信息
-	 * @param session
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为  Cart 类型对象具体属性参考 Cart实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.trade.cart.domain.Cart
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getCart",produces=EncodingConfig.produces)
@@ -46,10 +62,21 @@ public class CartController extends BaseController{
 		}
 		return toGsonString();
 	}
+	
 	/**
 	 * 往购物车中添加商品
-	 * @param session
+	 * @param dishId 需要加入购物车的菜肴的识别码 String 字符串
+	 * @param dishCount 加入数量  Integer 整形数字
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
 	 */
 	@ResponseBody
 	@RequestMapping(value="/addDishCart",produces=EncodingConfig.produces)
@@ -74,10 +101,21 @@ public class CartController extends BaseController{
 		}
 		return toGsonString();
 	}
+	
 	/**
 	 * 更新购物车中商品数量
-	 * @param session
+	 * @param dishId 需要更新购物车的菜肴的识别码 String 字符串
+	 * @param dishCount 更新后的数量  Integer 整形数字
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
 	 */
 	@ResponseBody
 	@RequestMapping(value="/updateDishCart",produces=EncodingConfig.produces)
@@ -104,9 +142,18 @@ public class CartController extends BaseController{
 	}
 	
 	/**
-	 * 更新购物车中商品数量
-	 * @param session
+	 * 删除购物车中商品
+	 * @param dishId 需要删除购物车的菜肴的识别码 String 字符串
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
 	 */
 	@ResponseBody
 	@RequestMapping(value="/deleteDishCart",produces=EncodingConfig.produces)
@@ -132,9 +179,23 @@ public class CartController extends BaseController{
 	
 	
 	/**
-	 * 根据购物车生成订单
+	 * 
 	 * @param session
 	 * @return
+	 */
+	/**
+	 * 根据购物车生成订单
+	 * @param addressId 客户配送地址的识别码 String 字符串
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
 	 */
 	@ResponseBody
 	@RequestMapping(value="/cartToOrder",produces=EncodingConfig.produces)

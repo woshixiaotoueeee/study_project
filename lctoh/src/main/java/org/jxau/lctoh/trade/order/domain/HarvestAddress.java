@@ -15,15 +15,24 @@ import org.springframework.stereotype.Component;
 @Alias("HarvestAddress")
 @Scope("prototype")
 public class HarvestAddress {
-	private String harvestAddressId;			//地址识别码
-	private String harvestAddressName;			//地址联系人
-	private String harvestAddressProvince;		//地址省份
-	private String harvestAddressCity;			//城市
-	private String harvestAddressInfo;			//地址详细信息
-	private String harvestAddressPhone;		//地址联系电话
-	private BigDecimal harvestAddressLatitude;	//纬度
-	private BigDecimal harvestAddressLongitude;//经度
-	private Date harvestAddressUpdateTime;		//最近更新时间
+	/**地址识别码*/
+	private String harvestAddressId;
+	/**地址联系人*/
+	private String harvestAddressName;
+	/**地址省份*/
+	private String harvestAddressProvince;
+	/**城市*/
+	private String harvestAddressCity;
+	/**地址详细信息*/
+	private String harvestAddressInfo;
+	/**地址联系电话*/
+	private String harvestAddressPhone;
+	/**纬度*/
+	private BigDecimal harvestAddressLatitude;
+	/**经度*/
+	private BigDecimal harvestAddressLongitude;
+	/**最近更新时间*/
+	private Date harvestAddressUpdateTime;
 
 	public String getHarvestAddressId() {
 		return harvestAddressId;

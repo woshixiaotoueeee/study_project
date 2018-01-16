@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * 菜肴操作接口
  * @author qdt_PC
  */
 @Controller
@@ -18,10 +19,21 @@ public class DishController extends BaseController{
 	@Autowired
 	private DishService dishService;
 	
+	
 	/**
 	 * 根据ID获取菜肴信息
-	 * @param dishId
+	 * @param dishId 菜肴ID String 字符串
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为  Dish 类型对象具体属性参考 Dish实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.trade.dish.domain.Dish
 	 */
 	@ResponseBody
 	@RequestMapping(value="/findDishByDishId",produces=EncodingConfig.produces)
@@ -38,10 +50,21 @@ public class DishController extends BaseController{
 		return toGsonString();
 	}
 	
+	
 	/**
 	 * 根据菜肴分类ID获取菜肴信息
-	 * @param dishCategoryId
+	 * @param dishCategoryId 菜肴分类ID String 字符串
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为  List&lt;Dish&gt; 类型对象具体属性参考 Dish实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.trade.dish.domain.Dish
 	 */
 	@ResponseBody
 	@RequestMapping(value="/findDishByDishCategoryId",produces=EncodingConfig.produces)
@@ -59,9 +82,19 @@ public class DishController extends BaseController{
 	}
 	
 	/**
-	 * 根据店家ID获取菜肴信息
-	 * @param restaurantId
+	 * 根据菜肴分类ID获取菜肴信息（暂时没有实现功能）
+	 * @param restaurantId 店家ID String 字符串
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为  List&lt;Dish&gt; 类型对象具体属性参考 Dish实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.trade.dish.domain.Dish
 	 */
 	@ResponseBody
 	@RequestMapping(value="/findDishByRestaurantId",produces=EncodingConfig.produces)

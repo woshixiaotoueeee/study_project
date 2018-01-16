@@ -18,9 +18,15 @@ import org.springframework.stereotype.Component;
 @Alias("CartItem")
 @Scope("prototype")
 public class CartItem {
-	private Dish dish;			//商品
-	private Integer dishCount;	// 数量的属性，在条目中默认是1
-	private BigDecimal subtotal;//小计
+	/**
+	 * 商品
+	 * @see org.jxau.lctoh.trade.dish.domain.Dish
+	 * */
+	private Dish dish;
+	/**数量的属性，在条目中默认是1*/
+	private Integer dishCount;
+	/**小计*/
+	private BigDecimal subtotal;
 	public Dish getDish() {
 		return dish;
 	}

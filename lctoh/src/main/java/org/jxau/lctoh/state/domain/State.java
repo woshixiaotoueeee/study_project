@@ -14,9 +14,12 @@ import org.springframework.stereotype.Component;
 @Alias("State")
 @Scope("prototype")
 public class State {
-	private Integer stateId;		//状态码
-	private String stateInfo;		//状态信息
-	private Date stateUpdateTime;	//最近更新信息
+	/**状态码*/
+	private Integer stateId;
+	/**状态信息*/
+	private String stateInfo;
+	/**最近更新信息*/
+	private Date stateUpdateTime;
 	public Integer getStateId() {
 		return stateId;
 	}

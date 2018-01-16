@@ -15,8 +15,10 @@ import org.springframework.stereotype.Component;
 @Alias("ResponseData")
 @Scope("prototype")
 public class ResponseData {
-	private Integer state;			//状态码
-	private Object responseInfo;	//成功或失败所相应的详细信息
+	/**状态码*/
+	private Integer state;
+	/**成功或失败所相应的详细信息*/
+	private Object responseInfo;
 	
 	public Object getResponseInfo() {
 		return responseInfo;

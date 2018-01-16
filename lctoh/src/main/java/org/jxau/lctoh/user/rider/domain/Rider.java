@@ -18,14 +18,31 @@ import org.springframework.stereotype.Component;
 @Alias("Rider")
 @Scope("prototype")
 public class Rider {
-	private String riderId;			//骑手识别码
-	private String riderName;		//骑手姓名
-	private Date riderUpdateTime;	//最近更新时间
-	private User riderUser;			//所属用户
-	private City riderCity;			//所属区域
-	private BigDecimal riderLongitude;//经度
-	private BigDecimal riderLatitude;//纬度
-	private State riderState;		//状态
+	/**骑手识别码*/
+	private String riderId;
+	/**骑手姓名*/
+	private String riderName;
+	/**最近更新时间*/
+	private Date riderUpdateTime;
+	/**
+	 * 用户基础信息
+	 * @see org.jxau.lctoh.user.basis.domain.User
+	 * */
+	private User riderUser;
+	/**
+	 * 所属区域
+	 * @see org.jxau.lctoh.position.region.domain.City
+	 * */
+	private City riderCity;	
+	/**经度*/
+	private BigDecimal riderLongitude;
+	/**纬度*/
+	private BigDecimal riderLatitude;
+	/**
+	 * 状态
+	 * @see org.jxau.lctoh.state.domain.State
+	 * */
+	private State riderState;
 	public String getRiderId() {
 		return riderId;
 	}

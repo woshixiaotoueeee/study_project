@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * 订单操作接口
  * @author qdt_PC
  */
 @Controller
@@ -23,8 +24,18 @@ public class OrderController extends BaseController{
 	
 	/**
 	 * 根据订单识别码获取订单信息
-	 * @param orderId
+	 * @param orderId String 字符串  订单识别码
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为  Order 类型对象具体属性参考 Order实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.trade.order.domain.Order
 	 */
 	@ResponseBody
 	@RequestMapping(value="/findOrderByOrderId",produces=EncodingConfig.produces)
@@ -40,10 +51,21 @@ public class OrderController extends BaseController{
 		}
 		return toGsonString();
 	}
+	
 	/**
 	 * 根据客户识别码查询订单
-	 * @param custmerId
+	 * @param custmerId String 字符串  客户识别码
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为  List&lt;Order&gt; 类型对象具体属性参考 Order实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.trade.order.domain.Order
 	 */
 	@ResponseBody
 	@RequestMapping(value="/findOrderByCustmerId",produces=EncodingConfig.produces)
@@ -61,9 +83,19 @@ public class OrderController extends BaseController{
 	}
 
 	/**
-	 * 根据客户识别码查询订单
-	 * @param restaurantId
+	 * 根据店家识别码查询订单
+	 * @param restaurantId String 字符串  店家识别码
 	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为  List&lt;Order&gt; 类型对象具体属性参考 Order实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.trade.order.domain.Order
 	 */
 	@ResponseBody
 	@RequestMapping(value="/findOrderByRestaurantId",produces=EncodingConfig.produces)

@@ -17,12 +17,27 @@ import org.springframework.stereotype.Component;
 @Alias("DishCategory")
 @Scope("prototype")
 public class DishCategory {
-	private String dishCategoryId;			//菜肴分类ID
-	private String dishCategoryName;		//菜肴分类名
-	private State dishCategoryState;		//分类状态
-	private Date dishCategoryUpdateTime;	//最近更新时间
-	private Restaurant dishCategoryRestaurant;//所属店家
-	private List<Dish> dishList;			//分类所拥有的菜肴
+	/**菜肴分类ID */
+	private String dishCategoryId;
+	/**菜肴分类名 */
+	private String dishCategoryName;
+	/**
+	 * 分类状态
+	 * @see org.jxau.lctoh.state.domain.State
+	 * */
+	private State dishCategoryState;
+	/**最近更新时间 */
+	private Date dishCategoryUpdateTime;
+	/**
+	 * 所属店家
+	 * @see org.jxau.lctoh.user.restaurant.domain.Restaurant
+	 * */
+	private Restaurant dishCategoryRestaurant;
+	/**
+	 * 分类所拥有的菜肴
+	 * @see org.jxau.lctoh.trade.dish.domain.Dish
+	 * */
+	private List<Dish> dishList;
 	public String getDishCategoryId() {
 		return dishCategoryId;
 	}

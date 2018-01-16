@@ -16,12 +16,24 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 @Component
 public class OrderItem {
-	private String orderItemid;			//订单条目ID
-	private BigDecimal orderItemSum;	//条目小计
-	private Integer orderItemCount;		//条目中商品数量
-	private Dish orderItemDish;			//条目商品信息
-	private Order orderItemOrder;		//条目所属订单
-	private Date orderItemUpdateTime;	//最近更新时间
+	/**订单条目ID*/
+	private String orderItemid;
+	/**条目小计*/
+	private BigDecimal orderItemSum;
+	/**条目中商品数量*/
+	private Integer orderItemCount;
+	/**
+	 * 条目商品信息
+	 * @see org.jxau.lctoh.trade.dish.domain.Dish
+	 * */
+	private Dish orderItemDish;			//
+	/**
+	 * 条目所属订单
+	 * @see org.jxau.lctoh.trade.order.domain.Order
+	 * */
+	private Order orderItemOrder;
+	/**最近更新时间*/
+	private Date orderItemUpdateTime;
 	public String getOrderItemid() {
 		return orderItemid;
 	}
