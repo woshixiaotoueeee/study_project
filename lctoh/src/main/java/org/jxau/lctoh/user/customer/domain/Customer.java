@@ -17,13 +17,26 @@ import org.springframework.stereotype.Component;
 @Alias("Customer")
 @Scope("prototype")
 public class Customer{
-	private User customerUser;					//所属用户
-	private String customerId;			//客户识别码
-	private String customerNickname;	//昵称
-	private String customerPortrait;	//头像
-	private BigDecimal customerBalance;		//余额
-	private Date customerUpdateTime;	//最近更新时间
-	private State customerState;		//状态信息
+	/**
+	 * 所属用户
+	 * @see org.jxau.lctoh.user.basis.domain.User
+	 * */
+	private User customerUser;
+	/**客户识别码*/
+	private String customerId;
+	/**昵称*/
+	private String customerNickname;
+	/**头像*/
+	private String customerPortrait;
+	/**余额*/
+	private BigDecimal customerBalance;
+	/**最近更新时间*/
+	private Date customerUpdateTime;
+	/**
+	 * 状态信息
+	 * @see org.jxau.lctoh.state.domain.State
+	 * */
+	private State customerState;
 	public String getCustomerId() {
 		return customerId;
 	}

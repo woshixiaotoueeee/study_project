@@ -14,8 +14,11 @@ import org.springframework.stereotype.Component;
 @Alias("VerificationCode")
 @Scope("prototype")
 public class VerificationCode {
+	/**验证码识别码*/
 	private String verificationCodeId;
+	/**验证码*/
 	private String verificationCode;
+	/**最近更新时间*/
 	private Date verificationCodeUpdateTime;
 	public String getVerificationCodeId() {
 		return verificationCodeId;
