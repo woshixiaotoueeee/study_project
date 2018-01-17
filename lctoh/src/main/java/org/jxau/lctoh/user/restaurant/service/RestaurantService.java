@@ -140,7 +140,29 @@ public class RestaurantService {
 		return restaurantDao.findRestaurantByRestaurantId(restaurantId);
 	}
 	
-	
+	/**
+	 * 根据location和分类Id得到餐馆信息
+	 * @param location
+	 * @param restaurantCategoryId
+	 * @return
+	 */
+	public List<Restaurant> getRestaueantByLocationAndrcid(Location location,String restaurantCategoryId) {
+		List<City> cityList=cityDao.findCityByCityName(location.getCity());
+		if(cityList==null||cityList.size()==0)
+			return null;
+		List<Restaurant> listRestaurant=restaurantDao.findRestaurantByRestaurantCategoryIdAndCityId(restaurantCategoryId,cityList.get(0).getCityId());
+		Restaurant restaurant;
+		for(int i=0;i<listRestaurant.size();i++){
+			restaurant=listRestaurant.get(i);
+			Double distance= Tools.getDistance(restaurant.getRestaurantLongitude().doubleValue(),
+					restaurant.getRestaurantLatitude().doubleValue(),
+					location.getLongitude().doubleValue(),
+					location.getLatitude().doubleValue());
+			restaurant.setRestaurantDistance(BigDecimal.valueOf(distance));
+			listRestaurant.set(i, restaurant);
+		}
+		return Tools.maoPaoSort(listRestaurant);
+	}
 	
 	
 	
