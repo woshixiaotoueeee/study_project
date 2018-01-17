@@ -82,7 +82,7 @@ public class DishController extends BaseController{
 	}
 	
 	/**
-	 * 根据菜肴分类ID获取菜肴信息（暂时没有实现功能）
+	 * 根据店家ID获取菜肴信息（暂时没有实现功能）
 	 * @param restaurantId 店家ID String 字符串
 	 * @return
 	 * <pre>

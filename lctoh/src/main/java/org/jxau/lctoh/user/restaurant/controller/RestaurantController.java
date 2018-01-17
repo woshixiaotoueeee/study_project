@@ -58,7 +58,7 @@ public class RestaurantController extends BaseController {
 	
 	/**
 	 * 根据cityName获取餐馆信息
-	 * @return
+	 * @return 
 	 * <pre>
 	 * json字符串{
 	 * 	说明：{
@@ -109,6 +109,39 @@ public class RestaurantController extends BaseController {
 		}else{
 			try {
 				responseData.successInfo(restaurantService.findRestaurantService(restaurantId));
+			}catch (Exception e) {
+				responseData.failInfo(ErrorMSG.selectFail);
+			}
+		}
+		return toGsonString();
+	}
+	
+	/**
+	 * 根据城市名和店家分类ID获取餐馆信息
+	 * @param restaurantCategoryId 店家分类ID String 字符串
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为  List&lt;Restaurant&gt; 类型对象具体属性参考 Restaurant实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.user.restaurant.domain.Restaurant
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getRestaurantByCityNameAndrcid",produces=EncodingConfig.produces)
+	public String getRestaurantByCityNameAndrcid(String restaurantCategoryId,HttpSession session){
+		Location location =(Location)session.getAttribute(ConversationConfig.locationSession);
+		if(location==null){
+			responseData.failInfo(ErrorMSG.getLocationFail);
+		}else if(restaurantCategoryId==null){
+			responseData.failInfo(ErrorMSG.notKnow);
+		}else{
+			try {
+				responseData.successInfo(restaurantService.getRestaueantByLocationAndrcid(location,restaurantCategoryId));
 			}catch (Exception e) {
 				responseData.failInfo(ErrorMSG.selectFail);
 			}
