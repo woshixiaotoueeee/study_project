@@ -93,4 +93,8 @@ public class ErrorMSG {
 	
 	/**菜肴不存在*/
 	public final static String noDish="菜肴不存在";
+	
+	
+	/**余额不足*/
+	public final static String insufficienFunds="余额不足";
 }

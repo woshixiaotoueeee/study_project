@@ -2,10 +2,16 @@ package org.jxau.lctoh.trade.order.controller;
 
 
 
+import javax.servlet.http.HttpSession;
+
 import org.jxau.lctoh.tool.base.controller.BaseController;
 import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
+import org.jxau.lctoh.tool.config.conversation.ConversationConfig;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
+import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
+import org.jxau.lctoh.trade.order.exception.OrderException;
 import org.jxau.lctoh.trade.order.service.OrderService;
+import org.jxau.lctoh.user.customer.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -113,4 +119,42 @@ public class OrderController extends BaseController{
 	}
 	
 	
+	
+	/**
+	 * 付款
+	 * @param orderId String 字符串  订单识别码
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 */
+	@ResponseBody
+	@RequestMapping(value="/payment",produces=EncodingConfig.produces)
+	public String payment(String orderId, HttpSession session){
+		if(orderId==null){
+			responseData.failInfo(ErrorMSG.notKnow);
+		}else{
+			Customer customer= (Customer) session.getAttribute(ConversationConfig.customerSession);
+			if(customer==null){
+				responseData.failInfo(ErrorMSG.loginTimerOut);
+			}else{
+				try{
+					customer=orderService.payment(orderId);
+					session.setAttribute(ConversationConfig.customerSession, customer);
+					responseData.successInfo(SuccessMSG.successMSG);
+				}catch(OrderException e){
+					responseData.failInfo(e.getMessage());
+				}catch(Exception e){
+					responseData.failInfo(ErrorMSG.operationFail);
+				}
+			}
+		}
+		return toGsonString();
+	}
 }

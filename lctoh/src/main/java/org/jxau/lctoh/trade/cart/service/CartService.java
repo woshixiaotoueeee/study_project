@@ -13,9 +13,11 @@ import org.jxau.lctoh.trade.order.dao.HarvestAddressDao;
 import org.jxau.lctoh.trade.order.dao.OrderDao;
 import org.jxau.lctoh.trade.order.dao.OrderItemDao;
 import org.jxau.lctoh.trade.order.domain.Order;
+import org.jxau.lctoh.user.customer.dao.CustomerDao;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author qdt_PC
@@ -34,6 +36,10 @@ public class CartService {
 	private HarvestAddressDao harvestAddressDao;
 	@Autowired
 	private AddressDao addressDao;
+	//@Autowired
+	//private CustomerDao customerDao;
+	
+	
 	/**
 	 * 添加菜肴至购物车
 	 * @param cart
@@ -95,10 +101,19 @@ public class CartService {
 	 * @param addressId
 	 * @throws CartException
 	 */
+	@Transactional(rollbackFor = Exception.class)
 	public void  putCartToOrder(Cart cart,Customer orderCustomer,String addressId) throws CartException{
 		Address address=addressDao.findAddressByAddressId(addressId);
 		if(address==null)throw new CartException(ErrorMSG.addressError);
 		Order order=cart.toOrder(orderCustomer, address.toHarvestAddress(Tools.getRandomString(32)));
+		
+		/*
+		if(orderCustomer.getCustomerBalance().doubleValue()<order.getOrderPrice().doubleValue()){
+			throw new CartException(ErrorMSG.insufficienFunds);
+		}
+		orderCustomer.setCustomerBalance(orderCustomer.getCustomerBalance().subtract(order.getOrderPrice()));
+		customerDao.updateCustomer(orderCustomer);
+		*/
 		orderDao.addOrder(order);
 		harvestAddressDao.addHarvestAddress(order.getOrderHarvestAddress());
 		orderItemDao.addOrderItemList(order.getOrderItemList());

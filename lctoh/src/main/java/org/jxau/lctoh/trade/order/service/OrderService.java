@@ -2,8 +2,12 @@ package org.jxau.lctoh.trade.order.service;
 
 import java.util.List;
 
+import org.jxau.lctoh.tool.config.error.ErrorMSG;
 import org.jxau.lctoh.trade.order.dao.OrderDao;
 import org.jxau.lctoh.trade.order.domain.Order;
+import org.jxau.lctoh.trade.order.exception.OrderException;
+import org.jxau.lctoh.user.customer.dao.CustomerDao;
+import org.jxau.lctoh.user.customer.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +16,8 @@ public class OrderService {
 	@Autowired
 	private OrderDao orderDao;
 	
-	
+	@Autowired
+	private CustomerDao customerDao;
 	
 	
 	/**
@@ -60,6 +65,25 @@ public class OrderService {
 	 */
 	public Integer addOrder(Order order){
 		return orderDao.addOrder(order);
+	}
+
+	
+	/**
+	 * 付款
+	 * @param orderId
+	 * @param customer
+	 * @throws OrderException 
+	 */
+	public Customer payment(String orderId) throws OrderException {
+		Order order=orderDao.findOrderByOrderId(orderId);
+		Customer customer=order.getOrderCustomer();
+		if(order.getOrderCustomer().getCustomerBalance().doubleValue()<order.getOrderPrice().doubleValue()){
+			throw new OrderException(ErrorMSG.insufficienFunds);
+		}
+		customer.setCustomerBalance(customer.getCustomerBalance().subtract(order.getOrderPrice()));
+		customerDao.updateCustomer(customer);
+		orderDao.updateOrder(order);
+		return customer;
 	}
 	
 	

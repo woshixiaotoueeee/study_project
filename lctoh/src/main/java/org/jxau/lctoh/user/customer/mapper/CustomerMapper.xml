@@ -69,4 +69,20 @@
 			#{customerUser.userId}
 		)
 	</insert>
+	
+	
+	<!-- 更新用户信息 -->
+	<update id="updateCustomer" parameterType="Customer" >
+		update customer
+		set
+			customer.customer_nickname=#{customerNickname},
+			customer.customer_portrait=#{customerPortrait},
+			customer.customer_balance=#{customerBalance},
+			customer.customer_update_time=#{customerUpdateTime},
+			customer.customer_state_id=#{customerState.stateId},
+			customer.customer_user_id=#{customerUser.userId}
+		where 
+			customer.customer_id=#{customerId}
+	</update>
+	
 </mapper>
