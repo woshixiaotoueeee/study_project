@@ -42,6 +42,7 @@ org.jxau.lctoh.trade.dish.service
 org.jxau.lctoh.trade.order.controller
 org.jxau.lctoh.trade.order.dao
 org.jxau.lctoh.trade.order.domain
+org.jxau.lctoh.trade.order.exception
 org.jxau.lctoh.trade.order.mapper
 org.jxau.lctoh.trade.order.service
 org.jxau.lctoh.user.admin.dao
