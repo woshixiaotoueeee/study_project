@@ -86,7 +86,7 @@ public class ErrorMSG {
 	public final static String addressError="地址有误导致操作失败";
 	
 	/**登陆状态过期*/
-	public final static String loginTimerOut="您可能为登陆或者登陆状态过期，请重新登陆";
+	public final static String loginTimerOut="您可能未登陆或者登陆状态过期，请重新登陆";
 	
 	/**购物车失效*/
 	public final static String  cartTimerOut="购物车失效，请重新登录";

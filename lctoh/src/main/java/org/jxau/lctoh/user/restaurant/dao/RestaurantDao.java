@@ -1,5 +1,6 @@
 package org.jxau.lctoh.user.restaurant.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.jxau.lctoh.tool.base.dao.BaseDao;
@@ -105,6 +106,13 @@ public class RestaurantDao extends BaseDao {
 	 */
 	public List<Restaurant> findRestaurantByRestaurantNameAndCityId(String restaurantName,String cityId){
 		return restaurantMapper.findRestaurantByRestaurantNameAndCityId(restaurantName, cityId);
+	}
+	/**更新店家信息
+	 * @param restaurant
+	 */
+	public Integer updateRestaurant(Restaurant restaurant) {
+		restaurant.setRestaurantUpdateTime(new Date());
+		return restaurantMapper.updateRestaurant(restaurant);
 	}
 	
 

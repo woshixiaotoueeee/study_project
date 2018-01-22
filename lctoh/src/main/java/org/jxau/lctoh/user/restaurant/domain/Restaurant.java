@@ -40,6 +40,10 @@ public class Restaurant {
 	private BigDecimal restaurantDistance;
 	/**配送费*/
 	private BigDecimal restaurantDeliveryFee;
+	
+	/**店家收入*/
+	private BigDecimal restaurantIncome;
+	
 	/**最近更新时间*/
 	private Date restaurantUpdateTime;
 	/**
@@ -164,6 +168,12 @@ public class Restaurant {
 	public void setRestaurantDeliveryFee(BigDecimal restaurantDeliveryFee) {
 		this.restaurantDeliveryFee = restaurantDeliveryFee;
 	}
+	public BigDecimal getRestaurantIncome() {
+		return restaurantIncome;
+	}
+	public void setRestaurantIncome(BigDecimal restaurantIncome) {
+		this.restaurantIncome = restaurantIncome;
+	}
 	@Override
 	public String toString() {
 		return "Restaurant [restaurantId=" + restaurantId + ", restaurantName="
@@ -175,12 +185,14 @@ public class Restaurant {
 				+ ", restaurantNotice=" + restaurantNotice
 				+ ", restaurantDistance=" + restaurantDistance
 				+ ", restaurantDeliveryFee=" + restaurantDeliveryFee
+				+ ", restaurantIncome=" + restaurantIncome
 				+ ", restaurantUpdateTime=" + restaurantUpdateTime
 				+ ", restaurantState=" + restaurantState + ", restaurantUser="
 				+ restaurantUser + ", restaurantCategory=" + restaurantCategory
 				+ ", restaurantCity=" + restaurantCity + ", dishCategory="
 				+ dishCategory + "]";
 	}
+	
 	
 	
 }

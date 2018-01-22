@@ -47,5 +47,12 @@ public interface RestaurantMapper {
 	 * @return
 	 */
 	public List<Restaurant> findRestaurantByRestaurantNameAndCityId(@Param("restaurantName")String restaurantName,@Param("cityId")String cityId);
+
+	/**
+	 * 更新店家信息
+	 * @param restaurant
+	 * @return
+	 */
+	public Integer updateRestaurant(Restaurant restaurant);
 	
 }
