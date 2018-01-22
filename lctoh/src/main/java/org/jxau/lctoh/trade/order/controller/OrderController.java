@@ -12,6 +12,7 @@ import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
 import org.jxau.lctoh.trade.order.exception.OrderException;
 import org.jxau.lctoh.trade.order.service.OrderService;
 import org.jxau.lctoh.user.customer.domain.Customer;
+import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -145,7 +146,7 @@ public class OrderController extends BaseController{
 				responseData.failInfo(ErrorMSG.loginTimerOut);
 			}else{
 				try{
-					customer=orderService.payment(orderId);
+					customer=orderService.payment(orderId,customer);
 					session.setAttribute(ConversationConfig.customerSession, customer);
 					responseData.successInfo(SuccessMSG.successMSG);
 				}catch(OrderException e){
@@ -157,4 +158,84 @@ public class OrderController extends BaseController{
 		}
 		return toGsonString();
 	}
+	
+	/**
+	 * 确认订单
+	 * @param orderId String 字符串  订单识别码
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 */
+	@ResponseBody
+	@RequestMapping(value="/confirmationOrder",produces=EncodingConfig.produces)
+	public String confirmationOrder(String orderId, HttpSession session){
+		if(orderId==null){
+			responseData.failInfo(ErrorMSG.notKnow);
+		}else{
+			Restaurant restaurant= (Restaurant) session.getAttribute(ConversationConfig.restaurantSession);
+			if(restaurant==null){
+				responseData.failInfo(ErrorMSG.loginTimerOut);
+			}else{
+				try{
+					orderService.confirmationOrder(orderId,restaurant);
+					responseData.successInfo(SuccessMSG.successMSG);
+				}catch(OrderException e){
+					responseData.failInfo(e.getMessage());
+				}catch(Exception e){
+					responseData.failInfo(ErrorMSG.operationFail);
+				}
+			}
+		}
+		return toGsonString();
+	}
+	
+	/**
+	 * 确认收货
+	 * @param orderId String 字符串  订单识别码
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 */
+	@ResponseBody
+	@RequestMapping(value="/confirmationReceipt",produces=EncodingConfig.produces)
+	public String confirmationReceipt(String orderId, HttpSession session){
+		if(orderId==null){
+			responseData.failInfo(ErrorMSG.notKnow);
+		}else{
+			Customer customer= (Customer) session.getAttribute(ConversationConfig.customerSession);
+			if(customer==null){
+				responseData.failInfo(ErrorMSG.loginTimerOut);
+			}else{
+				try{
+					orderService.confirmationReceipt(orderId,customer);
+					responseData.successInfo(SuccessMSG.successMSG);
+				}catch(OrderException e){
+					responseData.failInfo(e.getMessage());
+				}catch(Exception e){
+					responseData.failInfo(ErrorMSG.operationFail);
+				}
+			}
+		}
+		return toGsonString();
+	}
+	
+
+
+	
+	
+	
 }

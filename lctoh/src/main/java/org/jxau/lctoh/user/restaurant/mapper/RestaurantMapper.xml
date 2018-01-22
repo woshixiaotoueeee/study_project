@@ -16,6 +16,7 @@
 		<result property="restaurantNotice" column="restaurant_notice"/>
 		<result property="restaurantDistance" column="restaurant_distance"/>
 		<result property="restaurantDeliveryFee" column="restaurant_deliveryfee"/>
+		<result property="restaurantIncome" column="restaurant_income"/>
 		<result property="restaurantUpdateTime" column="restaurant_update_time"/>
 		<association property="restaurantState" column="restaurant_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
 		<association property="restaurantUser" column="restaurant_user_id" select="org.jxau.lctoh.user.basis.mapper.UserMapper.findUserByUserId"/>
@@ -40,7 +41,8 @@
 			restaurant.restaurant_user_id,
 			restaurant.restaurant_category_id,
 			restaurant.restaurant_city_id,
-			restaurant.restaurant_deliveryfee
+			restaurant.restaurant_deliveryfee,
+			restaurant.restaurant_income
 		from restaurant
 		where 
 			restaurant.restaurant_delete_or_not=1
@@ -65,14 +67,15 @@
 			restaurant.restaurant_user_id,
 			restaurant.restaurant_category_id,
 			restaurant.restaurant_city_id,
-			restaurant.restaurant_deliveryfee
+			restaurant.restaurant_deliveryfee,
+			restaurant.restaurant_income
 		from restaurant
 		where 
 			restaurant.restaurant_delete_or_not=1
 			and restaurant.restaurant_user_id=#{userId}
 	</select>
 	
-	
+
 	<!--根据分类及识别码及城市识别码查询店家信息-->
 	<select id="findRestaurantByRestaurantCategoryIdAndCityId" resultMap="RestaurantResultMap">
 		select 
@@ -90,7 +93,8 @@
 			restaurant.restaurant_user_id,
 			restaurant.restaurant_category_id,
 			restaurant.restaurant_city_id,
-			restaurant.restaurant_deliveryfee
+			restaurant.restaurant_deliveryfee,
+			restaurant.restaurant_income
 		from restaurant
 		where 
 			restaurant.restaurant_delete_or_not=1
@@ -114,7 +118,8 @@
 			restaurant.restaurant_user_id,
 			restaurant.restaurant_category_id,
 			restaurant.restaurant_city_id,
-			restaurant.restaurant_deliveryfee
+			restaurant.restaurant_deliveryfee,
+			restaurant.restaurant_income
 		from restaurant
 		where 
 			restaurant.restaurant_delete_or_not=1
@@ -138,12 +143,34 @@
 			restaurant.restaurant_user_id,
 			restaurant.restaurant_category_id,
 			restaurant.restaurant_city_id,
-			restaurant.restaurant_deliveryfee
+			restaurant.restaurant_deliveryfee,
+			restaurant.restaurant_income
 		from restaurant
 		where 
 			restaurant.restaurant_delete_or_not=1
 			and restaurant.restaurant_city_id=#{cityId}
 			and restaurant.restaurant_name like CONCAT(CONCAT('%', #{restaurantName}), '%')
 	</select>
-	
+	<!--根据店名及城市识别码查询店家信息-->
+	<update id="updateRestaurant" parameterType="Restaurant">
+		update restaurant
+		set
+			restaurant.restaurant_name=#{restaurantName},
+			restaurant.restaurant_phone=#{restaurantPhone},
+			restaurant.restaurant_image=#{restaurantImage},
+			restaurant.restaurant_longitude=#{restaurantLongitude},
+			restaurant.restaurant_latitude=#{restaurantLatitude},
+			restaurant.restaurant_address_info=#{restaurantAddressInfo},
+			restaurant.restaurant_notice=#{restaurantNotice},
+			restaurant.restaurant_distance=#{restaurantDistance},
+			restaurant.restaurant_update_time=#{restaurantUpdateTime},
+			restaurant.restaurant_state_id=#{restaurantState.stateId},
+			restaurant.restaurant_user_id=#{restaurantUser.userId},
+			restaurant.restaurant_category_id=#{restaurantCategory.restaurantCategoryId},
+			restaurant.restaurant_city_i#{restaurantCity.cityId},
+			restaurant.restaurant_deliveryfee=#{restaurantDeliveryFee},
+			restaurant.restaurant_income=#{restaurantIncome}
+		where
+			restaurant.restaurant_id=#{restaurantId}
+	</update>
 </mapper>
