@@ -15,4 +15,9 @@ public interface CustomerMapper {
 	/**添加客户*/
 	public Integer addCustomer(Customer customer);
 	
+	/**更新客户信息*/
+	public Integer updateCustomer(Customer customer);
+	
+	
+	
 }

@@ -39,4 +39,11 @@ public class CustomerDao extends BaseDao {
 		customer.setCustomerUpdateTime(new Date());
 		return customerMapper.addCustomer(customer);
 	}
+	
+	/**更新客户信息*/
+	public Integer updateCustomer(Customer customer){
+		customer.setCustomerUpdateTime(new Date());
+		return customerMapper.updateCustomer(customer);
+	}
+	
 }
