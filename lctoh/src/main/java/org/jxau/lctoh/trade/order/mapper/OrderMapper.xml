@@ -17,18 +17,22 @@
 		<association property="orderHarvestAddress" column="orderId" select="org.jxau.lctoh.trade.order.mapper.HarvestAddressMapper.findHarvestAddressByhaid"/>
 	</resultMap>
 	
+	<sql id="OrderColumns">
+		order.order_id,
+		order.order_creat_time,
+		order.order_price,
+		order.order_update_tiame,
+		order.order_delivery_time,
+		order.order_state_id,
+		order.order_customer_id,
+		order.order_restaurant_id
+	</sql>
+	
 	
 	<!--根据订单识别码查询订单-->
 	<select id="findOrderByOrderId" parameterType="String" resultMap="OrderResultMap">
 		select
-			order.order_id,
-			order.order_creat_time,
-			order.order_price,
-			order.order_update_tiame,
-			order.order_delivery_time,
-			order.order_state_id,
-			order.order_customer_id,
-			order.order_restaurant_id
+			<include refid="OrderColumns"></include>
 		from
 			order
 		where
@@ -39,14 +43,7 @@
 	<!--根据客户识别码查询订单-->
 	<select id="findOrderByCustmerId" parameterType="String" resultMap="OrderResultMap">
 		select
-			order.order_id,
-			order.order_creat_time,
-			order.order_price,
-			order.order_update_tiame,
-			order.order_delivery_time,
-			order.order_state_id,
-			order.order_customer_id,
-			order.order_restaurant_id
+			<include refid="OrderColumns"></include>
 		from
 			order
 		where
@@ -57,14 +54,7 @@
 	<!--根据店家识别码查询订单-->
 	<select id="findOrderByRestaurantId" parameterType="String" resultMap="OrderResultMap">
 		select
-			order.order_id,
-			order.order_creat_time,
-			order.order_price,
-			order.order_update_tiame,
-			order.order_delivery_time,
-			order.order_state_id,
-			order.order_customer_id,
-			order.order_restaurant_id
+			<include refid="OrderColumns"></include>
 		from
 			order
 		where

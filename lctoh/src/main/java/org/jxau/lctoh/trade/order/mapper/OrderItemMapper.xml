@@ -14,6 +14,8 @@
 		<association property="orderItemOrder" column="order_item_order_id" select="org.jxau.lctoh.trade.order.mapper.OrderMapper.findOrderByOrderId"/>
 	</resultMap>
 	
+	
+	
 	<!--根据订单识别码查询订单条目-->
 	<select id="findOrderItemByOrderId" parameterType="String" resultMap="OrderItemResultMap">
 		select
