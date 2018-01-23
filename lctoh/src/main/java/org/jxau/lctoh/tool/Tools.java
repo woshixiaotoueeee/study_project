@@ -2,10 +2,12 @@ package org.jxau.lctoh.tool;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import org.jxau.lctoh.position.location.domain.Location;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.springframework.stereotype.Component;
 
@@ -174,6 +176,23 @@ public class Tools {
   	
   	
   	
-  	
- 
+  	/**
+  	 * 根据定位信息补全与店家的距离信息并按距离大小进行排序
+  	 * @param restaurantList
+  	 * @param location
+  	 * @return
+  	 */
+  	public static List<Restaurant> completionDistance(List<Restaurant> restaurantList,Location location){
+  		Restaurant restaurant;
+		for(int i=0;i<restaurantList.size();i++){
+			restaurant=restaurantList.get(i);
+			Double distance= Tools.getDistance(restaurant.getRestaurantLongitude().doubleValue(),
+					restaurant.getRestaurantLatitude().doubleValue(),
+					location.getLongitude().doubleValue(),
+					location.getLatitude().doubleValue());
+			restaurant.setRestaurantDistance(BigDecimal.valueOf(distance));
+			restaurantList.set(i, restaurant);
+		}
+  		return maoPaoSort(restaurantList);
+  	}
 }
