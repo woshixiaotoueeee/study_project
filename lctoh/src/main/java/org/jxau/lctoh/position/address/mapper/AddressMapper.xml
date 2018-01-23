@@ -21,21 +21,24 @@
 		<association property="addressCustomer" column="address_customer_id" select="org.jxau.lctoh.user.customer.mapper.CustomerMapper.findCustomerByCustomerId"/>
 	</resultMap>
 	
+	<sql id="AddrressColumns">
+		address.address_id,
+		address.address_name,
+		address.address_province,
+		address.address_city,
+		address.address_info,
+		address.address_phone,
+		address.address_latitude,
+		address.address_longitude,
+		address.address_update_time,
+		address.address_state_id,
+		address.address_customer_id
+	</sql>
 	
 	<!--根据地址识别码查询地址信息-->
 	<select id="findAddressByAddressId" parameterType="String" resultMap="AddressResultMap">
 		select
-			address.address_id,
-			address.address_name,
-			address.address_province,
-			address.address_city,
-			address.address_info,
-			address.address_phone,
-			address.address_latitude,
-			address.address_longitude,
-			address.address_update_time,
-			address.address_state_id,
-			address.address_customer_id
+			<include refid="AddrressColumns"></include>
 		from
 			address
 		where
@@ -46,17 +49,7 @@
 	<!--根据客户识别码识别码查询地址信息-->
 	<select id="findAddressByCustomerId" parameterType="String" resultMap="AddressResultMap">
 		select
-			address.address_id,
-			address.address_name,
-			address.address_province,
-			address.address_city,
-			address.address_info,
-			address.address_phone,
-			address.address_latitude,
-			address.address_longitude,
-			address.address_update_time,
-			address.address_state_id,
-			address.address_customer_id
+			<include refid="AddrressColumns"></include>
 		from
 			address
 		where
@@ -67,17 +60,7 @@
 	<!--根据地址识别码查询地址信息-->
 	<select id="findAddressByCustomerIdAndState" resultMap="AddressResultMap">
 		select
-			address.address_id,
-			address.address_name,
-			address.address_province,
-			address.address_city,
-			address.address_info,
-			address.address_phone,
-			address.address_latitude,
-			address.address_longitude,
-			address.address_update_time,
-			address.address_state_id,
-			address.address_customer_id
+			<include refid="AddrressColumns"></include>
 		from
 			address
 		where

@@ -4,18 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace:需与接口的完全限定名保持一致 -->
 <mapper namespace="org.jxau.lctoh.user.basis.mapper.UserMapper">
-
+	<sql id="UserColumns">
+		user_id as userId,
+		user_account as userAccount,
+		user_password as userPassword,
+		user_email as userEmail,
+		user_sex as userSex,
+		user_phone as userPhone,
+		user_update_time as userUpdateTime,
+		user_code as userCode
+	</sql>
 	<!--根据用户识别码查询用户信息-->
 	<select id="findUserByUserId" parameterType="String" resultType="User">
 		select 
-			user_id as userId,
-			user_account as userAccount,
-			user_password as userPassword,
-			user_email as userEmail,
-			user_sex as userSex,
-			user_phone as userPhone,
-			user_update_time as userUpdateTime,
-			user_code as userCode
+			<include refid="UserColumns"></include>
 		from user
 		where
 			user_delete_or_not=1 
@@ -25,14 +27,7 @@
 	<!--根据用户账号查询用户信息-->
 	<select id="findUserByUserAccount" parameterType="String" resultType="User">
 		select 
-			user_id as userId,
-			user_account as userAccount,
-			user_password as userPassword,
-			user_email as userEmail,
-			user_sex as userSex,
-			user_phone as userPhone,
-			user_update_time as userUpdateTime,
-			user_code as userCode
+			<include refid="UserColumns"></include>
 		from user
 		where
 			user_delete_or_not=1 
@@ -42,14 +37,7 @@
 	<!--根据用户邮箱查询用户信息-->
 	<select id="findUserByUserEmail" parameterType="String" resultType="User">
 		select 
-			user_id as userId,
-			user_account as userAccount,
-			user_password as userPassword,
-			user_email as userEmail,
-			user_phone as userPhone,
-			user_sex as userSex,
-			user_update_time as userUpdateTime,
-			user_code as userCode
+			<include refid="UserColumns"></include>
 		from user
 		where 
 			user_delete_or_not=1 
@@ -59,14 +47,7 @@
 	<!--根据用户激活码查询用户信息-->
 	<select id="findUserByUserCode" parameterType="String" resultType="User">
 		select 
-			user_id as userId,
-			user_account as userAccount,
-			user_password as userPassword,
-			user_email as userEmail,
-			user_sex as userSex,
-			user_phone as userPhone,
-			user_update_time as userUpdateTime,
-			user_code as userCode
+			<include refid="UserColumns"></include>
 		from user
 		where 
 			user_delete_or_not=1 

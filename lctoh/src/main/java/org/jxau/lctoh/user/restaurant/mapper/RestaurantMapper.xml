@@ -24,25 +24,31 @@
 		<association property="restaurantCity" column="restaurant_city_id" select="org.jxau.lctoh.position.region.mapper.CityMapper.findCityByCityId"/>
 	</resultMap>
 
+
+
+	<sql id="RestaurantColumns">
+		restaurant.restaurant_id,
+		restaurant.restaurant_name,
+		restaurant.restaurant_phone,
+		restaurant.restaurant_image,
+		restaurant.restaurant_longitude,
+		restaurant.restaurant_latitude,
+		restaurant.restaurant_address_info,
+		restaurant.restaurant_notice,
+		restaurant.restaurant_distance,
+		restaurant.restaurant_update_time,
+		restaurant.restaurant_state_id,
+		restaurant.restaurant_user_id,
+		restaurant.restaurant_category_id,
+		restaurant.restaurant_city_id,
+		restaurant.restaurant_deliveryfee,
+		restaurant.restaurant_income
+	</sql>
+
 	<!--根据店家识别码查询分类信息-->
 	<select id="findRestaurantByRestaurantId" parameterType="String" resultMap="RestaurantResultMap">
 		select 
-			restaurant.restaurant_id,
-			restaurant.restaurant_name,
-			restaurant.restaurant_phone,
-			restaurant.restaurant_image,
-			restaurant.restaurant_longitude,
-			restaurant.restaurant_latitude,
-			restaurant.restaurant_address_info,
-			restaurant.restaurant_notice,
-			restaurant.restaurant_distance,
-			restaurant.restaurant_update_time,
-			restaurant.restaurant_state_id,
-			restaurant.restaurant_user_id,
-			restaurant.restaurant_category_id,
-			restaurant.restaurant_city_id,
-			restaurant.restaurant_deliveryfee,
-			restaurant.restaurant_income
+			<include refid="RestaurantColumns"></include>
 		from restaurant
 		where 
 			restaurant.restaurant_delete_or_not=1
@@ -53,22 +59,7 @@
 	<!--根据用户识别码查询店家信息-->
 	<select id="findRestaurantByUserId" parameterType="String" resultMap="RestaurantResultMap">
 		select 
-			restaurant.restaurant_id,
-			restaurant.restaurant_name,
-			restaurant.restaurant_phone,
-			restaurant.restaurant_image,
-			restaurant.restaurant_longitude,
-			restaurant.restaurant_latitude,
-			restaurant.restaurant_address_info,
-			restaurant.restaurant_notice,
-			restaurant.restaurant_distance,
-			restaurant.restaurant_update_time,
-			restaurant.restaurant_state_id,
-			restaurant.restaurant_user_id,
-			restaurant.restaurant_category_id,
-			restaurant.restaurant_city_id,
-			restaurant.restaurant_deliveryfee,
-			restaurant.restaurant_income
+			<include refid="RestaurantColumns"></include>
 		from restaurant
 		where 
 			restaurant.restaurant_delete_or_not=1
@@ -79,22 +70,7 @@
 	<!--根据分类及识别码及城市识别码查询店家信息-->
 	<select id="findRestaurantByRestaurantCategoryIdAndCityId" resultMap="RestaurantResultMap">
 		select 
-			restaurant.restaurant_id,
-			restaurant.restaurant_name,
-			restaurant.restaurant_phone,
-			restaurant.restaurant_image,
-			restaurant.restaurant_longitude,
-			restaurant.restaurant_latitude,
-			restaurant.restaurant_address_info,
-			restaurant.restaurant_notice,
-			restaurant.restaurant_distance,
-			restaurant.restaurant_update_time,
-			restaurant.restaurant_state_id,
-			restaurant.restaurant_user_id,
-			restaurant.restaurant_category_id,
-			restaurant.restaurant_city_id,
-			restaurant.restaurant_deliveryfee,
-			restaurant.restaurant_income
+			<include refid="RestaurantColumns"></include>
 		from restaurant
 		where 
 			restaurant.restaurant_delete_or_not=1
@@ -104,22 +80,7 @@
 	<!--根据城市识别码查询店家信息-->
 	<select id="findRestaurantByCityId" parameterType="String" resultMap="RestaurantResultMap">
 		select 
-			restaurant.restaurant_id,
-			restaurant.restaurant_name,
-			restaurant.restaurant_phone,
-			restaurant.restaurant_image,
-			restaurant.restaurant_longitude,
-			restaurant.restaurant_latitude,
-			restaurant.restaurant_address_info,
-			restaurant.restaurant_notice,
-			restaurant.restaurant_distance,
-			restaurant.restaurant_update_time,
-			restaurant.restaurant_state_id,
-			restaurant.restaurant_user_id,
-			restaurant.restaurant_category_id,
-			restaurant.restaurant_city_id,
-			restaurant.restaurant_deliveryfee,
-			restaurant.restaurant_income
+			<include refid="RestaurantColumns"></include>
 		from restaurant
 		where 
 			restaurant.restaurant_delete_or_not=1
@@ -129,22 +90,7 @@
 	<!--根据店名及城市识别码查询店家信息-->
 	<select id="findRestaurantByRestaurantNameAndCityId" resultMap="RestaurantResultMap">
 		select 
-			restaurant.restaurant_id,
-			restaurant.restaurant_name,
-			restaurant.restaurant_phone,
-			restaurant.restaurant_image,
-			restaurant.restaurant_longitude,
-			restaurant.restaurant_latitude,
-			restaurant.restaurant_address_info,
-			restaurant.restaurant_notice,
-			restaurant.restaurant_distance,
-			restaurant.restaurant_update_time,
-			restaurant.restaurant_state_id,
-			restaurant.restaurant_user_id,
-			restaurant.restaurant_category_id,
-			restaurant.restaurant_city_id,
-			restaurant.restaurant_deliveryfee,
-			restaurant.restaurant_income
+			<include refid="RestaurantColumns"></include>
 		from restaurant
 		where 
 			restaurant.restaurant_delete_or_not=1
