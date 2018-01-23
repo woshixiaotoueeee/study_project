@@ -103,12 +103,13 @@ public class RestaurantController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getRestaurantByRestaurantId",produces=EncodingConfig.produces)
-	public String getRestaurantByRestaurantId(String restaurantId){
+	public String getRestaurantByRestaurantId(String restaurantId,HttpSession session){
 		if(restaurantId==null){
 			responseData.failInfo(ErrorMSG.notKnow);
 		}else{
 			try {
-				responseData.successInfo(restaurantService.findRestaurantService(restaurantId));
+				Location location =(Location)session.getAttribute(ConversationConfig.locationSession);
+				responseData.successInfo(restaurantService.findRestaurantService(restaurantId,location));
 			}catch (Exception e) {
 				responseData.failInfo(ErrorMSG.selectFail);
 			}
