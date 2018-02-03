@@ -2,6 +2,7 @@ package org.jxau.lctoh.trade.cart.service;
 
 import org.jxau.lctoh.position.address.dao.AddressDao;
 import org.jxau.lctoh.position.address.domain.Address;
+import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
 import org.jxau.lctoh.trade.cart.domain.Cart;
@@ -13,8 +14,9 @@ import org.jxau.lctoh.trade.order.dao.HarvestAddressDao;
 import org.jxau.lctoh.trade.order.dao.OrderDao;
 import org.jxau.lctoh.trade.order.dao.OrderItemDao;
 import org.jxau.lctoh.trade.order.domain.Order;
-import org.jxau.lctoh.user.customer.dao.CustomerDao;
 import org.jxau.lctoh.user.customer.domain.Customer;
+import org.jxau.lctoh.user.rider.dao.DispatchingDao;
+import org.jxau.lctoh.user.rider.domain.Dispatching;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +38,9 @@ public class CartService {
 	private HarvestAddressDao harvestAddressDao;
 	@Autowired
 	private AddressDao addressDao;
+	@Autowired
+	private DispatchingDao dispatchingDao;
+	
 	//@Autowired
 	//private CustomerDao customerDao;
 	
@@ -114,9 +119,16 @@ public class CartService {
 		orderCustomer.setCustomerBalance(orderCustomer.getCustomerBalance().subtract(order.getOrderPrice()));
 		customerDao.updateCustomer(orderCustomer);
 		*/
+		Dispatching dispatching=new Dispatching();
+		dispatching.setDispatchingOrder(order);
+		
+		State dispatchingState=new State(110001);
+		dispatching.setDispatchingState(dispatchingState);
+		
 		orderDao.addOrder(order);
 		harvestAddressDao.addHarvestAddress(order.getOrderHarvestAddress());
 		orderItemDao.addOrderItemList(order.getOrderItemList());
+		dispatchingDao.addDispatching(dispatching);
 	}
 	
 	

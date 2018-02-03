@@ -52,7 +52,7 @@ public class AddressService{
 	 */
 	public Integer addAddress(Address address){
 		//补全状态信息
-		address.setAddressState(stateDao.findStateByStateId(60003));
+		address.setAddressState(new State(60003));
 		return addressDao.addAddress(address);
 	}
 	
