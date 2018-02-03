@@ -136,7 +136,7 @@ public class DishController extends BaseController{
 			responseData.failInfo(ErrorMSG.notKnow);
 		}else{
 			try{
-				responseData.successInfo(dishService.findDishByRestaurantId(restaurantId));
+	//			responseData.successInfo(dishService.findDishByRestaurantId(restaurantId));
 			}catch(Exception e){
 				responseData.failInfo(ErrorMSG.selectFail);
 			}
