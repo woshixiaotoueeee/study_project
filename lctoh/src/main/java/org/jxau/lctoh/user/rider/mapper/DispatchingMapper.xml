@@ -42,4 +42,58 @@
 	</update>
 	
 	
+	<!--根据ID查询配送信息-->
+	<select id="getDispatchingById" parameterType="String" resultMap="DispatchingResultMap">
+		SELECT
+			dispatching.dispatching_id,
+			dispatching.dispatching_rider_id,
+			dispatching.dispatching_state_id,
+			dispatching.dispatching_update_time
+		FROM
+			dispatching
+		where
+			dispatching.dispatching_delete_or_not=1
+			and dispatching.dispatching_id=#{dispatchingId}
+	</select>
+	<!--根据状态查询配送信息-->
+	<select id="getDispatchingByState" parameterType="Integer" resultMap="DispatchingResultMap">
+		SELECT
+			dispatching.dispatching_id,
+			dispatching.dispatching_rider_id,
+			dispatching.dispatching_state_id,
+			dispatching.dispatching_update_time
+		FROM
+			dispatching
+		where
+			dispatching.dispatching_delete_or_not=1
+			and dispatching.dispatching_state_id=#{dispatchingStateId}
+	</select>
+	<!--根据骑手查询配送信息-->
+	<select id="getDispatchingByRider" parameterType="String" resultMap="DispatchingResultMap">
+		SELECT
+			dispatching.dispatching_id,
+			dispatching.dispatching_rider_id,
+			dispatching.dispatching_state_id,
+			dispatching.dispatching_update_time
+		FROM
+			dispatching
+		where
+			dispatching.dispatching_delete_or_not=1
+			and dispatching.dispatching_rider_id=#{dispatchingRiderId}
+	</select>
+	
+	<!--根据骑手和状态查询配送信息-->
+	<select id="getDispatchingByRiderAndState"  resultMap="DispatchingResultMap">
+		SELECT
+			dispatching.dispatching_id,
+			dispatching.dispatching_rider_id,
+			dispatching.dispatching_state_id,
+			dispatching.dispatching_update_time
+		FROM
+			dispatching
+		where
+			dispatching.dispatching_delete_or_not=1
+			and dispatching.dispatching_state_id=#{dispatchingStateId}
+			and dispatching.dispatching_rider_id=#{dispatchingRiderId}
+	</select>
 </mapper>
