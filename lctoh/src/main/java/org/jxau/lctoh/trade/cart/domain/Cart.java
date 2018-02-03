@@ -160,8 +160,7 @@ public class Cart {
 		order.setOrderId(harvestAddress.getHarvestAddressId());// 设置订单编号
 		order.setOrderCreatTime(new Date());		// 下单时间
 		order.setOrderPrice(total);	//订单价格
-		State orderState=new State();
-		orderState.setStateId(100001);				//订单状态
+		State orderState=new State(100001);			//订单状态
 		order.setOrderState(orderState);			//设置未付款状态
 		
 		order.setOrderCustomer(orderCustomer);		//订单所属用户
