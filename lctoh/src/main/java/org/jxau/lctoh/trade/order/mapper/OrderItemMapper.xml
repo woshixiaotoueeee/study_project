@@ -91,7 +91,8 @@
 			order_item.order_item_count,
 			order_item.order_item_order_id,
 			order_item.order_item_dish_id,
-			order_item.order_item_update_time)
+			order_item.order_item_update_time
+		)
 			
 		<foreach collection="list" item="item" index="index" separator="union all">
 			select

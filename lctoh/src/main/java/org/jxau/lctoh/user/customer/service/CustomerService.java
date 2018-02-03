@@ -122,5 +122,23 @@ public class CustomerService {
 		
 		return user;
 	}
+
+	/**
+	 * 更新用户信息
+	 * @param customer
+	 * @throws UserException 
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	public void updateCustomer(Customer customer) throws UserException {
+		User user=customer.getCustomerUser();
+		if(userDao.findUserByUserEmail(user.getUserEmail())!=null){
+			throw new UserException(ErrorMSG.emailExistence);
+		}
+		/**
+		 * 省略电话号码验证
+		 * */
+		userDao.updateUser(user);
+		customerDao.updateCustomer(customer);
+	}
 	
 }

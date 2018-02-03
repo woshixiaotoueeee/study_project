@@ -1,5 +1,7 @@
 package org.jxau.lctoh.trade.dish.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.jxau.lctoh.tool.base.controller.BaseController;
 import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
@@ -112,6 +114,34 @@ public class DishController extends BaseController{
 	}
 	
 	
-	
+	/**
+	 * 根据店家ID获取菜肴信息（暂时没有实现功能）
+	 * @param restaurantId 店家ID String 字符串
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为  List&lt;Dish&gt; 类型对象具体属性参考 Dish实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.trade.dish.domain.Dish
+	 */
+	@ResponseBody
+	@RequestMapping(value="/addDishCategory",produces=EncodingConfig.produces)
+	public String addDishCategory(String restaurantId,HttpSession session){
+		if(restaurantId==null){
+			responseData.failInfo(ErrorMSG.notKnow);
+		}else{
+			try{
+				responseData.successInfo(dishService.findDishByRestaurantId(restaurantId));
+			}catch(Exception e){
+				responseData.failInfo(ErrorMSG.selectFail);
+			}
+		}
+		return toGsonString();
+	}
 	
 }

@@ -90,6 +90,7 @@
 			order.order_state_id,
 			order.order_customer_id,
 			order.order_restaurant_id
+		)
 		values(
 			#{orderId},
 			#{orderCreatTime},
@@ -99,7 +100,7 @@
 			#{orderState.sateId},
 			#{orderCustomer.customerId},
 			#{orderRestaurant.restaurantId}
-		}
+		)
 	</insert>
 	
 	

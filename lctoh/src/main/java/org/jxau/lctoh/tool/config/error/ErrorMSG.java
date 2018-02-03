@@ -30,6 +30,8 @@ public class ErrorMSG {
 	public final static String provinceAndCityIsNull="省份城市信息为空";
 	/**地址联系人或联系方式为空*/
 	public final static String addressNameOrPhoneIsNull="地址联系人或联系方式空";
+	/**昵称为空*/
+	public final static String nicknameIsNull="昵称为空";
 	
 	//操作
 	/**权限错误信息*/
