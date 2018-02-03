@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:需与接口的完全限定名保持一致 -->
+<mapper namespace="org.jxau.lctoh.user.rider.mapper.Dispatching">
+	<!-- 数据库表与实体类相对应的resultMap-->
+	<resultMap type="Dispatching" id="DispatchingResultMap">
+		<result property="dispatchingUpdateTime" column="dispatching_update_time"/>
+		<association property="dispatchingOrder" column="dispatching_id" select="org.jxau.lctoh.trade.order.mapper.OrderMapper.findOrderByOrderId"/>
+		<association property="dispatchingRider" column="dispatching_rider_id" select="org.jxau.lctoh.user.rider.mapper.RiderMapper.findRiderByRiderId"/>
+		<association property="dispatchingState" column="dispatching_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
+	</resultMap>
+	
+	
+	
+	
+	<!--添加配送信息-->
+	<insert id="addDispatching" parameterType="Dispatching">
+		insert into dispatching(
+			dispatching.dispatching_update_time,
+			dispatching.dispatching_id,
+			dispatching.dispatching_rider_id,
+			dispatching.dispatching_state_id
+		)
+		values(
+			#{dispatchingUpdateTime},
+			#{dispatchingOrder.orderId},
+			#{dispatchingRider.riderId},
+			#{dispatchingState.stateId}
+		)
+	</insert>
+	<!--更新配送信息-->
+	<update id="updateDispatching" parameterType="Dispatching">
+		update dispatching
+		set
+			dispatching_update_time=#{dispatchingUpdateTime},
+			dispatching_rider_id=#{dispatchingRider.riderId},
+			dispatching_state_id=#{dispatchingState.stateId}
+		where
+			dispatching_id=#{dispatchingOrder.orderId}
+	</update>
+	
+	
+</mapper>
