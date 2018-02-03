@@ -105,8 +105,8 @@ public class RiderConreoller extends BaseController {
 	 * @see org.jxau.lctoh.user.rider.domain.Dispatching
 	 */
 	@ResponseBody
-	@RequestMapping(value="/getDispatchingByState",produces=EncodingConfig.produces)
-	public String getDispatchingByRiderAndState(Rider rider,HttpSession session){
+	@RequestMapping(value="/getDispatchingByRider",produces=EncodingConfig.produces)
+	public String getDispatchingByRider(Rider rider,HttpSession session){
 		try {
 			rider=getRiderInSession(session);
 			responseData.successInfo(dispatchingService.getDispatchingByRider(rider.getRiderId()));
@@ -132,8 +132,8 @@ public class RiderConreoller extends BaseController {
 	 * @see org.jxau.lctoh.user.rider.domain.Dispatching
 	 */
 	@ResponseBody
-	@RequestMapping(value="/getDispatchingByState",produces=EncodingConfig.produces)
-	public String getDispatchingByRiderAndState(String  dispatchingId,HttpSession session){
+	@RequestMapping(value="/getDispatchingById",produces=EncodingConfig.produces)
+	public String getDispatchingById(String  dispatchingId,HttpSession session){
 		try {
 			if(dispatchingId==null){
 				responseData.failInfo(ErrorMSG.notKnow);
@@ -169,7 +169,7 @@ public class RiderConreoller extends BaseController {
 	 * @see org.jxau.lctoh.user.rider.domain.Dispatching
 	 */
 	@ResponseBody
-	@RequestMapping(value="/getDispatchingByState",produces=EncodingConfig.produces)
+	@RequestMapping(value="/updateDispatchingState",produces=EncodingConfig.produces)
 	public String updateDispatchingState(Rider rider,String  dispatchingId,Integer state,HttpSession session){
 		try {
 			rider=getRiderInSession(session);
