@@ -1,5 +1,9 @@
 package org.jxau.lctoh.user.rider.controller;
 
+import java.math.BigDecimal;
+import java.util.Map;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.jxau.lctoh.tool.base.controller.BaseController;
@@ -187,6 +191,48 @@ public class RiderConreoller extends BaseController {
 						dispatchingService.delivery(dispatchingId);
 						break;
 				}
+				responseData.successInfo(SuccessMSG.successMSG);
+			}
+		} catch (RiderException e) {
+			responseData.failInfo(e.getMessage());
+		}catch (Exception e){
+			responseData.failInfo(ErrorMSG.notKnow);
+		}
+		return toGsonString();
+	}
+	
+	
+	
+	/**
+	 * 根据更新订单配送状态配送信息
+	 * @param riderLongitude BigDecimal 数字 经纬度
+	 * @param riderLatitude BigDecimal 数字 经纬度
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为成功信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 */
+	@ResponseBody
+	@RequestMapping(value="/riderLocation",produces=EncodingConfig.produces)
+	public String riderLocation(Rider rider,BigDecimal riderLongitude,BigDecimal riderLatitude,HttpSession session){
+		try {
+			rider=getRiderInSession(session);
+			if(riderLongitude==null||riderLatitude==null){
+				responseData.failInfo(ErrorMSG.notKnow);
+			}else{
+				rider.setRiderLatitude(riderLatitude);
+				rider.setRiderLongitude(riderLongitude);
+				session.setAttribute(ConversationConfig.riderSession, rider);
+				ServletContext servletContext=session.getServletContext();
+				Map map=(Map) servletContext.getAttribute(ConversationConfig.riderContext);
+				map.put(rider.getRiderId(), rider);
+				servletContext.setAttribute(ConversationConfig.riderContext, map);
 				responseData.successInfo(SuccessMSG.successMSG);
 			}
 		} catch (RiderException e) {
