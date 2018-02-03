@@ -20,6 +20,9 @@ public class State {
 	private String stateInfo;
 	/**最近更新信息*/
 	private Date stateUpdateTime;
+	public State(){}
+	public State(Integer stateId){this.stateId=stateId;}
+	
 	public Integer getStateId() {
 		return stateId;
 	}
