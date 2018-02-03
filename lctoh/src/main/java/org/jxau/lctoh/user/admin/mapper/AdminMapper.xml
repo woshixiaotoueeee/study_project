@@ -8,6 +8,7 @@
 	<resultMap type="Admin" id="AdminResultMap">
 	    <id property="adminId" column="admin_id"/>
 		<result property="adminUpdateTime" column="admin_update_time"/>
+		<result property="adminName" column="admin_name"/>
 		<association property="adminUser" column="admin_user_id" select="org.jxau.lctoh.user.basis.mapper.UserMapper.findUserByUserId"/>
 		<association property="adminState" column="admin_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
 	</resultMap>
@@ -18,6 +19,7 @@
 			admin.admin_id,
 			admin.admin_update_time,
 			admin.admin_state_id,
+			admin.admin_name,
 			admin.admin_user_id
 		from admin
 		where 
@@ -31,6 +33,7 @@
 			admin.admin_id,
 			admin.admin_update_time,
 			admin.admin_state_id,
+			admin.admin_name,
 			admin.admin_user_id
 		from admin
 		where 

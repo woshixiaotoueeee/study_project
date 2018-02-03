@@ -25,6 +25,15 @@ public class Admin {
 	private String adminId;
 	/**最近更新时间*/
 	private Date adminUpdateTime;
+	/**管理员名字*/
+	private String adminName;
+	
+	public String getAdminName() {
+		return adminName;
+	}
+	public void setAdminName(String adminName) {
+		this.adminName = adminName;
+	}
 	/**
 	 * 管理员状态
 	 * @see org.jxau.lctoh.state.domain.State
@@ -57,10 +66,8 @@ public class Admin {
 	@Override
 	public String toString() {
 		return "Admin [adminUser=" + adminUser + ", adminId=" + adminId
-				+ ", adminUpdateTime=" + adminUpdateTime + ", adminState="
-				+ adminState + "]";
+				+ ", adminUpdateTime=" + adminUpdateTime + ", adminName="
+				+ adminName + ", adminState=" + adminState + "]";
 	}
-	
-	
 	
 }
