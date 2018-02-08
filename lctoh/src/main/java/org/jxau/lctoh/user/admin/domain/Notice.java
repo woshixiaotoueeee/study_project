@@ -1,0 +1,19 @@
+package org.jxau.lctoh.user.admin.domain;
+
+import org.apache.ibatis.type.Alias;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+/**
+ * 公告类
+ * @author qdt_PC
+ */
+@Component
+@Alias("Notice")
+@Scope("prototype")
+public class Notice {
+	
+	
+	
+	
+}
