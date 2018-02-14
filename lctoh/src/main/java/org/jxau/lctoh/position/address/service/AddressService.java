@@ -11,6 +11,7 @@ import org.jxau.lctoh.tool.config.defaultInformation.DefaultInformation;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service("AddressService")
@@ -76,6 +77,7 @@ public class AddressService{
 	 * @param addressId
 	 * @throws Exception 
 	 */
+	@Transactional(rollbackFor = Exception.class)
 	public void updateAddressState(Customer customer, String addressId) throws Exception {
 		/**
 		 * 先将用户的地址改为非默认地址

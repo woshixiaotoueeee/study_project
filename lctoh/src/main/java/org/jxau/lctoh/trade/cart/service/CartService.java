@@ -66,6 +66,7 @@ public class CartService {
 			//添加
 			cart.addDish(cartItem);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new CartException(ErrorMSG.noDish);
 		}
 		return cart;
@@ -93,6 +94,7 @@ public class CartService {
 			//更新
 			cart.updateDish(cartItem);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new CartException(ErrorMSG.updateFail);
 		}
 		return cart;

@@ -119,8 +119,10 @@ public class UserController extends BaseController{
 					default : responseData.failInfo(ErrorMSG.notKnowUser);
 				}
 			}catch (UserException e) {
+				e.printStackTrace();
 				responseData.failInfo(e.getMessage());
 			} catch (Exception e) {
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.notKnow);
 			}
 		}
@@ -185,8 +187,10 @@ public class UserController extends BaseController{
 					default : responseData.failInfo(ErrorMSG.notKnowUser);
 				}
 			}catch (UserException e) {
+				e.printStackTrace();
 				responseData.failInfo(e.getMessage());
 			} catch (Exception e) {
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.notKnow);
 			}
 		}
@@ -227,8 +231,10 @@ public class UserController extends BaseController{
 				session.setAttribute(ConversationConfig.userSession, user);
 				responseData.successInfo(SuccessMSG.sendEmailSuccess);
 			} catch (UserException e) {
+				e.printStackTrace();
 				responseData.failInfo(e.getMessage());
 			}catch (Exception e) {
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.notKnow);
 			}
 		}
@@ -269,6 +275,7 @@ public class UserController extends BaseController{
 			try {
 				responseData.successInfo(userService.updateUser(user));
 			} catch (Exception e) {
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.operationFail);
 			}
 		}
@@ -298,8 +305,10 @@ public class UserController extends BaseController{
 			try {
 				responseData.successInfo(verificationCodeService.setCode(userAccount));
 			} catch (VerificationCodeException e) {
+				e.printStackTrace();
 				responseData.failInfo(e.getMessage());
 			}catch(Exception e){
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.operationFail);
 			}
 		}
@@ -333,8 +342,10 @@ public class UserController extends BaseController{
 			try {
 				responseData.successInfo(verificationCodeService.setCodeByUserEmail(userEmail));
 			} catch (VerificationCodeException e) {
+				e.printStackTrace();
 				responseData.failInfo(e.getMessage());
 			}catch(Exception e){
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.operationFail);
 			}
 		}
@@ -393,8 +404,10 @@ public class UserController extends BaseController{
 				user=customerService.addCustomerRegister(user);
 				responseData.successInfo(user);
 			}catch(UserException e){
+				e.printStackTrace();
 				responseData.failInfo(e.getMessage());
 			}catch(Exception e){
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.operationFail);
 			}
 		}

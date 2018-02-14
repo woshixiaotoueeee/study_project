@@ -41,6 +41,7 @@ public class ProvinceController extends BaseController{
 		try{
 			responseData.successInfo(provinceService.getAllProvince());
 		}catch(Exception e){
+			e.getMessage();
 			responseData.failInfo(ErrorMSG.selectFail);
 		}
 		return Tools.gson.toJson(responseData);

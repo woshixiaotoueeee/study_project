@@ -50,6 +50,7 @@ public class RestaurantController extends BaseController {
 				Location location =(Location)session.getAttribute(ConversationConfig.locationSession);
 				responseData.successInfo(restaurantService.getRestaueantByCityId(cityId, location));
 			} catch (Exception e) {
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.selectFail);
 			}
 		}
@@ -80,6 +81,7 @@ public class RestaurantController extends BaseController {
 			try {
 				responseData.successInfo(restaurantService.getRestaueantByLocation(location));
 			}catch (Exception e) {
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.selectFail);
 			}
 		}
@@ -111,6 +113,7 @@ public class RestaurantController extends BaseController {
 				Location location =(Location)session.getAttribute(ConversationConfig.locationSession);
 				responseData.successInfo(restaurantService.findRestaurantService(restaurantId,location));
 			}catch (Exception e) {
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.selectFail);
 			}
 		}
@@ -144,6 +147,7 @@ public class RestaurantController extends BaseController {
 			try {
 				responseData.successInfo(restaurantService.getRestaueantByLocationAndrcid(location,restaurantCategoryId));
 			}catch (Exception e) {
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.selectFail);
 			}
 		}

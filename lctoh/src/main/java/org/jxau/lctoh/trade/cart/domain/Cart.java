@@ -74,6 +74,7 @@ public class Cart {
 			}
 			total=sum;
 		}catch(Exception e){
+			e.printStackTrace();
 			throw new CartException(ErrorMSG.putCartTotalFail);
 		}
 	}

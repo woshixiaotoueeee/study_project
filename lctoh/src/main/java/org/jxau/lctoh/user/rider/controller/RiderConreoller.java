@@ -55,8 +55,10 @@ public class RiderConreoller extends BaseController {
 				responseData.successInfo(dispatchingService.getDispatchingByRiderAndState(stateId, rider.getRiderId()));
 			}
 		} catch (RiderException e) {
+			e.printStackTrace();
 			responseData.failInfo(e.getMessage());
 		}catch (Exception e){
+			e.printStackTrace();
 			responseData.failInfo(ErrorMSG.notKnow);
 		}
 		return toGsonString();
@@ -88,6 +90,7 @@ public class RiderConreoller extends BaseController {
 				responseData.successInfo(dispatchingService.getDispatchingByState(stateId));
 			}
 		}catch (Exception e){
+			e.printStackTrace();
 			responseData.failInfo(ErrorMSG.notKnow);
 		}
 		return toGsonString();
@@ -115,8 +118,10 @@ public class RiderConreoller extends BaseController {
 			rider=getRiderInSession(session);
 			responseData.successInfo(dispatchingService.getDispatchingByRider(rider.getRiderId()));
 		} catch (RiderException e) {
+			e.printStackTrace();
 			responseData.failInfo(e.getMessage());
 		}catch (Exception e){
+			e.printStackTrace();
 			responseData.failInfo(ErrorMSG.notKnow);
 		}
 		return toGsonString();
@@ -145,6 +150,7 @@ public class RiderConreoller extends BaseController {
 				responseData.successInfo(dispatchingService.getDispatchingById(dispatchingId));
 			}
 		}catch (Exception e){
+			e.printStackTrace();
 			responseData.failInfo(ErrorMSG.notKnow);
 		}
 		return toGsonString();
@@ -194,8 +200,10 @@ public class RiderConreoller extends BaseController {
 				responseData.successInfo(SuccessMSG.successMSG);
 			}
 		} catch (RiderException e) {
+			e.printStackTrace();
 			responseData.failInfo(e.getMessage());
 		}catch (Exception e){
+			e.printStackTrace();
 			responseData.failInfo(ErrorMSG.notKnow);
 		}
 		return toGsonString();
@@ -236,8 +244,10 @@ public class RiderConreoller extends BaseController {
 				responseData.successInfo(SuccessMSG.successMSG);
 			}
 		} catch (RiderException e) {
+			e.printStackTrace();
 			responseData.failInfo(e.getMessage());
 		}catch (Exception e){
+			e.printStackTrace();
 			responseData.failInfo(ErrorMSG.notKnow);
 		}
 		return toGsonString();

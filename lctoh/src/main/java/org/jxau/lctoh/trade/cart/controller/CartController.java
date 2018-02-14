@@ -58,6 +58,7 @@ public class CartController extends BaseController{
 		try {
 			responseData.successInfo(getCartInSession(session));
 		} catch (CartException e) {
+			e.printStackTrace();
 			responseData.failInfo(e.getMessage());
 		}
 		return toGsonString();
@@ -83,8 +84,9 @@ public class CartController extends BaseController{
 	public String addDishCart(Cart cart,String dishId,Integer dishCount,HttpSession session){
 		try {
 			cart = getCartInSession(session);
-		} catch (CartException e1) {
-			return responseData.failInfo(e1.getMessage()).toGsonString();
+		} catch (CartException e) {
+			e.printStackTrace();
+			return responseData.failInfo(e.getMessage()).toGsonString();
 		}
 		if(dishCount==null||dishId==null){
 			responseData.failInfo(ErrorMSG.notKnow);
@@ -94,8 +96,10 @@ public class CartController extends BaseController{
 				session.setAttribute(ConversationConfig.cartSession, cart);
 				responseData.successInfo(SuccessMSG.addSuccessMSG);
 			} catch (CartException e) {
+				e.printStackTrace();
 				responseData.failInfo(e.getMessage());
 			} catch (Exception e) {
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.addFail);
 			}
 		}
@@ -122,8 +126,9 @@ public class CartController extends BaseController{
 	public String updateDishCart(Cart cart,String dishId,Integer dishCount,HttpSession session){
 		try {
 			cart = getCartInSession(session);
-		} catch (CartException e1) {
-			return responseData.failInfo(e1.getMessage()).toGsonString();
+		} catch (CartException e) {
+			e.printStackTrace();
+			return responseData.failInfo(e.getMessage()).toGsonString();
 		}
 		if(dishCount==null||dishId==null){
 			responseData.failInfo(ErrorMSG.notKnow);
@@ -133,8 +138,10 @@ public class CartController extends BaseController{
 				session.setAttribute(ConversationConfig.cartSession, cart);
 				responseData.successInfo(SuccessMSG.updateSuccessMSG);
 			} catch (CartException e) {
+				e.printStackTrace();
 				responseData.failInfo(e.getMessage());
 			}catch (Exception e) {
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.updateFail);
 			}
 		}
@@ -160,8 +167,9 @@ public class CartController extends BaseController{
 	public String deleteDishCart(Cart cart,String dishId,HttpSession session){
 		try {
 			cart = getCartInSession(session);
-		} catch (CartException e1) {
-			return responseData.failInfo(e1.getMessage()).toGsonString();
+		} catch (CartException e) {
+			e.printStackTrace();
+			return responseData.failInfo(e.getMessage()).toGsonString();
 		}
 		if(cart==null||dishId==null){
 			responseData.failInfo(ErrorMSG.notKnow);
@@ -171,6 +179,7 @@ public class CartController extends BaseController{
 				session.setAttribute(ConversationConfig.cartSession, cart);
 				responseData.successInfo(SuccessMSG.deleteSuccessMSG);
 			} catch (Exception e) {
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.deleteFail);
 			}
 		}
@@ -202,8 +211,9 @@ public class CartController extends BaseController{
 	public String cartToOrder(Cart cart,String addressId,HttpSession session){
 		try {
 			cart = getCartInSession(session);
-		} catch (CartException e1) {
-			return responseData.failInfo(e1.getMessage()).toGsonString();
+		} catch (CartException e) {
+			e.printStackTrace();
+			return responseData.failInfo(e.getMessage()).toGsonString();
 		}
 		if(addressId==null){
 			responseData.failInfo(ErrorMSG.notKnow);
@@ -217,8 +227,10 @@ public class CartController extends BaseController{
 					responseData.successInfo(SuccessMSG.successMSG);
 				}
 			} catch (CartException e) {
+				e.printStackTrace();
 				responseData.failInfo(e.getMessage());
 			} catch (Exception e) {
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.operationFail);
 			}
 		}
