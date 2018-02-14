@@ -44,6 +44,7 @@ public class CustomerController  extends BaseController{
 		try {
 			responseData.successInfo(getCustomer(session));
 		} catch (UserException e) {
+			e.printStackTrace();
 			responseData.failInfo(e.getMessage());
 		}
 		return toGsonString();
@@ -100,8 +101,10 @@ public class CustomerController  extends BaseController{
 			}
 			
 		} catch (UserException e) {
+			e.printStackTrace();
 			responseData.failInfo(e.getMessage());
 		} catch (Exception e) {
+			e.printStackTrace();
 			responseData.failInfo(ErrorMSG.notKnow);
 		}
 		return toGsonString();

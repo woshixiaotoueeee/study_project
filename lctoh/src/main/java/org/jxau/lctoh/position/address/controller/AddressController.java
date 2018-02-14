@@ -53,6 +53,7 @@ public class AddressController extends BaseController{
 			try{
 				responseData.successInfo(addressService.findAddressByAddressId(addressId));
 			}catch(Exception e){
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.selectFail);
 			}
 		}
@@ -83,6 +84,7 @@ public class AddressController extends BaseController{
 			try{
 				responseData.successInfo(addressService.findAddressByCustomerId(customerId));
 			}catch(Exception e){
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.selectFail);
 			}
 		}
@@ -142,6 +144,7 @@ public class AddressController extends BaseController{
 					addressService.updateAddress(address);
 					responseData.successInfo(SuccessMSG.updateSuccessMSG);
 				}catch(Exception e){
+					e.printStackTrace();
 					responseData.failInfo(ErrorMSG.updateFail);
 				}
 			}
@@ -177,6 +180,7 @@ public class AddressController extends BaseController{
 					addressService.updateAddressState(customer,addressId);
 					responseData.successInfo(SuccessMSG.successMSG);
 				}catch(Exception e){
+					e.printStackTrace();
 					responseData.failInfo(ErrorMSG.updateFail);
 				}
 			}
@@ -234,6 +238,7 @@ public class AddressController extends BaseController{
 					addressService.addAddress(address);
 					responseData.successInfo(SuccessMSG.addSuccessMSG);
 				}catch(Exception e){
+					e.printStackTrace();
 					responseData.failInfo(ErrorMSG.addFail);
 				}
 			}
@@ -266,6 +271,7 @@ public class AddressController extends BaseController{
 				addressService.deleteAddress(addressId);
 				responseData.successInfo(SuccessMSG.deleteSuccessMSG);
 			}catch(Exception e){
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.deleteFail);
 			}
 		}

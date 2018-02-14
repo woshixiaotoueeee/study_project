@@ -46,6 +46,7 @@ public class DishController extends BaseController{
 			try{
 				responseData.successInfo(dishService.findDishByDishId(dishId));
 			}catch(Exception e){
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.selectFail);
 			}
 		}
@@ -77,6 +78,7 @@ public class DishController extends BaseController{
 			try{
 				responseData.successInfo(dishService.findDishByDishCategoryId(dishCategoryId));
 			}catch(Exception e){
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.selectFail);
 			}
 		}
@@ -107,6 +109,7 @@ public class DishController extends BaseController{
 			try{
 				responseData.successInfo(dishService.findDishByRestaurantId(restaurantId));
 			}catch(Exception e){
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.selectFail);
 			}
 		}
@@ -138,6 +141,7 @@ public class DishController extends BaseController{
 			try{
 	//			responseData.successInfo(dishService.findDishByRestaurantId(restaurantId));
 			}catch(Exception e){
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.selectFail);
 			}
 		}

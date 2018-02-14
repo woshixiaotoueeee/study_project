@@ -53,6 +53,7 @@ public class OrderController extends BaseController{
 			try{
 				responseData.successInfo(orderService.findOrderByOrderId(orderId));
 			}catch(Exception e){
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.selectFail);
 			}
 		}
@@ -83,6 +84,7 @@ public class OrderController extends BaseController{
 			try{
 				responseData.successInfo(orderService.findOrderByCustmerId(custmerId));
 			}catch(Exception e){
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.selectFail);
 			}
 		}
@@ -113,6 +115,7 @@ public class OrderController extends BaseController{
 			try{
 				responseData.successInfo(orderService.findOrderByRestaurantId(restaurantId));
 			}catch(Exception e){
+				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.selectFail);
 			}
 		}
@@ -150,8 +153,10 @@ public class OrderController extends BaseController{
 					session.setAttribute(ConversationConfig.customerSession, customer);
 					responseData.successInfo(SuccessMSG.successMSG);
 				}catch(OrderException e){
+					e.printStackTrace();
 					responseData.failInfo(e.getMessage());
 				}catch(Exception e){
+					e.printStackTrace();
 					responseData.failInfo(ErrorMSG.operationFail);
 				}
 			}
@@ -187,8 +192,10 @@ public class OrderController extends BaseController{
 					orderService.confirmationOrder(orderId,restaurant);
 					responseData.successInfo(SuccessMSG.successMSG);
 				}catch(OrderException e){
+					e.printStackTrace();
 					responseData.failInfo(e.getMessage());
 				}catch(Exception e){
+					e.printStackTrace();
 					responseData.failInfo(ErrorMSG.operationFail);
 				}
 			}
@@ -224,8 +231,10 @@ public class OrderController extends BaseController{
 					orderService.confirmationReceipt(orderId,customer);
 					responseData.successInfo(SuccessMSG.successMSG);
 				}catch(OrderException e){
+					e.printStackTrace();
 					responseData.failInfo(e.getMessage());
 				}catch(Exception e){
+					e.printStackTrace();
 					responseData.failInfo(ErrorMSG.operationFail);
 				}
 			}

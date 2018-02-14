@@ -1,7 +1,9 @@
 package org.jxau.lctoh.user.admin.service;
 
 import java.util.List;
+
 import org.jxau.lctoh.user.admin.dao.NoticeDao;
+import org.jxau.lctoh.user.admin.domain.Admin;
 import org.jxau.lctoh.user.admin.domain.Notice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,8 +42,12 @@ public class NoticeService {
 	/**
 	 * 删除公告信息
 	 * @return
+	 * @throws Exception 
 	 */
-	public Integer deleteNoticeByNoticeId(Notice notice){
+	public Integer deleteNoticeByNoticeId(String noticeId,Admin admin) throws Exception{
+		Notice notice=noticeDao.findNoticeByNoticeId(noticeId);
+		if(notice==null)throw new Exception();
+		notice.setNoticeAdmin(admin);
 		return noticeDao.deleteNotice(notice);
 	}
 	/**
