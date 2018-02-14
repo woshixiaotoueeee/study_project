@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:需与接口的完全限定名保持一致 -->
+<mapper namespace="org.jxau.lctoh.user.admin.mapper.NoticeMapper">
+
+	<!-- 数据库表与实体类相对应的resultMap -->
+	<resultMap type="Notice" id="NoticeResultMap">
+	    <id property="noticeId" column="notice_id"/>
+		<result property="noticeTitle" column="notice_title"/>
+		<result property="notiveDetails" column="notice_details"/>
+		<result property="noticeUpdateTime" column="notice_update_time"/>
+		<association property="noticeAdmin" column="notice_admin_id" select="org.jxau.lctoh.user.admin.mapper.AdminMapper.findAdminByAdminId"/>
+		<association property="noticeState" column="notice_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
+	</resultMap>
+	
+	<!--根据公告识别码查询公告信息-->
+	<select id="findNoticeByNoticeId" parameterType="String" resultMap="NoticeResultMap">
+		select 
+			notice.notice_id,
+			notice.notice_admin_id,
+			notice.notice_title,
+			notice.notice_details,
+			notice.notice_update_time,
+			notice.notice_state_id
+		from notice
+		where 
+			notice.notice_delete_or_not=1
+			and notice.notice_id=#{noticeId}
+	</select>
+	<!--根据公告对应状态查询公告信息（查询不同人看的公告）-->
+	<select id="findNoticeByStateId" parameterType="Integer" resultMap="NoticeResultMap">
+		select 
+			notice.notice_id,
+			notice.notice_admin_id,
+			notice.notice_title,
+			notice.notice_details,
+			notice.notice_update_time,
+			notice.notice_state_id
+		from notice
+		where 
+			notice.notice_delete_or_not=1
+			and notice.notice_state_id=#{stateId}
+	</select>
+	<!--查询所有公告信息-->
+	<select id="findAllNotice" resultMap="NoticeResultMap">
+		select 
+			notice.notice_id,
+			notice.notice_admin_id,
+			notice.notice_title,
+			notice.notice_details,
+			notice.notice_update_time,
+			notice.notice_state_id
+		from notice
+		where 
+			notice.notice_delete_or_not=1
+	</select>
+	
+	<!--删除公告信息-->
+	<update id="deleteNotice" parameterType="Notice">
+		update 
+			notice
+		set 
+			notice.notice_delete_or_not=0
+		where 
+			notice.notice_id=#{noticeId}
+	</update>
+	<!--更新公告信息-->
+	<update id="updateNotice" parameterType="Notice">
+		update 
+			notice
+		set 
+			notice.notice_admin_id=#{noticeAdmin.adminId},
+			notice.notice_title=#{noticeTitle},
+			notice.notice_details=#{notiveDetails},
+			notice.notice_update_time=#{noticeUpdateTime},
+			notice.notice_state_id=#{noticeState.stateId}
+		where 
+			notice.notice_id=#{noticeId}
+	</update>
+	<!--添加公告信息-->
+	<insert id="addNotice" parameterType="Notice">
+		insert into notice(
+				notice.notice_id,
+				notice.notice_admin_id,
+				notice.notice_title,
+				notice.notice_details,
+				notice.notice_update_time,
+				notice.notice_state_id
+			)
+			values(
+				#{noticeId},
+				#{noticeAdmin.adminId},
+				#{noticeTitle},
+				#{notiveDetails},
+				#{noticeUpdateTime},
+				#{noticeState.stateId}
+			)
+	</insert>
+	
+</mapper>
