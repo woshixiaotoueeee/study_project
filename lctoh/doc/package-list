@@ -45,6 +45,7 @@ org.jxau.lctoh.trade.order.domain
 org.jxau.lctoh.trade.order.exception
 org.jxau.lctoh.trade.order.mapper
 org.jxau.lctoh.trade.order.service
+org.jxau.lctoh.user.admin.controller
 org.jxau.lctoh.user.admin.dao
 org.jxau.lctoh.user.admin.domain
 org.jxau.lctoh.user.admin.mapper
@@ -65,7 +66,9 @@ org.jxau.lctoh.user.restaurant.dao
 org.jxau.lctoh.user.restaurant.domain
 org.jxau.lctoh.user.restaurant.mapper
 org.jxau.lctoh.user.restaurant.service
+org.jxau.lctoh.user.rider.controller
 org.jxau.lctoh.user.rider.dao
 org.jxau.lctoh.user.rider.domain
+org.jxau.lctoh.user.rider.exception
 org.jxau.lctoh.user.rider.mapper
 org.jxau.lctoh.user.rider.service
