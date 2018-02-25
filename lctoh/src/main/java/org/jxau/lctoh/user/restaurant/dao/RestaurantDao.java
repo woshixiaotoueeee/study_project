@@ -114,6 +114,13 @@ public class RestaurantDao extends BaseDao {
 		restaurant.setRestaurantUpdateTime(new Date());
 		return restaurantMapper.updateRestaurant(restaurant);
 	}
-	
+	/**
+	 * 根据客户查询收藏的店家信息
+	 * @param customerId
+	 * @return
+	 */
+	public List<Restaurant> findCollectRestaurantByCustomerId(String customerId){
+		return restaurantMapper.findCollectRestaurantByCustomerId(customerId);
+	}
 
 }

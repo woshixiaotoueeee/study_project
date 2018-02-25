@@ -14,7 +14,10 @@ import org.jxau.lctoh.user.basis.dao.VerificationCodeDao;
 import org.jxau.lctoh.user.basis.domain.User;
 import org.jxau.lctoh.user.basis.domain.VerificationCode;
 import org.jxau.lctoh.user.basis.exception.UserException;
+import org.jxau.lctoh.user.customer.domain.Customer;
+import org.jxau.lctoh.user.restaurant.dao.CollectRestaurantDao;
 import org.jxau.lctoh.user.restaurant.dao.RestaurantDao;
+import org.jxau.lctoh.user.restaurant.domain.CollectRestaurant;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,8 +32,8 @@ public class RestaurantService {
 	private VerificationCodeDao verificationCodeDao;
 	@Autowired
 	private CityDao cityDao;
-	
-	
+	@Autowired
+	private CollectRestaurantDao collectRestaurantDao;
 	
 	/**
 	 * 管理员登陆
@@ -143,6 +146,45 @@ public class RestaurantService {
 		listRestaurant=Tools.completionDistance(listRestaurant, location);
 		return listRestaurant;
 	}
+	
+	/**
+	 * 根据客户查询收藏的店家信息
+	 * @param customer
+	 * @return
+	 */
+	public List<Restaurant> findCollectRestaurantByCustomer(Customer customer){
+		return restaurantDao.findCollectRestaurantByCustomerId(customer.getCustomerId());
+	}
+	
+	
+	
+	/**
+	 * 添加收藏的店家
+	 * @param collectRestaurant
+	 * @return
+	 */
+	public Integer addCollectRestaurant(Customer customer,String restaurantId){
+		CollectRestaurant collectRestaurant=new CollectRestaurant();
+		collectRestaurant.setCollectCustomer(customer);
+		Restaurant restaurant=new Restaurant();
+		restaurant.setRestaurantId(restaurantId);
+		collectRestaurant.setCollectRestaurant(restaurant);
+		return collectRestaurantDao.addCollectRestaurant(collectRestaurant);
+	}
+	/**
+	 * 删除收藏的店家
+	 * @param collectRestaurant
+	 * @return
+	 */
+	public Integer deleteCollectRestaurant(Customer customer,String restaurantId){
+		CollectRestaurant collectRestaurant=new CollectRestaurant();
+		collectRestaurant.setCollectCustomer(customer);
+		Restaurant restaurant=new Restaurant();
+		restaurant.setRestaurantId(restaurantId);
+		collectRestaurant.setCollectRestaurant(restaurant);
+		return collectRestaurantDao.deleteCollectRestaurant(collectRestaurant);
+	}
+	
 	
 	
 	

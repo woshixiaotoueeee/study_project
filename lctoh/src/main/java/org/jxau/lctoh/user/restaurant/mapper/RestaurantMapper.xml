@@ -119,4 +119,16 @@
 		where
 			restaurant.restaurant_id=#{restaurantId}
 	</update>
+	<!--根据客户查询收藏的店家信息-->
+	<select id="findCollectRestaurantByCustomerId" parameterType="String" resultMap="RestaurantResultMap">
+		select 
+			<include refid="RestaurantColumns"></include>
+		from restaurant ,collect_restaurant
+		where 
+			restaurant.restaurant_id=collect_restaurant.collect_restaurant_id
+			and collect_restaurant.collect_customer_id=#{customerId}
+			and collect_restaurant.collect_restaurant_delete_or_not=1
+			and restaurant.restaurant_delete_or_not=1
+	</select>
+	
 </mapper>

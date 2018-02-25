@@ -55,4 +55,12 @@ public interface RestaurantMapper {
 	 */
 	public Integer updateRestaurant(Restaurant restaurant);
 	
+	
+	/**
+	 * 根据客户查询收藏的店家信息
+	 * @param customerId
+	 * @return
+	 */
+	public List<Restaurant> findCollectRestaurantByCustomerId(@Param("customerId")String customerId);
+	
 }
