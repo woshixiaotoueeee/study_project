@@ -62,7 +62,8 @@
 		update 
 			notice
 		set 
-			notice.notice_delete_or_not=0
+			notice.notice_delete_or_not=0,
+			notice.notice_update_time=#{noticeUpdateTime}
 		where 
 			notice.notice_id=#{noticeId}
 	</update>

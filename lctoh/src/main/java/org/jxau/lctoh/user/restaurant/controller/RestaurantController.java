@@ -8,6 +8,8 @@ import org.jxau.lctoh.tool.base.controller.BaseController;
 import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
 import org.jxau.lctoh.tool.config.conversation.ConversationConfig;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
+import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
+import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.restaurant.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -150,6 +152,86 @@ public class RestaurantController extends BaseController {
 				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.selectFail);
 			}
+		}
+		return toGsonString();
+	}
+	/**
+	 * 根据客户查询收藏店家信息
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为  List&lt;Restaurant&gt; 类型对象具体属性参考 Restaurant实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.user.restaurant.domain.Restaurant
+	 */
+	@ResponseBody
+	@RequestMapping(value="/findCollectRestaurantByCustomerId",produces=EncodingConfig.produces)
+	public String findCollectRestaurantByCustomerId(HttpSession session){
+		Customer customer=(Customer)session.getAttribute(ConversationConfig.customerSession);
+		try {
+			responseData.successInfo(restaurantService.findCollectRestaurantByCustomer(customer));
+		}catch (Exception e) {
+			e.printStackTrace();
+			responseData.failInfo(ErrorMSG.selectFail);
+		}
+		return toGsonString();
+	}
+	/**
+	 * 添加询收藏店家
+	 * @param restaurantId 店家ID String 字符串
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 */
+	@ResponseBody
+	@RequestMapping(value="/addCollectRestaurant",produces=EncodingConfig.produces)
+	public String addCollectRestaurant(String restaurantId,HttpSession session){
+		Customer customer=(Customer)session.getAttribute(ConversationConfig.customerSession);
+		try {
+			restaurantService.addCollectRestaurant(customer,restaurantId);
+			responseData.successInfo(SuccessMSG.addSuccessMSG);
+		}catch (Exception e) {
+			e.printStackTrace();
+			responseData.failInfo(ErrorMSG.addFail);
+		}
+		return toGsonString();
+	}
+	/**
+	 * 删除询收藏店家
+	 * @param restaurantId 店家ID String 字符串
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 */
+	@ResponseBody
+	@RequestMapping(value="/deleteCollectRestaurant",produces=EncodingConfig.produces)
+	public String deleteCollectRestaurant(String restaurantId,HttpSession session){
+		Customer customer=(Customer)session.getAttribute(ConversationConfig.customerSession);
+		try {
+			restaurantService.deleteCollectRestaurant(customer,restaurantId);
+			responseData.successInfo(SuccessMSG.deleteSuccessMSG);
+		}catch (Exception e) {
+			e.printStackTrace();
+			responseData.failInfo(ErrorMSG.deleteFail);
 		}
 		return toGsonString();
 	}
