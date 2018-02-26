@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 /**
  * @author qdt_PC
  */
-@Repository("DishDao")
+@Repository("CollectDishDao")
 public class CollectDishDao extends BaseDao {
 	private CollectDishMapper collectDishMapper;
 	
