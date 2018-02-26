@@ -170,8 +170,8 @@ public class RestaurantController extends BaseController {
 	 * @see org.jxau.lctoh.user.restaurant.domain.Restaurant
 	 */
 	@ResponseBody
-	@RequestMapping(value="/findCollectRestaurantByCustomerId",produces=EncodingConfig.produces)
-	public String findCollectRestaurantByCustomerId(HttpSession session){
+	@RequestMapping(value="/findCollectRestaurant",produces=EncodingConfig.produces)
+	public String findCollectRestaurant(HttpSession session){
 		Customer customer=(Customer)session.getAttribute(ConversationConfig.customerSession);
 		try {
 			responseData.successInfo(restaurantService.findCollectRestaurantByCustomer(customer));

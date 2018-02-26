@@ -16,19 +16,24 @@
 		<association property="dishState" column="dish_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
 		<association property="dishCategory" column="dish_category_id" select="org.jxau.lctoh.trade.dish.mapper.DishCategoryMapper.findDishCategoryById"/>
 	</resultMap>
+	<sql id="DishColumns">
+		dish.dish_id,
+		dish.dish_name,
+		dish.dish_price,
+		dish.dish_image,
+		dish.dish_update_time,
+		dish.dish_intro,
+		dish.dish_quantity,
+		dish.dish_state_id,
+		dish.dish_category_id
+	</sql>
+	
+	
 	
 	<!--根据菜肴识别码查询菜肴信息-->
 	<select id="findDishByDishId" parameterType="String" resultMap="DishResultMap">
 		select 
-			dish.dish_id,
-			dish.dish_name,
-			dish.dish_price,
-			dish.dish_image,
-			dish.dish_update_time,
-			dish.dish_intro,
-			dish.dish_quantity,
-			dish.dish_state_id,
-			dish.dish_category_id
+			<include refid="DishColumns"></include>
 		from dish
 		where 
 			dish.dish_delete_or_not=1
@@ -38,15 +43,7 @@
 	<!--根据菜肴分类识别码查询菜肴信息-->
 	<select id="findDishByDishCategoryId" parameterType="String" resultMap="DishResultMap">
 		select 
-			dish.dish_id,
-			dish.dish_name,
-			dish.dish_price,
-			dish.dish_image,
-			dish.dish_update_time,
-			dish.dish_intro,
-			dish.dish_quantity,
-			dish.dish_state_id,
-			dish.dish_category_id
+			<include refid="DishColumns"></include>
 		from dish
 		where 
 			dish.dish_delete_or_not=1
@@ -56,6 +53,16 @@
 	<!--(dish left join dish_category on dish.dish_category_id=dish_category.dish_category_id) left join restaurant on dish_category.dish_category_restaurant_id=restaurant.restaurant_id
 -->
 	
- 
+ 	<!--根据客户识别码查询收藏菜肴信息-->
+	<select id="findCollectDishByCustomerId" parameterType="String" resultMap="DishResultMap">
+		select 
+			<include refid="DishColumns"></include>
+		from dish,collect_dish
+		where 
+			dish.dish_id=collect_dish.collect_dish_id
+			and dish.dish_delete_or_not=1
+			and collect_dish.collect_dish_delete_or_not=1
+			and collect_dish.collect_customer_id=#{customerId}
+	</select>
 	
 </mapper>

@@ -21,5 +21,10 @@ public interface DishMapper {
 	 * @return Dish
 	 */
 	public List<Dish> findDishByDishCategoryId(@Param("dishCategoryId")String dishCategoryId);
-	
+	/**
+	 * 根据客户识别码查询收藏菜肴信息
+	 * @param customerId
+	 * @return
+	 */
+	public List<Dish> findCollectDishByCustomerId(@Param("customerId")String customerId);
 }
