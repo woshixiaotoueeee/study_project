@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:需与接口的完全限定名保持一致 -->
+<mapper namespace="org.jxau.lctoh.trade.dish.mapper.CollectDishMapper">
+	
+	
+	<!--添加收藏的店家-->
+	<insert id="addCollectDish" parameterType="CollectDish">
+		insert into collect_dish(
+			collect_dish.collect_customer_id,
+			collect_dish.collect_dish_id,
+			collect_dish.collect_dish_update_time
+			)
+		values(
+			#{collectCustomer.customerId},
+			#{collectDish.dishId},
+			#{collectDishUpdateTime}
+		)
+	</insert>
+	
+	<!--删除收藏的店家-->
+	<update id="deleteCollectDish" parameterType="CollectDish">
+		update 
+			collect_dish
+		set
+			collect_dish.collect_dish_delete_or_not=0,
+			collect_dish.collect_dish_update_time=#{collectDishUpdateTime}
+		where 
+			collect_dish.collect_customer_id=#{collectCustomer.customerId}
+			and collect_dish.collect_dish_id=#{collectDish.dishId}
+	</update>
+</mapper>

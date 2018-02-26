@@ -2,12 +2,11 @@ package org.jxau.lctoh.trade.dish.service;
 
 import java.util.List;
 
-
-
-
-
+import org.jxau.lctoh.trade.dish.dao.CollectDishDao;
 import org.jxau.lctoh.trade.dish.dao.DishDao;
+import org.jxau.lctoh.trade.dish.domain.CollectDish;
 import org.jxau.lctoh.trade.dish.domain.Dish;
+import org.jxau.lctoh.user.customer.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 /**
@@ -17,7 +16,8 @@ import org.springframework.stereotype.Service;
 public class DishService {
 	@Autowired
 	private DishDao dishDao;
-	
+	@Autowired
+	private CollectDishDao collectDishDao;
 	
 	
 	/**
@@ -38,7 +38,43 @@ public class DishService {
 		return dishDao.findDishByDishCategoryId(dishCategoryId);
 	}
 	
+	/**
+	 * 根据客户查询收藏的菜肴
+	 * @param customer
+	 * @return
+	 */
+	public List<Dish> findCollectDishByCustomer(Customer customer){
+		return dishDao.findCollectDishByCustomerId(customer.getCustomerId());
+	}
 	
+	
+	
+	/**
+	 * 添加收藏的菜肴
+	 * @param collectDish
+	 * @return
+	 */
+	public Integer addCollectDish(Customer customer,String dishId){
+		CollectDish collectDish =new CollectDish();
+		collectDish.setCollectCustomer(customer);
+		Dish dish=new Dish();
+		dish.setDishId(dishId);;
+		collectDish.setCollectDish(dish);
+		return collectDishDao.addCollectDish(collectDish);
+	}
+	/**
+	 * 删除收藏的菜肴
+	 * @param collectDish
+	 * @return
+	 */
+	public Integer deleteCollectDish(Customer customer,String dishId){
+		CollectDish collectDish =new CollectDish();
+		collectDish.setCollectCustomer(customer);
+		Dish dish=new Dish();
+		dish.setDishId(dishId);;
+		collectDish.setCollectDish(dish);
+		return collectDishDao.deleteCollectDish(collectDish);
+	}
 	
 	/**
 	 * 根据店家ID查询菜肴信息
