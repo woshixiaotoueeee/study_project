@@ -42,6 +42,16 @@
 			and dish_category.dish_category_restaurant_id=#{restaurantId}
 	</select>
 	
-	
+	<!--根据店名及城市识别码查询店家信息-->
+	<update id="updateDishCategory" parameterType="DishCategory">
+		update dish_category
+		set
+			dish_category.dish_category_name=#{dishCategoryName},
+			dish_category.dish_category_state_id=#{dishCategoryState.stateId},
+			dish_category.dish_category_update_time=#{dish_category_update_time}
+		where
+			dish_category.dish_category_id=#{dishCategoryId}
+			
+	</update>
 	
 </mapper>

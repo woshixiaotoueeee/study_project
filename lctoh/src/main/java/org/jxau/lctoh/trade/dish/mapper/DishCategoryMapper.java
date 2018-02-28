@@ -24,4 +24,24 @@ public interface DishCategoryMapper {
 	 */
 	public List<DishCategory> findDishCategoryByRestaurantId(@Param("restaurantId")String restaurantId);
 	
+	
+	
+	/**
+	 * 添加菜肴分类信息
+	 * @param dishCategory
+	 * @return
+	 */
+	public Integer addDishCategory(DishCategory dishCategory);
+	/**
+	 * 删除菜肴分类信息
+	 * @param dishCategory
+	 * @return
+	 */
+	public Integer deleteDishCategory(DishCategory dishCategory);
+	/**
+	 * 修改菜肴分类信息
+	 * @param dishCategory
+	 * @return
+	 */
+	public Integer updateDishCategory(DishCategory dishCategory);
 }

@@ -62,7 +62,6 @@ public class OrderController extends BaseController{
 	
 	/**
 	 * 根据客户识别码查询订单
-	 * @param custmerId String 字符串  客户识别码
 	 * @return
 	 * <pre>
 	 * json字符串{
@@ -77,12 +76,13 @@ public class OrderController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/findOrderByCustmerId",produces=EncodingConfig.produces)
-	public String findOrderByCustmerId(String custmerId){
-		if(custmerId==null){
-			responseData.failInfo(ErrorMSG.notKnow);
+	public String findOrderByCustmerId(HttpSession session){
+		Customer customer= (Customer)session.getAttribute(ConversationConfig.customerSession);
+		if(customer==null){
+			responseData.failInfo(ErrorMSG.loginTimerOut);
 		}else{
 			try{
-				responseData.successInfo(orderService.findOrderByCustmerId(custmerId));
+				responseData.successInfo(orderService.findOrderByCustmerId(customer.getCustomerId()));
 			}catch(Exception e){
 				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.selectFail);
@@ -93,7 +93,6 @@ public class OrderController extends BaseController{
 
 	/**
 	 * 根据店家识别码查询订单
-	 * @param restaurantId String 字符串  店家识别码
 	 * @return
 	 * <pre>
 	 * json字符串{
@@ -108,12 +107,13 @@ public class OrderController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/findOrderByRestaurantId",produces=EncodingConfig.produces)
-	public String findOrderByRestaurantId(String restaurantId){
-		if(restaurantId==null){
-			responseData.failInfo(ErrorMSG.notKnow);
+	public String findOrderByRestaurantId(HttpSession session){
+		Restaurant restaurant= (Restaurant) session.getAttribute(ConversationConfig.restaurantSession);
+		if(restaurant==null){
+			responseData.failInfo(ErrorMSG.loginTimerOut);
 		}else{
 			try{
-				responseData.successInfo(orderService.findOrderByRestaurantId(restaurantId));
+				responseData.successInfo(orderService.findOrderByRestaurantId(restaurant.getRestaurantId()));
 			}catch(Exception e){
 				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.selectFail);
