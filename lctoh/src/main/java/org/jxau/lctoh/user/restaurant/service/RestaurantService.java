@@ -185,7 +185,12 @@ public class RestaurantService {
 		return collectRestaurantDao.deleteCollectRestaurant(collectRestaurant);
 	}
 	
-	
+	/**更新店家信息
+	 * @param restaurant
+	 */
+	public Integer updateRestaurant(Restaurant restaurant) {
+		return restaurantDao.updateRestaurant(restaurant);
+	}
 	
 	
 }
