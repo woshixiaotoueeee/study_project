@@ -45,7 +45,7 @@
 			and rider.rider_id=#{riderId}
 	</select>
 	
-	<!--根据骑手识别码查询用户信息-->
+	<!--根据骑手状态码查询用户信息-->
 	<select id="findRiderByRiderStateId" parameterType="Integer" resultMap="RiderResultMap">
 		select 
 			<include refid="RiderColumns"></include>

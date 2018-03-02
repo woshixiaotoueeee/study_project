@@ -42,6 +42,7 @@
 		where 
 			notice.notice_delete_or_not=1
 			and notice.notice_state_id=#{stateId}
+		order by notice.notice_update_time desc
 	</select>
 	<!--查询所有公告信息-->
 	<select id="findAllNotice" resultMap="NoticeResultMap">
@@ -55,6 +56,7 @@
 		from notice
 		where 
 			notice.notice_delete_or_not=1
+		order by notice.notice_update_time desc
 	</select>
 	
 	<!--删除公告信息-->
