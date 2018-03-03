@@ -18,14 +18,14 @@
 	</resultMap>
 	
 	<sql id="OrderColumns">
-		order.order_id,
-		order.order_creat_time,
-		order.order_price,
-		order.order_update_tiame,
-		order.order_delivery_time,
-		order.order_state_id,
-		order.order_customer_id,
-		order.order_restaurant_id
+		orders.order_id,
+		orders.order_creat_time,
+		orders.order_price,
+		orders.order_update_tiame,
+		orders.order_delivery_time,
+		orders.order_state_id,
+		orders.order_customer_id,
+		orders.order_restaurant_id
 	</sql>
 	
 	
@@ -34,10 +34,10 @@
 		select
 			<include refid="OrderColumns"></include>
 		from
-			order
+			orders
 		where
-			order.order_delete_or_not=1
-			and order.order_id =#{orderId}
+			orders.order_delete_or_not=1
+			and orders.order_id =#{orderId}
 	</select>
 
 	<!--根据客户识别码查询订单-->
@@ -45,10 +45,11 @@
 		select
 			<include refid="OrderColumns"></include>
 		from
-			order
+			orders
 		where
-			order.order_delete_or_not=1
-			and order.order_customer_id =#{custmerId}
+			orders.order_delete_or_not=1
+			and orders.order_customer_id =#{custmerId}
+		order by orders.order_creat_time desc
 	</select>
 	
 	<!--根据店家识别码查询订单-->
@@ -56,40 +57,41 @@
 		select
 			<include refid="OrderColumns"></include>
 		from
-			order
+			orders
 		where
-			order.order_delete_or_not=1
-			and order.order_restaurant_id =#{restaurantId}
+			orders.order_delete_or_not=1
+			and orders.order_restaurant_id =#{restaurantId}
+		order by orders.order_creat_time desc
 	</select>
 
 	
 	<!--更新订单-->
 	<update id="updateOrder" parameterType="Order">
 		update 
-			order
+			orders
 		set
-			order.order_creat_time=#{orderCreatTime},
-			order.order_price=#{orderPrice},
-			order.order_update_tiame=#{orderUpdateTiame},
-			order.order_delivery_time=#{orderDeliveryTime},
-			order.order_state_id=#{orderState.sateId},
-			order.order_customer_id=#{orderCustomer.customerId},
-			order.order_restaurant_id=#{orderRestaurant.restaurantId}
+			orders.order_creat_time=#{orderCreatTime},
+			orders.order_price=#{orderPrice},
+			orders.order_update_tiame=#{orderUpdateTiame},
+			orders.order_delivery_time=#{orderDeliveryTime},
+			orders.order_state_id=#{orderState.sateId},
+			orders.order_customer_id=#{orderCustomer.customerId},
+			orders.order_restaurant_id=#{orderRestaurant.restaurantId}
 		where
-			 order.order_id =#{orderId}
+			 orders.order_id =#{orderId}
 	</update>
 	
 	<!--添加订单-->
 	<insert id="addOrder" parameterType="Order">
-		insert into order(
-			order.order_id,
-			order.order_creat_time,
-			order.order_price,
-			order.order_update_tiame,
-			order.order_delivery_time,
-			order.order_state_id,
-			order.order_customer_id,
-			order.order_restaurant_id
+		insert into orders(
+			orders.order_id,
+			orders.order_creat_time,
+			orders.order_price,
+			orders.order_update_tiame,
+			orders.order_delivery_time,
+			orders.order_state_id,
+			orders.order_customer_id,
+			orders.order_restaurant_id
 		)
 		values(
 			#{orderId},
