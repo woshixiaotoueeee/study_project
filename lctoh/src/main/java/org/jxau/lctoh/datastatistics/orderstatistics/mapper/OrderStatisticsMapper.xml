@@ -6,17 +6,23 @@
 <mapper namespace="org.jxau.lctoh.datastatistics.orderstatistics.OrderStatisticsMapper">
 
 	<!--根据状态码查询状态信息 -->
-	<select id="orderStatisticsByDay" parameterType="Integer" resultType="State">
+	<select id="orderStatisticsByDay"  resultType="State">
 		SELECT
-			DATE_FORMAT(state_update_time, '%Y年%m月%d日') AS tm,
-			Count(*) AS count
+			count(orders.order_id) count, 
+			ifnull(SUM(state_id),0) amount ,
+			DATE_FORMAT(rt.recording_time_id, '%Y年%m月%d日') AS tm
 		FROM
-			state
+			recording_time rt left join orders 
+		on 
+			DATE_FORMAT(rt.recording_time_id, "%Y年%m月%d日")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月%d日")
 		where
 			1=1
+			and rt.recording_time_id>=#{stm}
+			and rt.recording_time_id<=#{etm}
 		GROUP BY
-			days
-		order by days
+			tm
+		order by 
+			tm
 	</select>
 	
 	
