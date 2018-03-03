@@ -1,5 +1,7 @@
 package org.jxau.lctoh.datastatistics.orderstatistics.daomain;
 
+import java.math.BigDecimal;
+
 import org.apache.ibatis.type.Alias;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -18,7 +20,7 @@ public class OrderStatistics {
 	/**对应时间段的数据条数*/
 	private Integer count;
 	/**对应时间段的数据数额（如营业额，消费额）*/
-	private Integer amount;
+	private BigDecimal amount;
 	public String getTm() {
 		return tm;
 	}
@@ -31,10 +33,10 @@ public class OrderStatistics {
 	public void setCount(Integer count) {
 		this.count = count;
 	}
-	public Integer getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
-	public void setAmount(Integer amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 }
