@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace:需与接口的完全限定名保持一致 -->
-<mapper namespace="org.jxau.lctoh.datastatistics.orderstatistics.OrderStatisticsMapper">
+<mapper namespace="org.jxau.lctoh.datastatistics.orderstatistics.mapper.OrderStatisticsMapper">
 	<!-- 
 	<sql id="dayColumns">
 		DATE_FORMAT(rt.recording_time_id, '%Y年%m月%d日') AS tm
