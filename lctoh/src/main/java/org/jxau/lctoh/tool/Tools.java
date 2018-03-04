@@ -124,7 +124,14 @@ public class Tools {
     	return nowDate.getTime()-date.getTime();
     }
     
-    
+    /**
+     * 计算两日期的时间差
+     * @param date
+     * @return Long
+     */
+    public static Long getTimeDifferenceFromDate(Date stm,Date etm) {
+    	return stm.getTime()-etm.getTime();
+    }
     
     /**辅助计算两点距离*/
     private static double EARTH_RADIUS = 6378.137;//地球半径
