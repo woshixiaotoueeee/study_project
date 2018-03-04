@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @author qdt_PC
  */
 @Component
-@Alias("State")
+@Alias("OrderStatistics")
 @Scope("prototype")
 public class OrderStatistics {
 	

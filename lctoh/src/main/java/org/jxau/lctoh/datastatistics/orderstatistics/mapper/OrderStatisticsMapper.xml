@@ -4,21 +4,68 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace:需与接口的完全限定名保持一致 -->
 <mapper namespace="org.jxau.lctoh.datastatistics.orderstatistics.OrderStatisticsMapper">
-
+	<!-- 
+	<sql id="dayColumns">
+		DATE_FORMAT(rt.recording_time_id, '%Y年%m月%d日') AS tm
+	</sql>
+	<sql id="mouthColumns">
+		DATE_FORMAT(rt.recording_time_id, '%Y年%m月') AS tm
+	</sql>
+	<sql id="weekColumns">
+		DATE_FORMAT(rt.recording_time_id, '%Y年%u周') AS tm
+	</sql>
+	<sql id="dayConnectionCondition">
+		DATE_FORMAT(rt.recording_time_id, "%Y年%m月%d日")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月%d日")
+	</sql>
+	<sql id="mouthConnectionCondition">
+		DATE_FORMAT(rt.recording_time_id, "%Y年%m月")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月")
+	</sql>
+	<sql id="weekConnectionCondition">
+		DATE_FORMAT(rt.recording_time_id, "%Y年%%u周")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月")
+	</sql>
+	 -->
 	<!--根据状态码查询状态信息 -->
-	<select id="orderStatisticsByDay"  resultType="State">
+	<select id="orderStatistics"  resultType="OrderStatistics">
 		SELECT
 			count(orders.order_id) count, 
-			ifnull(SUM(state_id),0) amount ,
-			DATE_FORMAT(rt.recording_time_id, '%Y年%m月%d日') AS tm
+			ifnull(SUM(order_price),0) amount ,
+			<if test="statisticsType==1" >
+				DATE_FORMAT(rt.recording_time_id, '%Y年%m月%d日') AS tm
+			</if>
+			<if test="statisticsType==2" >
+				DATE_FORMAT(rt.recording_time_id, '%Y年%u周') AS tm
+			</if>
+			<if test="statisticsType==3" >
+				DATE_FORMAT(rt.recording_time_id, '%Y年%m月') AS tm
+			</if>
+			<if test="statisticsType==4" >
+				CONCAT(DATE_FORMAT(rt.recording_time_id, '%Y年'),CONCAT(quarter( rt.recording_time_id),'季度')) as tm
+			</if>
 		FROM
 			recording_time rt left join orders 
 		on 
-			DATE_FORMAT(rt.recording_time_id, "%Y年%m月%d日")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月%d日")
+			<if test="statisticsType==1" >
+				DATE_FORMAT(rt.recording_time_id, "%Y年%m月%d日")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月%d日")
+			</if>
+			<if test="statisticsType==2" >
+				DATE_FORMAT(rt.recording_time_id, "%Y年%u周")=DATE_FORMAT(orders.order_creat_time, "%Y年%u周")
+			</if>
+			<if test="statisticsType==3" >
+				DATE_FORMAT(rt.recording_time_id, "%Y年%m月")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月")
+			</if>
+			<if test="statisticsType==4" >
+				CONCAT(DATE_FORMAT(rt.recording_time_id, '%Y年'),CONCAT(quarter( rt.recording_time_id),'季度'))=CONCAT(DATE_FORMAT(orders.order_creat_time, '%Y年'),CONCAT(quarter(orders.order_creat_time),'季度')) as tm
+			</if>
+			and orders.order_state_id=100004
 		where
-			1=1
-			and rt.recording_time_id>=#{stm}
-			and rt.recording_time_id<=#{etm}
+			rt.recording_time_id&gt;=#{stm}
+			and rt.recording_time_id&lt;=#{etm}
+			<if test="customerId != null and customerId!=''" >
+				and orders.order_customer_id=#{customerId}
+			</if>
+			<if test="restaurantId != null and restaurantId''" >
+				and orders.order_restaurant_id=#{restaurantId}
+			</if>
 		GROUP BY
 			tm
 		order by 

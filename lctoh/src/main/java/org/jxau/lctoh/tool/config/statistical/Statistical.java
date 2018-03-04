@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 @Component("Statistical")
 public class Statistical {
 	/**日统计时间节点(小于14天按日统计)*/
-	public final static double dayNode=1000*60*60*24*14;
+	public final static long dayNode=1000*60*60*24*14;
 	/**周统计时间节点(大于14天小于90天按周统计)*/
-	public final static double weekNode=1000*60*60*24*90;
+	public final static long weekNode=1000*60*60*24*90;
 	/**月统计时间节点(大于90天小于365天按月统计)*/
-	public final static double mouthNode=1000*60*60*24*360;
-	/**年统计时间节点(大于365天按月统计，没有给时间段还有全部统计按年统计来计算)*/
-	public final static double yearNode=1000*60*60*24*360;
+	public final static long mouthNode=1000*60*60*24*365;
+	/**季度统计时间节点(小于365天按月统计，没有给时间段还有全部统计按季度统计来计算)*/
+	public final static long quarterNode=1000*60*60*24*365;
 }
