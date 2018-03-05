@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 import org.springframework.context.annotation.Scope;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,8 +16,10 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 public class OrderStatisticsQureyModel{
 	/**统计开始时间*/
+	@DateTimeFormat(pattern = "yyyy-MM-dd")  
 	private Date stm;
 	/**统计结束时间*/
+	@DateTimeFormat(pattern = "yyyy-MM-dd")  
 	private Date etm;
 	/**统计对象客户*/
 	private String customerId;

@@ -60,10 +60,10 @@
 		where
 			rt.recording_time_id&gt;=#{stm}
 			and rt.recording_time_id&lt;=#{etm}
-			<if test="customerId != null and customerId!=''" >
+			<if test="customerId != null and customerId ==''" >
 				and orders.order_customer_id=#{customerId}
 			</if>
-			<if test="restaurantId != null and restaurantId''" >
+			<if test="restaurantId != null and restaurantId ==''" >
 				and orders.order_restaurant_id=#{restaurantId}
 			</if>
 		GROUP BY

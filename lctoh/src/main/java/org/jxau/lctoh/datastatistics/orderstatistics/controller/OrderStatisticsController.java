@@ -1,6 +1,8 @@
 package org.jxau.lctoh.datastatistics.orderstatistics.controller;
 
 
+import java.util.Date;
+
 import org.jxau.lctoh.tool.base.controller.BaseController;
 import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
@@ -37,8 +39,11 @@ public class OrderStatisticsController extends BaseController{
 	@RequestMapping(value="/orderStatistics",produces=EncodingConfig.produces)
 	public String orderStatistics(OrderStatisticsQureyModel orderStatisticsQureyModel){
 		try{
+			//orderStatisticsQureyModel.setEtm(new Date("2016-03-05 12:03:56.468"));
+			//orderStatisticsQureyModel.setStm(new Date());
 			responseData.successInfo(orderStatisticsService.orderStatistics(orderStatisticsQureyModel));
 		}catch(Exception e){
+			e.printStackTrace();
 			responseData.failInfo(ErrorMSG.selectFail);
 		}
 		return toGsonString();

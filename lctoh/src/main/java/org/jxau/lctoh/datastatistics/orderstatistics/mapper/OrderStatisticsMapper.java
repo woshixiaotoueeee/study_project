@@ -1,5 +1,7 @@
 package org.jxau.lctoh.datastatistics.orderstatistics.mapper;
 
+import java.util.List;
+
 import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatistics;
 import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQureyModel;
 
@@ -13,7 +15,7 @@ public interface OrderStatisticsMapper {
 	 * @param orderStatisticsQureyModel
 	 * @return
 	 */
-	public OrderStatistics orderStatistics(OrderStatisticsQureyModel orderStatisticsQureyModel );
+	public List<OrderStatistics> orderStatistics(OrderStatisticsQureyModel orderStatisticsQureyModel );
 	
 	
 	
