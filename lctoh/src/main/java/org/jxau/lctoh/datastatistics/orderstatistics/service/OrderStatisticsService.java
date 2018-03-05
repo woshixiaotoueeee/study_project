@@ -1,5 +1,7 @@
 package org.jxau.lctoh.datastatistics.orderstatistics.service;
 
+import java.util.List;
+
 import org.jxau.lctoh.datastatistics.orderstatistics.dao.OrderStatisticsDao;
 import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatistics;
 import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQureyModel;
@@ -22,7 +24,7 @@ public class OrderStatisticsService {
 	 * @param orderStatisticsQureyModel
 	 * @return
 	 */
-	public OrderStatistics orderStatistics(OrderStatisticsQureyModel orderStatisticsQureyModel){
+	public List<OrderStatistics> orderStatistics(OrderStatisticsQureyModel orderStatisticsQureyModel){
 		long timeDifference;
 		try{
 			timeDifference=Tools.getTimeDifferenceFromDate(orderStatisticsQureyModel.getStm(), orderStatisticsQureyModel.getEtm());

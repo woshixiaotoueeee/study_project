@@ -1,5 +1,7 @@
 package org.jxau.lctoh.datastatistics.orderstatistics.dao;
 
+import java.util.List;
+
 import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatistics;
 import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQureyModel;
 import org.jxau.lctoh.datastatistics.orderstatistics.mapper.OrderStatisticsMapper;
@@ -29,7 +31,7 @@ public class OrderStatisticsDao extends BaseDao {
 	 * @param orderStatisticsQureyModel
 	 * @return
 	 */
-	public OrderStatistics orderStatistics(OrderStatisticsQureyModel orderStatisticsQureyModel){
+	public List<OrderStatistics> orderStatistics(OrderStatisticsQureyModel orderStatisticsQureyModel){
 		return orderStatisticsMapper.orderStatistics(orderStatisticsQureyModel);
 	}
 

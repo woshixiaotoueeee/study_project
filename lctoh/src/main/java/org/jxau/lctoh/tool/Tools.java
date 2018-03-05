@@ -130,7 +130,7 @@ public class Tools {
      * @return Long
      */
     public static Long getTimeDifferenceFromDate(Date stm,Date etm) {
-    	return stm.getTime()-etm.getTime();
+    	return etm.getTime()-stm.getTime();
     }
     
     /**辅助计算两点距离*/
