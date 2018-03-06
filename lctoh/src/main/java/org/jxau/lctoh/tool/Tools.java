@@ -3,6 +3,7 @@ package org.jxau.lctoh.tool;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -23,13 +24,22 @@ import com.google.gson.GsonBuilder;
 public class Tools {
 	/**用于实体类对象与json字符串之间的转换*/
 	public static Gson gson;
+	public static SimpleDateFormat sdf;
 	/**得到一个单例gson对象*/
 	static{
 		/*显示为空属性*/
 		gson=new GsonBuilder().serializeNulls().create();
 		/*不显示为空属性*/
 		//gson=new Gson();
+		sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 	}
+	public static Date StringToDate(String datr){
+		return null;
+	}
+	
+	
+	
+	
 	/**
 	 * 将Object转换成Gson类型的字符串
 	 * @return
