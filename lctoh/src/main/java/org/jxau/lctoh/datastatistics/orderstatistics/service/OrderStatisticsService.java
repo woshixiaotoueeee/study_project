@@ -1,5 +1,6 @@
 package org.jxau.lctoh.datastatistics.orderstatistics.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.jxau.lctoh.datastatistics.orderstatistics.dao.OrderStatisticsDao;
@@ -27,8 +28,12 @@ public class OrderStatisticsService {
 	public List<OrderStatistics> orderStatistics(OrderStatisticsQureyModel orderStatisticsQureyModel){
 		long timeDifference;
 		try{
-			timeDifference=100;//Tools.getTimeDifferenceFromDate(sdf.parse(orderStatisticsQureyModel.getStm()), sdf.parse(orderStatisticsQureyModel.getEtm()));
+			timeDifference=Tools.getTimeDifferenceFromDate(Tools.StringToDate(orderStatisticsQureyModel.getStm()), Tools.StringToDate(orderStatisticsQureyModel.getEtm()));
 		}catch(Exception e){
+			e.printStackTrace();
+			Date now=new Date();
+			orderStatisticsQureyModel.setEtm(Tools.DateToString(now));
+			orderStatisticsQureyModel.setStm(Tools.DateToString(Tools.CalculationDate(now,-1,Tools.year)));
 			timeDifference=1000*60*60*24*366;
 		}
 		if(timeDifference<=Statistical.dayNode){

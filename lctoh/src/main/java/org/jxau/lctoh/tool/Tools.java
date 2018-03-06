@@ -3,7 +3,9 @@ package org.jxau.lctoh.tool;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -24,20 +26,53 @@ import com.google.gson.GsonBuilder;
 public class Tools {
 	/**用于实体类对象与json字符串之间的转换*/
 	public static Gson gson;
+	/**日期格式化*/
 	public static SimpleDateFormat sdf;
+	/**日期计算*/
+	public static Calendar cal;
+	/**日期计算*/
+	public static Integer year=Calendar.DAY_OF_YEAR;
+	
 	/**得到一个单例gson对象*/
 	static{
 		/*显示为空属性*/
 		gson=new GsonBuilder().serializeNulls().create();
 		/*不显示为空属性*/
 		//gson=new Gson();
+		cal = Calendar.getInstance();
 		sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 	}
-	public static Date StringToDate(String datr){
-		return null;
+	
+	
+	/**
+	 * 计算日期
+	 * @param datestr
+	 * @return
+	 */
+	public static Date CalculationDate(Date date,Integer number,Integer dateType){
+		cal.setTime(date);
+		cal.add(dateType, number);
+		return cal.getTime();
 	}
 	
+	/**
+	 * 字符串转Date 字符串格式须符合"yyyy-MM-dd HH:mm:ss"
+	 * @param datestr
+	 * @return
+	 * @throws ParseException
+	 */
+	public static Date StringToDate(String datestr) throws ParseException{
+		return sdf.parse(datestr);
+	}
 	
+	/**
+	 * Date转字符串
+	 * @param date
+	 * @return
+	 */
+	public static String DateToString(Date date){
+		return sdf.format(date);
+	}
 	
 	
 	/**

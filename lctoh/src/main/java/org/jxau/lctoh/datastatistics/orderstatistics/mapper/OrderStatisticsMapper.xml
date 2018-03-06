@@ -54,12 +54,12 @@
 				DATE_FORMAT(rt.recording_time_id, "%Y年%m月")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月")
 			</if>
 			<if test="statisticsType==4" >
-				CONCAT(DATE_FORMAT(rt.recording_time_id, '%Y年'),CONCAT(quarter( rt.recording_time_id),'季度'))=CONCAT(DATE_FORMAT(orders.order_creat_time, '%Y年'),CONCAT(quarter(orders.order_creat_time),'季度')) as tm
+				CONCAT(DATE_FORMAT(rt.recording_time_id, '%Y年'),CONCAT(quarter( rt.recording_time_id),'季度'))=CONCAT(DATE_FORMAT(orders.order_creat_time, '%Y年'),CONCAT(quarter(orders.order_creat_time),'季度'))
 			</if>
 			and orders.order_state_id=100004
 		where
-			rt.recording_time_id&gt;=#{stm}
-			and rt.recording_time_id&lt;=#{etm}
+			rt.recording_time_id&gt;=str_to_date(#{stm},'yyyy-MM-dd HH:mm:ss')
+			and rt.recording_time_id&lt;=str_to_date(#{etm},'yyyy-MM-dd HH:mm:ss')
 			<if test="customerId != null and customerId ==''" >
 				and orders.order_customer_id=#{customerId}
 			</if>
