@@ -27,7 +27,7 @@ public class OrderStatisticsService {
 	public List<OrderStatistics> orderStatistics(OrderStatisticsQureyModel orderStatisticsQureyModel){
 		long timeDifference;
 		try{
-			timeDifference=Tools.getTimeDifferenceFromDate(orderStatisticsQureyModel.getStm(), orderStatisticsQureyModel.getEtm());
+			timeDifference=100;//Tools.getTimeDifferenceFromDate(sdf.parse(orderStatisticsQureyModel.getStm()), sdf.parse(orderStatisticsQureyModel.getEtm()));
 		}catch(Exception e){
 			timeDifference=1000*60*60*24*366;
 		}

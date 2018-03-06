@@ -1,11 +1,10 @@
 package org.jxau.lctoh.datastatistics.orderstatistics.daomain;
 
 
-import java.util.Date;
+
 
 import org.apache.ibatis.type.Alias;
 import org.springframework.context.annotation.Scope;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,11 +15,9 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 public class OrderStatisticsQureyModel{
 	/**统计开始时间*/
-	@DateTimeFormat(pattern = "yyyy-MM-dd")  
-	private Date stm;
+	private String stm;
 	/**统计结束时间*/
-	@DateTimeFormat(pattern = "yyyy-MM-dd")  
-	private Date etm;
+	private String etm;
 	/**统计对象客户*/
 	private String customerId;
 	/**统计对象店家*/
@@ -34,23 +31,12 @@ public class OrderStatisticsQureyModel{
 	public void setStatisticsType(Integer statisticsType) {
 		this.statisticsType = statisticsType;
 	}
-	public Date getStm() {
-		return stm;
-	}
-	public Date getEtm() {
-		return etm;
-	}
+	
 	public String getCustomerId() {
 		return customerId;
 	}
 	public String getRestaurantId() {
 		return restaurantId;
-	}
-	public void setStm(Date stm) {
-		this.stm = stm;
-	}
-	public void setEtm(Date etm) {
-		this.etm = etm;
 	}
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
@@ -58,4 +44,17 @@ public class OrderStatisticsQureyModel{
 	public void setRestaurantId(String restaurantId) {
 		this.restaurantId = restaurantId;
 	}
+	public String getStm() {
+		return stm;
+	}
+	public void setStm(String stm) {
+		this.stm = stm;
+	}
+	public String getEtm() {
+		return etm;
+	}
+	public void setEtm(String etm) {
+		this.etm = etm;
+	}
+	
 }

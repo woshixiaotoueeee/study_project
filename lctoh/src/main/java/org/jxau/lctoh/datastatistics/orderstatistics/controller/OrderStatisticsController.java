@@ -1,7 +1,7 @@
 package org.jxau.lctoh.datastatistics.orderstatistics.controller;
 
 
-import java.util.Date;
+
 
 import org.jxau.lctoh.tool.base.controller.BaseController;
 import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
@@ -27,8 +27,8 @@ public class OrderStatisticsController extends BaseController{
 	 * <pre>
 	 * orderStatisticsQureyModel 说明
 	 * orderStatisticsQureyModel{
-	 * 	stm Date 统计开始时间
-	 * 	etm Date 统计结束时间
+	 * 	stm String 统计开始时间	格式：2011-12-31 00:00:00
+	 * 	etm Date 统计结束时间 格式：2011-12-31 00:00:00
 	 * 	customerId String 统计对象客户
 	 * 	restaurantId String 统计对象店家
 	 * }
