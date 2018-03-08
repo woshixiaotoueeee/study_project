@@ -33,7 +33,7 @@
 				DATE_FORMAT(rt.recording_time_id, '%Y年%m月%d日') AS tm
 			</if>
 			<if test="statisticsType==2" >
-				DATE_FORMAT(rt.recording_time_id, '%Y年%u周') AS tm
+				DATE_FORMAT(rt.recording_time_id, '%Y年%m月%u周') AS tm
 			</if>
 			<if test="statisticsType==3" >
 				DATE_FORMAT(rt.recording_time_id, '%Y年%m月') AS tm
@@ -48,7 +48,7 @@
 				DATE_FORMAT(rt.recording_time_id, "%Y年%m月%d日")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月%d日")
 			</if>
 			<if test="statisticsType==2" >
-				DATE_FORMAT(rt.recording_time_id, "%Y年%u周")=DATE_FORMAT(orders.order_creat_time, "%Y年%u周")
+				DATE_FORMAT(rt.recording_time_id, "%Y年%m月%u周")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月%u周")
 			</if>
 			<if test="statisticsType==3" >
 				DATE_FORMAT(rt.recording_time_id, "%Y年%m月")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月")
@@ -58,8 +58,8 @@
 			</if>
 			and orders.order_state_id=100004
 		where
-			rt.recording_time_id&gt;=str_to_date(#{stm},'yyyy-MM-dd HH:mm:ss')
-			and rt.recording_time_id&lt;=str_to_date(#{etm},'yyyy-MM-dd HH:mm:ss')
+			rt.recording_time_id&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
+			and rt.recording_time_id&lt;=str_to_date(#{etm},'%Y-%m-%d %H:%i:%s')
 			<if test="customerId != null and customerId ==''" >
 				and orders.order_customer_id=#{customerId}
 			</if>

@@ -31,7 +31,7 @@ public class Tools {
 	/**日期计算*/
 	public static Calendar cal;
 	/**日期计算*/
-	public static Integer year=Calendar.DAY_OF_YEAR;
+	public static Integer year=Calendar.YEAR;
 	
 	/**得到一个单例gson对象*/
 	static{
