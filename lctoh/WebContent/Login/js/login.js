@@ -108,7 +108,7 @@
     var obuser={
       user:{
     	  userAccount:12,		//账号（字符串）
-    	  userPassword:	111111111,		//密码（字符串）
+    	  userPassword:	111111111		//密码（字符串）
 
       },
       type:1   	            //角色类型（整形：1客户，2管理员，3骑手，4店家）          							
@@ -121,7 +121,7 @@
     	obuser.type=$(".select_user input[name='user']:checked").val();
     	if(obuser.userAccount==''||obuser.userPassword==''){
     		/*alert('账号密码不能为空');*/
-    		layer.msg('账号密码不能为空');
+    		layer.msg('账号密码不能为空', {time:1000});   		   		
     		/*var ti=layer.open({
          		type:1,
          		title: '<span style="color:#c00;font-size:10px;padding:0;margin:0;">提示</span>', 
@@ -141,14 +141,13 @@
     	   	var userData=$.post(
     	   			projectDirectory+"/UserController/login",    			
         			obuser,
-        			function(data){ //{"state":0,"responseInfo":"账号不存在"}
-    	   				if(data.state==0){
-    	   					alert(data.responseInfo);
+        			function(data){   //{"state":0,"responseInfo":"账号不存在"}
+    	   				if(data.state==0){    	   					
+    	   					layer.msg(data.responseInfo, {time:1000});  
     	   				}
     	   				else if(data.state==1){
     	   					//地址跳转   /custmer/index.html  /rider/index.html   	   					
-    	   					window.location.href=projectDirectory+data.responseInfo;
-    	   					
+    	   					window.location.href=projectDirectory+data.responseInfo;   	   					
     	   				}
         		},'JSON')
         	 .error(
@@ -185,19 +184,19 @@
     	request_email.userEmail=$('.find_password .email').val();
     	var v = $(this).get(0);
     	//time(v);
-    	if(request_email.userEmail==''){
-    		alert('邮箱不能为空');
+    	if(request_email.userEmail==''){  		
+    		layer.msg('邮箱不能为空', {time:1000});   
     	}
     	else{
     		var userData=$.post(
     	   			projectDirectory+"/UserController/getCodeByUserEmail",    			
     	   			request_email,
-        			function(data){ //{"state":0,"responseInfo":"邮箱格式不正确"}   	   			    	   				
-    	   				if(data.state==0){
-    	   					alert(data.responseInfo);
+        			function(data){   //{"state":0,"responseInfo":"邮箱格式不正确"}   	   			    	   				
+    	   				if(data.state==0){   	   					
+    	   					layer.msg(data.responseInfo, {time:1000});
     	   				}
-    	   				else if(data.state==1){
-    	   					alert('获取验证码成功');
+    	   				else if(data.state==1){   	   					
+    	   					layer.msg('获取验证码成功', {time:1000});
     	   					time(v);
     	   				}
         		},'JSON')
@@ -213,7 +212,8 @@
     	request_email.userEmail=$('.find_password .email').val();
     	request_email.code=$('.find_password .email_code').val();
     	if(request_email.userEmail==''||request_email.code==''){
-    		 alert('邮箱及验证码不能为空');
+    		 //alert('邮箱及验证码不能为空');
+    		 layer.msg('邮箱及验证码不能为空', {time:1000});
     	}
     	else{
     		//ajax  userEmail
@@ -221,11 +221,11 @@
     	   			projectDirectory+"/UserController/verificationByCode",   			
     	   			request_email,
         			function(data){  //{"state":0,"responseInfo":"邮箱为空"}   	   				
-    	   			   if(data.state==0){
-    	   					alert(data.responseInfo);
+    	   			   if(data.state==0){   	   					
+    	   					layer.msg(data.responseInfo, {time:1000});
     	   				}
-    	   			   else if(data.state==1){   	   				  
-    	   					alert(data.responseInfo);
+    	   			   else if(data.state==1){   	   				     	   					
+    	   					layer.msg(data.responseInfo, {time:1000});
     	   				    $('.p_mask').eq(0).css('display','none'); 
     	   				    $('.p_mask').eq(1).css('display','block');    	   				   
     	   				}
@@ -246,8 +246,8 @@
     	//获取账号，密码，类型type
     	set_password.password=$('.set_password .set_pw').val();
     	set_password._password=$('.set_password .confirm_pw').val();
-    	if(set_password.password==''||set_password._password==''){
-    		 alert('密码不能为空');
+    	if(set_password.password==''||set_password._password==''){   		
+    		 layer.msg('密码不能为空', {time:1000});
     	}
     	else{
     		//ajax  userEmail
@@ -255,8 +255,8 @@
     	   			projectDirectory+"/UserController/updatePassword",   			
     	   			set_password,
         			function(data){  //{"state":0,"responseInfo":"密码为空"}   	   				
-    	   			   if(data.state==0){    	   				    
-    	   					alert(data.responseInfo);   	   		
+    	   			   if(data.state==0){    	   				       	   				
+    	   				 layer.msg(data.responseInfo, {time:1000});
     	   				}
     	   			   else if(data.state==1){   
     	   				    alert('设置密码成功');
@@ -270,4 +270,22 @@
     	}  	
     })
     
-    /*..............与后台交互数据................*/
+    /*..............与后台交互数据................*/ 
+    //弹窗函数
+   function layer1(){
+    	var ti=layer.open({
+	 		type:1,
+	 		title: '<span style="color:#c00;font-size:10px;padding:0;margin:0;">提示</span>',
+	            //['提示','font-size:10px;height:20px;padding:0;line-height:20px'],
+	 		closeBtn: 0,
+	 		area:['300px','160px'],
+	 		shade: 0,
+	 		shadeClose:true,//点击遮罩层关闭
+	 		content:'\<\div style="padding:10px;">账号密码不能为空\<\/div>'
+	 	    })
+	     setTimeout(function(){
+	 		layer.close(ti);
+	 	  },1000);
+    }
+    //layer1();
+    
