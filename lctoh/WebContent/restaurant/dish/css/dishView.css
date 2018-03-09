@@ -1,0 +1,259 @@
+	body,html{
+		margin:0;
+		padding:0;
+		width:100%;
+        height:100%;
+        font-family: 宋体;
+	}
+	ul,h3,h4,p{
+		margin:0;
+		padding:0;
+	}
+	ul{
+		list-style:none;
+	}
+	.general{	
+		width:100%;
+        height:100%;
+	    /*overflow: hidden;  */
+		background:url('../../images/beijing1.jpg') no-repeat;
+		background-size:100% 100%;
+		position: relative;
+	}
+	.general .logo{
+       width:150px;
+       height:150px;
+       background-color: #e48250;
+       border-radius: 50%;
+       float:left;
+       text-align: center;
+       margin-top:23%;
+       margin-left:20%;
+       line-height: 150px;
+	}
+	.general .sign{
+       width:400px;
+       height:450px;
+       float:left;
+       border-radius:30px;
+       background: #e36a29;
+       margin-top:8%;
+       margin-left:20%;
+	}
+	.general .sign label,input,span{
+		float:left;
+	}
+	.general .sign label{
+		font-size:30px;
+		color:white;
+		width:100%;
+		text-align:center;
+		margin-top:35px;
+	}
+	.general .sign .user,.password{
+		height:36px;
+		width:340px;
+        margin:0px 30px;
+        font-size:18px;
+	}
+	.general .sign .user{
+		margin-top: 30px;
+	}
+	.general .sign .password{
+		margin-top: 15px;
+        margin-bottom: 0px;
+	}
+	.general .sign .user_p,.password_p{
+		float:left;
+		font-size:10px;
+		height:10px;
+		width:340px;
+		margin-left: 30px;
+		color:red;
+	}
+	.general .sign .user_p{
+        margin-top: 8px;
+	}
+	.general .sign .user_p p{
+		display:none;
+	} 
+	.general .sign .password_p{
+        margin-top: 8px;
+        margin-bottom: 20px;
+	}
+	.general .sign .password_p p{
+		display:none;
+	}
+	.general .sign .rem_check{
+		float:left;
+		margin-top:1px;
+		margin-left: 30px;
+	}
+	.general .sign .forget,.remember{
+		margin-left:5px;
+		font-size:14px;
+		color:#757270;
+	}
+	.general .sign .forget{
+		margin-left:150px;
+	}
+	.general .sign .forget:hover{
+		color:red;
+		cursor:pointer;
+	}
+	#register{
+		color:white;
+		margin-left:20px;
+		font-size:14px;
+	}
+	#register:hover{
+		color:red;
+		cursor:pointer;
+	}
+	/*选择用户*/
+	.general .sign .select_user{
+		float:left;
+		width:100%;
+		font-size:16px;
+		margin-top:30px
+	}
+	.general .sign .select_user>input{
+         float:left;
+         margin-right:5px;
+	}
+	.general .sign .select_user>input:first-child{
+        margin-left: 30px;
+	}
+	.general .sign .select_user span{
+		display: block;
+		float:left;
+		margin-right:34px;
+	}
+	.general .sign .select_user .font_show{
+		color:white;
+	}
+	/*选择用户*/
+	/* 遮罩 */
+	.p_mask{
+	  position:absolute;
+	   top:0;
+	   left:0;
+	   width:100%;
+	   height:100%;
+	   background:rgba(199,199,199,0.5);
+	   display:none;
+	}
+	/*找回密码*/
+	.find_password{
+		position: absolute;
+        width:270px;
+        height:160px;
+        border-radius:10px;
+        background:#FF6347;
+        top:33%;
+        left:48%;
+	}
+	.find_password label,input,span,a{
+		float:left;
+	}
+	.find_password label,span,a{
+		font-size: 14px;
+	}
+	.find_password label{
+		margin-top: 6px;
+		margin-left: 4px;
+	}
+	.find_password .close_p{
+		margin-top: 5px;
+		margin-left: 190px;
+	}
+	.find_password ul{
+	   float:left;
+       width:245px;
+       height:70px;
+       margin-top: 10px;
+       margin-left: 20px;
+	}
+	.find_password ul li{
+	   width:100%;
+       float:left;
+       margin-top: 10px;
+	}
+	.find_password ul li input{
+		width:80px;
+		height:12px;
+		margin-left: 3px;
+		outline: none;
+	}
+	.find_password ul li:nth-of-type(1) input{
+		width:162px;
+	}
+	.find_password ul li:nth-of-type(2) span{
+       margin-left: 14px;
+	}
+	.find_password #get_code{
+		width:80px;
+		margin: 0;
+		padding: 0;
+		height:20px;
+	    margin-left: 2px;
+	}
+	/* 确认按钮 */
+	#confirm_btn{
+       margin-top:10px;
+       margin-left: 70px;
+       width:45px;
+	}
+	/* 取消按钮 */
+	#cancel_btn{
+       margin-top: 10px;
+       margin-left: 50px;
+       width:45px;
+	}
+	/*找回密码*/
+	/*设置密码*/
+	.set_password{
+    	position: absolute;
+        width:200px;
+        height:130px;
+        border-radius:10px;
+        background:#FF7F50;
+        top:25%;
+        left:32%;
+	}
+	.set_password .close_p{
+		margin-top: 5px;
+		margin-left: 178px;
+	}
+	.set_password span,input{
+		float:left;
+	}
+    .set_password ul{
+	   float:left;
+       width:180px;
+       height:70px;
+       margin-left: 10px;
+	}
+	.set_password ul li{
+	   width:100%;
+       float:left;
+       margin-top: 10px;
+	}
+	.set_password ul li input{
+		width:100px;
+		height:12px;
+		margin-left: 3px;
+	}
+	#set_login{
+		width:50px;
+		margin-left: 75px;
+	}
+	/*设置密码*/
+	/*登录按钮*/
+	.general .sign .sign_btn{
+		height:40px;
+		width:340px;
+        margin:30px 30px;
+        font-size:22px;
+        color:#e36a29;
+	}
