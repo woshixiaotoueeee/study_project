@@ -1,5 +1,7 @@
 package org.jxau.lctoh.tool.config.successMSG;
 
+import java.io.File;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,13 +20,13 @@ public class SuccessMSG {
 	public final static String locationSuccessMSG="定位成功";
 	
 	/**管理员登陆成功后所需跳转的页面地址*/
-	public final static String adminSuccessUrl="/admin/index.html";
+	public final static String adminSuccessUrl=File.separator.concat("admin").concat(File.separator).concat("index.html");
 	/**客户登陆成功后所需跳转的页面地址*/
-	public final static String customerSuccessUrl="/custmer/index.html";
+	public final static String customerSuccessUrl=File.separator.concat("custmer").concat(File.separator).concat("index.html");
 	/**骑手登陆成功后所需跳转的页面地址*/
-	public final static String riderSuccessUrl="/rider/index.html";
+	public final static String riderSuccessUrl=File.separator.concat("rider").concat(File.separator).concat("index.html");
 	/**店家登陆成功后所需跳转的页面地址*/
-	public final static String restaurantSuccessUrl="/restaurant/index.html";
+	public final static String restaurantSuccessUrl=File.separator.concat("restaurant").concat(File.separator).concat("index.html");
 	/**邮件发送成功*/
 	public final static String sendEmailSuccess="验证通过";
 	

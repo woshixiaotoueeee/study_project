@@ -1,5 +1,6 @@
 package org.jxau.lctoh.tool.config.defaultInformation;
 
+import java.io.File;
 import java.math.BigDecimal;
 
 import org.springframework.stereotype.Component;
@@ -12,7 +13,7 @@ public class DefaultInformation {
 	/**默认昵称*/
 	public final static String customerNickname="用户";
 	/**默认头像*/
-	public final static String customerPortrait="/image.jpg";
+	public final static String customerPortrait=(File.separator.concat("image.jpg"));
 	/**默认账户余额*/
 	public final static BigDecimal customerBalance=BigDecimal.valueOf(100);
 	/**客户默认状态*/
