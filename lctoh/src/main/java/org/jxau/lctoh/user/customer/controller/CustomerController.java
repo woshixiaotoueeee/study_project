@@ -1,19 +1,28 @@
 package org.jxau.lctoh.user.customer.controller;
 
+
+import java.io.File;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.jxau.lctoh.tool.base.controller.BaseController;
 import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
 import org.jxau.lctoh.tool.config.conversation.ConversationConfig;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
+import org.jxau.lctoh.tool.config.imageurl.ImagesUrl;
+import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
 import org.jxau.lctoh.user.basis.domain.User;
 import org.jxau.lctoh.user.basis.exception.UserException;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author qdt_PC
@@ -46,6 +55,9 @@ public class CustomerController  extends BaseController{
 		} catch (UserException e) {
 			e.printStackTrace();
 			responseData.failInfo(e.getMessage());
+		}catch (Exception e) {
+			e.printStackTrace();
+			responseData.failInfo(ErrorMSG.notKnow);
 		}
 		return toGsonString();
 	}
@@ -66,7 +78,7 @@ public class CustomerController  extends BaseController{
 	 * json字符串{
 	 * 	说明：{
 	 * 		Integer state;			//状态码（整形数字）
-	 * 		Object responseInfo;	//成功：为  Customer类型对象具体属性参考 Dish实体类
+	 * 		Object responseInfo;	//成功：为成功的信息 String 字符串
 	 *  							//失败：为失败原因的信息 String 字符串
 	 * 	}
 	 * }
@@ -98,6 +110,7 @@ public class CustomerController  extends BaseController{
 				customer.setCustomerUser(user);
 				customer.setCustomerNickname(nickName);
 				customerService.updateCustomer(customer);
+				responseData.successInfo(SuccessMSG.updateSuccessMSG);
 			}
 			
 		} catch (UserException e) {
@@ -112,7 +125,74 @@ public class CustomerController  extends BaseController{
 	
 	
 	
-	
+	/**
+	 * 更新头像
+	 * @param file 文件
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.user.customer.domain.Customer
+	 */
+	@ResponseBody
+	@RequestMapping(value="/updateCustomerPortrait",produces=EncodingConfig.produces)
+	public String updateCustomerPortrait(@RequestParam("file") MultipartFile file, HttpSession session){
+		String xpath = session.getServletContext().getRealPath(File.separator).concat(ImagesUrl.customerPortraitUrl);
+		try {
+			Customer customer=getCustomer(session);
+			String fileName = file.getOriginalFilename();
+	        //后缀判断
+	        if (!fileName.endsWith(".jpg") &&! fileName.endsWith(".jpeg")    
+	              &&! fileName.endsWith(".bmp")    
+	                &&! fileName.endsWith(".gif")    
+	                &&! fileName.endsWith(".png")
+	                &&!fileName.endsWith(".JPG") 
+	                &&! fileName.endsWith(".JPEG")    
+	                &&! fileName.endsWith(".BMP")    
+	                &&! fileName.endsWith(".GIF")    
+	                &&! fileName.endsWith(".PNG")){
+	        	responseData.failInfo(ErrorMSG.fileFormatError);
+	        } else{
+	        	//获取后缀
+		        String prefix=fileName.substring(fileName.lastIndexOf(".")+1);    
+		        //新文件名
+		        String imagename=session.getId()+ System.currentTimeMillis()+"."+prefix;
+		        //数据库路径
+		        String sqlurl=ImagesUrl.customerPortraitSqlUrl.concat(imagename);
+		        File targetFile = new File(xpath, imagename);
+		        if (!targetFile.exists()) {
+		            targetFile.mkdirs();
+		        }
+		        // 保存
+		        try {
+		            file.transferTo(targetFile);
+		            customer.setCustomerPortrait(sqlurl);
+		            customerService.updateCustomer(customer);
+		            session.setAttribute(ConversationConfig.customerSession, customer);
+		            responseData.successInfo(SuccessMSG.updateSuccessMSG);
+		        }catch (UserException e) {
+		        	e.printStackTrace();
+		        	responseData.failInfo(e.getMessage());
+		        }catch (Exception e) {
+		        	e.printStackTrace();
+		        	responseData.failInfo(ErrorMSG.updateFail);
+		        }
+	        }
+		} catch (UserException e) {
+			e.printStackTrace();
+			responseData.failInfo(e.getMessage());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			responseData.failInfo(ErrorMSG.notKnow);
+		}
+		return toGsonString();
+	}
 	
 	
 	/**

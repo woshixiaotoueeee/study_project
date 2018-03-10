@@ -67,6 +67,10 @@ public class ErrorMSG {
 	public final static String emailExistence="邮箱已被注册";
 	
 	
+	/**文件格式不对*/
+	public final static String fileFormatError="文件格式不正确";
+	
+	
 	/**计算购物车价格失败*/
 	public final static String putCartTotalFail="计算购物车总价失败";
 	/**添加失败*/
