@@ -3,7 +3,7 @@ package org.jxau.lctoh.user.customer.controller;
 
 import java.io.File;
 
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpSession;
 
 import org.jxau.lctoh.tool.base.controller.BaseController;
@@ -18,7 +18,6 @@ import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,7 +39,7 @@ public class CustomerController  extends BaseController{
 	 * json字符串{
 	 * 	说明：{
 	 * 		Integer state;			//状态码（整形数字）
-	 * 		Object responseInfo;	//成功：为  Customer类型对象具体属性参考 Dish实体类
+	 * 		Object responseInfo;	//成功：为  Customer类型对象具体属性参考 Customer实体类
 	 *  							//失败：为失败原因的信息 String 字符串
 	 * 	}
 	 * }
@@ -206,5 +205,4 @@ public class CustomerController  extends BaseController{
 		if(customer==null)throw new UserException(ErrorMSG.loginTimerOut);
 		return customer;
 	}
-	
 }

@@ -1,8 +1,11 @@
 package org.jxau.lctoh.trade.order.service;
 
+import java.util.Date;
 import java.util.List;
 
+import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQureyModel;
 import org.jxau.lctoh.state.domain.State;
+import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
 import org.jxau.lctoh.trade.order.dao.OrderDao;
 import org.jxau.lctoh.trade.order.domain.Order;
@@ -150,6 +153,8 @@ public class OrderService {
 		orderDao.updateOrder(order);
 	}
 	
-	
+	public List<Order> findOrder(OrderStatisticsQureyModel osqm){
+		return orderDao.findOrder(osqm);
+	}
 	
 }

@@ -3,6 +3,7 @@ package org.jxau.lctoh.trade.order.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQureyModel;
 import org.jxau.lctoh.trade.order.domain.Order;
 
 /**
@@ -45,4 +46,6 @@ public interface OrderMapper {
 	 * @return Integer
 	 */
 	public Integer addOrder(Order order);
+	
+	public List<Order> findOrder(OrderStatisticsQureyModel osqm);
 }

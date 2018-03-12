@@ -1,8 +1,10 @@
 package org.jxau.lctoh.user.customer.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import org.jxau.lctoh.tool.base.dao.BaseDao;
+import org.jxau.lctoh.user.admin.domain.QueryWebModel;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.customer.mapper.CustomerMapper;
 import org.springframework.stereotype.Repository;
@@ -45,5 +47,7 @@ public class CustomerDao extends BaseDao {
 		customer.setCustomerUpdateTime(new Date());
 		return customerMapper.updateCustomer(customer);
 	}
-	
+	public List<Customer> getCustomer(QueryWebModel qwm){
+		return customerMapper.getCustomer(qwm);
+	}
 }
