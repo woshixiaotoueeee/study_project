@@ -3,6 +3,7 @@ package org.jxau.lctoh.trade.order.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQureyModel;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.trade.order.domain.Order;
 import org.jxau.lctoh.trade.order.mapper.OrderItemMapper;
@@ -93,5 +94,7 @@ public class OrderDao extends BaseDao {
 		return orderMapper.addOrder(order);
 	}
 	
-	
+	public List<Order> findOrder(OrderStatisticsQureyModel osqm){
+		return orderMapper.findOrder(osqm);
+	}
 }

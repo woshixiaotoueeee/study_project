@@ -1,11 +1,14 @@
 package org.jxau.lctoh.user.customer.service;
 
 
+import java.util.List;
+
 import org.jxau.lctoh.state.dao.StateDao;
 import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.config.defaultInformation.DefaultInformation;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
 import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
+import org.jxau.lctoh.user.admin.domain.QueryWebModel;
 import org.jxau.lctoh.user.basis.dao.UserDao;
 import org.jxau.lctoh.user.basis.dao.VerificationCodeDao;
 import org.jxau.lctoh.user.basis.domain.User;
@@ -139,6 +142,16 @@ public class CustomerService {
 		 * */
 		userDao.updateUser(user);
 		customerDao.updateCustomer(customer);
+	}
+	
+	
+	public List<Customer> getCustomer(QueryWebModel qwm){
+		return customerDao.getCustomer(qwm);
+	}
+
+	public void lockAccount(String customerid, int i) {
+		
+		
 	}
 	
 }

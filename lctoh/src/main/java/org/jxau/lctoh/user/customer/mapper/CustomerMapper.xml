@@ -81,4 +81,14 @@
 			customer.customer_id=#{customerId}
 	</update>
 	
+	
+	
+	<!--根据用户识别码查询用户信息-->
+	<select id="getCustomer" resultMap="CustomerResultMap">
+		select
+			<include refid="CustomerColumns"></include>
+		from customer
+		where 
+			customer.customer_delete_or_not=1
+	</select>
 </mapper>

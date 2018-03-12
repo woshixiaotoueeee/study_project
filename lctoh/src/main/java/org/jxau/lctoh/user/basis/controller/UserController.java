@@ -414,4 +414,47 @@ public class UserController extends BaseController{
 		return toGsonString();
 	}
 	
+	
+	
+	/**
+	 * 注销
+	 * @param type Integer 整形数字，注销类型：1，客户；2，店家；3，骑手；4，admin
+	 * @return
+	 * @throws UserException
+	 */
+	@ResponseBody
+	@RequestMapping(value="/logout",produces=EncodingConfig.produces)	
+	private String logout(Integer type,HttpSession session){
+		try{
+			switch(type){
+			case 1:
+				session.setAttribute(ConversationConfig.customerSession, null);
+				responseData.successInfo(SuccessMSG.successMSG);
+				break;
+			case 2:
+				session.setAttribute(ConversationConfig.restaurantSession, null);
+				responseData.successInfo(SuccessMSG.successMSG);
+				break;
+			case 3:
+				Rider rider=(Rider) session.getAttribute(ConversationConfig.riderSession);
+				session.setAttribute(ConversationConfig.riderSession, null);
+				ServletContext servletContext=session.getServletContext();
+				Map riderMap=(Map)servletContext.getAttribute(ConversationConfig.riderContext);
+				riderMap.remove(rider.getRiderId());
+				responseData.successInfo(SuccessMSG.successMSG);
+				break;
+			case 4:
+				session.setAttribute(ConversationConfig.adminSession, null);
+				responseData.successInfo(SuccessMSG.successMSG);
+				break;
+			default : responseData.failInfo(ErrorMSG.notKnowUser);
+				
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			responseData.failInfo(ErrorMSG.notKnow);
+		}
+		
+		return toString();
+	}
 }

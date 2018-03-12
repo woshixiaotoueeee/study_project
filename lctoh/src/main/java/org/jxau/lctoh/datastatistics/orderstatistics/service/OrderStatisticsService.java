@@ -6,6 +6,7 @@ import java.util.List;
 import org.jxau.lctoh.datastatistics.orderstatistics.dao.OrderStatisticsDao;
 import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatistics;
 import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQureyModel;
+import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderTypeCount;
 import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.config.statistical.Statistical;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,13 @@ public class OrderStatisticsService {
 			orderStatisticsQureyModel.setStatisticsType(4);
 		}
 		return orderStatisticsDao.orderStatistics(orderStatisticsQureyModel);
+	}
+
+
+	public List<OrderTypeCount> orderStatisticsByState(
+			OrderStatisticsQureyModel orderStatisticsQureyModel) {
+		
+		return orderStatisticsDao.orderStatisticsByState(orderStatisticsQureyModel);
 	}
 	
 	

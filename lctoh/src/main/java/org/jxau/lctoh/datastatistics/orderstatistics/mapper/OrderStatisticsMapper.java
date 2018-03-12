@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatistics;
 import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQureyModel;
+import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderTypeCount;
 
 /**
  * @author qdt_PC
@@ -16,6 +17,9 @@ public interface OrderStatisticsMapper {
 	 * @return
 	 */
 	public List<OrderStatistics> orderStatistics(OrderStatisticsQureyModel orderStatisticsQureyModel );
+
+	public List<OrderTypeCount> orderStatisticsByState(
+			OrderStatisticsQureyModel orderStatisticsQureyModel);
 	
 	
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatistics;
 import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQureyModel;
+import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderTypeCount;
 import org.jxau.lctoh.datastatistics.orderstatistics.mapper.OrderStatisticsMapper;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.springframework.stereotype.Repository;
@@ -33,6 +34,10 @@ public class OrderStatisticsDao extends BaseDao {
 	 */
 	public List<OrderStatistics> orderStatistics(OrderStatisticsQureyModel orderStatisticsQureyModel){
 		return orderStatisticsMapper.orderStatistics(orderStatisticsQureyModel);
+	}
+	public List<OrderTypeCount> orderStatisticsByState(
+			OrderStatisticsQureyModel orderStatisticsQureyModel) {
+		return orderStatisticsMapper.orderStatisticsByState(orderStatisticsQureyModel);
 	}
 
 	
