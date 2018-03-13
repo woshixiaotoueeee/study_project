@@ -99,14 +99,11 @@ public class AdminController extends BaseController{
 						responseData.successInfo(SuccessMSG.updateSuccessMSG);
 						break;
 					case 3:
-						restaurantService.lockAccount(id,130003);
+						riderService.lockAccount(id,130003);
 						responseData.successInfo(SuccessMSG.updateSuccessMSG);
 						break;
 					default : responseData.failInfo(ErrorMSG.notKnowUser);
 				}
-			}catch(UserException e){
-				e.printStackTrace();
-				responseData.failInfo(e.getMessage());
 			}catch(Exception e){
 				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.updateFail);

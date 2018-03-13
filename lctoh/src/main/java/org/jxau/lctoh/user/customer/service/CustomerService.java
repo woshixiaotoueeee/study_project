@@ -4,6 +4,7 @@ package org.jxau.lctoh.user.customer.service;
 import java.util.List;
 
 import org.jxau.lctoh.state.dao.StateDao;
+import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.config.defaultInformation.DefaultInformation;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
@@ -149,9 +150,10 @@ public class CustomerService {
 		return customerDao.getCustomer(qwm);
 	}
 
-	public void lockAccount(String customerid, int i) {
-		
-		
+	public Integer lockAccount(String customerId, Integer state) {
+		Customer customer=customerDao.findCustomerByCustomerId(customerId);
+		customer.setCustomerState(new State(state));
+		return customerDao.updateCustomer(customer);
 	}
 	
 }

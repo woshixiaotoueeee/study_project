@@ -6,6 +6,7 @@ import java.util.List;
 import org.jxau.lctoh.position.location.domain.Location;
 import org.jxau.lctoh.position.region.dao.CityDao;
 import org.jxau.lctoh.position.region.domain.City;
+import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
 import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
@@ -189,6 +190,13 @@ public class RestaurantService {
 	 * @param restaurant
 	 */
 	public Integer updateRestaurant(Restaurant restaurant) {
+		return restaurantDao.updateRestaurant(restaurant);
+	}
+
+
+	public Integer lockAccount(String restaurantId, Integer state) {
+		Restaurant restaurant=restaurantDao.findRestaurantByRestaurantId(restaurantId);
+		restaurant.setRestaurantState(new State(state));
 		return restaurantDao.updateRestaurant(restaurant);
 	}
 	
