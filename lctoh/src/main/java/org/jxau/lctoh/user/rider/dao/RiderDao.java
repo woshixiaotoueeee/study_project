@@ -1,6 +1,8 @@
 package org.jxau.lctoh.user.rider.dao;
 
 
+import java.util.Date;
+
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.user.rider.domain.Rider;
 import org.jxau.lctoh.user.rider.mapper.RiderMapper;
@@ -40,6 +42,12 @@ public class RiderDao extends BaseDao {
 	 */
 	public Rider findRiderByRiderId(String riderId){
 		return riderMapper.findRiderByRiderId(riderId);
+	}
+	
+	
+	public Integer updateRider(Rider rider) {
+		rider.setRiderUpdateTime(new Date());
+		return riderMapper.updateRider( rider);
 	}
 	
 	

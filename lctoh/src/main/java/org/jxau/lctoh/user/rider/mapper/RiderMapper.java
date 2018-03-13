@@ -32,6 +32,9 @@ public interface RiderMapper {
 	 * @return List<Rider> 骑手
 	 */
 	public List<Rider> findRiderByRiderStateId(@Param("riderStateId")Integer riderStateId);
+
+
+	public Integer updateRider(Rider rider);
 	
 	
 	

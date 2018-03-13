@@ -1,5 +1,6 @@
 package org.jxau.lctoh.user.rider.service;
 
+import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
 import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
@@ -67,5 +68,11 @@ public class RiderService {
 		if(rider.getRiderState().getStateId()!=10002)
 			throw new UserException(ErrorMSG.loginStateError);
 		return rider;
+	}
+	public Integer lockAccount(String riderId, Integer type) {
+		Rider rider=riderDao.findRiderByRiderId(riderId);
+		rider.setRiderState(new State(type));
+		
+		return riderDao.updateRider(rider);
 	}
 }

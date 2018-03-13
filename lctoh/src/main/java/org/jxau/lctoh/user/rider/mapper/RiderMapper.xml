@@ -55,4 +55,21 @@
 			and rider.rider_state_id=#{riderStateId}
 	</select>
 	
+	<update id="updateRider" parameterType="Rider">
+		update 
+			rider
+		set
+			
+			rider.rider_name=#{riderName},
+			rider.rider_longitude=#{riderLongitude},
+			rider.rider_latitude=#{riderLatitude},
+			rider.rider_update_time=#{riderUpdateTime},
+			rider.rider_user_id=#{riderUser.userId},
+			rider.rider_city_id=#{riderCity.cityId},
+			rider.rider_state_id={riderState.stateId}
+		where
+			rider.rider_id=#{riderId}
+	</update>
+	
+	
 </mapper>
