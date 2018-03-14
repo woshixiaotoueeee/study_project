@@ -235,4 +235,29 @@ public class RestaurantController extends BaseController {
 		}
 		return toGsonString();
 	}
+	
+	
+	/**
+	 * 更新店家地址
+	 * @param restaurantId 店家ID String 字符串
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 */
+	@ResponseBody
+	@RequestMapping(value="/updateRestaurantAddress",produces=EncodingConfig.produces)
+	public String updateRestaurantAddress(HttpSession session){
+		
+		
+		
+		
+		return toGsonString();
+	}
 }
