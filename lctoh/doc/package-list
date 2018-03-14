@@ -1,3 +1,8 @@
+org.jxau.lctoh.datastatistics.orderstatistics.controller
+org.jxau.lctoh.datastatistics.orderstatistics.dao
+org.jxau.lctoh.datastatistics.orderstatistics.daomain
+org.jxau.lctoh.datastatistics.orderstatistics.mapper
+org.jxau.lctoh.datastatistics.orderstatistics.service
 org.jxau.lctoh.filter
 org.jxau.lctoh.interceptor
 org.jxau.lctoh.listener
@@ -25,7 +30,9 @@ org.jxau.lctoh.tool.config.charEncoding
 org.jxau.lctoh.tool.config.conversation
 org.jxau.lctoh.tool.config.defaultInformation
 org.jxau.lctoh.tool.config.error
+org.jxau.lctoh.tool.config.imageurl
 org.jxau.lctoh.tool.config.msg
+org.jxau.lctoh.tool.config.statistical
 org.jxau.lctoh.tool.config.successMSG
 org.jxau.lctoh.tool.domain
 org.jxau.lctoh.tool.exception
