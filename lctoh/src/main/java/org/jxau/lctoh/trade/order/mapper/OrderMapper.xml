@@ -106,8 +106,8 @@
 	</insert>
 	
 	
-	<!--根据店家识别码查询订单-->
-	<select id="findOrderByRestaurantId"  resultMap="OrderResultMap">
+	<!-- 时间段+客户或店家识别码 -->
+	<select id="findOrder"  resultMap="OrderResultMap">
 		select
 			<include refid="OrderColumns"></include>
 		from

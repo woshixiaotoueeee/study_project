@@ -84,7 +84,7 @@ public class OrderStatisticsController extends BaseController{
 	 * @see org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderTypeCount
 	 */
 	@ResponseBody
-	@RequestMapping(value="/orderStatistics",produces=EncodingConfig.produces)
+	@RequestMapping(value="/orderStatisticsByState",produces=EncodingConfig.produces)
 	public String orderStatisticsByState(OrderStatisticsQureyModel orderStatisticsQureyModel){
 		try{
 			
