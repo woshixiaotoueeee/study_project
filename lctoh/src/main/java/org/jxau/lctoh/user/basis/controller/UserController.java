@@ -457,4 +457,33 @@ public class UserController extends BaseController{
 		
 		return toString();
 	}
+	
+
+	/**
+	 * 更改密码
+	 * @param userId 用户ID  oldPassword 原密码  newPassword 新密码  _newPassword 确认密码
+	 * @return
+	 * @throws UserException
+	 */
+	@ResponseBody
+	@RequestMapping(value="/updatePasswordByUserId",produces=EncodingConfig.produces)	
+	private String updatePasswordByUserId(String userId,String oldPassword,String newPassword, String _newPassword){
+		try{
+			if(userId==null||oldPassword==null||newPassword==null){
+				responseData.failInfo(ErrorMSG.parameterIsNull);
+			}else if(newPassword.endsWith(_newPassword)){
+				userService.updateUserPassword(userId, oldPassword, _newPassword);
+				responseData.successInfo(SuccessMSG.updateSuccessMSG);
+			}else{
+				responseData.failInfo(ErrorMSG.passwordNotSameError);
+			}
+		}catch(UserException e){
+			e.printStackTrace();
+			responseData.failInfo(e.getMessage());
+		}catch(Exception e){
+			e.printStackTrace();
+			responseData.failInfo(ErrorMSG.notKnow);
+		}
+		return toString();
+	}
 }

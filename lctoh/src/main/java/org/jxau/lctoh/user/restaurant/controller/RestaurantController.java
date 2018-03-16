@@ -10,6 +10,7 @@ import org.jxau.lctoh.tool.config.conversation.ConversationConfig;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
 import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
 import org.jxau.lctoh.user.customer.domain.Customer;
+import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.jxau.lctoh.user.restaurant.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -239,7 +240,7 @@ public class RestaurantController extends BaseController {
 	
 	/**
 	 * 更新店家地址
-	 * @param restaurantId 店家ID String 字符串
+	 * @param 
 	 * @return
 	 * <pre>
 	 * json字符串{
@@ -253,11 +254,25 @@ public class RestaurantController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/updateRestaurantAddress",produces=EncodingConfig.produces)
-	public String updateRestaurantAddress(HttpSession session){
-		
-		
-		
-		
+	public String updateRestaurantAddress(Location location,HttpSession session){
+		Restaurant restaurant=(Restaurant) session.getAttribute(ConversationConfig.restaurantSession);
+		if (restaurant==null||location==null
+				||location.getLatitude()==null
+				||location.getLongitude()==null
+				||location.getInfo()==null) {
+			responseData.failInfo(ErrorMSG.parameterIsNull);
+		} else {
+			restaurant.setRestaurantLatitude(location.getLatitude());
+			restaurant.setRestaurantLongitude(location.getLongitude());
+			restaurant.setRestaurantAddressInfo(location.getInfo());
+			try{
+				restaurantService.updateRestaurant(restaurant);
+				responseData.successInfo(SuccessMSG.updateSuccessMSG);
+			}catch(Exception e){
+				e.printStackTrace();
+				responseData.failInfo(ErrorMSG.updateFail);
+			}
+		}
 		return toGsonString();
 	}
 }

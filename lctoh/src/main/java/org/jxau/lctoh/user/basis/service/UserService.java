@@ -49,6 +49,20 @@ public class UserService {
 	public Integer updateUser(User user) {
 		return userDao.updateUser(user);
 	}
-	
+	/**
+	 * 更新用户信息
+	 * @param user
+	 * @return
+	 * @throws UserException 
+	 */
+	public Integer updateUserPassword(String userId,String oldPassword,String newPassword) throws UserException {
+		User user=userDao.findUserByUserId(userId);
+		if(oldPassword.endsWith(user.getUserPassword())){
+			user.setUserPassword(newPassword);
+			return userDao.updateUser(user);
+		}else{
+			throw new UserException(ErrorMSG.passwordError);
+		}
+	}
 	
 }
