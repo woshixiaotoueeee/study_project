@@ -141,7 +141,7 @@ public class CustomerController  extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="/updateCustomerPortrait",produces=EncodingConfig.produces)
 	public String updateCustomerPortrait(@RequestParam("file") MultipartFile file, HttpSession session){
-		String xpath = session.getServletContext().getRealPath(File.separator).concat(ImagesUrl.customerPortraitUrl);
+		String xpath = session.getServletContext().getRealPath(File.separator).concat(ImagesUrl.CustomerPortraitUrl.replace("/", File.separator));
 		try {
 			Customer customer=getCustomer(session);
 			String fileName = file.getOriginalFilename();
@@ -162,7 +162,7 @@ public class CustomerController  extends BaseController{
 		        //新文件名
 		        String imagename=session.getId()+ System.currentTimeMillis()+"."+prefix;
 		        //数据库路径
-		        String sqlurl=ImagesUrl.customerPortraitSqlUrl.concat(imagename);
+		        String sqlurl=ImagesUrl.CustomerPortraitUrl.concat(imagename);
 		        File targetFile = new File(xpath, imagename);
 		        if (!targetFile.exists()) {
 		            targetFile.mkdirs();

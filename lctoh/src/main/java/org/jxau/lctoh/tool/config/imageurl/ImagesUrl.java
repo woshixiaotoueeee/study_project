@@ -13,12 +13,29 @@ import org.springframework.stereotype.Component;
 public class ImagesUrl{
 	
 	/**头像路径*/
-	public final static String customerPortraitUrl="image".concat(File.separator);//File.separator;
-	public final static String customerPortraitSqlUrl="image/";
-	/**菜肴图片路径*/
-	public final static String dishImageUrl=File.separator;
+	//public final static String PortraitUrl="image".concat(File.separator).concat("portrait");//File.separator;
+	
+	/**头像路径*/
+	public final static String CustomerPortraitUrl="custmer/images/portrait/";
+	
 	/**店家图片路径*/
+	public final static String RestaurantPortraitUrl="restaurant/images/portrait/";
+	
+	/**菜肴图片路径*/
+	public final static String DishPortraitUrl="restaurant/dish/images/portrait/";
+	
+	
+	
+	
+	/**路径数据库*/
+	//public final static String PortraitSQLUrl="image/portrait/";//File.separator;
+	
+	/*
+	public final static String customerPortraitSqlUrl="image".concat(File.separator);
+	///**菜肴图片路径
+	public final static String dishImageUrl=File.separator;
+	///**店家图片路径
 	public final static String restaurantImageUrl=File.separator;
 	
-	
+	*/
 }
