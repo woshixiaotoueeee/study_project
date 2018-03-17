@@ -31,6 +31,11 @@ public class City {
 	 * @see org.jxau.lctoh.position.region.domain.Province
 	 * */
 	private Province cityProvince;
+	
+	public City(){}
+	
+	public City(String cityId){this.cityId=cityId;}
+	
 	public String getCityId() {
 		return cityId;
 	}

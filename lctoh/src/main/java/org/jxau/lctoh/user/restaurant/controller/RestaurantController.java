@@ -1,21 +1,30 @@
 package org.jxau.lctoh.user.restaurant.controller;
 
 
+import java.io.File;
+import java.math.BigDecimal;
+
 import javax.servlet.http.HttpSession;
 
 import org.jxau.lctoh.position.location.domain.Location;
+import org.jxau.lctoh.position.region.domain.City;
 import org.jxau.lctoh.tool.base.controller.BaseController;
 import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
 import org.jxau.lctoh.tool.config.conversation.ConversationConfig;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
+import org.jxau.lctoh.tool.config.imageurl.ImagesUrl;
 import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
+import org.jxau.lctoh.user.basis.domain.User;
+import org.jxau.lctoh.user.basis.exception.UserException;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.jxau.lctoh.user.restaurant.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 店家操作接口
@@ -240,7 +249,7 @@ public class RestaurantController extends BaseController {
 	
 	/**
 	 * 更新店家地址
-	 * @param 
+	 * @param 所属城市ID String city 详细地址信息  String info  经度 BigDecimal longitude 纬度 BigDecimal latitude ;
 	 * @return
 	 * <pre>
 	 * json字符串{
@@ -259,12 +268,14 @@ public class RestaurantController extends BaseController {
 		if (restaurant==null||location==null
 				||location.getLatitude()==null
 				||location.getLongitude()==null
-				||location.getInfo()==null) {
+				||location.getInfo()==null
+				||location.getCity()==null) {
 			responseData.failInfo(ErrorMSG.parameterIsNull);
 		} else {
 			restaurant.setRestaurantLatitude(location.getLatitude());
 			restaurant.setRestaurantLongitude(location.getLongitude());
 			restaurant.setRestaurantAddressInfo(location.getInfo());
+			restaurant.setRestaurantCity(new City(location.getCity()));
 			try{
 				restaurantService.updateRestaurant(restaurant);
 				responseData.successInfo(SuccessMSG.updateSuccessMSG);
@@ -275,4 +286,130 @@ public class RestaurantController extends BaseController {
 		}
 		return toGsonString();
 	}
+	
+	/**
+	 * 更新店家信息
+	 * @param user restaurant
+	 * <pre>
+	 * 	user 说明：{
+	 * 		String userSex 性别
+	 *  	String userEmail 邮箱
+	 *  	String userPhone 电话
+	 * 	}
+	 * restaurant{
+	 * 	 BigDecimal restaurantDeliveryFee 配送费
+	 * 	 String restaurantName 店名
+	 * 	 String restaurantPhone 店家联系方式
+	 *	 String restaurantNotice 公告
+	 * 	}
+	 * </pre>
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 */
+	@ResponseBody
+	@RequestMapping(value="/updateRestaurant",produces=EncodingConfig.produces)
+	public String updateRestaurant(Restaurant restaurant,User user,HttpSession session){
+		Restaurant _restaurant=(Restaurant) session.getAttribute(ConversationConfig.restaurantSession);
+		if (restaurant==null||user==null
+				||restaurant.getRestaurantDeliveryFee()==null
+				||restaurant.getRestaurantName()==null
+				||restaurant.getRestaurantPhone()==null
+				||restaurant.getRestaurantNotice()==null
+				||user.getUserEmail()==null
+				||user.getUserPhone()==null
+				||user.getUserSex()==null
+				) {
+			responseData.failInfo(ErrorMSG.parameterIsNull);
+		} else {
+			User _user=_restaurant.getRestaurantUser();
+			_user.setUserEmail(user.getUserEmail());
+			_user.setUserSex(user.getUserSex());
+			_user.setUserPhone(user.getUserPhone());
+			_restaurant.setRestaurantUser(_user);
+			_restaurant.setRestaurantDeliveryFee(restaurant.getRestaurantDeliveryFee());
+			_restaurant.setRestaurantName(restaurant.getRestaurantName());
+			_restaurant.setRestaurantPhone(restaurant.getRestaurantPhone());
+			_restaurant.setRestaurantNotice(restaurant.getRestaurantNotice());
+			try{
+				restaurantService.updateRestaurant(restaurant);
+				responseData.successInfo(SuccessMSG.updateSuccessMSG);
+			}catch(Exception e){
+				e.printStackTrace();
+				responseData.failInfo(ErrorMSG.updateFail);
+			}
+		}
+		return toGsonString();
+	}
+	
+	
+	/**
+	 * 更新店铺图片
+	 * @param file 文件
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.user.customer.domain.Customer
+	 */
+	@ResponseBody
+	@RequestMapping(value="/updateRestaurantPortrait",produces=EncodingConfig.produces)
+	public String updateRestaurantPortrait(@RequestParam("file") MultipartFile file, HttpSession session){
+		String xpath = session.getServletContext().getRealPath(File.separator).concat(ImagesUrl.RestaurantPortraitUrl.replace("/", File.separator));
+		Restaurant restaurant=(Restaurant) session.getAttribute(ConversationConfig.restaurantSession);
+		try {
+			String fileName = file.getOriginalFilename();
+	        //后缀判断
+	        if (!fileName.endsWith(".jpg") &&! fileName.endsWith(".jpeg")    
+	              &&! fileName.endsWith(".bmp")    
+	                &&! fileName.endsWith(".gif")    
+	                &&! fileName.endsWith(".png")
+	                &&!fileName.endsWith(".JPG") 
+	                &&! fileName.endsWith(".JPEG")    
+	                &&! fileName.endsWith(".BMP")    
+	                &&! fileName.endsWith(".GIF")    
+	                &&! fileName.endsWith(".PNG")){
+	        	responseData.failInfo(ErrorMSG.fileFormatError);
+	        } else{
+	        	//获取后缀
+		        String prefix=fileName.substring(fileName.lastIndexOf(".")+1);    
+		        //新文件名
+		        String imagename=session.getId()+ System.currentTimeMillis()+"."+prefix;
+		        //数据库路径
+		        String sqlurl=ImagesUrl.RestaurantPortraitUrl.concat(imagename);
+		        File targetFile = new File(xpath, imagename);
+		        if (!targetFile.exists()) {
+		            targetFile.mkdirs();
+		        }
+		        // 保存
+		        try {
+		            file.transferTo(targetFile);
+		            restaurant.setRestaurantImage(sqlurl);
+		            restaurantService.updateRestaurant(restaurant);
+		            session.setAttribute(ConversationConfig.customerSession, restaurant);
+		            responseData.successInfo(SuccessMSG.updateSuccessMSG);
+		        }catch (Exception e) {
+		        	e.printStackTrace();
+		        	responseData.failInfo(ErrorMSG.updateFail);
+		        }
+	        }
+		}catch (Exception e) {
+			e.printStackTrace();
+			responseData.failInfo(ErrorMSG.notKnow);
+		}
+		return toGsonString();
+	}
+	
 }
