@@ -18,6 +18,7 @@
 		<result property="restaurantDeliveryFee" column="restaurant_deliveryfee"/>
 		<result property="restaurantIncome" column="restaurant_income"/>
 		<result property="restaurantUpdateTime" column="restaurant_update_time"/>
+		<result property="restaurantOfferPrice" column="restaurant_offer_price"/>
 		<association property="restaurantState" column="restaurant_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
 		<association property="restaurantUser" column="restaurant_user_id" select="org.jxau.lctoh.user.basis.mapper.UserMapper.findUserByUserId"/>
 		<association property="restaurantCategory" column="restaurant_category_id" select="org.jxau.lctoh.user.restaurant.mapper.RestaurantCategoryMapper.findRestaurantCategoryById"/>
@@ -42,7 +43,8 @@
 		restaurant.restaurant_category_id,
 		restaurant.restaurant_city_id,
 		restaurant.restaurant_deliveryfee,
-		restaurant.restaurant_income
+		restaurant.restaurant_income,
+		restaurant.restaurant_offer_price
 	</sql>
 
 	<!--根据店家识别码查询分类信息-->
@@ -115,7 +117,8 @@
 			restaurant.restaurant_category_id=#{restaurantCategory.restaurantCategoryId},
 			restaurant.restaurant_city_i#{restaurantCity.cityId},
 			restaurant.restaurant_deliveryfee=#{restaurantDeliveryFee},
-			restaurant.restaurant_income=#{restaurantIncome}
+			restaurant.restaurant_income=#{restaurantIncome},
+			restaurant.restaurant_offer_price=#{restaurantOfferPrice}
 		where
 			restaurant.restaurant_id=#{restaurantId}
 	</update>

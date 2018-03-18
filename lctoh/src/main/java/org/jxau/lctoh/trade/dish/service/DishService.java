@@ -1,5 +1,6 @@
 package org.jxau.lctoh.trade.dish.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.jxau.lctoh.trade.dish.dao.CollectDishDao;
@@ -82,7 +83,37 @@ public class DishService {
 	 * @return List<Dish>
 	 */
 	public List<Dish> findDishByRestaurantId(String restaurantId) {
-		return null;
+		return dishDao.findDishByRestaurantId(restaurantId);
+	}
+	/**
+	 * 添加菜肴信息
+	 * @param dish
+	 * @return
+	 */
+	public Integer addDish(Dish dish){
+		return dishDao.addDish(dish);
 	}
 	
+	/**
+	 * 删除菜肴信息
+	 * @param dish
+	 * @return
+	 */
+	public Integer deleteDish(Dish dish){
+		
+		return dishDao.deleteDish(dish);
+	}
+	/**
+	 * 更新菜肴信息
+	 * @param dish
+	 * @return
+	 */
+	public Integer updateDish(Dish dish){
+		Dish _dish=dishDao.findDishByDishId(dish.getDishId());
+		_dish.setDishImage(dish.getDishImage());
+		
+		
+		sss
+		return dishDao.updateDish(_dish);
+	}
 }

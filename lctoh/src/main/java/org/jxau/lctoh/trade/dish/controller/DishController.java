@@ -2,13 +2,18 @@ package org.jxau.lctoh.trade.dish.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.jxau.lctoh.state.domain.State;
+import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.base.controller.BaseController;
 import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
 import org.jxau.lctoh.tool.config.conversation.ConversationConfig;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
 import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
+import org.jxau.lctoh.trade.dish.domain.DishCategory;
+import org.jxau.lctoh.trade.dish.service.DishCategoryService;
 import org.jxau.lctoh.trade.dish.service.DishService;
 import org.jxau.lctoh.user.customer.domain.Customer;
+import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +28,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DishController extends BaseController{
 	@Autowired
 	private DishService dishService;
-	
+	@Autowired
+	private DishCategoryService dishCategoryService;
 	
 	/**
 	 * 根据ID获取菜肴信息
@@ -176,7 +182,7 @@ public class DishController extends BaseController{
 	
 	
 	/**
-	 * 根据店家ID获取菜肴信息（暂时没有实现功能）
+	 * 根据店家ID获取菜肴信息
 	 * @param restaurantId 店家ID String 字符串
 	 * @return
 	 * <pre>
@@ -208,27 +214,66 @@ public class DishController extends BaseController{
 	
 	
 	/**
-	 * 添加菜肴分类（暂时没有实现功能）
+	 * 添加菜肴分类
+	 * @param dishCategoryName 菜肴分类名
 	 * @return
 	 * <pre>
 	 * json字符串{
 	 * 	说明：{
 	 * 		Integer state;			//状态码（整形数字）
-	 * 		Object responseInfo;	//成功：为  List&lt;Dish&gt; 类型对象具体属性参考 Dish实体类
+	 * 		Object responseInfo;	//成功：为成功的信息  String 字符串
 	 *  							//失败：为失败原因的信息 String 字符串
 	 * 	}
 	 * }
 	 * </pre>
-	 * @see org.jxau.lctoh.trade.dish.domain.Dish
+	 * @see org.jxau.lctoh.trade.dish.domain.DishCategory
 	 */
 	@ResponseBody
 	@RequestMapping(value="/addDishCategory",produces=EncodingConfig.produces)
-	public String addDishCategory(String restaurantId,HttpSession session){
-		if(restaurantId==null){
-			responseData.failInfo(ErrorMSG.notKnow);
+	public String addDishCategory(DishCategory dishCategory,HttpSession session){
+		if(dishCategory==null||dishCategory.getDishCategoryName()==null){
+			responseData.failInfo(ErrorMSG.parameterIsNull);
+		}else{
+			Restaurant restaurant=(Restaurant) session.getAttribute(ConversationConfig.restaurantSession);
+			dishCategory.setDishCategoryRestaurant(restaurant);
+			dishCategory.setDishCategoryState(new State(30001));
+			dishCategory.setDishCategoryId(Tools.getRandomString(32));
+			try{
+				
+				dishCategoryService.addDishCategory(dishCategory);
+				responseData.successInfo(SuccessMSG.addSuccessMSG);
+			}catch(Exception e){
+				e.printStackTrace();
+				responseData.failInfo(ErrorMSG.addFail);
+			}
+		}
+		return toGsonString();
+	}
+	
+	
+	/**
+	 * 更新菜肴分类
+	 * @param dishCategoryName 菜肴分类名  dishCategoryId 菜肴分类ID
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为成功的信息  String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 */
+	@ResponseBody
+	@RequestMapping(value="/updateDishCategory",produces=EncodingConfig.produces)
+	public String updateDishCategory(DishCategory dishCategory){
+		if(dishCategory==null||dishCategory.getDishCategoryName()==null||dishCategory.getDishCategoryId()==null){
+			responseData.failInfo(ErrorMSG.parameterIsNull);
 		}else{
 			try{
-	//			responseData.successInfo(dishService.findDishByRestaurantId(restaurantId));
+				dishCategoryService.updateDishCategory(dishCategory);
+				responseData.successInfo(SuccessMSG.updateSuccessMSG);
 			}catch(Exception e){
 				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.selectFail);
@@ -236,5 +281,34 @@ public class DishController extends BaseController{
 		}
 		return toGsonString();
 	}
-	
+	/**
+	 * 更新菜肴分类
+	 * @param dishCategoryId 菜肴分类ID
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为成功的信息  String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 */
+	@ResponseBody
+	@RequestMapping(value="/deleteDishCategory",produces=EncodingConfig.produces)
+	public String deleteDishCategory(DishCategory dishCategory){
+		if(dishCategory==null||dishCategory.getDishCategoryId()==null){
+			responseData.failInfo(ErrorMSG.parameterIsNull);
+		}else{
+			try{
+				dishCategoryService.deleteDishCategory(dishCategory);
+				responseData.successInfo(SuccessMSG.deleteSuccessMSG);
+			}catch(Exception e){
+				e.printStackTrace();
+				responseData.failInfo(ErrorMSG.deleteFail);
+			}
+		}
+		return toGsonString();
+	}
 }

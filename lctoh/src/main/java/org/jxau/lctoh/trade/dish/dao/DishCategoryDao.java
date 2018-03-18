@@ -1,6 +1,10 @@
 package org.jxau.lctoh.trade.dish.dao;
 
+import java.util.Date;
 import java.util.List;
+
+
+
 
 
 
@@ -80,5 +84,35 @@ public class DishCategoryDao  extends BaseDao {
 		List<DishCategory> dishCategoryList=dishCategoryMapper.findDishCategoryByRestaurantId(restaurantId);
 		if(dishCategoryList==null)return dishCategoryList;
 		return loadDiahCategoryListDishList(dishCategoryList);
+	}
+	
+	
+	/**
+	 * 添加分类信息
+	 * @param dishCategory
+	 * @return Integer
+	 */
+	public Integer addDishCategory(DishCategory dishCategory){
+		dishCategory.setDishCategoryUpdateTime(new Date());
+		return dishCategoryMapper.addDishCategory(dishCategory);
+	}
+	/**
+	 * 更新分类信息
+	 * @param dishCategory
+	 * @return Integer
+	 */
+	public Integer updateDishCategory(DishCategory dishCategory) {
+		dishCategory.setDishCategoryUpdateTime(new Date());
+		return dishCategoryMapper.updateDishCategory(dishCategory);
+	}
+	
+	/**
+	 * 删除菜肴分类
+	 * @param dishCategory
+	 * @return
+	 */
+	public Integer deleteDishCategory(DishCategory dishCategory) {
+		dishCategory.setDishCategoryUpdateTime(new Date());
+		return dishCategoryMapper.deleteDishCategory(dishCategory);
 	}
 }
