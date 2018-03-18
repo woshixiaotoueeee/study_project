@@ -27,4 +27,33 @@ public interface DishMapper {
 	 * @return
 	 */
 	public List<Dish> findCollectDishByCustomerId(@Param("customerId")String customerId);
+	
+	/**
+	 * 根据店家识别码查询菜肴信息
+	 * @param restaurantId
+	 * @return
+	 */
+	public List<Dish> findDishByRestaurantId(String restaurantId);
+	
+	
+	/**
+	 * 添加菜肴信息
+	 * @param dish
+	 * @return
+	 */
+	public Integer addDish(Dish dish);
+	
+	/**
+	 * 删除菜肴信息
+	 * @param dish
+	 * @return
+	 */
+	public Integer deleteDish(Dish dish);
+	/**
+	 * 更新菜肴信息
+	 * @param dish
+	 * @return
+	 */
+	public Integer updateDish(Dish dish);
+	
 }

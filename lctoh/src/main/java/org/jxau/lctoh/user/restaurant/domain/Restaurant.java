@@ -40,7 +40,8 @@ public class Restaurant {
 	private BigDecimal restaurantDistance;
 	/**配送费*/
 	private BigDecimal restaurantDeliveryFee;
-	
+	/**起送价格*/
+	private BigDecimal restaurantOfferPrice;
 	/**店家收入*/
 	private BigDecimal restaurantIncome;
 	
@@ -173,6 +174,12 @@ public class Restaurant {
 	}
 	public void setRestaurantIncome(BigDecimal restaurantIncome) {
 		this.restaurantIncome = restaurantIncome;
+	}
+	public BigDecimal getRestaurantOfferPrice() {
+		return restaurantOfferPrice;
+	}
+	public void setRestaurantOfferPrice(BigDecimal restaurantOfferPrice) {
+		this.restaurantOfferPrice = restaurantOfferPrice;
 	}
 	@Override
 	public String toString() {

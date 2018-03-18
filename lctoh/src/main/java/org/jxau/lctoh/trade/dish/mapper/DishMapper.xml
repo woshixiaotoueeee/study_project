@@ -65,4 +65,70 @@
 			and collect_dish.collect_customer_id=#{customerId}
 	</select>
 	
+	
+	<!--根据店家ID查询菜肴-->
+	<select id="findDishByRestaurantId" parameterType="String" resultMap="DishResultMap">
+		select 
+			<include refid="DishColumns"></include>
+		from dish ,dish_category,restaurant
+		where 
+			dish.dish_category_id=dish_category.dish_category_id
+			and dish_category.dish_category_restaurant_id=restaurant.restaurant_id
+			and dish.dish_delete_or_not=1
+			and dish.dish_category_delete_or_not=1
+			and restaurant.restaurant_delete_or_not=1
+			and restaurant.restaurant_id=#{restaurantId}
+	</select>
+	
+	<!--删除菜肴信息-->
+	<update id="deleteDish" parameterType="Dish">
+		update dish
+		set
+			dish.dish_delete_or_not=0
+			dish.dish_update_time=#{dishUpdateTime}
+		where
+			dish.dish.dish_id=#{dishId}
+	</update>
+	
+	<!--更新菜肴信息-->
+	<update id="updateDish" parameterType="Dish">
+		update dish
+		set
+			dish.dish_name=#{dishName},
+			dish.dish_price=#{dishPrice},
+			dish.dish_image=#{dishImage},
+			dish.dish_intro=#{dishIntro},
+			dish.dish_quantity#{dishQuantity},
+			dish.dish_state_id=#{dishState.stateId},
+			dish.dish_category_id=#{dishCategory.dishCategoryId},
+			dish.dish_update_time=#{dishUpdateTime}
+		where
+			dish.dish.dish_id=#{dishId}
+	</update>
+	
+	<!--添加菜肴分类-->
+	<insert id="addDish" parameterType="Dish">
+		insert into dish(
+			dish.dish_id,
+			dish.dish_name,
+			dish.dish_price,
+			dish.dish_image,
+			dish.dish_update_time,
+			dish.dish_intro,
+			dish.dish_quantity,
+			dish.dish_state_id,
+			dish.dish_category_id
+			)
+		values(
+			#{dishId},
+			#{dishName},
+			#{dishPrice},
+			#{dishImage},
+			#{dishUpdateTime},
+			#{dishIntro},
+			#{dishQuantity},
+			#{dishState.stateId},
+			#{dishCategory.dishCategoryId}
+		)
+	</insert>
 </mapper>

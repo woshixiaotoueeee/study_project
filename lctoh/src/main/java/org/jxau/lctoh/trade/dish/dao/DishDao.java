@@ -1,6 +1,10 @@
 package org.jxau.lctoh.trade.dish.dao;
 
+import java.util.Date;
 import java.util.List;
+
+
+
 
 
 import org.jxau.lctoh.tool.base.dao.BaseDao;
@@ -48,5 +52,42 @@ public class DishDao extends BaseDao {
 	 */
 	public List<Dish> findCollectDishByCustomerId(String customerId){
 		return dishMapper.findCollectDishByCustomerId(customerId);
+	}
+	/**
+	 * 根据店家识别码查询菜肴信息
+	 * @param restaurantId
+	 * @return
+	 */
+	public List<Dish> findDishByRestaurantId(String restaurantId) {
+		return dishMapper.findDishByRestaurantId( restaurantId);
+	}
+	
+	/**
+	 * 添加菜肴信息
+	 * @param dish
+	 * @return
+	 */
+	public Integer addDish(Dish dish){
+		dish.setDishUpdateTime(new Date());
+		return dishMapper.addDish(dish);
+	}
+	
+	/**
+	 * 删除菜肴信息
+	 * @param dish
+	 * @return
+	 */
+	public Integer deleteDish(Dish dish){
+		dish.setDishUpdateTime(new Date());
+		return dishMapper.deleteDish(dish);
+	}
+	/**
+	 * 更新菜肴信息
+	 * @param dish
+	 * @return
+	 */
+	public Integer updateDish(Dish dish){
+		dish.setDishUpdateTime(new Date());
+		return dishMapper.updateDish(dish);
 	}
 }
