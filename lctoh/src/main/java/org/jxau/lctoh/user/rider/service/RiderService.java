@@ -42,7 +42,7 @@ public class RiderService {
 		if(rider==null)throw new UserException(ErrorMSG.noPower);
 		
 		/**后期可能需要修改*/
-		if(rider.getRiderState().getStateId()!=10002)
+		if(rider.getRiderState().getStateId()==130003||rider.getRiderState().getStateId()==130004)
 			throw new UserException(ErrorMSG.loginStateError);
 		return rider;
 	}

@@ -38,6 +38,10 @@ public class DishCategory {
 	 * @see org.jxau.lctoh.trade.dish.domain.Dish
 	 * */
 	private List<Dish> dishList;
+	public DishCategory( ) {}
+	public DishCategory(String dishCategoryId) {
+		this.dishCategoryId=dishCategoryId;
+	}
 	public String getDishCategoryId() {
 		return dishCategoryId;
 	}
