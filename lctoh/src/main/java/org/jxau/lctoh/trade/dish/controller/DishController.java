@@ -391,7 +391,7 @@ public class DishController extends BaseController{
 	}
 	
 	/**
-	 * 添加菜肴
+	 * 更新菜肴
 	 * @param dishId 菜肴ID dishCategoryId 菜肴分类ID   dishName 菜肴名  dishPrice 菜肴价格  file 菜肴图片  dishIntro 菜肴简介 dishQuantity 库存
 	 * @return
 	 * <pre>
@@ -460,7 +460,7 @@ public class DishController extends BaseController{
 	}
 	
 	/**
-	 * 添加菜肴
+	 * 删除菜肴
 	 * @param dishId 菜肴ID 
 	 * @return
 	 * <pre>

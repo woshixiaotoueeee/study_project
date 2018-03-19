@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.tool.base.controller.BaseController;
 import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
 import org.jxau.lctoh.tool.config.conversation.ConversationConfig;
@@ -30,7 +31,7 @@ public class RiderConreoller extends BaseController {
 	
 	
 	/**
-	 * 根据骑手和状态获取配送信息
+	 * 根据骑手和订单配送状态获取配送信息
 	 * @param stateId 状态ID Integer 整形数字
 	 * @return
 	 * <pre>
@@ -212,7 +213,7 @@ public class RiderConreoller extends BaseController {
 	
 	
 	/**
-	 * 根据更新订单配送状态配送信息
+	 * 更新骑手位置信息
 	 * @param riderLongitude BigDecimal 数字 经纬度
 	 * @param riderLatitude BigDecimal 数字 经纬度
 	 * @return
@@ -253,6 +254,51 @@ public class RiderConreoller extends BaseController {
 		return toGsonString();
 	}
 	
+	
+	/**
+	 * 
+	 * @param stateType Integer 状态 1：上班  2：下班
+	 * @return
+	 * @throws RiderException
+	 */
+	@ResponseBody
+	@RequestMapping(value="/updateRiderState",produces=EncodingConfig.produces)
+	private String updateRiderState(Rider rider,Integer stateType, HttpSession session){
+		try {
+			rider=getRiderInSession(session);
+			if(stateType==null){
+				responseData.failInfo(ErrorMSG.parameterIsNull);
+			}else{
+				if(stateType==1){
+					rider.setRiderState(new State(130001));
+					session.setAttribute(ConversationConfig.riderSession, rider);
+					ServletContext servletContext=session.getServletContext();
+					Map map=(Map) servletContext.getAttribute(ConversationConfig.riderContext);
+					map.put(rider.getRiderId(), rider);
+					servletContext.setAttribute(ConversationConfig.riderContext, map);
+					
+				}else if(stateType==2){
+					rider.setRiderState(new State(130002));
+					session.setAttribute(ConversationConfig.riderSession, rider);
+					ServletContext servletContext=session.getServletContext();
+					Map map=(Map) servletContext.getAttribute(ConversationConfig.riderContext);
+					map.remove(rider.getRiderId());
+					servletContext.setAttribute(ConversationConfig.riderContext, map);
+				}
+				responseData.successInfo(SuccessMSG.successMSG);
+			}
+		} catch (RiderException e) {
+			e.printStackTrace();
+			responseData.failInfo(e.getMessage());
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			responseData.failInfo(ErrorMSG.notKnow);
+		}
+		return toString();
+	}
+	
+	
 	/**
 	 * 获取Session中的骑手信息
 	 * @param session
@@ -264,4 +310,7 @@ public class RiderConreoller extends BaseController {
 		if(rider==null)throw new RiderException(ErrorMSG.loginTimerOut);
 		return rider;
 	}
+	
+	
+	
 }
