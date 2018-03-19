@@ -52,7 +52,7 @@ public class RestaurantService {
 		if(restaurant==null)throw new UserException(ErrorMSG.noPower);
 		
 		/**后期可能需要修改*/
-		if(restaurant.getRestaurantState().getStateId()!=70001)
+		if(restaurant.getRestaurantState().getStateId()==70001)
 			throw new UserException(ErrorMSG.loginStateError);
 		return restaurant;
 		

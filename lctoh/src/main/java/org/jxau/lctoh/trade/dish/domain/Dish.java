@@ -26,7 +26,7 @@ public class Dish {
 	private String dishImage;
 	/**最近更新时间*/
 	private Date dishUpdateTime;
-	/**菜肴见解*/
+	/**菜肴简介*/
 	private String dishIntro;
 	/**库存*/
 	private Integer dishQuantity;

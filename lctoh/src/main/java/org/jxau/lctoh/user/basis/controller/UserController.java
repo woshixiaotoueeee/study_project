@@ -1,11 +1,14 @@
 package org.jxau.lctoh.user.basis.controller;
 
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.jxau.lctoh.position.location.domain.Location;
+import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.base.controller.BaseController;
 import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
@@ -13,6 +16,7 @@ import org.jxau.lctoh.tool.config.conversation.ConversationConfig;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
 import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
 import org.jxau.lctoh.trade.cart.domain.Cart;
+import org.jxau.lctoh.trade.dish.domain.DishCategory;
 import org.jxau.lctoh.user.admin.domain.Admin;
 import org.jxau.lctoh.user.admin.service.AdminService;
 import org.jxau.lctoh.user.basis.domain.User;
@@ -49,6 +53,90 @@ public class UserController extends BaseController{
 	private RestaurantService restaurantService;
 	@Autowired
 	private VerificationCodeService verificationCodeService;
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/loginbasic",produces=EncodingConfig.produces)
+	public String loginbasic(HttpSession session) throws UserException, Exception{
+		User user=new User();
+		user.setUserAccount("851844570");
+		user.setUserPassword("123456");
+		Customer customer=customerService.login(user);
+		
+		Location location=new Location();
+		location.setInfo("北京");
+		location.setCity("北京");
+		location.setProvince("北京");
+		location.setLatitude(BigDecimal.valueOf(39.92));
+		location.setLongitude(BigDecimal.valueOf(116.46));
+		session.setAttribute(ConversationConfig.locationSession, location);
+		
+		
+		session.setAttribute(ConversationConfig.customerSession, customer);
+		session.setAttribute(ConversationConfig.cartSession, new Cart());
+		//responseData.successInfo(SuccessMSG.customerSuccessUrl);
+		
+		Admin admin=adminService.login(user);
+		session.setAttribute(ConversationConfig.adminSession, admin);
+		//responseData.successInfo(SuccessMSG.adminSuccessUrl);
+		
+		Rider rider=riderService.login(user);
+		session.setAttribute(ConversationConfig.riderSession, rider);
+		ServletContext servletContext=session.getServletContext();
+		Map riderMap=(Map)servletContext.getAttribute(ConversationConfig.riderContext);
+		riderMap.put(rider.getRiderId(), rider);
+		synchronized(this){
+			servletContext.setAttribute(ConversationConfig.riderContext, riderMap);
+		}
+		//responseData.successInfo(SuccessMSG.riderSuccessUrl);
+		
+		Restaurant restaurant=restaurantService.login(user);
+		session.setAttribute(ConversationConfig.restaurantSession, restaurant);
+		
+		
+		responseData.successInfo(SuccessMSG.successMSG);
+		
+		return toGsonString();
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/logoutbasic",produces=EncodingConfig.produces)
+	public String logoutbasic(HttpSession session) throws UserException, Exception{
+		User user=new User();
+		user.setUserAccount("851844570");
+		user.setUserPassword("123456");
+		
+		session.removeAttribute(ConversationConfig.locationSession);
+		session.removeAttribute(ConversationConfig.customerSession);
+		session.removeAttribute(ConversationConfig.cartSession);
+		//responseData.successInfo(SuccessMSG.customerSuccessUrl);
+		
+		session.removeAttribute(ConversationConfig.adminSession);
+		
+		
+		Rider rider=riderService.login(user);
+		session.removeAttribute(ConversationConfig.riderSession);
+		ServletContext servletContext=session.getServletContext();
+		Map riderMap=(Map)servletContext.getAttribute(ConversationConfig.riderContext);
+		riderMap.remove(rider.getRiderId());
+		synchronized(this){
+			servletContext.setAttribute(ConversationConfig.riderContext, riderMap);
+		}
+		//responseData.successInfo(SuccessMSG.riderSuccessUrl);
+		
+		session.removeAttribute(ConversationConfig.restaurantSession);
+		responseData.successInfo(SuccessMSG.successMSG);
+		
+		return toGsonString();
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	
