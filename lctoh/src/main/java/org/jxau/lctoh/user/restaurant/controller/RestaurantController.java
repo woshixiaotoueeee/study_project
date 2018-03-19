@@ -2,12 +2,12 @@ package org.jxau.lctoh.user.restaurant.controller;
 
 
 import java.io.File;
-import java.math.BigDecimal;
 
 import javax.servlet.http.HttpSession;
 
 import org.jxau.lctoh.position.location.domain.Location;
 import org.jxau.lctoh.position.region.domain.City;
+import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.tool.base.controller.BaseController;
 import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
 import org.jxau.lctoh.tool.config.conversation.ConversationConfig;
@@ -15,7 +15,6 @@ import org.jxau.lctoh.tool.config.error.ErrorMSG;
 import org.jxau.lctoh.tool.config.imageurl.ImagesUrl;
 import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
 import org.jxau.lctoh.user.basis.domain.User;
-import org.jxau.lctoh.user.basis.exception.UserException;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.jxau.lctoh.user.restaurant.service.RestaurantService;
@@ -411,5 +410,41 @@ public class RestaurantController extends BaseController {
 		}
 		return toGsonString();
 	}
-	
+	/**
+	 * 更新店家状态
+	 * @param type Integer 1:营业 2:休息
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 */
+	@ResponseBody
+	@RequestMapping(value="/updateRestaurantState",produces=EncodingConfig.produces)
+	public String updateRestaurantState(Integer type,HttpSession session){
+		Restaurant restaurant=(Restaurant) session.getAttribute(ConversationConfig.restaurantSession);
+		if (restaurant==null||type==null) {
+			responseData.failInfo(ErrorMSG.parameterIsNull);
+		} else {
+			if(type==1){
+				restaurant.setRestaurantState(new State(70002));
+			}else if(type==2){
+				restaurant.setRestaurantState(new State(70003));
+			}
+			try{
+				restaurantService.updateRestaurant(restaurant);
+				session.setAttribute(ConversationConfig.restaurantSession, restaurant);
+				responseData.successInfo(SuccessMSG.updateSuccessMSG);
+			}catch(Exception e){
+				e.printStackTrace();
+				responseData.failInfo(ErrorMSG.updateFail);
+			}
+		}
+		return toGsonString();
+	}
 }

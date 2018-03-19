@@ -82,6 +82,7 @@ public class UserController extends BaseController{
 		//responseData.successInfo(SuccessMSG.adminSuccessUrl);
 		
 		Rider rider=riderService.login(user);
+		rider.setRiderState(new State(130001));
 		session.setAttribute(ConversationConfig.riderSession, rider);
 		ServletContext servletContext=session.getServletContext();
 		Map riderMap=(Map)servletContext.getAttribute(ConversationConfig.riderContext);
@@ -190,6 +191,7 @@ public class UserController extends BaseController{
 						break;
 					case 3:
 						Rider rider=riderService.login(user);
+						rider.setRiderState(new State(130001));
 						session.setAttribute(ConversationConfig.riderSession, rider);
 						ServletContext servletContext=session.getServletContext();
 						Map riderMap=(Map)servletContext.getAttribute(ConversationConfig.riderContext);
