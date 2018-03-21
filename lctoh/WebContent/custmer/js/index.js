@@ -48,8 +48,11 @@ $(function(){
 
    })
    /*点击商家进入店家详细信息*/
-    var str='<iframe src="./storeDetails.html" name="iframe_a" scrolling="no"></iframe>';
-    $('#section_change').html(str);
-    $('footer').css('margin-top','-5px');
+   function changePage(){
+	   var str='<iframe src="./storeDetails.html" name="iframe_a" scrolling="no"></iframe>';
+	    $('#section_change').html(str);
+	    $('footer').css('margin-top','-5px');
+   }
+   changePage();
    
 })
