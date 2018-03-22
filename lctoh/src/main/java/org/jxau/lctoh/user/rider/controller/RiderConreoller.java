@@ -299,6 +299,52 @@ public class RiderConreoller extends BaseController {
 	}
 	
 	
+	
+	
+	
+	/**
+	 * 3/23修改
+	 * @param stateType Integer 状态 1：上班  2：下班
+	 * @return
+	 * @throws RiderException
+	 */
+	@ResponseBody
+	@RequestMapping(value="/updateRider",produces=EncodingConfig.produces)
+	private String updateRider(Rider rider,Integer stateType, HttpSession session){
+		try {
+			rider=getRiderInSession(session);
+			if(stateType==null){
+				responseData.failInfo(ErrorMSG.parameterIsNull);
+			}else{
+				if(stateType==1){
+					rider.setRiderState(new State(130001));
+					session.setAttribute(ConversationConfig.riderSession, rider);
+					ServletContext servletContext=session.getServletContext();
+					Map map=(Map) servletContext.getAttribute(ConversationConfig.riderContext);
+					map.put(rider.getRiderId(), rider);
+					servletContext.setAttribute(ConversationConfig.riderContext, map);
+					
+				}else if(stateType==2){
+					rider.setRiderState(new State(130002));
+					session.setAttribute(ConversationConfig.riderSession, rider);
+					ServletContext servletContext=session.getServletContext();
+					Map map=(Map) servletContext.getAttribute(ConversationConfig.riderContext);
+					map.remove(rider.getRiderId());
+					servletContext.setAttribute(ConversationConfig.riderContext, map);
+				}
+				responseData.successInfo(SuccessMSG.successMSG);
+			}
+		} catch (RiderException e) {
+			e.printStackTrace();
+			responseData.failInfo(e.getMessage());
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			responseData.failInfo(ErrorMSG.notKnow);
+		}
+		return toString();
+	}
+	
 	/**
 	 * 获取Session中的骑手信息
 	 * @param session
