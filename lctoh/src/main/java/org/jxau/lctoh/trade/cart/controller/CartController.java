@@ -200,7 +200,7 @@ public class CartController extends BaseController{
 	 * json字符串{
 	 * 	说明：{
 	 * 		Integer state;			//状态码（整形数字）
-	 * 		Object responseInfo;	//成功：为成功的信息 String 字符串
+	 * 		Object responseInfo;	//成功：订单信息
 	 *  							//失败：为失败原因的信息 String 字符串
 	 * 	}
 	 * }
@@ -208,31 +208,22 @@ public class CartController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/cartToOrder",produces=EncodingConfig.produces)
-	public String cartToOrder(Cart cart,String addressId,HttpSession session){
+	public String cartToOrder(Cart cart,HttpSession session){
 		try {
 			cart = getCartInSession(session);
+			Customer orderCustomer=(Customer)session.getAttribute(ConversationConfig.customerSession);
+			if(orderCustomer==null){
+				responseData.failInfo(ErrorMSG.loginTimerOut);
+			}else{
+				
+				responseData.successInfo(cartService.putCartToOrder(cart, orderCustomer));
+			}
 		} catch (CartException e) {
 			e.printStackTrace();
 			return responseData.failInfo(e.getMessage()).toGsonString();
-		}
-		if(addressId==null){
-			responseData.failInfo(ErrorMSG.notKnow);
-		}else{
-			try {
-				Customer orderCustomer=(Customer)session.getAttribute(ConversationConfig.customerSession);
-				if(orderCustomer==null){
-					responseData.failInfo(ErrorMSG.loginTimerOut);
-				}else{
-					cartService.putCartToOrder(cart, orderCustomer, addressId);
-					responseData.successInfo(SuccessMSG.successMSG);
-				}
-			} catch (CartException e) {
-				e.printStackTrace();
-				responseData.failInfo(e.getMessage());
-			} catch (Exception e) {
-				e.printStackTrace();
-				responseData.failInfo(ErrorMSG.operationFail);
-			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			responseData.failInfo(ErrorMSG.operationFail);
 		}
 		return toGsonString();
 	}

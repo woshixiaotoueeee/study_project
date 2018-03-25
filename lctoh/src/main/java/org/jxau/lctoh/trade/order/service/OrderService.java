@@ -4,10 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQureyModel;
+import org.jxau.lctoh.position.address.domain.Address;
+import org.jxau.lctoh.position.address.service.AddressService;
 import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
+import org.jxau.lctoh.trade.order.dao.HarvestAddressDao;
 import org.jxau.lctoh.trade.order.dao.OrderDao;
+import org.jxau.lctoh.trade.order.domain.HarvestAddress;
 import org.jxau.lctoh.trade.order.domain.Order;
 import org.jxau.lctoh.trade.order.exception.OrderException;
 import org.jxau.lctoh.user.customer.dao.CustomerDao;
@@ -28,6 +32,10 @@ public class OrderService {
 	@Autowired
 	private RestaurantDao restaurantDao;
 	
+	@Autowired
+	private AddressService addressService;
+	@Autowired
+	private HarvestAddressDao harvestAddressDao;
 	/**
 	 * 根据订单ID查询订单
 	 * @param orderId
@@ -80,12 +88,15 @@ public class OrderService {
 	 * 付款
 	 * @param orderId
 	 * @param customer 
+	 * @param address 
 	 * @throws OrderException 
 	 */
 	@Transactional(rollbackFor = Exception.class)
-	public Customer payment(String orderId, Customer customer) throws OrderException {
+	public Customer payment(String orderId, Customer customer, Address address) throws OrderException {
 		Order order=orderDao.findOrderByOrderId(orderId);
 		Customer _customer=order.getOrderCustomer();
+		address=addressService.findAddressByAddressId(address.getAddressId());
+		if(address==null)throw new OrderException(ErrorMSG.addressError);
 		if(_customer.getCustomerId().equals(customer.getCustomerId()))
 			throw new OrderException(ErrorMSG.noPower);
 		if(_customer.getCustomerBalance().doubleValue()<order.getOrderPrice().doubleValue()){
@@ -99,7 +110,12 @@ public class OrderService {
 		if(state.getStateId()!=100001)throw new OrderException(ErrorMSG.notKnow);
 		
 		state.setStateId(100002);
+		HarvestAddress harvestAddress= address.toHarvestAddress(order.getOrderId());
+		harvestAddressDao.addHarvestAddress(harvestAddress);
 		order.setOrderState(state);
+		
+		
+		order.setOrderHarvestAddress(harvestAddress);
 		orderDao.updateOrder(order);
 		return _customer;
 	}

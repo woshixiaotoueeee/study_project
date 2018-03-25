@@ -30,6 +30,17 @@ public class Dish {
 	private String dishIntro;
 	/**库存*/
 	private Integer dishQuantity;
+	
+	/**销售量*/
+	private Integer salesVolume;
+	
+	
+	public Integer getSalesVolume() {
+		return salesVolume;
+	}
+	public void setSalesVolume(Integer salesVolume) {
+		this.salesVolume = salesVolume;
+	}
 	/**
 	 * 菜肴状态
 	 * @see org.jxau.lctoh.state.domain.State

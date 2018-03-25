@@ -129,7 +129,15 @@
 		order by orders.order_creat_time desc
 	</select>
 	
-	
+	<!-- 所售单数 -->
+	<select id="getCountOrder"  resultType="Integer">
+		select
+			count(*) orderCount
+		from
+			orders
+		where
+			orders.order_restaurant_id=#{restaurantId}
+	</select>
 	
 	
 </mapper>

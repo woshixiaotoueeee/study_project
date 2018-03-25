@@ -4,26 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace:需与接口的完全限定名保持一致 -->
 <mapper namespace="org.jxau.lctoh.datastatistics.orderstatistics.mapper.OrderStatisticsMapper">
-	<!-- 
-	<sql id="dayColumns">
-		DATE_FORMAT(rt.recording_time_id, '%Y年%m月%d日') AS tm
-	</sql>
-	<sql id="mouthColumns">
-		DATE_FORMAT(rt.recording_time_id, '%Y年%m月') AS tm
-	</sql>
-	<sql id="weekColumns">
-		DATE_FORMAT(rt.recording_time_id, '%Y年%u周') AS tm
-	</sql>
-	<sql id="dayConnectionCondition">
-		DATE_FORMAT(rt.recording_time_id, "%Y年%m月%d日")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月%d日")
-	</sql>
-	<sql id="mouthConnectionCondition">
-		DATE_FORMAT(rt.recording_time_id, "%Y年%m月")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月")
-	</sql>
-	<sql id="weekConnectionCondition">
-		DATE_FORMAT(rt.recording_time_id, "%Y年%%u周")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月")
-	</sql>
-	 -->
+	
 	<!--根据状态码查询状态信息 -->
 	<select id="orderStatistics"  resultType="OrderStatistics">
 		SELECT
@@ -72,21 +53,92 @@
 			tm
 	</select>
 	
+	
+	<!--根据状态码查询状态信息 -->
+	<select id="dispatchingStatistics"  resultType="OrderStatistics">
+		SELECT
+			count(dispatching.dispatching_id) count,
+			<if test="statisticsType==1" >
+				DATE_FORMAT(rt.recording_time_id, '%Y年%m月%d日') AS tm
+			</if>
+			<if test="statisticsType==2" >
+				DATE_FORMAT(rt.recording_time_id, '%Y年%m月%u周') AS tm
+			</if>
+			<if test="statisticsType==3" >
+				DATE_FORMAT(rt.recording_time_id, '%Y年%m月') AS tm
+			</if>
+			<if test="statisticsType==4" >
+				CONCAT(DATE_FORMAT(rt.recording_time_id, '%Y年'),CONCAT(quarter( rt.recording_time_id),'季度')) as tm
+			</if>
+		FROM
+			recording_time rt left join dispatching 
+		on 
+			<if test="statisticsType==1" >
+				DATE_FORMAT(rt.recording_time_id, "%Y年%m月%d日")=DATE_FORMAT(dispatching.dispatching_update_time, "%Y年%m月%d日")
+			</if>
+			<if test="statisticsType==2" >
+				DATE_FORMAT(rt.recording_time_id, "%Y年%m月%u周")=DATE_FORMAT(dispatching.dispatching_update_time, "%Y年%m月%u周")
+			</if>
+			<if test="statisticsType==3" >
+				DATE_FORMAT(rt.recording_time_id, "%Y年%m月")=DATE_FORMAT(dispatching.dispatching_update_time, "%Y年%m月")
+			</if>
+			<if test="statisticsType==4" >
+				CONCAT(DATE_FORMAT(rt.recording_time_id, '%Y年'),CONCAT(quarter( rt.recording_time_id),'季度'))=CONCAT(DATE_FORMAT(dispatching.dispatching_update_time, '%Y年'),CONCAT(quarter(dispatching.dispatching_update_time),'季度'))
+			</if>
+			and dispatching.dispatching_state_id=110004
+		where
+			rt.recording_time_id&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
+			and rt.recording_time_id&lt;=str_to_date(#{etm},'%Y-%m-%d %H:%i:%s')
+			<if test="riderId != null and riderId ==''" >
+				and dispatching.dispatching_rider_id=#{riderId}
+			</if>
+		GROUP BY
+			tm
+		order by 
+			tm 
+	</select>
+	
+	
+	<!--根据状态码查询状态信息 -->
+	<select id="dispatchingStatisticsByState"  resultType="OrderTypeCount">
+		SELECT
+			count(dispatching.dispatching_id) count, 
+			dispatching.dispatching_state_id type
+		FROM
+			dispatching 
+		where 
+			1=1
+			<if test="stm != null and stm ==''" >
+				and dispatching.dispatching_update_time&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
+			</if>
+			<if test="etm != null and etm ==''" >
+				and dispatching.dispatching_update_time&lt;=str_to_date(#{etm},'%Y-%m-%d %H:%i:%s')
+			</if>
+			<if test="riderId != null and riderId ==''" >
+				and dispatching.dispatching_rider_id=#{riderId}
+			</if>
+			
+		group by
+			dispatching.dispatching_state_id 
+	</select>
+	
+	
+	
+	
 	<!--根据状态码查询状态信息 -->
 	<select id="orderStatisticsByState"  resultType="OrderTypeCount">
 		SELECT
 			count(orders.order_id) count, 
 			orders.order_state_id type
-			
 		FROM
 			orders 
 		where 
 			1=1
 			<if test="stm != null and stm ==''" >
-				rt.recording_time_id&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
+				and orders.order_creat_time&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
 			</if>
 			<if test="etm != null and etm ==''" >
-				and rt.recording_time_id&lt;=str_to_date(#{etm},'%Y-%m-%d %H:%i:%s')
+				and orders.order_creat_time&lt;=str_to_date(#{etm},'%Y-%m-%d %H:%i:%s')
 			</if>
 			<if test="customerId != null and customerId ==''" >
 				and orders.order_customer_id=#{customerId}
@@ -95,6 +147,6 @@
 				and orders.order_restaurant_id=#{restaurantId}
 			</if>
 		group by
-			orders.order_state_id
+			orders.order_state_id 
 	</select>
 </mapper>

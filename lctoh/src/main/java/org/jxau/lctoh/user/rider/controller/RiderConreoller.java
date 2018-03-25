@@ -6,15 +6,18 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.jxau.lctoh.position.region.domain.City;
 import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.tool.base.controller.BaseController;
 import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
 import org.jxau.lctoh.tool.config.conversation.ConversationConfig;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
 import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
+import org.jxau.lctoh.user.basis.domain.User;
 import org.jxau.lctoh.user.rider.domain.Rider;
 import org.jxau.lctoh.user.rider.exception.RiderException;
 import org.jxau.lctoh.user.rider.service.DispatchingService;
+import org.jxau.lctoh.user.rider.service.RiderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +32,8 @@ public class RiderConreoller extends BaseController {
 	@Autowired
 	private DispatchingService dispatchingService;
 	
-	
+	@Autowired
+	private RiderService riderService;
 	/**
 	 * 根据骑手和订单配送状态获取配送信息
 	 * @param stateId 状态ID Integer 整形数字
@@ -229,18 +233,18 @@ public class RiderConreoller extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/riderLocation",produces=EncodingConfig.produces)
-	public String riderLocation(Rider rider,BigDecimal riderLongitude,BigDecimal riderLatitude,HttpSession session){
+	public String riderLocation(Rider rider,HttpSession session){
 		try {
-			rider=getRiderInSession(session);
-			if(riderLongitude==null||riderLatitude==null){
+			Rider _rider=getRiderInSession(session);
+			if(rider.getRiderLatitude()==null||rider.getRiderLongitude()==null){
 				responseData.failInfo(ErrorMSG.notKnow);
 			}else{
-				rider.setRiderLatitude(riderLatitude);
-				rider.setRiderLongitude(riderLongitude);
-				session.setAttribute(ConversationConfig.riderSession, rider);
+				_rider.setRiderLatitude(rider.getRiderLatitude());
+				_rider.setRiderLongitude(rider.getRiderLongitude());
+				session.setAttribute(ConversationConfig.riderSession, _rider);
 				ServletContext servletContext=session.getServletContext();
 				Map map=(Map) servletContext.getAttribute(ConversationConfig.riderContext);
-				map.put(rider.getRiderId(), rider);
+				map.put(_rider.getRiderId(), _rider);
 				servletContext.setAttribute(ConversationConfig.riderContext, map);
 				responseData.successInfo(SuccessMSG.successMSG);
 			}
@@ -303,36 +307,44 @@ public class RiderConreoller extends BaseController {
 	
 	
 	/**
-	 * 3/23修改
-	 * @param stateType Integer 状态 1：上班  2：下班
+	 * 更新信息
+	 * @param  
+	 * <pre>
+	 * 骑手姓名 String riderName 
+	 * 所属城市String cityId 
+	 * 	userEmail String 字符串  邮箱
+	 * 	userPhone String 字符串 联系方式
+	 * 	userSex String 字符串 性别
+	 * </pre>
 	 * @return
 	 * @throws RiderException
 	 */
 	@ResponseBody
 	@RequestMapping(value="/updateRider",produces=EncodingConfig.produces)
-	private String updateRider(Rider rider,Integer stateType, HttpSession session){
+	private String updateRider(Rider rider,City city,User user, HttpSession session){
 		try {
-			rider=getRiderInSession(session);
-			if(stateType==null){
+			Rider _rider=getRiderInSession(session);
+			if(rider.getRiderName()==null||city.getCityId()==null||
+					user.getUserEmail()==null||user.getUserPhone()==null||
+					user.getUserSex()==null
+					){
 				responseData.failInfo(ErrorMSG.parameterIsNull);
 			}else{
-				if(stateType==1){
-					rider.setRiderState(new State(130001));
-					session.setAttribute(ConversationConfig.riderSession, rider);
-					ServletContext servletContext=session.getServletContext();
-					Map map=(Map) servletContext.getAttribute(ConversationConfig.riderContext);
-					map.put(rider.getRiderId(), rider);
-					servletContext.setAttribute(ConversationConfig.riderContext, map);
-					
-				}else if(stateType==2){
-					rider.setRiderState(new State(130002));
-					session.setAttribute(ConversationConfig.riderSession, rider);
-					ServletContext servletContext=session.getServletContext();
-					Map map=(Map) servletContext.getAttribute(ConversationConfig.riderContext);
-					map.remove(rider.getRiderId());
-					servletContext.setAttribute(ConversationConfig.riderContext, map);
-				}
-				responseData.successInfo(SuccessMSG.successMSG);
+				
+				_rider.setRiderName(rider.getRiderName());
+				_rider.setRiderCity(city);
+				User _user=_rider.getRiderUser();
+				_user.setUserEmail(user.getUserEmail());
+				_user.setUserPhone(user.getUserPhone());
+				_user.setUserSex(user.getUserSex());
+				_rider.setRiderUser(_user);
+				riderService.updateRider(_rider);
+				session.setAttribute(ConversationConfig.riderSession, rider);
+				ServletContext servletContext=session.getServletContext();
+				Map map=(Map) servletContext.getAttribute(ConversationConfig.riderContext);
+				map.remove(rider.getRiderId());
+				servletContext.setAttribute(ConversationConfig.riderContext, map);
+				responseData.successInfo(SuccessMSG.updateSuccessMSG);
 			}
 		} catch (RiderException e) {
 			e.printStackTrace();

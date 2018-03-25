@@ -134,7 +134,26 @@ public class AdminController extends BaseController{
 		if(admin==null){
 			responseData.failInfo(ErrorMSG.loginTimerOut);
 		}else{
-			
+			try{
+				switch(type){
+					case 1:
+						customerService.lockAccount(id,20002);
+						responseData.successInfo(SuccessMSG.updateSuccessMSG);
+						break;
+					case 2:
+						restaurantService.lockAccount(id,70003);
+						responseData.successInfo(SuccessMSG.updateSuccessMSG);
+						break;
+					case 3:
+						riderService.lockAccount(id,130002);
+						responseData.successInfo(SuccessMSG.updateSuccessMSG);
+						break;
+					default : responseData.failInfo(ErrorMSG.notKnowUser);
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				responseData.failInfo(ErrorMSG.updateFail);
+			}
 		}
 		return toGsonString();
 	}

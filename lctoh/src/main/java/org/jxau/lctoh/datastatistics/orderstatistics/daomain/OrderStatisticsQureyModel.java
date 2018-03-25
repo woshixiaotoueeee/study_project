@@ -22,6 +22,16 @@ public class OrderStatisticsQureyModel{
 	private String customerId;
 	/**统计对象店家*/
 	private String restaurantId;
+	
+	/**统计对象骑手*/
+	private String riderId;
+	
+	public String getRiderId() {
+		return riderId;
+	}
+	public void setRiderId(String riderId) {
+		this.riderId = riderId;
+	}
 	/**统计类型：1，日统计，2，周统计，3，月统计，4季度统计（全部）*/
 	private Integer statisticsType;
 	

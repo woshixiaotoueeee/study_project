@@ -57,6 +57,17 @@ public class Restaurant {
 	 * @see org.jxau.lctoh.user.basis.domain.User
 	 * */
 	private User restaurantUser;
+	
+	/**
+	 * 所售单数
+	 * */
+	private Integer orderCount;
+	public Integer getOrderCount() {
+		return orderCount;
+	}
+	public void setOrderCount(Integer orderCount) {
+		this.orderCount = orderCount;
+	}
 	/**
 	 * 所属分类
 	 * @see org.jxau.lctoh.user.restaurant.domain.RestaurantCategory

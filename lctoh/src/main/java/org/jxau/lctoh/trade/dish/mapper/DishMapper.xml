@@ -13,6 +13,7 @@
 		<result property="dishUpdateTime" column="dish_update_time"/>
 		<result property="dishIntro" column="dish_intro"/>
 		<result property="dishQuantity" column="dish_quantity"/>
+		<association property="salesVolume" column="dish_id" select="org.jxau.lctoh.trade.order.mapper.OrderItemMapper.getSalesVolume"/>
 		<association property="dishState" column="dish_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
 		<association property="dishCategory" column="dish_category_id" select="org.jxau.lctoh.trade.dish.mapper.DishCategoryMapper.findDishCategoryById"/>
 	</resultMap>
