@@ -19,6 +19,7 @@
 		<result property="restaurantIncome" column="restaurant_income"/>
 		<result property="restaurantUpdateTime" column="restaurant_update_time"/>
 		<result property="restaurantOfferPrice" column="restaurant_offer_price"/>
+		<association property="orderCount" column="restaurant_id" select="org.jxau.lctoh.trade.order.mapper.OrderMapper.getCountOrder"/>
 		<association property="restaurantState" column="restaurant_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
 		<association property="restaurantUser" column="restaurant_user_id" select="org.jxau.lctoh.user.basis.mapper.UserMapper.findUserByUserId"/>
 		<association property="restaurantCategory" column="restaurant_category_id" select="org.jxau.lctoh.user.restaurant.mapper.RestaurantCategoryMapper.findRestaurantCategoryById"/>

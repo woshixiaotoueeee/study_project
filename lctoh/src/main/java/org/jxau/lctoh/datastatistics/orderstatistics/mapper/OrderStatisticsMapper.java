@@ -21,6 +21,14 @@ public interface OrderStatisticsMapper {
 	public List<OrderTypeCount> orderStatisticsByState(
 			OrderStatisticsQureyModel orderStatisticsQureyModel);
 	
+	/**
+	 * 根据对应信息统计配送信息
+	 * @param orderStatisticsQureyModel
+	 * @return
+	 */
+	public List<OrderStatistics> dispatchingStatistics(OrderStatisticsQureyModel orderStatisticsQureyModel );
+
 	
-	
+	public List<OrderTypeCount> dispatchingStatisticsByState(
+			OrderStatisticsQureyModel orderStatisticsQureyModel);
 }

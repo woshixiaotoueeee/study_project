@@ -40,9 +40,19 @@ public class OrderStatisticsDao extends BaseDao {
 		return orderStatisticsMapper.orderStatisticsByState(orderStatisticsQureyModel);
 	}
 
+	/**
+	 * 根据对应信息统计订单信息
+	 * @param orderStatisticsQureyModel
+	 * @return
+	 */
+	public List<OrderStatistics> dispatchingStatistics(OrderStatisticsQureyModel orderStatisticsQureyModel){
+		return orderStatisticsMapper.dispatchingStatistics(orderStatisticsQureyModel);
+	}
 	
-	
-	
+	public List<OrderTypeCount> dispatchingStatisticsByState(
+			OrderStatisticsQureyModel orderStatisticsQureyModel) {
+		return orderStatisticsMapper.dispatchingStatisticsByState(orderStatisticsQureyModel);
+	}
 	
 	
 }

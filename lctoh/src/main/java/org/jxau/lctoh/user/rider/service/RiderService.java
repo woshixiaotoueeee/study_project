@@ -75,4 +75,9 @@ public class RiderService {
 		
 		return riderDao.updateRider(rider);
 	}
+	
+	
+	public Integer updateRider(Rider rider) {
+		return riderDao.updateRider(rider);
+	}
 }

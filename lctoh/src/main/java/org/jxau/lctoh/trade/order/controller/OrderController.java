@@ -5,6 +5,7 @@ package org.jxau.lctoh.trade.order.controller;
 import javax.servlet.http.HttpSession;
 
 import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQureyModel;
+import org.jxau.lctoh.position.address.domain.Address;
 import org.jxau.lctoh.tool.base.controller.BaseController;
 import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
 import org.jxau.lctoh.tool.config.conversation.ConversationConfig;
@@ -127,7 +128,7 @@ public class OrderController extends BaseController{
 	
 	/**
 	 * 付款
-	 * @param orderId String 字符串  订单识别码
+	 * @param orderId String 字符串  订单识别码    addressId String 地址识别码
 	 * @return
 	 * <pre>
 	 * json字符串{
@@ -141,7 +142,7 @@ public class OrderController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/payment",produces=EncodingConfig.produces)
-	public String payment(String orderId, HttpSession session){
+	public String payment(String orderId,Address address, HttpSession session){
 		if(orderId==null){
 			responseData.failInfo(ErrorMSG.notKnow);
 		}else{
@@ -150,7 +151,7 @@ public class OrderController extends BaseController{
 				responseData.failInfo(ErrorMSG.loginTimerOut);
 			}else{
 				try{
-					customer=orderService.payment(orderId,customer);
+					customer=orderService.payment(orderId,customer,address);
 					session.setAttribute(ConversationConfig.customerSession, customer);
 					responseData.successInfo(SuccessMSG.successMSG);
 				}catch(OrderException e){

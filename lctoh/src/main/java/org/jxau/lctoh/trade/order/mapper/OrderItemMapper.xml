@@ -105,4 +105,17 @@
 			from dual
 		</foreach>
 	</insert>
+	
+	
+	
+	<!--根据订单条目识别码查询订单-->
+	<select id="getSalesVolume" parameterType="String" resultType="Integer">
+		select
+			ifnull(sum(order_item.order_item_count),0) salesVolume
+		from
+			order_item
+		where
+			order_item.order_item_dish_id =#{dishId}
+	</select>
+	
 </mapper>

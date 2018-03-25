@@ -105,14 +105,12 @@ public class CartService {
 	 * 将购物车中的商品生成订单
 	 * @param cart
 	 * @param orderCustomer
-	 * @param addressId
 	 * @throws CartException
 	 */
 	@Transactional(rollbackFor = Exception.class)
-	public void  putCartToOrder(Cart cart,Customer orderCustomer,String addressId) throws CartException{
-		Address address=addressDao.findAddressByAddressId(addressId);
-		if(address==null)throw new CartException(ErrorMSG.addressError);
-		Order order=cart.toOrder(orderCustomer, address.toHarvestAddress(Tools.getRandomString(32)));
+	public Order  putCartToOrder(Cart cart,Customer orderCustomer ) throws CartException{
+		
+		Order order=cart.toOrder(orderCustomer);
 		
 		/*
 		if(orderCustomer.getCustomerBalance().doubleValue()<order.getOrderPrice().doubleValue()){
@@ -128,9 +126,10 @@ public class CartService {
 		dispatching.setDispatchingState(dispatchingState);
 		
 		orderDao.addOrder(order);
-		harvestAddressDao.addHarvestAddress(order.getOrderHarvestAddress());
+		//harvestAddressDao.addHarvestAddress(order.getOrderHarvestAddress());
 		orderItemDao.addOrderItemList(order.getOrderItemList());
 		dispatchingDao.addDispatching(dispatching);
+		return order;
 	}
 	
 	

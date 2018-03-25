@@ -27,6 +27,33 @@ public class OrderStatisticsService {
 	 * @return
 	 */
 	public List<OrderStatistics> orderStatistics(OrderStatisticsQureyModel orderStatisticsQureyModel){
+		return orderStatisticsDao.orderStatistics(getorderStatisticsQureyModel(orderStatisticsQureyModel));
+	}
+
+
+	public List<OrderTypeCount> orderStatisticsByState(
+			OrderStatisticsQureyModel orderStatisticsQureyModel) {
+		return orderStatisticsDao.orderStatisticsByState(orderStatisticsQureyModel);
+	}
+	
+	/**
+	 * 根据对应信息统计配送信息
+	 * @param orderStatisticsQureyModel
+	 * @return
+	 */
+	public List<OrderStatistics> dispatchingStatistics(OrderStatisticsQureyModel orderStatisticsQureyModel){
+		return orderStatisticsDao.dispatchingStatistics(getorderStatisticsQureyModel(orderStatisticsQureyModel));
+	}
+	
+	
+	public List<OrderTypeCount> dispatchingStatisticsByState(
+			OrderStatisticsQureyModel orderStatisticsQureyModel) {
+		return orderStatisticsDao.dispatchingStatisticsByState(orderStatisticsQureyModel);
+	}
+	
+	
+	/**补全统计信息*/
+	private OrderStatisticsQureyModel getorderStatisticsQureyModel(OrderStatisticsQureyModel orderStatisticsQureyModel){
 		long timeDifference;
 		try{
 			timeDifference=Tools.getTimeDifferenceFromDate(Tools.StringToDate(orderStatisticsQureyModel.getStm()), Tools.StringToDate(orderStatisticsQureyModel.getEtm()));
@@ -46,15 +73,6 @@ public class OrderStatisticsService {
 		}else if(timeDifference>Statistical.mouthNode){
 			orderStatisticsQureyModel.setStatisticsType(4);
 		}
-		return orderStatisticsDao.orderStatistics(orderStatisticsQureyModel);
+		return orderStatisticsQureyModel;
 	}
-
-
-	public List<OrderTypeCount> orderStatisticsByState(
-			OrderStatisticsQureyModel orderStatisticsQureyModel) {
-		
-		return orderStatisticsDao.orderStatisticsByState(orderStatisticsQureyModel);
-	}
-	
-	
 }
