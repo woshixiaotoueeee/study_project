@@ -136,34 +136,32 @@
        regisObj.userSex=$('.register .sex input:radio:checked').val();
        regisObj.userEmail=$('.register .email').val();
        regisObj.userPhone=$('.register #phone_nu').val();
+       if(regisObj.userPassword==''||regisObj._userPassword==''||
+	    		regisObj.userPhone==''||$('#idName').val()==''){
+	    	    //alert('请填写必填信息');        	    	   
+	    	    var ii=layer.msg('请填写必填信息');
+	      	    layer.style(ii, {
+	 			   color:'red'
+	 			 });
+	      	   setTimeout(function(){
+	      		 layer.close(ii);
+	      	   },1000);
+	       }
         //ajax
         var custData=$.post(projectDirectory+"/UserController/register",
         		regisObj,
-        		function(data){
-        	       if(regisObj.userPassword==''||regisObj._userPassword==''||
-        	    		regisObj.userPhone==''||$('#idName').val()==''){
-        	    	    //alert('请填写必填信息');        	    	   
-        	    	    var ii=layer.msg('请填写必填信息');
-        	      	    layer.style(ii, {
-        	 			   color:'red'
-        	 			 });
-        	      	   setTimeout(function(){
-        	      		 layer.close(ii);
-        	      	   },1000);
-        	       }
-        	       else{  // state":0,"responseInfo":"邮箱格式错误"
-        	    	   alert('访问后台');           	          
-           	         if(data.state==0){  
-           	        	 alert(data);
-           	        	   alert(data.responseInfo)
-           	           }
-           	           else{
-           	                alert('注册成功');
-           	                alert(data);
-           	        	    alert(data.responseInfo);
-           	           }
-        	       }       	           	   
-        })
+        		function(data){          	          
+       	         if(data.state==0){  
+       	        	 alert(data);
+       	        	 alert(data.responseInfo)
+       	           }
+       	           else{
+       	                alert('注册成功');
+       	                alert(data);
+       	        	    alert(data.responseInfo);
+       	           }
+        	          	           	   
+          })
         .error(
         		function(custData){
         			alert('erro');
