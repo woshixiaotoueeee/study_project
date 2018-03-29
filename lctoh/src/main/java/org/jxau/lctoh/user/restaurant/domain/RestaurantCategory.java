@@ -19,6 +19,8 @@ public class RestaurantCategory {
 	private String restaurantCategoryId;
 	/**分类名*/
 	private String restaurantCategoryName;
+	/**分类图标*/
+	private String restaurantCategoryIcon;
 	/**最近更新日期*/
 	private Date restaurantCategoryUpdateTime;
 	/**
@@ -49,6 +51,12 @@ public class RestaurantCategory {
 	}
 	public void setRestaurantCategoryState(State restaurantCategoryState) {
 		this.restaurantCategoryState = restaurantCategoryState;
+	}
+	public String getRestaurantCategoryIcon() {
+		return restaurantCategoryIcon;
+	}
+	public void setRestaurantCategoryIcon(String restaurantCategoryIcon) {
+		this.restaurantCategoryIcon = restaurantCategoryIcon;
 	}
 	@Override
 	public String toString() {

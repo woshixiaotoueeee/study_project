@@ -53,6 +53,9 @@ public class RestaurantCategoryDao extends BaseDao {
 	public List<RestaurantCategory> findRestaurantCategoryByStateId(String stateId){
 		return restaurantCategoryMapper.findRestaurantCategoryByStateId(stateId);
 	}
-	
+	/**根据查询所有分类信息*/
+	public List<RestaurantCategory> findAllRestaurantCategory(){
+		return restaurantCategoryMapper.findAllRestaurantCategory();
+	}
 
 }

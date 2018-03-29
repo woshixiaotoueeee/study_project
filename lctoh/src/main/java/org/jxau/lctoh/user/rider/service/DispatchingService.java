@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
+import org.jxau.lctoh.trade.order.dao.OrderDao;
+import org.jxau.lctoh.trade.order.domain.Order;
 import org.jxau.lctoh.trade.order.exception.OrderException;
 import org.jxau.lctoh.user.rider.dao.DispatchingDao;
 import org.jxau.lctoh.user.rider.domain.Dispatching;
@@ -21,7 +23,8 @@ public class DispatchingService {
 	private DispatchingDao dispatchingDao;
 	
 	
-	
+	@Autowired
+	private OrderDao orderDao;
 	
 	
 	
@@ -88,7 +91,12 @@ public class DispatchingService {
 	 * @return
 	 */
 	public Dispatching getDispatchingById(String dispatchingId){
-		return dispatchingDao.getDispatchingById(dispatchingId);
+		Dispatching dispatching= dispatchingDao.getDispatchingById(dispatchingId);
+		if(dispatching!=null){
+			Order order=dispatching.getDispatchingOrder();
+			dispatching.setDispatchingOrder(orderDao.loadOrderItem(order));
+		}
+		return dispatching;
 	}
 	
 	/**
