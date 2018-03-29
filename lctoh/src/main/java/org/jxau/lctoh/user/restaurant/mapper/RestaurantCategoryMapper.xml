@@ -17,7 +17,7 @@
 		restaurant_category.restaurant_category_id,
 		restaurant_category.restaurant_category_name,
 		restaurant_category.restaurant_category_update_time,
-		restaurant_categoryrestaurant_category_icon,
+		restaurant_category.restaurant_category_icon,
 		restaurant_category.restaurant_category_state_id
 	</sql>
 	<!--根据分类识别码查询分类信息-->
