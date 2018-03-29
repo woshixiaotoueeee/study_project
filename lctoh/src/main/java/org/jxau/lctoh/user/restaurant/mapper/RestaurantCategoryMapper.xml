@@ -9,17 +9,21 @@
 	    <id property="restaurantCategoryId" column="restaurant_category_id"/>
 		<result property="restaurantCategoryName" column="restaurant_category_name"/>
 		<result property="restaurantCategoryUpdateTime" column="restaurant_category_update_time"/>
+		<result property="restaurantCategoryIcon" column="restaurant_category_icon"/>
 		<association property="restaurantCategoryState" column="restaurant_category_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
 	</resultMap>
 	
-	
+	<sql id="RestaurantCategoryColumns">
+		restaurant_category.restaurant_category_id,
+		restaurant_category.restaurant_category_name,
+		restaurant_category.restaurant_category_update_time,
+		restaurant_categoryrestaurant_category_icon,
+		restaurant_category.restaurant_category_state_id
+	</sql>
 	<!--根据分类识别码查询分类信息-->
 	<select id="findRestaurantCategoryById" parameterType="String" resultMap="RestaurantCategoryResultMap">
 		select 
-			restaurant_category.restaurant_category_id,
-			restaurant_category.restaurant_category_name,
-			restaurant_category.restaurant_category_update_time,
-			restaurant_category.restaurant_category_state_id
+			<include refid="RestaurantCategoryColumns"></include>
 		from restaurant_category
 		where 
 			restaurant_category.restaurant_category_delete_or_not=1
@@ -29,10 +33,7 @@
 	<!--根据分类名查询分类信息-->
 	<select id="findRestaurantCategoryByName" parameterType="String" resultMap="RestaurantCategoryResultMap">
 		select 
-			restaurant_category.restaurant_category_id,
-			restaurant_category.restaurant_category_name,
-			restaurant_category.restaurant_category_update_time,
-			restaurant_category.restaurant_category_state_id
+			<include refid="RestaurantCategoryColumns"></include>
 		from restaurant_category
 		where 
 			restaurant_category.restaurant_category_delete_or_not=1
@@ -42,13 +43,20 @@
 	<!--根据分类状态查询分类信息-->
 	<select id="findRestaurantCategoryByStateId" parameterType="Integer" resultMap="RestaurantCategoryResultMap">
 		select 
-			restaurant_category.restaurant_category_id,
-			restaurant_category.restaurant_category_name,
-			restaurant_category.restaurant_category_update_time,
-			restaurant_category.restaurant_category_state_id
+			<include refid="RestaurantCategoryColumns"></include>
 		from restaurant_category
 		where 
 			restaurant_category.restaurant_category_delete_or_not=1
 			and restaurant_category.restaurant_category_state_id =#{stateId}
+	</select>
+	
+	
+	<!--根据查询所有分类信息-->
+	<select id="findAllRestaurantCategory" resultMap="RestaurantCategoryResultMap">
+		select 
+			<include refid="RestaurantCategoryColumns"></include>
+		from restaurant_category
+		where 
+			restaurant_category.restaurant_category_delete_or_not=1
 	</select>
 </mapper>

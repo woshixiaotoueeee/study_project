@@ -2,6 +2,7 @@ package org.jxau.lctoh.user.restaurant.controller;
 
 
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +18,7 @@ import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
 import org.jxau.lctoh.user.basis.domain.User;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
+import org.jxau.lctoh.user.restaurant.domain.RestaurantCategory;
 import org.jxau.lctoh.user.restaurant.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -446,5 +448,14 @@ public class RestaurantController extends BaseController {
 			}
 		}
 		return toGsonString();
+	}
+	
+	
+	/**根据查询所有分类信息*/
+	@ResponseBody
+	@RequestMapping(value="/findAllRestaurantCategory",produces=EncodingConfig.produces)
+	public String findAllRestaurantCategory(){
+		responseData.successInfo(restaurantService.findAllRestaurantCategory());
+		return toString();
 	}
 }

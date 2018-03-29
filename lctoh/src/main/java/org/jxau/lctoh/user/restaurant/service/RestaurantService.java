@@ -17,9 +17,11 @@ import org.jxau.lctoh.user.basis.domain.VerificationCode;
 import org.jxau.lctoh.user.basis.exception.UserException;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.restaurant.dao.CollectRestaurantDao;
+import org.jxau.lctoh.user.restaurant.dao.RestaurantCategoryDao;
 import org.jxau.lctoh.user.restaurant.dao.RestaurantDao;
 import org.jxau.lctoh.user.restaurant.domain.CollectRestaurant;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
+import org.jxau.lctoh.user.restaurant.domain.RestaurantCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,10 @@ public class RestaurantService {
 	private CityDao cityDao;
 	@Autowired
 	private CollectRestaurantDao collectRestaurantDao;
+	@Autowired
+	private RestaurantCategoryDao restaurantCategoryDao;
+	
+	
 	
 	/**
 	 * 管理员登陆
@@ -200,6 +206,9 @@ public class RestaurantService {
 		return restaurantDao.updateRestaurant(restaurant);
 	}
 	
-	
+	/**根据查询所有分类信息*/
+	public List<RestaurantCategory> findAllRestaurantCategory(){
+		return restaurantCategoryDao.findAllRestaurantCategory();
+	}
 }
 

@@ -8,6 +8,7 @@ import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.trade.order.domain.Order;
 import org.jxau.lctoh.trade.order.mapper.OrderItemMapper;
 import org.jxau.lctoh.trade.order.mapper.OrderMapper;
+import org.jxau.lctoh.user.rider.mapper.DispatchingMapper;
 import org.springframework.stereotype.Repository;
 /**
  * @author qdt_PC
@@ -17,6 +18,14 @@ public class OrderDao extends BaseDao {
 	
 	private OrderMapper orderMapper;
 	private OrderItemMapper orderItemMapper;
+	
+	private DispatchingMapper dispatchingMapper;
+	public DispatchingMapper getDispatchingMapper() {
+		return dispatchingMapper;
+	}
+	public void setDispatchingMapper(DispatchingMapper dispatchingMapper) {
+		this.dispatchingMapper = dispatchingMapper;
+	}
 	public OrderMapper getOrderMapper() {
 		return orderMapper;
 	}
@@ -31,6 +40,7 @@ public class OrderDao extends BaseDao {
 	}
 	@Override
 	public void puttMapper() {
+		dispatchingMapper=this.getMapper(DispatchingMapper.class);
 		orderMapper=this.getMapper(OrderMapper.class);
 		orderItemMapper=this.getMapper(OrderItemMapper.class);
 	}
@@ -43,6 +53,7 @@ public class OrderDao extends BaseDao {
 	public Order findOrderByOrderId(String orderId){
 		Order order =orderMapper.findOrderByOrderId(orderId);
 		if(order==null)return order;
+		order.setOrderDispatching(dispatchingMapper.getDispatchingById(orderId));
 		return loadOrderItem(order);
 	}
 	/**
@@ -50,7 +61,7 @@ public class OrderDao extends BaseDao {
 	 * @param order
 	 * @return
 	 */
-	private Order loadOrderItem(Order order){
+	public Order loadOrderItem(Order order){
 		order.setOrderItemList(orderItemMapper.findOrderItemByOrderId(order.getOrderId()));
 		return order;
 	}

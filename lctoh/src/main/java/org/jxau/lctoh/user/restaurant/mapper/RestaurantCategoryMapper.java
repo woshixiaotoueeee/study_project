@@ -33,7 +33,7 @@ public interface RestaurantCategoryMapper {
 	 * @return List<RestaurantCategory>
 	 */
 	public List<RestaurantCategory> findRestaurantCategoryByStateId(@Param("stateId")String stateId);
-	
-	
+	/**根据查询所有分类信息*/
+	public List<RestaurantCategory> findAllRestaurantCategory();
 	
 }

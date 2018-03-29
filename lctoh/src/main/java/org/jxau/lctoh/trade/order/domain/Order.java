@@ -7,6 +7,7 @@ import java.util.List;
 import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
+import org.jxau.lctoh.user.rider.domain.Dispatching;
 
 
 /**
@@ -49,6 +50,20 @@ public class Order {
 	 * @see org.jxau.lctoh.trade.order.domain.OrderItem
 	 * */
 	private List<OrderItem> orderItemList;
+	
+	/**
+	 * 派送信息
+	 * @see org.jxau.lctoh.trade.order.domain.OrderItem
+	 * */
+	private Dispatching orderDispatching;
+	
+	
+	public Dispatching getOrderDispatching() {
+		return orderDispatching;
+	}
+	public void setOrderDispatching(Dispatching orderDispatching) {
+		this.orderDispatching = orderDispatching;
+	}
 	public String getOrderId() {
 		return orderId;
 	}
