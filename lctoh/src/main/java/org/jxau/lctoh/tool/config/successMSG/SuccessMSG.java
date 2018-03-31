@@ -22,7 +22,7 @@ public class SuccessMSG {
 	/**管理员登陆成功后所需跳转的页面地址*/
 	public final static String adminSuccessUrl=File.separator.concat("admin").concat(File.separator).concat("index.html");
 	/**客户登陆成功后所需跳转的页面地址*/
-	public final static String customerSuccessUrl=File.separator.concat("custmer").concat(File.separator).concat("index.html");
+	public final static String customerSuccessUrl=File.separator.concat("customer").concat(File.separator).concat("index.html");
 	/**骑手登陆成功后所需跳转的页面地址*/
 	public final static String riderSuccessUrl=File.separator.concat("rider").concat(File.separator).concat("index.html");
 	/**店家登陆成功后所需跳转的页面地址*/
