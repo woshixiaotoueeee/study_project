@@ -41,10 +41,10 @@
 		where
 			rt.recording_time_id&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
 			and rt.recording_time_id&lt;=str_to_date(#{etm},'%Y-%m-%d %H:%i:%s')
-			<if test="customerId != null and customerId ==''" >
+			<if test="customerId != null and customerId !=''" >
 				and orders.order_customer_id=#{customerId}
 			</if>
-			<if test="restaurantId != null and restaurantId ==''" >
+			<if test="restaurantId != null and restaurantId !=''" >
 				and orders.order_restaurant_id=#{restaurantId}
 			</if>
 		GROUP BY
@@ -89,7 +89,7 @@
 		where
 			rt.recording_time_id&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
 			and rt.recording_time_id&lt;=str_to_date(#{etm},'%Y-%m-%d %H:%i:%s')
-			<if test="riderId != null and riderId ==''" >
+			<if test="riderId != null and riderId !=''" >
 				and dispatching.dispatching_rider_id=#{riderId}
 			</if>
 		GROUP BY
@@ -108,13 +108,13 @@
 			dispatching 
 		where 
 			1=1
-			<if test="stm != null and stm ==''" >
+			<if test="stm != null and stm !=''" >
 				and dispatching.dispatching_update_time&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
 			</if>
-			<if test="etm != null and etm ==''" >
+			<if test="etm != null and etm !=''" >
 				and dispatching.dispatching_update_time&lt;=str_to_date(#{etm},'%Y-%m-%d %H:%i:%s')
 			</if>
-			<if test="riderId != null and riderId ==''" >
+			<if test="riderId != null and riderId !=''" >
 				and dispatching.dispatching_rider_id=#{riderId}
 			</if>
 			
@@ -134,16 +134,16 @@
 			orders 
 		where 
 			1=1
-			<if test="stm != null and stm ==''" >
+			<if test="stm != null and stm !=''" >
 				and orders.order_creat_time&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
 			</if>
-			<if test="etm != null and etm ==''" >
+			<if test="etm != null and etm !=''" >
 				and orders.order_creat_time&lt;=str_to_date(#{etm},'%Y-%m-%d %H:%i:%s')
 			</if>
-			<if test="customerId != null and customerId ==''" >
+			<if test="customerId != null and customerId !=''" >
 				and orders.order_customer_id=#{customerId}
 			</if>
-			<if test="restaurantId != null and restaurantId ==''" >
+			<if test="restaurantId != null and restaurantId !=''" >
 				and orders.order_restaurant_id=#{restaurantId}
 			</if>
 		group by

@@ -488,6 +488,6 @@ public class DishController extends BaseController{
 	        	responseData.failInfo(ErrorMSG.deleteFail);
 			}
 		}
-		return toString();
+		return toGsonString();
 	}
 }

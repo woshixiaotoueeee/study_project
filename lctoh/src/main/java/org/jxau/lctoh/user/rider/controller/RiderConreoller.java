@@ -299,7 +299,7 @@ public class RiderConreoller extends BaseController {
 			e.printStackTrace();
 			responseData.failInfo(ErrorMSG.notKnow);
 		}
-		return toString();
+		return toGsonString();
 	}
 	
 	
@@ -354,7 +354,7 @@ public class RiderConreoller extends BaseController {
 			e.printStackTrace();
 			responseData.failInfo(ErrorMSG.notKnow);
 		}
-		return toString();
+		return toGsonString();
 	}
 	
 	/**
