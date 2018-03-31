@@ -22,6 +22,7 @@ import org.jxau.lctoh.user.restaurant.dao.RestaurantDao;
 import org.jxau.lctoh.user.restaurant.domain.CollectRestaurant;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.jxau.lctoh.user.restaurant.domain.RestaurantCategory;
+import org.jxau.lctoh.user.restaurant.domain.RestaurantWebModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -209,6 +210,15 @@ public class RestaurantService {
 	/**根据查询所有分类信息*/
 	public List<RestaurantCategory> findAllRestaurantCategory(){
 		return restaurantCategoryDao.findAllRestaurantCategory();
+	}
+	
+	/**
+	 * 根据店家识别码查询店家大概信息
+	 * @param restaurantId
+	 * @return
+	 */
+	public RestaurantWebModel findRestaurantWebModelByRestaurantId(String restaurantId){
+		return restaurantDao.findRestaurantWebModelByRestaurantId(restaurantId);
 	}
 }
 

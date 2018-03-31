@@ -26,8 +26,6 @@
 		<association property="restaurantCity" column="restaurant_city_id" select="org.jxau.lctoh.position.region.mapper.CityMapper.findCityByCityId"/>
 	</resultMap>
 
-
-
 	<sql id="RestaurantColumns">
 		restaurant.restaurant_id,
 		restaurant.restaurant_name,
@@ -48,7 +46,7 @@
 		restaurant.restaurant_offer_price
 	</sql>
 
-	<!--根据店家识别码查询分类信息-->
+	<!--根据店家识别码查询店家信息-->
 	<select id="findRestaurantByRestaurantId" parameterType="String" resultMap="RestaurantResultMap">
 		select 
 			<include refid="RestaurantColumns"></include>
@@ -57,7 +55,6 @@
 			restaurant.restaurant_delete_or_not=1
 			and restaurant.restaurant_id=#{restaurantId}
 	</select>
-	
 	
 	<!--根据用户识别码查询店家信息-->
 	<select id="findRestaurantByUserId" parameterType="String" resultMap="RestaurantResultMap">

@@ -3,9 +3,12 @@ package org.jxau.lctoh.user.restaurant.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQureyModel;
+import org.jxau.lctoh.datastatistics.orderstatistics.mapper.OrderStatisticsMapper;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.trade.dish.mapper.DishCategoryMapper;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
+import org.jxau.lctoh.user.restaurant.domain.RestaurantWebModel;
 import org.jxau.lctoh.user.restaurant.mapper.RestaurantMapper;
 import org.springframework.stereotype.Repository;
 /**
@@ -16,7 +19,13 @@ public class RestaurantDao extends BaseDao {
 	
 	private RestaurantMapper restaurantMapper;
 	private DishCategoryMapper dishCategoryMapper;
-	
+	private OrderStatisticsMapper orderStatisticsMapper;
+	public OrderStatisticsMapper getOrderStatisticsMapper() {
+		return orderStatisticsMapper;
+	}
+	public void setOrderStatisticsMapper(OrderStatisticsMapper orderStatisticsMapper) {
+		this.orderStatisticsMapper = orderStatisticsMapper;
+	}
 	public DishCategoryMapper getDishCategoryMapper() {
 		return dishCategoryMapper;
 	}
@@ -33,6 +42,7 @@ public class RestaurantDao extends BaseDao {
 	public void puttMapper() {
 		restaurantMapper=this.getMapper(RestaurantMapper.class);
 		dishCategoryMapper=this.getMapper(DishCategoryMapper.class);
+		orderStatisticsMapper=this.getMapper(OrderStatisticsMapper.class);
 	}
 	
 	
@@ -122,5 +132,20 @@ public class RestaurantDao extends BaseDao {
 	public List<Restaurant> findCollectRestaurantByCustomerId(String customerId){
 		return restaurantMapper.findCollectRestaurantByCustomerId(customerId);
 	}
-
+	
+	
+	/**
+	 * 根据店家识别码查询店家大概信息
+	 * @param restaurantId
+	 * @return
+	 */
+	public RestaurantWebModel findRestaurantWebModelByRestaurantId(String restaurantId){
+		RestaurantWebModel restaurantWebModel =new RestaurantWebModel();
+		restaurantWebModel.setRestaurant(restaurantMapper.findRestaurantByRestaurantId(restaurantId));
+		OrderStatisticsQureyModel orderStatisticsQureyModel=new OrderStatisticsQureyModel();
+		orderStatisticsQureyModel.setRestaurantId(restaurantId);
+		restaurantWebModel.setOrderTypeCountList(orderStatisticsMapper.orderStatisticsByState(orderStatisticsQureyModel));
+		
+		return restaurantWebModel;
+	}
 }

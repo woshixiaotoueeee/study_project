@@ -19,6 +19,7 @@ import org.jxau.lctoh.user.basis.domain.User;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.jxau.lctoh.user.restaurant.domain.RestaurantCategory;
+import org.jxau.lctoh.user.restaurant.domain.RestaurantWebModel;
 import org.jxau.lctoh.user.restaurant.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -456,6 +457,24 @@ public class RestaurantController extends BaseController {
 	@RequestMapping(value="/findAllRestaurantCategory",produces=EncodingConfig.produces)
 	public String findAllRestaurantCategory(){
 		responseData.successInfo(restaurantService.findAllRestaurantCategory());
-		return toString();
+		return toGsonString();
+	}
+	
+	
+	
+	/**
+	 * 根据店家识别码查询店家大概信息
+	 * @param restaurantId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/findRestaurantWebModel",produces=EncodingConfig.produces)
+	public String findRestaurantWebModelByRestaurantId(String restaurantId){
+		if(restaurantId==null){
+			responseData.failInfo(ErrorMSG.parameterIsNull);
+		}else{
+			responseData.successInfo(restaurantService.findRestaurantWebModelByRestaurantId(restaurantId));
+		}
+		return toGsonString();
 	}
 }

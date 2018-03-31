@@ -545,7 +545,7 @@ public class UserController extends BaseController{
 			responseData.failInfo(ErrorMSG.notKnow);
 		}
 		
-		return toString();
+		return toGsonString();
 	}
 	
 
@@ -574,6 +574,6 @@ public class UserController extends BaseController{
 			e.printStackTrace();
 			responseData.failInfo(ErrorMSG.notKnow);
 		}
-		return toString();
+		return toGsonString();
 	}
 }
