@@ -68,8 +68,8 @@ public class UserController extends BaseController{
 		location.setInfo("北京");
 		location.setCity("北京");
 		location.setProvince("北京");
-		location.setLatitude(BigDecimal.valueOf(39.92));
-		location.setLongitude(BigDecimal.valueOf(116.46));
+		location.setLatitude(BigDecimal.valueOf(40.066841));
+		location.setLongitude(BigDecimal.valueOf(116.396938));
 		session.setAttribute(ConversationConfig.locationSession, location);
 		
 		
