@@ -155,8 +155,6 @@ public class RestaurantController extends BaseController {
 		Location location =(Location)session.getAttribute(ConversationConfig.locationSession);
 		if(location==null){
 			responseData.failInfo(ErrorMSG.getLocationFail);
-		}else if(restaurantCategoryId==null){
-			responseData.failInfo(ErrorMSG.notKnow);
 		}else{
 			try {
 				responseData.successInfo(restaurantService.getRestaueantByLocationAndrcid(location,restaurantCategoryId));
