@@ -179,7 +179,7 @@ public class Tools {
     }
     
     /**辅助计算两点距离*/
-    private static double EARTH_RADIUS = 6378.137;//地球半径
+    private static double EARTH_RADIUS = 6370996.81;//地球半径
 	private static double rad(double d)
 	{
 	   return d * Math.PI / 180.0;
