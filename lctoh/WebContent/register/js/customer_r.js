@@ -152,16 +152,15 @@
         		regisObj,
         		function(data){          	          
        	         if(data.state==0){  
-       	        	 alert(data);
+       	        	
        	        	 alert(data.responseInfo)
        	           }
-       	           else{
-       	                alert('注册成功');
-       	                alert(data);
-       	        	    alert(data.responseInfo);
+       	         else{
+       	                alert('注册成功');      	              
+       	        	    alert("你的账户为:"+data.responseInfo.userAccount);
        	           }
         	          	           	   
-          })
+          },'JSON')
         .error(
         		function(custData){
         			alert('erro');
