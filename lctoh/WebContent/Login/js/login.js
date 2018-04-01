@@ -82,7 +82,7 @@
 
         })*/
     $("#register").click(function(){
-    	 window.location.href=projectDirectory+"/register/custmer_r.html";
+    	 window.location.href=projectDirectory+"/register/customer_r.html";
     })
     /* .............点击注册发生的事件..............  */
     /* .............点击忘记密码发生的事件..............  */
@@ -146,7 +146,7 @@
     	   					layer.msg(data.responseInfo, {time:1000});  
     	   				}
     	   				else if(data.state==1){
-    	   					//地址跳转   /custmer/index.html  /rider/index.html   	   					
+    	   					//地址跳转   /customer/index.html  /rider/index.html   	   					
     	   					window.location.href=projectDirectory+data.responseInfo;   	   					
     	   				}
         		},'JSON')
