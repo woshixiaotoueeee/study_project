@@ -74,7 +74,9 @@
 		from restaurant
 		where 
 			restaurant.restaurant_delete_or_not=1
-			and restaurant.restaurant_category_id=#{restaurantCategoryId}
+			<if test="restaurantCategoryId != null and restaurantCategoryId !=''" >
+				and restaurant.restaurant_category_id=#{restaurantCategoryId}
+			</if>
 			and restaurant.restaurant_city_id=#{cityId}
 	</select>
 	<!--根据城市识别码查询店家信息-->
