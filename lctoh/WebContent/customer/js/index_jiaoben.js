@@ -78,7 +78,7 @@ function loadRestaurantData(rtList){
 	var rtHtml="";
 	for(var i=0 ;i<rtlength;i++){
 		rtHtml+="<div class='cont_shop' value='"+rtList[i].restaurantId+"'>" +
-				"<div class='img_shop'><img src='./images/portrait/pic_1.jpg'></div>" +
+				"<div class='img_shop'><img src='.."+rtList[i].restaurantImage+"'></div>" +
 				"<div class='shop_same shop_title'>"+rtList[i].restaurantName+"</div>" +
 				"<div class='shop_same shop_cont'>共出售<span>"+rtList[i].orderCount+"份</span></div>" +
 				"<div class='shop_same shop_bot' >" +
