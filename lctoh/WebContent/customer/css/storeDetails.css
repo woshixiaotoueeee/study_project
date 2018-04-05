@@ -1,296 +1,290 @@
-body{
-    	/*width:100%;*/
-    	height:100%;
-    	padding: 0;
-    	margin: 0;
-    }	
 /*店家实体*/
-.con_shop{
-	  height:auto;
-      /*width:calc(100% - 240px);*/
-      width:99%;
-      margin: 0 auto;
-      background: #eee;
-      border: 1px solid #eee; 
-      font-size: 14px;    
+.con_shop {
+  height: auto;
+  /*width:calc(100% - 240px);*/
+  width: 99%;
+  margin: 0 auto;
+  background: #eee;
+  border: 1px solid #eee;
+  font-size: 14px;
 }
-ul{
-   list-style: none;
-   padding: 0;
-   margin: 0;
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-p,h4,h3,hr{
-	padding: 0;
-	margin: 0;
+p,
+h4,
+h3,
+hr {
+  padding: 0;
+  margin: 0;
 }
-ul li{
-   float:left;
+ul li {
+  float: left;
 }
-.con_shop .res_entity {      
-    background: #f5efea;/* #dcbfa3;*/
-    float: left;
-    width:100%;
-    border: 1px solid #ccc;
-    box-shadow: 1px 2px 6px #ccc;
-    border-radius:2px;
-    margin-top: 10px;
-    color:#666;
-    height:142px;
-    position: relative;
+.con_shop .res_entity {
+  background: #f5efea;
+  /* #dcbfa3;*/
+  float: left;
+  width: 100%;
+  border: 1px solid #ccc;
+  box-shadow: 1px 2px 6px #ccc;
+  border-radius: 2px;
+  margin-top: 10px;
+  color: #666;
+  height: 142px;
+  position: relative;
 }
 /*里面背景*/
-.res_entity  .res_right{
-	float:left;
-    width:calc(100% - 10px);
-    height:132px;
-    background: #fafafa;
-    margin:5px;
+.res_entity .res_right {
+  float: left;
+  width: calc(90%);
+  height: 132px;
+  background: #fafafa;
+  margin: 5px;
 }
 /*店家图片*/
-.res_entity  .img_shop{
-	width:210px;
-	height:132px;
-	float: left;
-	/*border:1px solid red;*/
+.res_entity .img_shop {
+  width: 210px;
+  height: 132px;
+  float: left;
+  /*border:1px solid red;*/
 }
-.res_entity  .img_shop img{
-	width:100%;
-	height:132px;
+.res_entity .img_shop img {
+  width: 100%;
+  height: 132px;
 }
-.res_entity .shop_same{
-	float: left;
-	margin-top: 10px;
-	margin-left: 30px;
+.res_entity .shop_same {
+  float: left;
+  margin-top: 10px;
+  margin-left: 30px;
 }
 /*店家名称*/
-.res_entity  .shop_top .shop_title{
-	font-size: 24px;
-	font-weight:bold;
-	color:#333;
+.res_entity .shop_top .shop_title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
 }
 /*店家状态*/
-.res_entity  .shop_top .shop_state{
-    background: green;
-    color:#fff;
-    text-align: center;
-    padding: 2px 8px;
-    margin-left: 15px;
+.res_entity .shop_top .shop_state {
+  background: green;
+  color: #fff;
+  text-align: center;
+  padding: 2px 8px;
+  margin-left: 15px;
 }
-.res_entity  .shop_top .shop_drink{
-	  margin-top: 3px;
+.res_entity .shop_top .shop_drink {
+  margin-top: 3px;
 }
-.res_entity  .shop_top .shop_drink span:nth-of-type(2){
-	color:red;
+.res_entity .shop_top .shop_drink span:nth-of-type(2) {
+  color: red;
 }
-.res_entity  .shop_top .shop_time{
-    margin-top: 10px;
+.res_entity .shop_top .shop_time {
+  margin-top: 10px;
 }
-.res_entity  .shop_top .shop_address{
-    margin-top: 10px;
+.res_entity .shop_top .shop_address {
+  margin-top: 10px;
 }
 /*起送，配送，距离时间*/
-.res_entity   .shop_cont{
-   width:36%;
-   float:right;
-   height:62px;
-   position: relative;
-   margin-top:40px;
-   margin-right: 10px;
+.res_entity .shop_cont {
+  width: 36%;
+  float: right;
+  height: 62px;
+  position: relative;
+  margin-top: 40px;
+  margin-right: 10px;
 }
-.res_entity   .shop_cont ul{		
-    width:100%;
-    height:100%;      
+.res_entity .shop_cont ul {
+  width: 100%;
+  height: 100%;
 }
-.res_entity   .shop_cont ul li{
-	width:33%;
-	height:100%;
-	text-align: center;
-	border-right:1px solid #aaa;
+.res_entity .shop_cont ul li {
+  width: 33%;
+  height: 100%;
+  text-align: center;
+  border-right: 1px solid #aaa;
 }
-.res_entity   .shop_cont ul li:last-child{
-	border-right:none;
+.res_entity .shop_cont ul li:last-child {
+  border-right: none;
 }
-.res_entity   .shop_cont ul li span{
-	float:left;
-	width:100%;
-	display: block;
-    font-size: 24px;
+.res_entity .shop_cont ul li span {
+  float: left;
+  width: 100%;
+  display: block;
+  font-size: 24px;
 }
-.res_entity  .shop_cont ul li p{
-	float:left;
-	padding: 0;
-	margin: 0;
-	width:100%;
-	margin-top: 10px;
+.res_entity .shop_cont ul li p {
+  float: left;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  margin-top: 10px;
 }
 /*菜单详情*/
-.res_menu{
-	float:left;
-    background: #f5efea;/* #dcbfa3;*/
-    width:100%;
-    box-shadow: 1px 2px 6px #ccc;
-    border-radius:2px;
-    margin-top: 40px;
-    color:#666;
-    height:auto;
-    position: relative;
+.res_menu {
+  float: left;
+  background: #f5efea;
+  /* #dcbfa3;*/
+  width: 100%;
+  box-shadow: 1px 2px 6px #ccc;
+  border-radius: 2px;
+  margin-top: 40px;
+  color: #666;
+  height: auto;
+  position: relative;
 }
 /*菜单详情左侧*/
-.res_menu .res_menu_left{
-   float:left;
-   width:70%;
-   height:100%;
-   margin-left: 5px;
-   /*border:1px solid blue;*/
+.res_menu .res_menu_left {
+  float: left;
+  width: 70%;
+  height: 100%;
+  margin-left: 5px;
+  /*border:1px solid blue;*/
 }
 /*菜单详情右侧大小*/
-.res_menu .res_menu_right{
-   float: left;
-   width:24%;
-   margin-left: 3%;
-   margin-top:60px;
-   height:100%;
+.res_menu .res_menu_right {
+  float: left;
+  width: 24%;
+  margin-left: 3%;
+  margin-top: 60px;
+  height: 100%;
 }
 /*公告*/
-.res_menu .res_menu_right .notice{
-   width:100%;
-   background: #fafafa;
-   box-shadow: 1px 2px 6px #ccc;
-   border-radius: 2px;
+.res_menu .res_menu_right .notice {
+  width: 100%;
+  background: #fafafa;
+  box-shadow: 1px 2px 6px #ccc;
+  border-radius: 2px;
 }
-.res_menu .res_menu_right .notice .notice_tit{
-   display: block;
-   font-size: 20px;
-   margin: 10px 0;
-   margin-left: 10%;
-   width:80%;
+.res_menu .res_menu_right .notice .notice_tit {
+  display: block;
+  font-size: 20px;
+  margin: 10px 0;
+  margin-left: 10%;
+  width: 80%;
 }
-.res_menu .res_menu_right .notice hr{
-	width:80%;
-	margin-left: 10%;
-	background: #ccc;
-	height:1px;
-	border:none;
+.res_menu .res_menu_right .notice hr {
+  width: 80%;
+  margin-left: 10%;
+  background: #ccc;
+  height: 1px;
+  border: none;
 }
-.res_menu .res_menu_right .notice .notice_cont{
-    width:80%;
-	margin-left: 10%;
+.res_menu .res_menu_right .notice .notice_cont {
+  width: 80%;
+  margin-left: 10%;
 }
-.res_menu .res_menu_right .notice .notice_cont p{
-	text-indent: 2em;
-	margin-top: 10px;
-	line-height: 24px;
+.res_menu .res_menu_right .notice .notice_cont p {
+  text-indent: 2em;
+  margin-top: 10px;
+  line-height: 24px;
 }
-.res_menu .res_menu_right  .decorate_pic{
-	margin-top: 20px;
-	height:60px;
-	width:100%;
-    background: #fafafa;
-    box-shadow: 1px 2px 6px #ccc;
-    border-radius: 2px;
+.res_menu .res_menu_right .decorate_pic {
+  margin-top: 20px;
+  height: 60px;
+  width: 100%;
+  background: #fafafa;
+  box-shadow: 1px 2px 6px #ccc;
+  border-radius: 2px;
 }
-
 /*菜单详情右侧大小*/
-
 /*菜单标题*/
-.res_menu .res_menu_left .res_menu_tit{
-	font-size: 24px;
-	margin-left: 30px;
-	line-height: 48px;
+.res_menu .res_menu_left .res_menu_tit {
+  font-size: 24px;
+  margin-left: 30px;
+  line-height: 48px;
 }
-.res_menu .res_menu_left hr{
-    background:#ccc;
-    padding: 0;
-    margin: 0;
-    height:2px;
-    border:none;
-    width:100%;
+.res_menu .res_menu_left hr {
+  background: #ccc;
+  padding: 0;
+  margin: 0;
+  height: 2px;
+  border: none;
+  width: 100%;
 }
 /*菜单类别*/
-.res_menu .res_menu_left .res_menu_type{
-    width:100%;
-    height:150px;
-    background: #fafafa;
-    box-shadow: 1px 2px 6px #ccc;
-    border-radius:2px;
-    margin-top: 20px;
+.res_menu .res_menu_left .res_menu_type {
+  width: 100%;
+  height: 150px;
+  background: #fafafa;
+  box-shadow: 1px 2px 6px #ccc;
+  border-radius: 2px;
+  margin-top: 20px;
 }
-.res_menu .res_menu_left .res_menu_type ul{
-     width:96%;
-     height:100%;
-     text-align: left;
-    /* border:1px solid red;*/
+.res_menu .res_menu_left .res_menu_type ul {
+  width: 96%;
+  height: 100%;
+  text-align: left;
+  /* border:1px solid red;*/
 }
-.res_menu .res_menu_left .res_menu_type ul li{
-    width:15%;
-    margin-right: 10px;
-    height:40px;
-    margin-top: 5px;
-    line-height: 40px;
-    text-align: center;
-   /* border:1px solid blue;*/
+.res_menu .res_menu_left .res_menu_type ul li {
+  width: 15%;
+  margin-right: 10px;
+  height: 40px;
+  margin-top: 5px;
+  line-height: 40px;
+  text-align: center;
+  /* border:1px solid blue;*/
 }
-.res_menu .res_menu_left .res_menu_type ul li:hover{
-	color:red;
+.res_menu .res_menu_left .res_menu_type ul li:hover {
+  color: red;
 }
-.res_menu .res_menu_left .res_menu_type ul li:nth-of-type(6n){
-
-}
-.res_menu .res_menu_left .res_menu_type .first_type{
-	color:red;
+.res_menu .res_menu_left .res_menu_type .first_type {
+  color: red;
 }
 /*菜单类别*/
 /*单个菜品*/
-.res_menu .res_menu_left  .res_menu_content{
+.res_menu .res_menu_left .res_menu_content {
   /* border:1px solid red;*/
-   width:100%;
+  width: 100%;
 }
-.res_menu .res_menu_left  .res_menu_content .res_menu_tit{
-   display: block;
-   margin: 0;
-   font-size: 20px;
-   height:60px;
-   line-height: 60px;
-   width:100%;
+.res_menu .res_menu_left .res_menu_content .res_menu_tit {
+  display: block;
+  margin: 0;
+  font-size: 20px;
+  height: 60px;
+  line-height: 60px;
+  width: 100%;
 }
-.res_menu .res_menu_left  .res_menu_content .menu_single{
-   background: #fafafa;
-   box-shadow: 1px 2px 6px #ccc;
-   border-radius:2px;
-   width:30%;
-   margin-left: 3%;
-   margin-bottom: 10px;
-   height:120px;
-   float:left;
+.res_menu .res_menu_left .res_menu_content .menu_single {
+  background: #fafafa;
+  box-shadow: 1px 2px 6px #ccc;
+  border-radius: 2px;
+  width: 30%;
+  margin-left: 3%;
+  margin-bottom: 10px;
+  height: 120px;
+  float: left;
 }
 /*图片*/
-.res_menu .res_menu_left  .res_menu_content .menu_single .img_single{
-	float: left;
+.res_menu .res_menu_left .res_menu_content .menu_single .img_single {
+  float: left;
 }
 /*单个菜品文字介绍*/
-.res_menu .res_menu_left  .res_menu_content .menu_single .single_same{
-	float: left;
+.res_menu .res_menu_left .res_menu_content .menu_single .single_same {
+  float: left;
 }
-.res_menu .res_menu_left  .res_menu_content .menu_single .single_same>div{
-	margin-left: 10px;
+.res_menu .res_menu_left .res_menu_content .menu_single .single_same > div {
+  margin-left: 10px;
 }
-.res_menu .res_menu_left  .res_menu_content .menu_single .single_same .single_tit{
-    margin-top: 10px;
+.res_menu .res_menu_left .res_menu_content .menu_single .single_same .single_tit {
+  margin-top: 10px;
 }
-.res_menu .res_menu_left  .res_menu_content .menu_single .single_same .single_sales{
-    margin-top: 5px;
-    color:#ccc;
+.res_menu .res_menu_left .res_menu_content .menu_single .single_same .single_sales {
+  margin-top: 5px;
+  color: #ccc;
 }
-.res_menu .res_menu_left  .res_menu_content .menu_single .single_same .single_sales span{
-	margin-right: 10px;
+.res_menu .res_menu_left .res_menu_content .menu_single .single_same .single_sales span {
+  margin-right: 10px;
 }
-.res_menu .res_menu_left  .res_menu_content .menu_single .single_same .single_price{
-    margin-top: 35px;
+.res_menu .res_menu_left .res_menu_content .menu_single .single_same .single_price {
+  margin-top: 35px;
 }
-.res_menu .res_menu_left  .res_menu_content .menu_single .single_same .single_price span{
-	margin-right: 30px;
+.res_menu .res_menu_left .res_menu_content .menu_single .single_same .single_price span {
+  margin-right: 30px;
 }
-.res_menu .res_menu_left  .res_menu_content .menu_single img{
-	height:120px;
+.res_menu .res_menu_left .res_menu_content .menu_single img {
+  height: 120px;
 }
 /*单个菜品*/

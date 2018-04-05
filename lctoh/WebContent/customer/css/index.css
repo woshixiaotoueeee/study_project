@@ -78,6 +78,7 @@ ul li{
 }	
 .content header  .nav>ul>li:hover{
 	background: #ef7e11;
+	cursor:pointer;
 }	
 .content header  .nav>ul>li:first-child{
 	background: #df6e0b;
@@ -154,6 +155,7 @@ ul li{
 	box-shadow: 2px 2px 4px #aaa;
 	color:#333;
 	border-radius: 2px;
+	z-index:99;
 	/*display: none;*/
 }
 .content header   .set_list .set_up::before{
@@ -197,7 +199,8 @@ ul li{
 	border:none;			
 }
 .content header  .set_list .set_up ul li:hover{
-          background: #cccccc;
+    background: #cccccc;
+    cursor:pointer;
 }
 /*底部*/
  footer{
