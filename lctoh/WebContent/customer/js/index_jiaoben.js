@@ -16,11 +16,11 @@ function getRestaurantCategoryData(){
 			   loadRestaurantCategoryData(data.responseInfo);
 		   }
 		   else{
-			   layer.msg('获取数据失败', {time:1000});
+			   layer.msg(data.responseInfo, {time:2500});
 		   }
 	   },
 	   error:function(errordate){
-		   layer.msg('未知错误请刷新页面或联系管理员', {time:1000});
+		   layer.msg('未知错误请刷新页面或联系管理员', {time:2500});
 	   }
 	})
 }
@@ -60,11 +60,11 @@ function getRestaurant(rtcId){
 				   loadRestaurantData(data.responseInfo);
 			   }
 			   else{
-				   layer.msg('获取数据失败', {time:1000});
+				   layer.msg(data.responseInfo, {time:2500});
 			   }
 		   },
 		   error:function(errordate){
-			   layer.msg('未知错误请刷新页面或联系管理员', {time:1000});
+			   layer.msg('未知错误请刷新页面或联系管理员', {time:2500});
 		   }
 		})
 }
@@ -78,7 +78,7 @@ function loadRestaurantData(rtList){
 	var rtHtml="";
 	for(var i=0 ;i<rtlength;i++){
 		rtHtml+="<div class='cont_shop' value='"+rtList[i].restaurantId+"'>" +
-				"<div class='img_shop'><img src='.."+rtList[i].restaurantImage+"'></div>" +
+				"<div class='img_shop'><img src='../"+rtList[i].restaurantImage+"'></div>" +
 				"<div class='shop_same shop_title'>"+rtList[i].restaurantName+"</div>" +
 				"<div class='shop_same shop_cont'>共出售<span>"+rtList[i].orderCount+"份</span></div>" +
 				"<div class='shop_same shop_bot' >" +
