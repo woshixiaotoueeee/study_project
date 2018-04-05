@@ -135,7 +135,8 @@ public class CustomerService {
 	@Transactional(rollbackFor = Exception.class)
 	public void updateCustomer(Customer customer) throws UserException {
 		User user=customer.getCustomerUser();
-		if(userDao.findUserByUserEmail(user.getUserEmail())!=null){
+		User _user=userDao.findUserByUserEmail(user.getUserEmail());
+		if(_user!=null&&!(_user.getUserId().equals(user.getUserId()))){
 			throw new UserException(ErrorMSG.emailExistence);
 		}
 		/**
