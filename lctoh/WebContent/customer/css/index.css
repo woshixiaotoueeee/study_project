@@ -312,9 +312,9 @@ footer .footer_bot{
 	display:inline-block;
 }
 iframe{
-	height:730px;
+	height:900px;
 	width: 100%;
-	border:none;/*iframe的边框设置为没有*/		
+	border:none; /*iframe的边框设置为没有*/		
 	overflow: hidden;
 	margin: 0;
 	padding: 0;
