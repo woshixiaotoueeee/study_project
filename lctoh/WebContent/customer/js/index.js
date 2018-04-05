@@ -59,13 +59,23 @@ function loadRestaurantHtml(){
    /* $('.sec_hotel_type .type_cont ul li').click(function(){
 
    })*/
-   /*点击商家进入店家详细信息*/
+   /*跳转页面设置*/
    function changePage(){
-	
+	   /*点击商家进入店家详细信息*/
 	   var str='<iframe src="./storeDetails.html" name="iframe_a" scrolling="no"></iframe>';
 	   $('#section_change').html(str);
-	   $('footer').css('margin-top','-5px');
+	   $('footer').css('margin-top','-5px'); 
    }
+   /*点击我的订单进入我的订单信息*/
+   $('#my_order').click(function(){
+	   var str='<iframe src="./myCenter.html" name="iframe_a" scrolling="no"></iframe>';
+	   $('#section_change').html(str);
+   })
+    /*点击个人中心进入我的个人信息*/
+   $('#my_center').click(function(){
+	   var str='<iframe src="./myCenter.html" name="iframe_a" scrolling="no"></iframe>';
+	   $('#section_change').html(str); 
+   })
    $('.cont_shop').eq(0).click(function(){
 	   changePage();
    })
