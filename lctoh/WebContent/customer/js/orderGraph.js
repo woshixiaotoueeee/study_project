@@ -21,23 +21,35 @@ function getTm(){
 	initDate();
 }
 function initDate(){
-	
-    var dtNtm=new Date();  
-    var dtEtm=dtNtm; 
-    var dtStm=new Date(dtNtm.getFullYear(),dtNtm.getMonth(),1,00,00,00);    
-    // 初始化时间
-    alert(dtNtm);
-    var sdateStr =dtStm.toString(10);
-    var edateStr =dtEtm.toString(10);
-    $('#stm').val(sdateStr);
-    $('#etm').val(edateStr);
-   /* this.own(on(this.s_tm,"focus",lang.hitch(this,function(evt){
-        window.WdatePicker({startDate:sdateStr,dateFmt:'yyyy-MM-dd HH:mm:ss'})
-    })));
+	var buttons = $.extend([], $.fn.datebox.defaults.buttons);
+	buttons.splice(1, 0, {
+		text: 'MyBtn',
+		handler: function(target){
+			alert('click MyBtn');
+		}
+	});
 
-    this.own(on(this.e_tm,"focus",lang.hitch(this,function(evt){
-        window.WdatePicker({endDate:edateStr,dateFmt:'yyyy-MM-dd HH:mm:ss'})
-    })));*/
+	var str='';
+	var now=new Date();
+	/*alert(now);*/
+	// console.log(now);//当前系统的时间对象
+	var year=now.getFullYear();//年
+	var month=now.getMonth()+1;//月，从下标0计算
+	var date=now.getDate();//日
+    str=month+'/'+date+'/'+year;
+    
+    $('#etm').val(str);
+    $('#tyy').css('color','red');
+    $('#tyy').val('red');
+     var strs='';
+    var newDate = now - 9*24 * 60 * 60 * 1000; //备注 如果是往前计算日期则为减号 否则为加号
+    newDate = new Date(newDate);
+    var years=newDate.getFullYear();//年
+	var months=newDate.getMonth()+1;//月，从下标0计算
+	var dates=newDate.getDate();//日
+    var strs=months+'/'+dates+'/'+years;
+    alert(newDate);
+    $('#stm').val(strs);
 }
 /*
  * 统计饼图

@@ -3,19 +3,25 @@
 <head>
 	<title>订单图表</title>	
 	<link rel="stylesheet" type="text/css" href="./css/orderGraph.css">
-	<script src="http://127.0.0.1/lctoh/Common/jquery-1.8.3.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://127.0.0.1/lctoh/Common/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="http://127.0.0.1/lctoh/Common/easyui/themes/icon.css">
+	<script type="text/javascript" src="http://127.0.0.1/lctoh/Common/easyui/jquery.min.js"></script>
 	<script src="http://127.0.0.1/lctoh/Common/echarts.common.min.js"></script>
 	<script src="http://127.0.0.1/lctoh/Common/layer/layer.js"> </script>
 	<script src="http://127.0.0.1/lctoh/Common/common.js"></script>
-	<script type="text/javascript" src='./js/orderGraph.js'></script>
+	<script type="text/javascript" src="http://127.0.0.1/lctoh/Common/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src='./js/orderGraph.js'></script>	
 </head>
 <body>
       <div class='order_graph'>
          <div class='order_tm'>
             <span class="input-group-addon">选择时间</span> 
-            <input type="text"  class="form-control tm" id="stm" name="stm" require="true"  /> 
+            <input style='width:100px;' id='stm'  class="easyui-datebox" data-options="sharedCalendar:'#cc'">           
 			<div class='time_font'>至</div> 
-			<input type="text"  class="form-control tm" id="etm" name="etm" require="true"  />
+			 <input style='width:100px;' id='etm'  class="easyui-datebox" data-options="sharedCalendar:'#cc'">
+			<!-- <input type="text"  class="form-control tm" id="etm" name="etm" require="true"  /> -->
+            <div id="cc" class="easyui-calendar"></div>
+            <div id='tyy'> <input type="text"  class="form-control tm" id="etm" name="etm"   /></div>
          </div>
          <div class='order_pie'> 
             <div id="mainTwo"></div>
