@@ -1,66 +1,112 @@
+var customer=null;
 $(function(){
-	    /* 点击编辑头像*/
-		$('#edit_portrait').click(function(){
-			edit_portrait();
-		})	
-		/* 点击编辑姓名*/
-		$('#edit_name').click(function(){
-			edit_name_eail();
-		})
-		/* 点击编辑eamil*/
-		$('#edit_email').click(function(){
-			edit_name_eail();	
-		})	
-		/* 点击修改eamil*/
-		$('#edit_password').click(function(){
-			edit_password();
-		})
-	   //我的地址  新增地址 修改地址
-	   $('#add_new').click(function(){
-		   edit_address();
-	   })	   
-	   $('.modify_del span').click(function(){
-		   edit_address();
-	   })
-	   /*点击显示订单详情*/
-	   $('.my_order .ord_click input').click(function(){
-		    order_detail();
-	   })
-	   /*订单统计过程线图*/
-	   order_graph();
-	   /*个人中心 我的收藏 我的订单 我的订单切换*/ 
-	   my_center_list();
+	init();
+	
 })
+function init(){
+	getRestaurantCategoryData()
+	initHtml(customer);
+	setCustomerToHtml(customer);
+}
+function initHtml(_customer){
+	if(_customer==null)return;
+    /* 点击编辑头像*/
+	$('#edit_portrait').click(function(){
+		edit_portrait(_customer);
+	})	
+	/* 点击编辑姓名*/
+	$('#edit_name').click(function(){
+		edit_name_eail(_customer);
+	})
+	/* 点击编辑eamil*/
+	$('#edit_email').click(function(){
+		edit_name_eail(_customer);	
+	})	
+	/* 点击修改eamil*/
+	$('#edit_password').click(function(){
+		edit_password(_customer);
+	})
+   //我的地址  新增地址 修改地址
+   $('#add_new').click(function(){
+	   edit_address();
+   })	   
+   $('.modify_del span').click(function(){
+	   edit_address();
+   })
+   /*点击显示订单详情*/
+   $('.my_order .ord_click input').click(function(){
+	    order_detail();
+   })
+   /*订单统计过程线图*/
+   order_graph();
+   /*个人中心 我的收藏 我的订单 我的订单切换*/ 
+   my_center_list();
+
+}
   /*编辑头像*/
-function edit_portrait() {
+function edit_portrait(_customer) {
 	var str=`<div class='portrait_lay'>
 	    <div class='lay_infor'>
 	        <div class='pic_img'>
-	             <img src='./images/portrait/tou.png'/>
+	             <img src='#portrait#'/>
 		    </div>
 	    </div>
 	    <div class='lay_infor'>
 	    	<div class='upload_img'>
 	    	  <span>上传图片</span>
-	    	  <form>
-	    	     <input type="file" name="pic" id="pic" accept="image/gif,image/jpeg,image/.png" />
+	    	  <form id='updatePortrait'>
+	    	     <input type="file" name="file" id="file" accept="image/gif,image/jpeg,image/.png" />
 	    	  </form>	
 	    	 </div>
 	    </div>
 	    <div class='lay_infor'>
 		    <input type='button' class='pic_save' value='保存图像'/>
-		    <input type='button' value='取消'/>
+		    <input type='button' class='pic_cancel' value='取消'/>
 	    </div>	    
 	</div>`;
-	layer.open({
+	
+	str=str.replace("#portrait#",'../'+_customer.customerPortrait);
+	
+	var layerIndex=layer.open({
 	  title:['编辑头像', 'font-size:18px;'],
 	  type: 1,
 	  area: ['500px', '450px'], //宽高
 	  content: str
 	});
+	$(".pic_save").click(function(){
+		var picdata=$("#updatePortrait")[0];
+		if(picdata.length==0){
+			layer.msg('请选择文件', {time:2500}); 
+			return;
+		}
+		var image = new FormData(picdata);  
+	    $.ajax({  
+	         url: Common.updateCustomerPortrait,  
+	         type: 'POST',  
+	         data: image, 
+	         dataType: "json",
+	         cache: false,  
+	         contentType: false,  
+	         processData: false, 
+	         success: function (returndata) {  
+	        	 layer.msg(returndata.responseInfo, {time:2500});
+	        	 
+	        	 init();
+	        	 layer.close(layerIndex);
+	         },  
+	         error: function (returndata) {  
+	        	 layer.msg('文件过大或文件格式不对', {time:2500}); 
+	        	 layer.close(layerIndex);
+	         }  
+	    });
+	});
+	$(".pic_cancel").click(function(){
+		layer.close(layerIndex);
+	});
+	
  }
 /*编辑修改个人信息*/
-function edit_name_eail(){
+function edit_name_eail(_customer){
 	var strEdit=`<div class='edit_name'>
 	    <div class='lay_infor'>
 		   <span>姓名</span>
@@ -96,7 +142,7 @@ function edit_name_eail(){
 		});	
 }
 /*编辑修改密码*/
-function edit_password(){
+function edit_password(_customer){
 	var str=`<div class='edit_password'>
 		    <div class='lay_infor'>
 			    <span>原密码</span>
@@ -224,4 +270,35 @@ function center_tabs(_this){
 	   $(_this).find('>span').css('display','block');
 	   $(_this).siblings().find('>span').css('display','none');
 	      
+}
+/**
+ * 获取客户信息
+ * */
+function getRestaurantCategoryData(){
+	$.ajax({
+	   type: "post",
+	   url:Common.getLoginInfo,
+	   async: false,
+	   dataType: "json",
+	   success:function(data){
+		   if(data.state==1){
+			   customer=data.responseInfo;
+		   }
+		   else{
+			   layer.msg(data.responseInfo, {time:2500});
+		   }
+	   },
+	   error:function(errordate){
+		   layer.msg('未知错误请刷新页面或联系管理员', {time:2500});
+	   }
+	})
+}
+/**
+ * 设置客户信息
+ * */
+function setCustomerToHtml(_customer){
+	
+	$(".portrait").find('>img').attr('src','../'+_customer.customerPortrait);
+	
+	
 }
