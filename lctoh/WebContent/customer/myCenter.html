@@ -23,7 +23,7 @@
         <div class='my_infor'>
              <div class='infor_left'>
                     <ul>
-                       <li class='first_infor'>
+                      <li class='first_infor'>
                           <div class='list_cont'>
                               <div class='img_list'>
                                  <img src="./images/list_1.png">
@@ -35,11 +35,19 @@
                            <span></span>
                            <div class='list_cont'>
 	                           <div class='img_list'>
-	                               <img src="./images/list_3.png">
+	                               <img src="./images/list_6.png">
+	                           </div>
+	                           <span>我的资料</span>
+                           </div>                          
+                       </li> 
+                       <li>
+                           <span  style='display: none;'></span>
+                           <div class='list_cont'>
+	                           <div class='img_list'>
+	                               <img src="./images/list_5.png">
 	                           </div>
 	                           <span>我的订单</span>
-                           </div>
-                           
+                           </div>                          
                        </li> 
                        <li>
                           <span style='display: none;'></span>
@@ -57,8 +65,7 @@
 	                               <img src="./images/list_3.png">
 	                            </div>
 	                            <span>我的地址</span>
-                           </div>
-                          
+                           </div>                          
                        </li>   
                    </ul>
              </div>
@@ -69,7 +76,7 @@
                  <span class='span_left'></span>
                  <div class='center_cont my_data' style='display:block;'> 
                      <div class='edit_cont'>
-                         <label>个人中心</label>
+                         <label>我的资料</label>
                          <div class='portrait'> 
                              <img src="./images/portrait/tou.png">
                          </div>
@@ -140,8 +147,8 @@
                                   <div class='order_one' >
                                      <div class='ord_time'> 
 	                                     <div class='time_show'>
-	                                        <span>03/12</span>
-	                                        <span>19:20</span>
+	                                        <span>2018/03</span>
+	                                        <span>11/19:20</span>
 	                                     </div> 
 	                                 </div>
 	                                 <div class='pic_img'>
@@ -172,8 +179,8 @@
                                   <div class='order_one' >
                                      <div class='ord_time'> 
 	                                     <div class='time_show'>
-	                                        <span>03/12</span>
-	                                        <span>19:20</span>
+	                                        <span>2018/03</span>
+	                                        <span>12/19:20</span>
 	                                     </div> 
 	                                 </div>
 	                                 <div class='pic_img'>
@@ -202,7 +209,36 @@
 	                                 </div>
                                   </div>
                                   <div class='order_one' style='height:118px;'>
-                                      
+                                       <div class='ord_time'> 
+	                                     <div class='time_show'>
+	                                        <span>2018/03</span>
+	                                        <span>12/19:20</span>
+	                                     </div> 
+	                                 </div>
+	                                 <div class='pic_img'>
+	                                 </div>
+	                                 <div class='border_bot'>
+	                                    <div class='ord_cont'> 
+	                                          <div class='ord_title'>黄焖鸡米饭</div>
+		                                      <div class='ord_inf'>
+		                                        尖椒肉丝盖浇饭1份 等3个菜品
+		                                      </div>
+		                                      <div class='ord_number'>
+		                                          <span>订单号：</span>
+		                                          <span>1088201803120105</span>
+		                                      </div>  
+		                                 </div>
+		                                 <div class='ord_state'> 
+		                                    <span>订单取消</span>
+		                                 </div>
+		                                 <div class='ord_money'> 
+		                                    <span>35元</span>
+		                                    <span>在线支付</span>
+		                                 </div>
+		                                 <div class='ord_click ' > 
+		                                    <input  type="button" name="" value='订单详情'>
+		                                 </div>
+	                                 </div>
                                   </div>
                              </div>
                         </div>
@@ -268,7 +304,7 @@
                                         <span>先生</span>
                                     </div>
                                     <div class='modify_del'>
-                                        <span>修改</span>
+                                        <span id='modify_address'>修改</span>
                                         <span>删除</span>
                                     </div>
                                 </div>
@@ -280,11 +316,11 @@
                                 </div>
                             </div>
                             <div class='address_one address_new'>
-                                 <div>
+                                 <div  id='add_new'>
                                      <div class='ck_img'>
                                          +
                                      </div>
-                                     <div class='add_new' id='add_new'>添加新地址</div>
+                                     <div class='add_new'>添加新地址</div>
                                  </div>
                             </div>
                         </div>
