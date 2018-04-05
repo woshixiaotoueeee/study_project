@@ -215,10 +215,13 @@ ul li {
 .my_center .my_infor .infor_right .my_data .edit_cont .portrait {
   width: 60px;
   height: 60px;
-  border: 1px solid red;
   float: left;
   margin-top: 10px;
 }
+.my_center .my_infor .infor_right .my_data .edit_cont .portrait img{
+  width:100%;
+}
+
 /*编辑头像*/
 .my_center .my_infor .infor_right .my_data .edit_cont .edit_portrait {
   width: 70px;
