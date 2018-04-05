@@ -1,8 +1,12 @@
 $(function(){
 	 /*初始化数据*/
 	 init();
+	 /*获取时间*/
+	 getTm();
+	 /*统计饼图*/
 	 pie_chart();
-	 line_chart();
+	 /*统计过程线*/
+	 line_chart();	 
 })
 /*
  * 初始化数据
@@ -14,7 +18,26 @@ function init(){
  * 获取时间
  * */
 function getTm(){
+	initDate();
+}
+function initDate(){
 	
+    var dtNtm=new Date();  
+    var dtEtm=dtNtm; 
+    var dtStm=new Date(dtNtm.getFullYear(),dtNtm.getMonth(),1,00,00,00);    
+    // 初始化时间
+    alert(dtNtm);
+    var sdateStr =dtStm.toString(10);
+    var edateStr =dtEtm.toString(10);
+    $('#stm').val(sdateStr);
+    $('#etm').val(edateStr);
+   /* this.own(on(this.s_tm,"focus",lang.hitch(this,function(evt){
+        window.WdatePicker({startDate:sdateStr,dateFmt:'yyyy-MM-dd HH:mm:ss'})
+    })));
+
+    this.own(on(this.e_tm,"focus",lang.hitch(this,function(evt){
+        window.WdatePicker({endDate:edateStr,dateFmt:'yyyy-MM-dd HH:mm:ss'})
+    })));*/
 }
 /*
  * 统计饼图
