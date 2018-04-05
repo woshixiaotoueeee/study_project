@@ -1,0 +1,59 @@
+{
+  "code": null, 
+  "data": [
+    { 
+      "ordps":23, 
+      "ordww": 4, 
+      "ordwc": 124, 
+      "ordid": "30427800", 
+      "tm": "2018-03-16"
+    }, 
+    { 
+      "ordps": 32, 
+      "ordww": 1, 
+      "ordwc": 116, 
+      "ordid": "30427800", 
+      "tm": "2018-03-17"
+    }, 
+    {
+       "ordps": 4, 
+      "ordww": 2, 
+      "ordwc": 134, 
+      "ordid": "30427800", 
+      "tm": "2018-03-18"
+    }, 
+    { 
+      "ordps": 24, 
+      "ordww": 6, 
+      "ordwc": 126, 
+      "ordid": "30427800", 
+      "tm": "2018-03-19 "
+    }, 
+    {
+       "ordps": 2, 
+      "ordww": 0, 
+      "ordwc": 126, 
+      "ordid": "30427800", 
+      "tm": "2018-03-20 "
+    }, 
+    {
+       "ordps": 36, 
+      "ordww": 3, 
+      "ordwc": 145, 
+      "ordid": "30427800", 
+      "tm": "2018-03-21 "
+    },
+     {
+       "ordps": 46, 
+       "ordww": 3, 
+       "ordwc": 165, 
+       "ordid": "30427800", 
+       "tm": "2018-03-22"
+    }
+  ], 
+  "message": null, 
+  "pages": 0, 
+  "stackTrace": null, 
+  "success": true, 
+  "total": 6
+}
