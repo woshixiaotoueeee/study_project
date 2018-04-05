@@ -15,10 +15,10 @@ body,html{
 	line-height:30px;
 	display:inline-block;
 }
-.order_graph .order_tm input{
+/* .order_graph .order_tm input{
 	float:left;
 	margin-top:5px;
-}
+} */
 .order_graph .order_tm span{
 	float:left;
 	margin-right:8px;
