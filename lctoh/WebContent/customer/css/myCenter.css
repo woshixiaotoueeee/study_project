@@ -21,6 +21,14 @@ img {
 ul li {
   float: left;
 }
+iframe{
+	height:auto;
+	width: 100%;
+	border:none; /*iframe的边框设置为没有*/		
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
 .my_center {
   height: auto;
   width: calc(100% - 350px);
@@ -276,21 +284,27 @@ ul li {
   /* border:1px solid red;*/
 }
 .my_center .my_infor .infor_right .my_data .edit_cont .edit_infor .infor_list .infor_fixed {
-  width: 20%;
-  margin-left: 5%;
+  width: 35%;
+  margin-left: 10%;
   margin-right: 5%;
   text-align: center;
 }
-.my_center .my_infor .infor_right .my_data .edit_cont .edit_infor .infor_list .show_infor {
-  width: 15%;
+.my_center .my_infor .infor_right .my_data .edit_cont .edit_infor .infor_list input{
+  color: #fff;
+  width:75px;
+  height:24px;
+  line-height: 24px;
+  background: #aaa;
+  outline:none;
+  border:1px solid #aaa;
+  text-align: center;
+  border-radius: 2px; 
 }
-.my_center .my_infor .infor_right .my_data .edit_cont .edit_infor .infor_list .show_edit {
-  float: right;
-  width: 10%;
-  margin-right: 10%;
-  color: #fa7c03;
+.my_center .my_infor .infor_right .my_data .edit_cont .edit_infor .infor_list input:hover {
   cursor: pointer;
-}
+  background: #fa7c03; 
+   border:1px solid #fa7c03;
+} 
 /*..................编辑头像弹窗.................*/
 .portrait_lay {
   width: 100%;
@@ -612,6 +626,10 @@ ul li {
   width: 42px;
   margin-left: 18px;
   text-align: center;
+}
+.my_center .my_infor .infor_right .my_order .order_infor .order_detaile .order_one .ord_time .time_show span:first-child{
+  margin-left: 8px;
+  font-size:12px;
 }
 .my_center .my_infor .infor_right .my_order .order_infor .order_detaile .order_one .border_bot {
   float: left;

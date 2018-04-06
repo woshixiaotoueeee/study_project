@@ -5,6 +5,7 @@ html {
   width: 100%;
   height: 100%;
   color: #666;
+  overflow:hidden;
 }
 ul,
 ol {
@@ -37,7 +38,7 @@ input:hover {
   /* 轮播图*/
   width: 780px;
   height: 560px;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   /* 订单状态*/
   /* 商家信息*/
   /* 订单详情*/

@@ -14,23 +14,20 @@ function initHtml(_customer){
 	$('#edit_portrait').click(function(){
 		edit_portrait(_customer);
 	})	
-	/* 点击编辑姓名*/
-	$('#edit_name').click(function(){
-		edit_name_eail(_customer);
-	})
-	/* 点击编辑eamil*/
-	$('#edit_email').click(function(){
+	/* 点击编辑个人资料*/
+	$('#edit_infor').click(function(){
 		edit_name_eail(_customer);	
 	})	
-	/* 点击修改eamil*/
+	/* 点击修改密码*/
 	$('#edit_password').click(function(){
 		edit_password(_customer);
 	})
-   //我的地址  新增地址 修改地址
+   //我的地址  新增地址 
    $('#add_new').click(function(){
 	   edit_address();
-   })	   
-   $('.modify_del span').click(function(){
+   })
+   // 修改地址
+   $('.modify_del span').eq(0).click(function(){
 	   edit_address();
    })
    /*点击显示订单详情*/
@@ -41,7 +38,6 @@ function initHtml(_customer){
    order_graph();
    /*个人中心 我的收藏 我的订单 我的订单切换*/ 
    my_center_list();
-
 }
   /*编辑头像*/
 function edit_portrait(_customer) {
@@ -221,9 +217,9 @@ function order_detail(){
 		  type: 2,
 		  shadeClose: true,
 		  shade: 0.8,
-		  area: ['800px', '600px'],
+		  area: ['800px', '630px'],
 		  content: str  //iframe的url
-	 });
+	 }); 
 }
 /*订单过程线*/
 function order_graph(){
