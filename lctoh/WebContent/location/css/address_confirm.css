@@ -8,6 +8,7 @@ body, html {
 	font-size:14px;
 	color:#666;
 	overflow:hidden;
+	background:#f8f8f8;
 }
 .contain{
     width:100%;
@@ -30,7 +31,6 @@ ul li{
 }
 /*左侧显示选择面板  */
 .contain_left {
-	  margin-left:20px;
     width:290px;
     height:600px;
     float:left;
@@ -72,7 +72,7 @@ ul li{
 	margin-bottom:10px;
 }
 .contain_left .city_province span{
-  margin-left: 10px;
+   margin-left: 10px;
 }
 .contain_left select{
    font-size:10px;
@@ -86,7 +86,7 @@ ul li{
 
 /*..store_one  单个店家*/
 .contain_left .nearby_store .store_one {
-	  margin-bottom:10px;
+	margin-bottom:10px;
     width:272px;
     height:66px;
     background: #f6f2ef;
@@ -162,11 +162,16 @@ ul li{
  }
 /*左侧显示选择面板  */
 /* 地图交互 */
+.contain_right{
+	width: calc(100% - 294px);
+	height: auto;
+	 float:left;
+}
 #allmap{
-    width: calc(100% - 320px);
+    width:100%; 
 	height: 600px;
 /*  border:1px solid black; */
-    float:left;
+   
 }
 #dingwei{		   
     color:red;
