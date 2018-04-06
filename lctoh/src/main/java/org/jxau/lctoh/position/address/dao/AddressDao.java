@@ -8,9 +8,11 @@ import java.util.List;
 
 
 
+
 import org.jxau.lctoh.position.address.domain.Address;
 import org.jxau.lctoh.position.address.mapper.AddressMapper;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -18,7 +20,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("AddressDao")
 public class AddressDao extends BaseDao{
-	
+	@Autowired
 	private AddressMapper addressMapper;
 	
 	public AddressMapper getAddressMapper() {

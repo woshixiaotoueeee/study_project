@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository("BaseDao")
 public abstract class BaseDao {
 	
-	@Autowired
+	//@Autowired
 	SqlSession sqlSession;
 	
 	/**

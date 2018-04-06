@@ -10,15 +10,18 @@ import org.jxau.lctoh.trade.dish.mapper.DishCategoryMapper;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.jxau.lctoh.user.restaurant.domain.RestaurantWebModel;
 import org.jxau.lctoh.user.restaurant.mapper.RestaurantMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 /**
  * @author qdt_PC
  */
 @Repository("RestaurantDao")
 public class RestaurantDao extends BaseDao {
-	
+	@Autowired
 	private RestaurantMapper restaurantMapper;
+	@Autowired
 	private DishCategoryMapper dishCategoryMapper;
+	@Autowired
 	private OrderStatisticsMapper orderStatisticsMapper;
 	public OrderStatisticsMapper getOrderStatisticsMapper() {
 		return orderStatisticsMapper;

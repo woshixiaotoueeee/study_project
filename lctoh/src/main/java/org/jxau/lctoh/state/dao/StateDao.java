@@ -6,6 +6,7 @@ import java.util.Date;
 import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.state.mapper.StateMapper;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,6 +17,7 @@ public class StateDao extends BaseDao {
 	
 	
 	/**状态代理接口*/
+	@Autowired
 	private StateMapper stateMappeer;
 	
 	public StateMapper getStateMappeer() {

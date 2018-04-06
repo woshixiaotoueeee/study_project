@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace:需与接口的完全限定名保持一致 -->
-<mapper namespace="org.jxau.lctoh.user.rider.mapper.Dispatching">
+<mapper namespace="org.jxau.lctoh.user.rider.mapper.DispatchingMapper">
 	<!-- 数据库表与实体类相对应的resultMap-->
 	<resultMap type="Dispatching" id="DispatchingResultMap">
 		<result property="dispatchingUpdateTime" column="dispatching_update_time"/>

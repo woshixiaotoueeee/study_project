@@ -7,13 +7,14 @@ import org.apache.ibatis.annotations.Param;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.user.rider.domain.Dispatching;
 import org.jxau.lctoh.user.rider.mapper.DispatchingMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 /**
  * @author qdt_PC
  */
 @Repository("DispatchingDao")
 public class DispatchingDao extends BaseDao {
-	
+	@Autowired
 	private DispatchingMapper dispatchingMapper;
 	public DispatchingMapper getDispatchingMapper() {
 		return dispatchingMapper;

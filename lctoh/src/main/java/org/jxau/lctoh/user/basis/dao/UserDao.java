@@ -6,12 +6,15 @@ import java.util.Date;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.user.basis.domain.User;
 import org.jxau.lctoh.user.basis.mapper.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 /**
  * @author qdt_PC
  */
 @Repository("UserDao")
 public class UserDao extends BaseDao{
+
+	@Autowired
 	private UserMapper userMapper;
 	
 	public UserMapper getUserMapper() {

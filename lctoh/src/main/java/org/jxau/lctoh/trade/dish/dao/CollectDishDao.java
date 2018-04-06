@@ -7,11 +7,13 @@ import java.util.List;
 
 
 
+
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.trade.dish.domain.CollectDish;
 import org.jxau.lctoh.trade.dish.domain.Dish;
 import org.jxau.lctoh.trade.dish.mapper.CollectDishMapper;
 import org.jxau.lctoh.trade.dish.mapper.DishMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("CollectDishDao")
 public class CollectDishDao extends BaseDao {
+	@Autowired
 	private CollectDishMapper collectDishMapper;
 	
 	public CollectDishMapper getCollectDishMapper() {
