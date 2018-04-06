@@ -4,7 +4,7 @@ $(function(){
 	
 })
 function init(){
-	getRestaurantCategoryData()
+	getRestaurantCategoryData();
 	initHtml(customer);
 	setCustomerToHtml(customer);
 }
@@ -62,7 +62,6 @@ function edit_portrait(_customer) {
 	</div>`;
 	
 	str=str.replace("#portrait#",'../'+_customer.customerPortrait);
-	
 	var layerIndex=layer.open({
 	  title:['编辑头像', 'font-size:18px;'],
 	  type: 1,
@@ -70,12 +69,11 @@ function edit_portrait(_customer) {
 	  content: str
 	});
 	$(".pic_save").click(function(){
-		var picdata=$("#updatePortrait")[0];
-		if(picdata.length==0){
+		if($('#file').val().length==0){
 			layer.msg('请选择文件', {time:2500}); 
 			return;
 		}
-		var image = new FormData(picdata);  
+		var image = new FormData($("#updatePortrait")[0]);  
 	    $.ajax({  
 	         url: Common.updateCustomerPortrait,  
 	         type: 'POST',  
@@ -86,9 +84,10 @@ function edit_portrait(_customer) {
 	         processData: false, 
 	         success: function (returndata) {  
 	        	 layer.msg(returndata.responseInfo, {time:2500});
-	        	 
-	        	 init();
 	        	 layer.close(layerIndex);
+	        	 getRestaurantCategoryData();
+	        	 setCustomerToHtml(customer);
+	        	 
 	         },  
 	         error: function (returndata) {  
 	        	 layer.msg('文件过大或文件格式不对', {time:2500}); 
@@ -105,8 +104,8 @@ function edit_portrait(_customer) {
 function edit_name_eail(_customer){
 	var strEdit=`<div class='edit_name'>
 	    <div class='lay_infor'>
-		   <span>姓名</span>
-		   <input type='text' placeholder="请输入您的姓名"/>	
+		   <span>昵称</span>
+		   <input id='upcustomerNickname' type='text' placeholder="请输入您的昵称" value='#customerNickname#'/>	
 	    </div>	
 	    <div class='lay_infor sex_infor'>
 		   <span>性别</span>
@@ -119,50 +118,129 @@ function edit_name_eail(_customer){
 	    </div>
 	    <div class='lay_infor'>
 		   <span>手机号码</span>
-		   <input type='text' placeholder="18770811902"/>	
+		   <input id='upphone' type='text' placeholder="#phone#" value="#phone#"/>	
 	    </div>
 	    <div class='lay_infor'>
 		   <span>我的邮箱</span>
-		   <input type='text' placeholder="请绑定您的邮箱"/>	
+		   <input id='upemail' type='text' placeholder="#email#" value="#email#"/>	
 	    </div>
 	    <div class='lay_infor save_cancel'>
 		    <input type='button' class='edit_save' value='保存'/>
 		    <input type='button' class='edit_cancel' value='取消'/>
 	    </div>			   
 	</div>`;
-	layer.open({
+	//补全信息
+	var str=strEdit.replace("#customerNickname#",_customer.customerNickname);
+	str=str.replace("#phone#",_customer.customerUser.userPhone);
+	str=str.replace("#email#",_customer.customerUser.userEmail);
+	//性别			_customer.customerUser.userSex
+	str=str.replace("#email#",_customer.customerUser.userEmail);
+	var layerIndex=layer.open({
 		  title: ['修改资料', 'font-size:18px;'],
 		  type: 1,
 		  area: ['544px', '400px'], //宽高
-		  content: strEdit
+		  content: str
 		});	
+	
+	
+	
+	/* <pre>
+	 * _user说明{
+	 * 		userEmail String 字符串  邮箱
+	 * 		userPhone String 字符串 联系方式
+	 * 		userSex String 字符串 性别
+	 * }
+	 * </pre>
+	 * @param nickName String 字符串 昵称
+	 */
+	
+	$(".edit_save").click(function(){
+		var updateData={};
+		updateData.nickName=$('#upcustomerNickname').val();
+		updateData.userEmail=$('#upemail').val();
+		updateData.userPhone=$('#upphone').val();
+		//性别
+		updateData.userSex='男';//$('#customerNickname').val();
+	    $.ajax({  
+	         url: Common.updateCustomer,  
+	         type: 'POST',  
+	         data: updateData, 
+	         dataType: "json",
+	         success: function (returndata) {  
+	        	 layer.msg(returndata.responseInfo, {time:2500});
+	        	 layer.close(layerIndex);
+	        	 getRestaurantCategoryData();
+	        	 setCustomerToHtml(customer);
+	         },  
+	         error: function (returndata) {  
+	        	 layer.msg('未知错误请刷新页面重试', {time:2500}); 
+	        	 layer.close(layerIndex);
+	         }  
+	    });
+	});
+	
+	$(".edit_cancel").click(function(){
+		layer.close(layerIndex);
+	});
 }
 /*编辑修改密码*/
 function edit_password(_customer){
 	var str=`<div class='edit_password'>
 		    <div class='lay_infor'>
 			    <span>原密码</span>
-			    <input type='password' placeholder=""/>	
+			    <input id='oldpwd' type='password' placeholder=""/>	
 		    </div>	
 		    <div class='lay_infor'>
 			   <span>新密码</span>
-			   <input type='password' placeholder=""/>
+			   <input id='newpwd' type='password' placeholder=""/>
 		    </div>
 		    <div class='lay_infor'>
 			   <span>确认密码</span>
-			   <input type='password' placeholder=""/>	
+			   <input id='_newpwd' type='password' placeholder=""/>	
 		    </div>
 		    <div class='lay_infor save_cancel'>
 			    <input type='button' class='edit_save' value='保存'/>
 			    <input type='button' class='edit_cancel' value='取消'/>
 		    </div>	
 		</div>`;
-		layer.open({
+		var layerIndex=layer.open({
 		  title:['修改密码', 'font-size:18px;'],
 		  type: 1,
 		  area: ['544px', '360px'], //宽高
 		  content: str
 		});
+		
+		
+		$(".edit_save").click(function(){
+			var pwd={};
+			pwd.oldPassword=$('#oldpwd').val();
+			pwd.newPassword=$('#newpwd').val();
+			pwd._newPassword=$('#_newpwd').val();
+			pwd.userId=_customer.customerUser.userId;
+			
+		    $.ajax({  
+		         url: Common.updatePasswordByUserId,  
+		         type: 'POST',  
+		         data: pwd, 
+		         dataType: "json",
+		         success: function (returndata) {  
+		        	 layer.msg(returndata.responseInfo, {time:2500});
+		        	 layer.close(layerIndex);
+		        	 getRestaurantCategoryData();
+		        	 setCustomerToHtml(customer);
+		         },  
+		         error: function (returndata) {  
+		        	 layer.msg('未知错误请刷新页面重试', {time:2500}); 
+		        	 layer.close(layerIndex);
+		         }  
+		    });
+		});
+		
+		$(".edit_cancel").click(function(){
+			layer.close(layerIndex);
+		});
+		
+		
 }
 /*编辑添加地址*/
 function edit_address(){
@@ -208,6 +286,11 @@ function edit_address(){
 		  area: ['544px', '480px'], //宽高
 		  content: add_new
 		});
+	 
+	 
+	 
+	 
+	 
 }
 /*订单详情*/
 function order_detail(){
@@ -295,6 +378,10 @@ function getRestaurantCategoryData(){
 function setCustomerToHtml(_customer){
 	
 	$(".portrait").find('>img').attr('src','../'+_customer.customerPortrait);
-	
-	
+	$("#my_balance").html(_customer.customerBalance.toFixed(2));
+	$("#account").html(_customer.customerUser.userAccount);
+	$("#customerNickname").html(_customer.customerNickname);
+	$("#sex").html(_customer.customerUser.userSex);
+	$("#phone").html(_customer.customerUser.userPhone);
+	$("#email").html(_customer.customerUser.userEmail);
 }
