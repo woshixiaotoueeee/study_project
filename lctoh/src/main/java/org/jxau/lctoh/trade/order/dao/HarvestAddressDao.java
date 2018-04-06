@@ -5,6 +5,7 @@ import java.util.Date;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.trade.order.domain.HarvestAddress;
 import org.jxau.lctoh.trade.order.mapper.HarvestAddressMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("HarvestAddressDao")
 public class HarvestAddressDao extends BaseDao {
+	@Autowired
 	private HarvestAddressMapper harvestAddressMapper;
 	
 	public HarvestAddressMapper getHarvestAddressMapper() {

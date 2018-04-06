@@ -9,16 +9,18 @@ import org.jxau.lctoh.trade.order.domain.Order;
 import org.jxau.lctoh.trade.order.mapper.OrderItemMapper;
 import org.jxau.lctoh.trade.order.mapper.OrderMapper;
 import org.jxau.lctoh.user.rider.mapper.DispatchingMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 /**
  * @author qdt_PC
  */
 @Repository("OrderDao")
 public class OrderDao extends BaseDao {
-	
+	@Autowired
 	private OrderMapper orderMapper;
+	@Autowired
 	private OrderItemMapper orderItemMapper;
-	
+	@Autowired
 	private DispatchingMapper dispatchingMapper;
 	public DispatchingMapper getDispatchingMapper() {
 		return dispatchingMapper;

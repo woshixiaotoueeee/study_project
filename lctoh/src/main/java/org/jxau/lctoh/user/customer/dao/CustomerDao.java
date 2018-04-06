@@ -7,6 +7,7 @@ import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.user.admin.domain.QueryWebModel;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.customer.mapper.CustomerMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("CustomerDao")
 public class CustomerDao extends BaseDao {
-	
+	@Autowired
 	private CustomerMapper customerMapper;
 	
 	public CustomerMapper getCustomerMapper() {

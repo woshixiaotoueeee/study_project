@@ -5,10 +5,12 @@ import java.util.List;
 
 
 
+
 import org.jxau.lctoh.position.region.domain.Province;
 import org.jxau.lctoh.position.region.mapper.CityMapper;
 import org.jxau.lctoh.position.region.mapper.ProvinceMapper;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,8 +18,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("ProvinceDao")
 public class ProvinceDao extends BaseDao {
-	
+	@Autowired
 	private ProvinceMapper provinceMapper;
+	@Autowired
 	private CityMapper cityMapper;
 	
 	

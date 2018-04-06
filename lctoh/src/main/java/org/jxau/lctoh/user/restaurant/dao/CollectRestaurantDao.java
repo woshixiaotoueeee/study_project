@@ -9,13 +9,14 @@ import org.jxau.lctoh.user.restaurant.domain.CollectRestaurant;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.jxau.lctoh.user.restaurant.mapper.CollectRestaurantMapper;
 import org.jxau.lctoh.user.restaurant.mapper.RestaurantMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 /**
  * @author qdt_PC
  */
 @Repository("CollectRestaurantDao")
 public class CollectRestaurantDao extends BaseDao {
-	
+	@Autowired
 	private CollectRestaurantMapper collectRestaurantMapper;
 	
 	public CollectRestaurantMapper getCollectRestaurantMapper() {

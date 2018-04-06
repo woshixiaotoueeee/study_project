@@ -5,15 +5,18 @@ import java.util.Date;
 
 
 
+
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.user.basis.domain.VerificationCode;
 import org.jxau.lctoh.user.basis.mapper.VerificationCodeMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 /**
  * @author qdt_PC
  */
 @Repository("VerificationCodeDao")
 public class VerificationCodeDao extends BaseDao{
+	@Autowired
 	private VerificationCodeMapper verificationCodeMapper;
 	
 	public VerificationCodeMapper getVerificationCodeMapper() {

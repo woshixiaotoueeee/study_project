@@ -6,12 +6,14 @@ import java.util.List;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.user.admin.domain.Notice;
 import org.jxau.lctoh.user.admin.mapper.NoticeMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 /**
  * @author qdt_PC
  */
 @Repository("NoticeDao")
 public class NoticeDao extends BaseDao {
+	@Autowired
 	private NoticeMapper noticeMapper;
 	@Override
 	public void puttMapper() {

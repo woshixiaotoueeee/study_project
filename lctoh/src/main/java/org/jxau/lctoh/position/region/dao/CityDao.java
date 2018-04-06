@@ -3,16 +3,18 @@ package org.jxau.lctoh.position.region.dao;
 import java.util.List;
 
 
+
 import org.jxau.lctoh.position.region.domain.City;
 import org.jxau.lctoh.position.region.mapper.CityMapper;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 /**
  * @author qdt_PC
  */
 @Repository("CityDao")
 public class CityDao extends BaseDao {
-	
+	@Autowired
 	private CityMapper cityMapper;
 	
 	public CityMapper getCityMapper() {

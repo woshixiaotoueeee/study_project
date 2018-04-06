@@ -3,15 +3,18 @@ package org.jxau.lctoh.user.restaurant.dao;
 import java.util.List;
 
 
+
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.user.restaurant.domain.RestaurantCategory;
 import org.jxau.lctoh.user.restaurant.mapper.RestaurantCategoryMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 /**
  * @author qdt_PC
  */
 @Repository("RestaurantCategoryDao")
 public class RestaurantCategoryDao extends BaseDao {
+	@Autowired
 	private RestaurantCategoryMapper restaurantCategoryMapper;
 	
 	@Override

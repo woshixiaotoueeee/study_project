@@ -8,10 +8,12 @@ import java.util.List;
 
 
 
+
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.trade.dish.domain.DishCategory;
 import org.jxau.lctoh.trade.dish.mapper.DishCategoryMapper;
 import org.jxau.lctoh.trade.dish.mapper.DishMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -20,8 +22,9 @@ import org.springframework.stereotype.Repository;
 @Repository("DishCategoryDao")
 public class DishCategoryDao  extends BaseDao {
 
-	
+	@Autowired
 	private DishCategoryMapper dishCategoryMapper;
+	@Autowired
 	private DishMapper dishMapper;
 	
 	public DishCategoryMapper getDishCategoryMapper() {

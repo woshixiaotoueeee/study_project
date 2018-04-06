@@ -7,6 +7,7 @@ import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQure
 import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderTypeCount;
 import org.jxau.lctoh.datastatistics.orderstatistics.mapper.OrderStatisticsMapper;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("OrderStatisticsDao")
 public class OrderStatisticsDao extends BaseDao {
-	
+	@Autowired
 	private OrderStatisticsMapper orderStatisticsMapper;
 	
 	public OrderStatisticsMapper getOrderStatisticsMapper() {

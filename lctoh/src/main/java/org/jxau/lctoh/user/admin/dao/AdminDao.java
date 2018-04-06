@@ -3,13 +3,14 @@ package org.jxau.lctoh.user.admin.dao;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.user.admin.domain.Admin;
 import org.jxau.lctoh.user.admin.mapper.AdminMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 /**
  * @author qdt_PC
  */
 @Repository("AdminDao")
 public class AdminDao extends BaseDao {
-	
+	@Autowired
 	private AdminMapper adminMapper;
 	
 	
