@@ -76,6 +76,11 @@ function loadRestaurantHtml(){
 	   var str='<iframe src="./myCenter.html" name="iframe_a" scrolling="no"></iframe>';
 	   $('#section_change').html(str); 
    })
+    /*点击地址进入定位页面*/
+   $('#last_loca').click(function(){
+	   var str='<iframe src="../location/address_confirm.html" name="iframe_a" scrolling="no"></iframe>';
+	   $('#section_change').html(str); 
+   })
    $('.cont_shop').eq(0).click(function(){
 	   changePage();
    })
