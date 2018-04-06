@@ -1,0 +1,179 @@
+body, html {
+	width: 100%;
+	height: 100%;
+	margin:0;
+	padding:0;
+	overflow: hidden;
+	font-family:"宋体";
+	font-size:14px;
+	color:#666;
+}
+.contain{
+    width:100%;
+}
+input {
+  outline: none;
+  text-align: center;
+  border-radius: 2px;
+  margin: 0;
+  font-size: 12px;
+  cursor: pointer;
+}
+ul{
+  list-style: none;
+  padding:0;
+  margin: 0;
+}
+ul li{
+  float:left;
+}
+/*左侧显示选择面板  */
+.contain_left {
+	  margin-left:20px;
+    width:290px;
+    height:600px;
+    float:left;
+    border:2px solid #ccc;
+    box-shadow: 0 0 4px #ccc;
+    position:relative;
+}
+.contain_left .opt_address{
+	font-size:16px;
+}
+.contain_left #dingwei{
+  	float:right;
+  	width:65px;
+  	height:24px;
+  	margin-right:10px;
+  	outline: none;
+    text-align: center;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+    border:none;
+    color:#fff;
+    background:#fa7c03;
+}
+.contain_left>div{
+	float:left;
+	margin-left:10px;
+	width:calc(100% - 20px);
+}
+.contain_left  .hr_bot{
+	margin-top:15px;
+	border-bottom:1px solid #ccc;
+	height:32px;
+	line-height:32px;
+	color:#333;
+}
+.contain_left .city_province{
+	margin-top:15px;
+	margin-bottom:10px;
+}
+.contain_left .city_province span{
+  margin-left: 10px;
+}
+.contain_left select{
+   font-size:10px;
+   height:20px;
+   color:#666;
+   border:1px solid #aaa;
+}
+.contain_left .nearby_store{
+	margin-top:16px;
+}
+
+/*..store_one  单个店家*/
+.contain_left .nearby_store .store_one {
+	  margin-bottom:10px;
+    width:272px;
+    height:66px;
+    background: #f6f2ef;
+    float: left;
+    border:1px solid #ccc;
+    box-shadow: 0px 0px 2px #ccc;
+    border-radius:2px;
+    font-size: 12px;
+    color:#666;
+    display:inline-block;
+}
+.contain_left .nearby_store  .store_one .img_shop{
+	width:80px;
+	height:60px;
+    float:left;
+	margin:2px;
+	/* border:1px solid red; */
+}
+.contain_left .nearby_store .store_one .img_shop img{
+	width:100%;
+}
+.contain_left .nearby_store .store_one  .shop_same{
+  float:left;
+  width:calc(100% - 92px);
+/*   border:1px solid red; */
+  margin-top: 6px;
+  margin-left: 4px;
+}
+.contain_left .nearby_store .store_one .shop_cont{
+  position: relative;
+  display: inline-block;
+}
+.contain_left .nearby_store .store_one .shop_cont>div{
+  float:left;
+}
+/* 评价图 */
+.contain_left .nearby_store .store_one .shop_cont .bg_img{
+
+}
+/* 月售 */
+.contain_left .nearby_store .store_one .shop_cont .mon_sales{
+   float:right;
+   margin-right: 10px;
+   text-align: left;
+   width:60px;
+}
+.contain_left .nearby_store .store_one  .shop_same:last-child{
+  margin-top: 6px;
+}
+.contain_left .nearby_store  .store_one .shop_title{
+	font-size: 16px;
+	color:#333;
+    margin-left:6px;
+}
+/*起送，配送，距离时间*/
+.contain_left .nearby_store  .store_one .shop_bot ul{
+    width:100%;
+    height:16px;
+    line-height: 16px;
+    /*border:1px solid red;*/
+}
+.contain_left .nearby_store .store_one  .shop_bot ul li{
+	width:36%;
+  float:left;
+	text-align: left;
+}
+.contain_left .nearby_store .store_one  .shop_bot ul li:nth-of-type(2){
+  width:40%;
+}
+.contain_left .nearby_store .store_one  .shop_bot ul li:nth-of-type(3){
+   width:23%;
+   text-align: center;
+ }
+/*左侧显示选择面板  */
+/* 地图交互 */
+#allmap{
+    width: calc(100% - 320px);
+	height: 600px;
+/*  border:1px solid black; */
+    float:left;
+}
+#dingwei{		   
+    color:red;
+}
+.logo{
+   width:50px;
+   height:50px;
+   border:1px solid black;
+   background:red;
+   float:left;
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<!-- 。。。。。。。。。。。图标。。。。。。。。。。。 -->
+	<link rel="icon" type="image/gif" href="http://127.0.0.1/lctoh/images/11.gif" >
+	<link rel="stylesheet"  href="./css/address_confirm.css" >
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=YnD4uKaLCm3OxKqa7poZPFMNamRbzh2S" ></script>
+	<script src="http://127.0.0.1/lctoh/Common/jquery-1.8.3.js"></script>
+	<script src="http://127.0.0.1/lctoh/Common/common.js"></script>
+	<title>定位页面</title>
+</head>
+<body id="body">
+    <div  class='contain'>
+        <div  class='contain_left'>
+            <div class='hr_bot'>
+                <span class='opt_address'>选择地址</span>
+                <button id="dingwei" onclick='dingwei()'>自动定位</button>
+            </div>
+            <div class='city_province'>
+                 <span>省份</span>  
+			     <select id='province'>
+			        <option>请选择省份</option>
+			     </select>
+			     <span>城市</span>
+			     <select id='cityList'>
+			        <option>请选择城市</option>
+			     </select>
+            </div>  	    
+		    <div class='nearby_search hr_bot'>附近商家</div>
+		    <div class='nearby_store'>
+		         <div class='store_one'>
+                        <div class='img_shop'>
+                             <img src="./images/store_1.png">
+                        </div> 
+                        <div class='shop_same shop_title'>
+                        外婆家
+                        </div>
+                        <div class='shop_same shop_cont'>
+                             <div class='bg_img'>****</div>
+                             <div class='mon_sales'>
+                                月售
+                                <span>900份</span>
+                             </div>
+                        </div>
+                        <div class='shop_same shop_bot' >
+                             <ul>
+                                <li> 起送：<span>15￥</span></li>
+                                <li> 配送费：<span>0￥</span></li>
+                                <li> <span>0km</span></li>                               
+                             </ul>        
+                        </div>	             
+		         </div>
+		         <div class='store_one'>
+                        <div class='img_shop'>
+                             <img src="./images/store_1.png">
+                        </div> 
+                        <div class='shop_same shop_title'>
+                        外婆家
+                        </div>
+                        <div class='shop_same shop_cont'>
+                             <div class='bg_img'>****</div>
+                             <div class='mon_sales'>
+                                月售
+                                <span>40份</span>
+                             </div>
+                        </div>
+                        <div class='shop_same shop_bot' >
+                             <ul>
+                                <li> 起送：<span>15￥</span></li>
+                                <li> 配送费：<span>0￥</span></li>
+                                <li> <span>0km</span></li>                               
+                             </ul>        
+                        </div>	             
+		         </div>
+		          <div class='store_one'>
+                        <div class='img_shop'>
+                             <img src="./images/store_1.png">
+                        </div> 
+                        <div class='shop_same shop_title'>
+                        外婆家
+                        </div>
+                        <div class='shop_same shop_cont'>
+                             <div class='bg_img'>****</div>
+                             <div class='mon_sales'>
+                                月售
+                                <span></span>
+                             </div>
+                        </div>
+                        <div class='shop_same shop_bot' >
+                             <ul>
+                                <li> 起送：<span>15￥</span></li>
+                                <li> 配送费：<span>0￥</span></li>
+                                <li> <span>0km</span></li>                               
+                             </ul>        
+                        </div>	             
+		         </div>
+		     </div>
+		</div>
+		<div class='contain_right'>
+		    <div id="allmap"></div>
+		</div>
+    </div>	
+	<script src="./js/address_confirm.js"></script>
+</body>
+</html>
