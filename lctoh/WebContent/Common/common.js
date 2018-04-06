@@ -9,3 +9,7 @@ Common.getRestaurant=projectDirectory+'/RestaurantController/getRestaurantByCity
 Common.getRestaurantCategory=projectDirectory+'/RestaurantController/findAllRestaurantCategory';
 //店家分类获取店家  全部店家
 Common.getRestaurantByCityNameAndrcid=projectDirectory+'/RestaurantController/getRestaurantByCityNameAndrcid';
+//获取客户登录信息
+Common.getLoginInfo=projectDirectory+'/CustomerController/getLoginInfo';
+//更新客户头像信息
+Common.updateCustomerPortrait=projectDirectory+'/CustomerController/updateCustomerPortrait';
