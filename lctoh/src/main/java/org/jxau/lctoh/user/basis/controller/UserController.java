@@ -514,7 +514,7 @@ public class UserController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/logout",produces=EncodingConfig.produces)	
-	private String logout(Integer type,HttpSession session){
+	public String logout(Integer type,HttpSession session){
 		try{
 			switch(type){
 			case 1:
@@ -557,7 +557,7 @@ public class UserController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/updatePasswordByUserId",produces=EncodingConfig.produces)	
-	private String updatePasswordByUserId(String userId,String oldPassword,String newPassword, String _newPassword){
+	public String updatePasswordByUserId(String userId,String oldPassword,String newPassword, String _newPassword){
 		try{
 			if(userId==null||oldPassword==null||newPassword==null){
 				responseData.failInfo(ErrorMSG.parameterIsNull);
