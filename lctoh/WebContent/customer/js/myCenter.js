@@ -1,15 +1,21 @@
 var customer=null;
+var addressList=null;
+
+var map = new BMap.Map();//初始化地图
 $(function(){
 	init();
 	
 })
 function init(){
 	getRestaurantCategoryData();
+	getAddressData(customer);
+	setAddressListToHtml(addressList);
 	initHtml(customer);
 	setCustomerToHtml(customer);
 }
 function initHtml(_customer){
 	if(_customer==null)return;
+	
     /* 点击编辑头像*/
 	$('#edit_portrait').click(function(){
 		edit_portrait(_customer);
@@ -33,7 +39,7 @@ function initHtml(_customer){
    })
    // 删除地址
    $('.delete_address').click(function(){
-	   delete_address();
+	   delete_address(this);
    })
    /*点击显示订单详情*/
    $('.my_order .ord_click input').click(function(){
@@ -136,7 +142,7 @@ function edit_name_eail(_customer){
 	</div>`;
 	//补全信息
 	var str=strEdit.replace("#customerNickname#",_customer.customerNickname);
-	str=str.replace("#phone#",_customer.customerUser.userPhone);
+	str=str.replace(/#phone#/g,_customer.customerUser.userPhone);
 	str=str.replace("#email#",_customer.customerUser.userEmail);
 	//性别			_customer.customerUser.userSex
 	_customer.customerUser.userSex='女';
@@ -308,23 +314,10 @@ function add_address(){
 			   <span>姓名</span>
 			   <input type='text' placeholder="请输入您的姓名"/>	
 		    </div>	
-		    <div class='lay_infor sex_infor'>
-			   <span>性别</span>
-			   <div class='edit_sex'>
-				   <input type='radio' class='sex' name='sex' checked/>
-				   <span>先生</span>
-				   <input type='radio' class='sex' name='sex'/>
-				   <span>女士</span>
-			   </div>  
-		    </div>
 		    <div class='lay_infor'>
 			   <span>位置</span>
-			   <select id='sel_address'>
-				  <option value ="volvo">请输入小区或路名</option>
-				  <option value ="saab">Saab</option>
-				  <option value="opel">Opel</option>
-				  <option value="audi">Audi</option>
-			   </select>	
+			   <input type="text" id="sel_address" />
+			   <div id="searchResultPanel11" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
 		    </div>
 		    <div class='lay_infor'>
 			   <span>详细地址</span>
@@ -333,21 +326,54 @@ function add_address(){
 		    <div class='lay_infor'>
 			   <span>手机号码</span>
 			   <input type='text' placeholder="请输入您的手机号码"/>	
-		    </div>		    
-		    <div class='lay_infor save_cancel'>
+		    </div>	
+		    <div id="r-result">请输入:<input type="text" id="suggestId" size="20" value="1111111" style="width:150px;" /></div>
+			<div class='lay_infor save_cancel'>
 			    <input type='button' class='edit_save' value='保存'/>
 			    <input type='button' class='edit_cancel' value='取消'/>
-		    </div>			   
+		    </div>	
+		    
 		</div>`;
 	 layer.open({
 		  title: ['新添地址', 'font-size:18px;'],
 		  type: 1,
 		  area: ['544px', '480px'], //宽高
 		  content: add_new
-		});	 	 
+		});	
+	 var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+				{"input" : "suggestId"
+				,"location" : map
+			});
+
+	ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+		var str = "";
+		var _value = e.fromitem.value;
+		var value = "";
+		if (e.fromitem.index > -1) {
+			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		}    
+		str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+		
+		value = "";
+		if (e.toitem.index > -1) {
+			_value = e.toitem.value;
+			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		}    
+		str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+		//$("#searchResultPanel").html(str);
+	});
+
+	var myValue;
+	ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+		var _value = e.item.value;
+		myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		//$("#searchResultPanel").html("onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue);
+		//setPlace();
+	});
 }
 /*删除地址*/
-function delete_address(){
+function delete_address(_this){
+	aler(_this);
 	layer.open({
 		  title: ['删除地址', 'font-size:14px;'],
 		  content: '是否确认删除？'
@@ -441,10 +467,33 @@ function getRestaurantCategoryData(){
 	})
 }
 /**
+ * 获取客户地址信息
+ * */
+function getAddressData(_customer){
+	if(_customer==null)return;
+	$.ajax({
+	   type: "post",
+	   url:Common.findAddressByCustomerId,
+	   async: false,
+	   data: {'customerId':_customer.customerId}, 
+	   dataType: "json",
+	   success:function(data){
+		   if(data.state==1){
+			   addressList=data.responseInfo;
+		   }
+		   else{
+			   layer.msg(data.responseInfo, {time:2500});
+		   }
+	   },
+	   error:function(errordate){
+		   layer.msg('未知错误请刷新页面或联系管理员', {time:2500});
+	   }
+	})
+}
+/**
  * 设置客户信息
  * */
 function setCustomerToHtml(_customer){
-	
 	$(".portrait").find('>img').attr('src','../'+_customer.customerPortrait);
 	$("#my_balance").html(_customer.customerBalance.toFixed(2));
 	$("#account").html(_customer.customerUser.userAccount);
@@ -452,4 +501,21 @@ function setCustomerToHtml(_customer){
 	$("#sex").html(_customer.customerUser.userSex);
 	$("#phone").html(_customer.customerUser.userPhone);
 	$("#email").html(_customer.customerUser.userEmail);
+}
+
+/**
+ * 设置地址信息
+ * */
+function setAddressListToHtml(_addressList){
+	if(_addressList==null)return;
+	var addressHtml='';
+	
+	
+	addressHtml+="<div class='address_one address_new'>" +
+			"<div  id='add_new'><div class='ck_img'>+</div><div class='add_new'>添加新地址</div></div>"+
+			"</div>";
+	//var addressDiv=
+	$(".my_address .edit_cont .edit_infor").html(addressHtml);
+	
+	
 }
