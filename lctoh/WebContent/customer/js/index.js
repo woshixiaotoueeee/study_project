@@ -1,8 +1,31 @@
 $(function(){
+	init();//初始化主体页面
 	loadRestaurantHtml();
 })
+function init(){
+	  /*加载主页主体页面*/
+	/* var initStr='<iframe src="./customer.html" name="iframe_a" scrolling="no"></iframe>';
+	 $('#section_change').html(initStr);
+	 $('footer').css('margin-top','-5px'); */
+	
+	 //购物车移动
+	 var isLeft=1;
+     $('#click_car').click(function(){
+        if(isLeft==1){
+          $('.shopping_car').animate({right:'0px'},2000);  
+          $(this).find('.greater').html('&lsaquo;');         
+          isLeft=2;
+       }
+       else{
+           $('.shopping_car').animate({right:'22px'},2000); 
+           $(this).find('.greater').html('&rsaquo;');              
+           isLeft=1;
+       }
+     })
+	
+}
 function loadRestaurantHtml(){
-
+  
 	/*点击用户图标显示用户设置*/
 	$('.small_up').click(function(){   	 
 		$('.set_up').css('display','block');
@@ -30,60 +53,47 @@ function loadRestaurantHtml(){
 	$('#sign_out').click(function(){  //退出登录
 	   //alert('跳到登录页面')
 	})
-	/*商家分类 划过变颜色*/
-	$('.sec_hotel_type .type_cont ul li').mouseover(function(){
-		//alert($(this).index());
-		var index=$(this).index()+1;
-		$(this).find('.img_list img').attr('src','./images/bus_type/food_'+index+'_1.png');
-		//$(this).addClass('first_list');
-   })
-   $('.sec_hotel_type .type_cont ul li').mouseleave(function(){
-	   var index=$(this).index()+1;
-	   $(this).find('.img_list img').attr('src','./images/bus_type/food_'+index+'.png');
-	   //$(this).removeClass('first_list');
-   })
-   $('.sec_hotel_type .type_cont ul li').mousedown(function(){	
-   
-	   var index=$(this).index()+1;
-	   $(this).find('.img_list img').attr('src','./images/bus_type/food_'+index+'_1.png');       
-	   $(this).addClass('first_list').siblings().removeClass('first_list');
-   })
-   $('.sec_hotel_type .type_cont ul li').mouseup(function(){
-   
-	   var index=$(this).index()+1;
-	   $(this).find('.img_list img').attr('src','./images/bus_type/food_'+index+'_1.png');       
-	   $(this).addClass('first_list').siblings().removeClass('first_list');
-   })
-
-   /*商家分类 点击变颜色及事件*/
-   /* $('.sec_hotel_type .type_cont ul li').click(function(){
-
-   })*/
-   /*跳转页面设置*/
+   /*
+    *  跳转页面设置
+    * */
    function changePage(){
-	   /*点击商家进入店家详细信息*/
-	   var str='<iframe src="./storeDetails.html" name="iframe_a" scrolling="no"></iframe>';
-	   $('#section_change').html(str);
-	   $('footer').css('margin-top','-5px'); 
+	   /*点击我的订单进入我的订单信息*/
+	   $('#my_order').click(function(){
+		   var str='<iframe src="./myCenter.html" name="iframe_a" scrolling="no"></iframe>';
+		   $('#section_change').html(str);
+		   $(this).addClass('frist_show').siblings().removeClass('frist_show');
+	   })
+	    /*点击个人中心进入我的个人信息*/
+	   $('#my_center').click(function(){
+		   var str='<iframe src="./myCenter.html" name="iframe_a" scrolling="no"></iframe>';
+		   $('#section_change').html(str); 
+		   $(this).addClass('frist_show').siblings().removeClass('frist_show');
+	   })
+	    /*点击地址进入定位页面*/
+	   $('#last_loca').click(function(){
+		   var str='<iframe src="../location/address_confirm.html" name="iframe_a" scrolling="no"></iframe>';
+		   $('#section_change').html(str); 
+	   })
+	   /*点击地址进入店家详情*/
+	   $('.cont_shop').click(function(){
+		   var str='<iframe src="./storeCenter.html" name="iframe_a" scrolling="no"></iframe>';
+		   $('#section_change').html(str); 
+	   })
+	    /*点击跳转首页*/
+	    $('#my_page').click(function(){
+	        var initStr='<iframe src="./customer.html" name="iframe_a" scrolling="no"></iframe>';
+	   	    $('#section_change').html(initStr);
+	   	   $(this).addClass('frist_show').siblings().removeClass('frist_show');
+	    })
+	    /*点击到联系我们*/
+	    $('#contact_us').click(function(){	    
+	        var str='<iframe src="../ownShare/connect.html" name="iframe_a" scrolling="no"></iframe>';
+	   	    $('#section_change').html(str);
+	   	    $(this).addClass('frist_show').siblings().removeClass('frist_show');
+	    })
+	    $('footer').css('margin-top','-5px');    
    }
-   /*点击我的订单进入我的订单信息*/
-   $('#my_order').click(function(){
-	   var str='<iframe src="./myCenter.html" name="iframe_a" scrolling="no"></iframe>';
-	   $('#section_change').html(str);
-   })
-    /*点击个人中心进入我的个人信息*/
-   $('#my_center').click(function(){
-	   var str='<iframe src="./myCenter.html" name="iframe_a" scrolling="no"></iframe>';
-	   $('#section_change').html(str); 
-   })
-    /*点击地址进入定位页面*/
-   $('#last_loca').click(function(){
-	   var str='<iframe src="../location/address_confirm.html" name="iframe_a" scrolling="no"></iframe>';
-	   $('#section_change').html(str); 
-   })
-   $('.cont_shop').eq(0).click(function(){
-	   changePage();
-   })
+	changePage();
    /* 点击店家分类获取店家的接口   （参数  城市 city 店家分类id ）*/
    $('#all_shop').click(function(){
 	   $.ajax({
