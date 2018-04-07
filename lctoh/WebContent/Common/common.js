@@ -20,5 +20,20 @@ Common.updateCustomer=projectDirectory+'/CustomerController/updateCustomer';
 //获取地址信息
 Common.findAddressByCustomerId=projectDirectory+'/AddressController/findAddressByCustomerId';
 
-
-
+testsql();
+function testsql(){
+	$.ajax({
+		   type: "post",
+		   data:null,
+		   url:projectDirectory+'/NoticeController/findAllNotice',
+		   dataType: "json",
+		   success:function(data){
+			   
+			   setTimeout(testsql,90000);
+		   },
+		   error:function(errordate){
+			   layer.msg('未知错误请刷新页面或联系管理员', {time:2500});
+		   }
+		})
+	
+}
