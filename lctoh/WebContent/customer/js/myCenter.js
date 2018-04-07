@@ -24,11 +24,16 @@ function initHtml(_customer){
 	})
    //我的地址  新增地址 
    $('#add_new').click(function(){
-	   edit_address();
+	   add_address();
    })
    // 修改地址
-   $('.modify_del span').eq(0).click(function(){
+   $('.modify_address').click(function(){
 	   edit_address();
+	   
+   })
+   // 删除地址
+   $('.delete_address').click(function(){
+	   delete_address();
    })
    /*点击显示订单详情*/
    $('.my_order .ord_click input').click(function(){
@@ -110,9 +115,9 @@ function edit_name_eail(_customer){
 	    <div class='lay_infor sex_infor'>
 		   <span>性别</span>
 		   <div class='edit_sex'>
-			   <input type='radio' class='sex' name='sex' checked/>
+			   <input type='radio' class='sex' name='sex' value='男' checked/>
 			   <span>先生</span>
-			   <input type='radio' class='sex' name='sex'/>
+			   <input type='radio' class='sex' value='女' name='sex'/>
 			   <span>女士</span>
 		   </div>  
 	    </div>
@@ -134,6 +139,7 @@ function edit_name_eail(_customer){
 	str=str.replace("#phone#",_customer.customerUser.userPhone);
 	str=str.replace("#email#",_customer.customerUser.userEmail);
 	//性别			_customer.customerUser.userSex
+	_customer.customerUser.userSex='女';
 	str=str.replace("#email#",_customer.customerUser.userEmail);
 	var layerIndex=layer.open({
 		  title: ['修改资料', 'font-size:18px;'],
@@ -141,7 +147,13 @@ function edit_name_eail(_customer){
 		  area: ['544px', '400px'], //宽高
 		  content: str
 		});	
-	
+	if(_customer.customerUser.userSex=='男'){
+		$('.edit_sex input:radio[name="sex"][value="男"]').attr("checked","checked");	
+	}
+	else{
+		$('.edit_sex input:radio[name="sex"][value="女"]').attr("checked","checked");
+		
+	}
 	
 	
 	/* <pre>
@@ -159,8 +171,10 @@ function edit_name_eail(_customer){
 		updateData.nickName=$('#upcustomerNickname').val();
 		updateData.userEmail=$('#upemail').val();
 		updateData.userPhone=$('#upphone').val();
-		//性别
-		updateData.userSex='男';//$('#customerNickname').val();
+		//性别		
+		var sexVal=$('.edit_sex').find(' input[name="sex"]:checked ').val();
+        //alert(sexVal);
+		updateData.userSex=sexVal;//$('#customerNickname').val();
 	    $.ajax({  
 	         url: Common.updateCustomer,  
 	         type: 'POST',  
@@ -242,8 +256,53 @@ function edit_password(_customer){
 		
 		
 }
-/*编辑添加地址*/
+/*编辑修改地址*/
 function edit_address(){
+	 var add_new=`<div class='edit_name edit_address'>
+		    <div class='lay_infor'>
+			   <span>姓名</span>
+			   <input type='text' placeholder="请输入您的姓名"/>	
+		    </div>	
+		    <div class='lay_infor sex_infor'>
+			   <span>性别</span>
+			   <div class='edit_sex'>
+				   <input type='radio' class='sex' name='sex' checked/>
+				   <span>先生</span>
+				   <input type='radio' class='sex' name='sex'/>
+				   <span>女士</span>
+			   </div>  
+		    </div>
+		    <div class='lay_infor'>
+			   <span>位置</span>
+			   <select id='sel_address'>
+				  <option value ="volvo">请输入小区或路名</option>
+				  <option value ="saab">Saab</option>
+				  <option value="opel">Opel</option>
+				  <option value="audi">Audi</option>
+			   </select>	
+		    </div>
+		    <div class='lay_infor'>
+			   <span>详细地址</span>
+			   <input type='text' />	
+		    </div>
+		    <div class='lay_infor'>
+			   <span>手机号码</span>
+			   <input type='text' placeholder="请输入您的手机号码"/>	
+		    </div>		    
+		    <div class='lay_infor save_cancel'>
+			    <input type='button' class='edit_save' value='保存'/>
+			    <input type='button' class='edit_cancel' value='取消'/>
+		    </div>			   
+		</div>`;
+	 layer.open({
+		  title: ['修改地址', 'font-size:18px;'],
+		  type: 1,
+		  area: ['544px', '480px'], //宽高
+		  content: add_new
+		});	 	 
+}
+/*添加新地址*/
+function add_address(){
 	 var add_new=`<div class='edit_name edit_address'>
 		    <div class='lay_infor'>
 			   <span>姓名</span>
@@ -285,12 +344,21 @@ function edit_address(){
 		  type: 1,
 		  area: ['544px', '480px'], //宽高
 		  content: add_new
-		});
-	 
-	 
-	 
-	 
-	 
+		});	 	 
+}
+/*删除地址*/
+function delete_address(){
+	layer.open({
+		  title: ['删除地址', 'font-size:14px;'],
+		  content: '是否确认删除？'
+		  ,btn: ['确认',  '取消']
+		  ,yes: function(index, layero){
+		    //按钮【按钮一】的回调
+		  }
+		  ,cancel: function(){ 
+		    //右上角关闭回调
+		  }
+	 });
 }
 /*订单详情*/
 function order_detail(){
