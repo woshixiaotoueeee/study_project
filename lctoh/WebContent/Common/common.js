@@ -17,6 +17,8 @@ Common.updateCustomerPortrait=projectDirectory+'/CustomerController/updateCustom
 Common.updatePasswordByUserId=projectDirectory+'/UserController/updatePasswordByUserId';
 //更新客户信息
 Common.updateCustomer=projectDirectory+'/CustomerController/updateCustomer';
+//获取地址信息
+Common.findAddressByCustomerId=projectDirectory+'/AddressController/findAddressByCustomerId';
 
 
 
