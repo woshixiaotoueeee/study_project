@@ -1,0 +1,645 @@
+/*店家实体*/
+.con_shop {
+  height: auto;
+  /*width:calc(100% - 240px);*/
+  width: 1204px;
+  margin: 0 auto;
+  border: 1px solid #eee;
+  font-size: 14px;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+p,
+h4,
+h3,
+hr {
+  padding: 0;
+  margin: 0;
+}
+ul li {
+  float: left;
+}
+img {
+  width: 100%;
+}
+.con_shop .res_entity {
+  background-image: url('../images/store_detail/bg.png');
+  float: left;
+  width: 100%;
+  margin-top: 10px;
+  color: #666;
+  height: 120px;
+  position: relative;
+}
+/*里面背景*/
+.res_entity .res_right {
+  float: left;
+  width: calc(90%);
+  height: 120px;
+  position: relative;
+}
+.res_entity .coll_store {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 30px;
+  height: 30px;
+}
+/*鼠标移入显示详情*/
+.res_entity .mover_show {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 330px;
+  width: 350px;
+  /*border:1px solid blue;*/
+  border-radius: 3px;
+  z-index: 199;
+  background: rgba(204, 204, 204, 0.8);
+}
+.res_entity .mover_show > div {
+  float: left;
+  margin-left: 15px;
+  margin-top: 10px;
+}
+.res_entity .mover_show .shop_store {
+  width: 308px;
+  margin-top: 120px;
+  height: 60px;
+}
+.res_entity .mover_show .shop_store > div {
+  float: left;
+}
+.res_entity .mover_show .shop_store .comp_store {
+  height: 60px;
+  width: 106px;
+  margin-top: 10px;
+  border-bottom: 1px dashed  #aaa;
+  border-right: 1px dashed  #aaa;
+  float: left;
+  display: inline-block;
+}
+.res_entity .mover_show .shop_store .comp_store span {
+  width: 100%;
+  float: left;
+  text-align: center;
+}
+.res_entity .mover_show .shop_store .comp_store .score_num {
+  font-size: 20px;
+  color: #fa7c03;
+  margin-bottom: 10px;
+}
+.res_entity .mover_show .shop_store .comp_right {
+  margin-top: 10px;
+  float: left;
+  width: 200px;
+  height: 60px;
+  border-bottom: 1px dashed  #aaa;
+}
+.res_entity .mover_show .shop_store .comp_right .service_score {
+  margin-left: 10px;
+  float: left;
+}
+.res_entity .mover_show .shop_store .comp_right .service_score > div {
+  float: left;
+}
+.res_entity .mover_show .shop_store .comp_right .service_score > div:first-child {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.res_entity .mover_show .shop_store .comp_right .service_score:nth-of-type(2) {
+  margin-top: 10px;
+}
+.store_brief {
+  border-bottom: 1px dashed  #aaa;
+  width: 310px;
+}
+.store_brief p {
+  width: 100%;
+  text-indent: 2em;
+  margin-bottom: 6px;
+  margin-top: 3px;
+}
+.address_time .shop_time {
+  margin-top: 3px;
+}
+.res_entity .img_score {
+  width: 90px;
+  height: 24px;
+}
+.res_entity .img_score img {
+  width: 100%;
+}
+/*店家图片*/
+.res_entity .img_shop {
+  width: 84px;
+  height: 84px;
+  float: left;
+  margin-top: 20px;
+  margin-left: 20px;
+  /*border:1px solid red;*/
+  border-radius: 50%;
+}
+.res_entity .img_shop img {
+  width: 100%;
+}
+.res_entity .shop_same {
+  float: left;
+  margin-top: 10px;
+}
+/*店家名称*/
+.res_entity .shop_top {
+  margin-top: 25px;
+  margin-left: 15px;
+}
+.res_entity .shop_top .shop_title {
+  font-size: 26px;
+  color: #fff;
+}
+.res_entity .shop_top .shop_drink {
+  margin-top: 10px;
+}
+/*起送，配送，距离时间*/
+.res_entity .shop_cont {
+  width: 36%;
+  float: right;
+  height: 62px;
+  position: relative;
+  margin-top: 40px;
+  margin-right: 60px;
+  color: #fff;
+}
+.res_entity .shop_cont ul {
+  width: 100%;
+  height: 100%;
+}
+.res_entity .shop_cont ul li {
+  width: 33%;
+  height: 100%;
+  text-align: center;
+  border-right: 1px solid #aaa;
+}
+.res_entity .shop_cont ul li:last-child {
+  border-right: none;
+}
+.res_entity .shop_cont ul li span {
+  float: left;
+  width: 100%;
+  display: block;
+  font-size: 24px;
+}
+.res_entity .shop_cont ul li p {
+  float: left;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  margin-top: 10px;
+  font-size: 14px;
+}
+/*菜单详情*/
+.res_menu {
+  float: left;
+  background: #f5efea;
+  /* #dcbfa3;*/
+  width: 100%;
+  box-shadow: 1px 2px 6px #ccc;
+  border-radius: 2px;
+  margin-top: 20px;
+  color: #666;
+  height: auto;
+  position: relative;
+}
+/*菜单详情左侧*/
+.res_menu .res_menu_left {
+  float: left;
+  width: 922px;
+  height: 100%;
+  margin-left: 5px;
+  /*border:1px solid blue;*/
+}
+/*菜单详情右侧大小*/
+.res_menu .res_menu_right {
+  float: right;
+  width: 248px;
+  margin-right: 10px;
+  margin-top: 50px;
+  height: auto;
+}
+/*商家公告*/
+.res_menu .res_menu_right .store_notice {
+  width: 100%;
+  background-color: #fafafa;
+  box-shadow: 1px 2px 6px #ccc;
+  border-radius: 2px;
+  display: inline-block;
+  box-shadow: 2px 2px 4px #aaa;
+}
+.res_menu .res_menu_right .store_notice label {
+  font-size: 14px;
+  color: #fa7c03;
+}
+.res_menu .res_menu_right .store_notice .pic_notice {
+  width: 30px;
+  float: left;
+  margin-left: calc(50% - 15px);
+  margin-right: calc(50% - 15px);
+  margin-top: 5px;
+}
+.res_menu .res_menu_right .store_notice .tm_notice {
+  float: right;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.res_menu .res_menu_right .store_notice .notice_tit {
+  display: block;
+  font-size: 20px;
+  margin: 10px 0;
+  margin-left: 10%;
+  width: 80%;
+}
+.res_menu .res_menu_right .store_notice .notice_cont {
+  width: 90%;
+  margin-left: 5%;
+}
+.res_menu .res_menu_right .store_notice .notice_cont p {
+  text-indent: 2em;
+  margin-top: 10px;
+  line-height: 24px;
+}
+.res_menu .res_menu_right .decorate_pic {
+  margin-top: 20px;
+  height: 60px;
+  width: 100%;
+  background: #fafafa;
+  box-shadow: 1px 2px 6px #ccc;
+  border-radius: 2px;
+}
+/*菜单详情右侧大小*/
+/*菜单标题*/
+.res_menu .res_menu_tit {
+  heght: 48px;
+}
+.res_menu .res_menu_tit label {
+  font-size: 16px;
+  color: #333;
+  margin-left: 50px;
+  line-height: 48px;
+  font-weight: bold;
+}
+.res_menu .res_menu_tit ul {
+  float: right;
+  width: 240px;
+  font-size: 12px;
+  color: #333;
+  text-align: center;
+  height: 48px;
+  line-height: 48px;
+}
+.res_menu .res_menu_tit ul li {
+  width: 33%;
+  float: left;
+  position: relative;
+}
+.res_menu .res_menu_tit ul li span {
+  display: block;
+  float: left;
+  text-align: center;
+  margin-left: 20px;
+}
+.res_menu .res_menu_tit ul li hr {
+  height: 16px;
+  width: 2px;
+  background: #ccc;
+  position: absolute;
+  top: 16px;
+  right: 0;
+}
+.res_menu .res_menu_tit ul li:first-child {
+  color: #fa7c03;
+}
+.res_menu .res_menu_tit ul li:first-child span {
+  width: 100%;
+  margin-left: 0px;
+}
+.res_menu .res_menu_tit .img_list {
+  width: 8px;
+  height: 12px;
+  margin-left: 8px;
+  margin-top: 1px;
+  float: left;
+}
+.res_menu .res_menu_tit .img_list img {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.res_menu .res_menu_left hr {
+  background: #ccc;
+  padding: 0;
+  margin: 0;
+  height: 2px;
+  border: none;
+  width: 100%;
+}
+/*菜单类别*/
+.res_menu .res_menu_left .res_menu_type {
+  width: 100%;
+  height: 145px;
+  background: #fafafa;
+  box-shadow: 2px 2px 6px #ccc;
+  border-radius: 2px;
+  margin-top: 10px;
+}
+.res_menu .res_menu_left .res_menu_type ul {
+  width: 100%;
+  height: 100%;
+  text-align: left;
+}
+.res_menu .res_menu_left .res_menu_type ul li {
+  width: 16%;
+  margin-right: 2px;
+  height: 40px;
+  margin-top: 5px;
+  line-height: 40px;
+  text-align: center;
+  /* border:1px solid blue;*/
+  position: relative;
+}
+.res_menu .res_menu_left .res_menu_type ul li hr {
+  height: 16px;
+  width: 2px;
+  background: #ccc;
+  position: absolute;
+  top: 12px;
+  right: 0;
+}
+.res_menu .res_menu_left .res_menu_type ul li:hover {
+  color: #fa7c03;
+}
+.res_menu .res_menu_left .res_menu_type .first_type {
+  color: #fa7c03;
+}
+/*菜单类别*/
+/*单个菜品*/
+.res_menu .res_menu_left .res_menu_content {
+  /* border:1px solid red;*/
+  width: 100%;
+  margin-top: 10px;
+  background: #fff;
+  /* #dcbfa3;*/
+  box-shadow: 1px 2px 6px #ccc;
+  border-radius: 2px;
+  color: #666;
+  height: 400px;
+  position: relative;
+}
+.res_menu .res_menu_left .res_menu_content .res_menu_tit {
+  display: block;
+  margin: 0;
+  font-size: 20px;
+  height: 60px;
+  line-height: 60px;
+  width: 100%;
+}
+.res_menu .res_menu_left .res_menu_content .menu_single {
+  background: #fafafa;
+  box-shadow: 1px 2px 6px #ccc;
+  border-radius: 2px;
+  width: 450px;
+  margin-bottom: 20px;
+  height: 150px;
+  float: left;
+}
+.res_menu .res_menu_left .res_menu_content > div:nth-of-type(n) {
+  margin-right: 22px;
+}
+.res_menu .res_menu_left .res_menu_content > div:nth-of-type(2n) {
+  margin-right: 0px;
+}
+/*图片*/
+.res_menu .res_menu_left .res_menu_content .menu_single .img_single {
+  float: left;
+  width: 190px;
+  height: 142px;
+  margin: 4px;
+}
+.res_menu .res_menu_left .res_menu_content .menu_single .img_single img {
+  height: 142px;
+}
+/*单个菜品文字介绍*/
+.res_menu .res_menu_left .res_menu_content .menu_single .single_same {
+  float: left;
+  margin-left: 10px;
+  width: 220px;
+}
+.res_menu .res_menu_left .res_menu_content .menu_single .single_same .single_tit {
+  margin-top: 20px;
+}
+.res_menu .res_menu_left .res_menu_content .menu_single .single_same .single_tit label {
+  font-size: 16px;
+  color: #333333;
+}
+.res_menu .res_menu_left .res_menu_content .menu_single .single_same .single_sales {
+  margin-top: 15px;
+  width: 100%;
+  color: #666;
+  height: auto;
+  display: inline-block;
+}
+.res_menu .res_menu_left .res_menu_content .menu_single .single_same .single_sales .img_score {
+  float: left;
+}
+.res_menu .res_menu_left .res_menu_content .menu_single .single_same .single_sales .shop_num {
+  float: right;
+  margin-right: 0px;
+}
+.res_menu .res_menu_left .res_menu_content .menu_single .single_same .single_sales .shop_num span {
+  color: #fa7c03;
+}
+.res_menu .res_menu_left .res_menu_content .menu_single .single_same .single_price {
+  margin-top: 25px;
+  height: 35px;
+  border-top: 1px solid #ccc;
+  line-height: 35px;
+}
+.res_menu .res_menu_left .res_menu_content .menu_single .single_same .single_price span {
+  float: left;
+  display: block;
+  margin-right: 30px;
+  color: #fa7c03;
+}
+.res_menu .res_menu_left .res_menu_content .menu_single .single_same .single_price .pic_car {
+  float: right;
+  width: 34px;
+  height: 34px;
+}
+/*单个菜品*/
+/*购物车*/
+ input {
+   outline: none;
+   border:none;
+   text-align: center;
+   border-radius: 2px;
+   margin: 0;
+ }
+ input:hover{
+  cursor: pointer;
+ }
+ ul{
+    list-style: none;
+    padding:0;
+    margin: 0;
+ }
+ ul li{
+    float:left;
+ }
+ img{
+   width:100%;
+}
+.shoppping_car{
+    float:right;
+    height:200px;
+}
+.car_shop{
+    height:auto;
+    position:relative;
+ }
+.car_shop .pic_bg{
+    position: absolute;
+    top:0;
+    left:160px;
+    height:84px;
+    width:74px
+}
+.click_car span{
+     display: block;
+	   float: left;
+}
+.click_car span:first-child{
+	   font-size: 14px;
+	   width:14px;
+	   height:42px;
+	   margin-top: 17px;
+	   margin-left: 42px;
+	   line-height: 14px;
+}
+.click_car span:nth-of-type(2){
+     font-size: 36px;
+     margin-left: 2px;
+     margin-top: 10px;
+}
+.car_cont{
+     margin-top: 84px;
+	   position: relative;
+	   float:left;
+     width:260px;
+     height:auto;
+     z-index: 19;
+     background: #fff;
+     border-top:3px solid #fa7c03;
+     box-shadow: 0 0 2px #aaa;
+     border-radius: 2px;
+}
+.car_cont .car_edit{
+    height:24px;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+.car_cont .car_edit label{
+   margin-left: 10px;
+   line-height: 24px;
+   font-size: 14px;
+   color:#666666;
+   float:left;
+}
+.car_cont .car_edit>span{
+   margin-left: 11px;
+   line-height: 24px;
+   font-size: 12px;
+   color:#fa7c03;
+   float:left;
+}
+.car_cont .car_edit .pic_car{
+   float:right;
+   margin-right: 7px;
+   margin-top: 2px;
+}
+.car_cont .car_edit>span:hover{
+  cursor:pointer;
+
+}
+/*结算*/
+.car_cont .edit_set{
+  display: inline-block;
+  width:100%;
+  height: 50px;
+  margin-bottom: -3px;
+}
+.car_cont .edit_set .pic_car{
+  width:100px;
+  background: #656766;
+  height:50px;
+
+}
+.car_cont .edit_set .pic_car img{
+	width:54px;
+  margin-top: 4px;
+  margin-left: 18px;
+
+}
+.car_cont .edit_set>div{
+  float:left;
+}
+.car_cont .edit_set input{
+  width:160px;
+  height:50px;
+  font-size: 16px;
+  color:#fff;
+  background: #fa7c03;
+  border-radius: 0;
+} 
+/*购物车主体内容*/
+.car_cont .ord_car{
+  width: 100%;
+  height:100px;
+  min-height: 50px;
+}
+.car_cont .ord_car .car_one{
+  margin: 10px 0;
+  width:100%;
+  height:36px;
+  display: inline-block;
+}
+.car_cont .ord_car .car_one>span:first-child{
+   float:left;
+   margin-left: 10px;
+   width:100px;
+   color:#666;
+}
+.car_cont .ord_car .car_one>span:last-child{
+   float:right;
+   margin-right: 10px;
+   color:#fa7c03;
+}
+.car_cont .ord_car .car_one>div{
+  margin-right: 25px;
+  margin-top: 2px;
+  float:left;
+}
+.car_cont .ord_car .car_one>div li{
+  width:16px;
+  height:16px;
+  border:1px solid #ccc;
+  text-align: center;
+  line-height: 16px;
+  color:#fa7c03;
+}
+.car_cont .ord_car .car_one>div li:nth-of-type(2){
+   width:32px;
+   font-size: 12px;
+   color:#666;
+}

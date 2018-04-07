@@ -24,14 +24,13 @@ ul li{
 /*头部*/
 .content header{
 	width:100%;
-	min-width: 1000px;
+	min-width: 1204px;
 	height:50px;
 	background: #fa7c03;
 }
 .content header .header-wrap{
 	height:100%;
-	width: calc(100% - 350px);
-	min-width: 1000px;
+	width: 1204px;
 	margin: 0 auto ;
 }
 .content header .header-wrap>div{
@@ -80,8 +79,8 @@ ul li{
 	background: #ef7e11;
 	cursor:pointer;
 }	
-.content header  .nav>ul>li:first-child{
-	background: #df6e0b;
+.content header  .nav>ul> .frist_show{
+		background: #df6e0b;
 }
 /*搜索框*/
 .content header .header-wrap .query_btn{
@@ -155,7 +154,7 @@ ul li{
 	box-shadow: 2px 2px 4px #aaa;
 	color:#333;
 	border-radius: 2px;
-	z-index:99;
+	z-index:199;
 	/*display: none;*/
 }
 .content header   .set_list .set_up::before{
@@ -216,7 +215,7 @@ footer ul{
     list-style: none;
 }    
 footer .footer-mid{
-    width: calc(100% - 120px);
+    width: 1204px;
     height: 200px;
     margin: 0px auto;
 }
@@ -303,12 +302,80 @@ footer .footer_bot{
 	text-align: center;
 }
 /*底部*/
+/*购物车   公告*/
+.click_car{
+    padding:0;
+    position: absolute;
+    float:left;
+    width:76px;
+    height: 76px;
+    background: #999;
+    border-radius:50%;
+    color:#fff;
+    left: 222px;
+    top: 165px;
+    z-index: 2;
+}
+.click_car:hover{
+  cursor: pointer;
+}
+.click_car span{
+     display: block;
+     float: left;
+}
+.click_car span:first-child{
+     font-size: 14px;
+     width:14px;
+     height:42px;
+     margin-top: 17px;
+     margin-left: 42px;
+     line-height: 14px;
+}
+.click_car span:nth-of-type(2){
+     font-size: 36px;
+     margin-left: 2px;
+     margin-top: 14px;
+}
+.notice_show{
+   position: absolute;
+   top: 70px;
+   right: 116px;
+   z-index: 99;
+}
+.notice_show .notice_pic{
+    float:left;
+    width: 58px;
+    height:58px;
+}
+.notice_show .notice_pic img{
+  width:100%;
+}
+.notice_show .notice_cont{
+  position: absolute;
+  top:20px;
+  left: 58px;
+  width:210px;
+  height:226px;
+  background: #fff;
+  border:1px solid #aaa;
+  box-shadow: 0 2px 2px rgba(78,69,69,0.5);
+  border-radius: 2px;
+}
+.notice_show  .notice_cont iframe{
+      height:230px;
+      width: 100%;
+      border:none;/*iframe的边框设置为没有*/    
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+}
+/*购物车   公告*/
 /*.......主体内容.......*/
 .content>section{
 	height:auto;
-	width: calc(100% - 350px);
-	margin-left:175px ;
-	background: #ccc;
+	width: 1204px;
+	margin-left:calc(50% - 602px);
+	background: #eeeeee;
 	display:inline-block;
 }
 iframe{
@@ -319,205 +386,12 @@ iframe{
 	margin: 0;
 	padding: 0;
 }
-.content>section .sec_loca {
-    width:100%;			
-	margin-top:15px;
-}
-.content>section .sec_loca span{
-          color:#666;
-}
-.content>section .sec_loca span:first-child{
-	margin-left:20px;
-}
-.content>section .sec_loca span:last-child{
-	color:#333;
-}
-.content>section .sec_loca .last_loca:hover{
-	color:#fa7c03;
-}
-/*店铺分类*/
-.content>section .sec_hotel_type{
-	margin-top: 10px;
-	width:100%;
-	background: #f5efea;
-	box-shadow: 1px 2px 2px #f5efea;
-	font-size: 16px;
-	color:#333;
-}
-.content>section .sec_hotel_type .type_tit{
-	float:left;
-	margin-left: 5px;
-	margin-top: 22px;
-	font-size:16px;
-}
-.content>section .sec_hotel_type .type_tit .img_list{
-    width:16px;
-    height:16px;
-    margin-left:5px;
-    margin-right:5px;
-    margin-top: 1px;
-    float:left;
-}
-.content>section .sec_hotel_type .type_tit .img_list img{
-	width:100%;
-	height:100%;
-	margin: 0;
-	padding: 0;
-}
-.content>section .sec_hotel_type .type_tit span{
-	height:18px;
-	width:18px;
-}
-.content>section .sec_hotel_type .type_tit label{
-    color:#333;
-}
-.content>section .sec_hotel_type .type_tit:hover{
-	color:#fa7c03;
-}
-/*具体分类*/
-.content>section .sec_hotel_type  .type_cont{
-	float:left;
-	width:85%;
-}
-.content>section .sec_hotel_type  .type_cont ul{
-	width:100%;
-	float: left;
-    margin-top: 16px;
-    height:54px;            
-    position: relative;
-    /*border:1px solid red;*/
-}
-.content>section .sec_hotel_type  .type_cont ul li{       	
-	width:12%;
-	height:50%;
-	margin-left: 10px;
-	line-height: 27px;
-	padding: 3px;
-	/*border:1px solid red;*/
-	text-align: left;
-}
-.content>section .sec_hotel_type  .type_cont ul .first_list{
-	 color:#fc7b03;
-	 cursor: pointer;
-}
-.content>section .sec_hotel_type  .type_cont ul li:hover{
-	 color:#fc7b03;
-	 cursor: pointer;
-}
-.content>section .sec_hotel_type  .type_cont ul li .img_list{
-    width:16px;
-    height:16px;
-    margin-left:5px;
-    margin-right:5px;
-    margin-top: 1px;
-    float:left;
-}
-.content>section .sec_hotel_type  .type_cont ul li .img_list img{
-	width:100%;
-	height:100%;
-	margin: 0;
-	padding: 0;
-}
-/*评价导航*/
-.content>section .sec_hotel_nav{
-    margin-top: 10px;
-	width:100%;
-	background: #f5efea;
-	box-shadow: 1px 2px 2px #f4efeb;
-	font-size: 14px;
-	color:#333;
-}
-.content>section .sec_hotel_nav ul li:first-child{
-    color:#fa7c03;
-   
-}
-.content>section .sec_hotel_nav ul li{
-	padding-left:20px;
-	margin-top: 13px;
-	padding-right: 20px;
-	height:14px;
-	line-height: 14px;
-	border-right:1px solid black;
-	border-size:18px;
-}
-.content>section .sec_hotel_nav ul li:last-child{
-	border-right:none;
-}
-.content>section .sec_hotel_nav ul li .img_list{
-    width:8px;
-    height:16px;
-    margin-left:3px;
-    margin-right:3px;
-    float: right;
-}
-.content>section .sec_hotel_nav  ul li .img_list img{
-	width:100%;
-	height:100%;
-	margin: 0;
-	padding: 0;
-}
-/*店铺矩形及全部内容.sec_hotel_content */
-.content>section .sec_hotel_content{
-	height:600px;
-	width:100%;
-	margin-top: 10px;
-	background: #f5efea;
-	/*border:1px solid red;*/
-	box-shadow: 1px 2px 2px #f5efea;
-}
-/*.cont_shop 每个店铺*/
-.content>section .sec_hotel_content .cont_shop{
-    width:220px;
-    height:260px;
-    background: #f6f2ef;
-    float: left;
-    margin-left: calc(20% - 176px);
-    boeder:1px solid #ccc;
-    box-shadow: 1px 2px 6px #ccc;
-    border-radius:2px;
-    margin-top: 10px;
-    font-size: 12px;
-    color:#666;
-}
-.content>section .sec_hotel_content .cont_shop .img_shop{
-	width:210px;
-	height:158px;
-	margin: 5px;
-	/*border:1px solid red;*/
-}
-.content>section .sec_hotel_content .cont_shop .img_shop img{
-	width:100%;
-}
-.content>section .sec_hotel_content .cont_shop .shop_same{
-	margin-top: 10px;
-	margin-left: 10px;
-}
-.content>section .sec_hotel_content .cont_shop .shop_title{
-	font-size: 18px;
-	color:#333;
-}
-/*起送，配送，距离时间*/
-.content>section .sec_hotel_content .cont_shop  .shop_bot{
-    width:100%;
-}
-.content>section .sec_hotel_content .cont_shop  .shop_bot ul{
-    width:calc(100% - 20px);
-    height:16px;
-    /*border:1px solid red;*/
-}
-.content>section .sec_hotel_content .cont_shop  .shop_bot ul li{
-	width:33%;
-	height:100%;
-	text-align: center;
-}
-/*店铺矩形及全部内容.sec_hotel_content */
-      /*.......主体内容.......*/
-      /*.......右侧导航.......*/
+/*.......右侧导航.......*/
 .content .sec_right{
 	height:180px;
 	width:60px;			
 	position: absolute;
-	right:58px;
+	right:14px;
 	bottom:240px;
 }
 .content .sec_right .img_sec{
