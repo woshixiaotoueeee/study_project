@@ -87,6 +87,7 @@
 		where 
 			restaurant.restaurant_delete_or_not=1
 			and restaurant.restaurant_city_id=#{cityId}
+		limit 5
 	</select>
 	
 	<!--根据店名及城市识别码查询店家信息-->
