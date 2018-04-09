@@ -1,5 +1,6 @@
 var map;//百度地图对象
 var _location=new Object();
+var provinceList=[];
 window.onload = function (){
 	// 百度地图API功能
 	map = new BMap.Map("allmap");//初始化地图
@@ -66,39 +67,105 @@ window.onload = function (){
 				},"JSON")
 			 .error(
 					 function(data) {
-						alert('erro'); 
+						 layer.msg('未知错误请刷新页面或联系管理员', {time:2500}); 
 			});			
 	})
 	//商家的省份，城市联动    运用了ajax连接后台数据
 	var posiData=$.post(
 					projectDirectory+"/ProvinceController/getAllProvince",					
 					function(positionData){	
-						//省份数据
-						for(i in positionData){ //i为 省份的下标
-					       //添加省份数据，option的value值为省份数据的id 
-					        $('#province ').append('<option value="'+positionData[i].provinceId+'">'+positionData[i].provinceName+'</option>'); 					        
-					    }
-						//positionData[i].cityList[0].cityName
-						//城市随省份联动  通过id相关联
-						$('#province').change(function(){							
-					       for(i in positionData){
-					            if(positionData[i].provinceId==$(this).val()){
-					            	 $('#cityList').html('');	
-					            	for(j in positionData[i].cityList){	//城市city	           		 		                         
-							             $('#cityList').append('<option>'+positionData[i].cityList[j].cityName+'</option>');
-					            	}					            						                            
-					            }
-					        }
-						})
+						provinceList=positionData.responseInfo;
+						setProvienceTohtml(provinceList);
 						
 				},"JSON")
 			 .error(
 					 function(posiData) {
-						alert('erro'); 
+						 layer.msg('未知错误请刷新页面或联系管理员', {time:2500}); 
 			});		
 
 	
 };
+
+/**将省市信息放入联动菜单*/
+function setProvienceTohtml(_provinceList){
+	$('#province').html('');
+	//省份数据
+	for(i in _provinceList){ //i为 省份的下标
+       //添加省份数据，option的value值为省份数据的id 
+			
+        $('#province').append('<option value="'+_provinceList[i].provinceId+'">'+_provinceList[i].provinceName+'</option>'); 					        
+    }
+	
+	//positionData[i].cityList[0].cityName
+	//城市随省份联动  通过id相关联
+	$('#province').change(function(){	
+		changeprovince($(this).val());
+	})
+	
+	function changeprovince(val){
+		
+		for(i in provinceList){
+            if(provinceList[i].provinceId==val){
+            	$('#cityList').html('');	
+            	for(j in provinceList[i].cityList){	//城市city	           		 		                         
+		             $('#cityList').append('<option value="'+provinceList[i].cityList[j].cityId+'">'+provinceList[i].cityList[j].cityName+'</option>');
+            	}			            						                            
+            }
+        }
+		var citylist=$('#cityList')[0];
+		changeCity($('#cityList').val(),citylist.options[citylist.selectedIndex].text);
+	}
+	//城市随省份联动  通过id相关联
+	$('#cityList').change(function(){
+		changeCity($(this).val(),this.selectedOptions[0].innerText);
+	})
+	
+	changeprovince($('#province').val());
+	function changeCity(cityId,cityName){
+		getRestaurant(cityId);
+		map.centerAndZoom(cityName,15);
+	}
+	
+}
+
+function getRestaurant(cityId){
+	$.ajax({
+		   type: "post",
+		   data:{"cityId":cityId},
+		   url:Common.getRestaurantCityId,
+		   dataType: "json",
+		   success:function(data){
+			   if(data.state==1){
+				   loadRestaurantData(data.responseInfo);
+			   }
+			   else{
+				   layer.msg(data.responseInfo, {time:2500});
+			   }
+		   },
+		   error:function(errordate){
+			   layer.msg('未知错误请刷新页面或联系管理员', {time:2500});
+		   }
+		})
+}
+
+function loadRestaurantData(restaurantList){
+	var storyDiv=$('.nearby_store');
+	storyDiv.html('');
+	var resHtml=''
+	for(var i=0;i<restaurantList.length;i++){
+		resHtml+="<div class='store_one'>" +
+				"<div class='img_shop'><img src='../"+restaurantList[i].restaurantImage +"'></div>" +
+				"<div class='shop_same shop_title'>"+restaurantList[i].restaurantName+"</div>" +
+				" <div class='shop_same shop_cont'><div class='bg_img'>****</div>" +
+				"<div class='mon_sales'>共出售<span>"+restaurantList[i].orderCount+"份</span></div></div>" +
+				"<div class='shop_same shop_bot' >" +
+				"<ul><li> 起送：<span>"+restaurantList[i].restaurantOfferPrice+"￥</span></li><li> 配送费：<span>"+restaurantList[i].restaurantDeliveryFee+"￥</span></li><li> <span>"+(restaurantList[i].restaurantDistance/1000).toFixed(2)+"km</span></li>" +
+				"</ul></div></div>";
+	}
+	storyDiv.html(resHtml);
+}
+
+
 
 
 //自动定位
@@ -151,11 +218,17 @@ function Loction(_location){
 			projectDirectory+"/LocationController/setLocation",
 			_location,
 			function(data){
-				alert(data);
-		})
+				if(data.state==1){
+					top.location.href=projectDirectory+"/customer/index.html";
+				}else{
+					layer.msg(data.responseInfo, {time:2500});
+				}
+				
+				
+		},"JSON")
 	 .error(
 			 function(data) {
-				alert('erro'); 
+				 layer.msg('未知错误请刷新页面或联系管理员', {time:2500});
 	});	
 }	
 
