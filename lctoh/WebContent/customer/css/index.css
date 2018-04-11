@@ -339,7 +339,7 @@ footer .footer_bot{
 .notice_show{
    position: absolute;
    top: 70px;
-   right: 116px;
+   right: 294px;
    z-index: 99;
 }
 .notice_show .notice_pic{
@@ -376,9 +376,9 @@ footer .footer_bot{
 	width: 1204px;
 	margin-left:calc(50% - 602px);
 	background: #eeeeee;
-	display:inline-block;
+	display:inline-block;	
 }
-iframe{
+section iframe{
 	height:900px;
 	width: 100%;
 	border:none; /*iframe的边框设置为没有*/		
