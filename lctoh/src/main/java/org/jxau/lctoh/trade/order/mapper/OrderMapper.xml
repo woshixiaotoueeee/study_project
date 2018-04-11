@@ -74,7 +74,7 @@
 			orders.order_price=#{orderPrice},
 			orders.order_update_tiame=#{orderUpdateTiame},
 			orders.order_delivery_time=#{orderDeliveryTime},
-			orders.order_state_id=#{orderState.sateId},
+			orders.order_state_id=#{orderState.stateId},
 			orders.order_customer_id=#{orderCustomer.customerId},
 			orders.order_restaurant_id=#{orderRestaurant.restaurantId}
 		where
@@ -99,7 +99,7 @@
 			#{orderPrice},
 			#{orderUpdateTiame},
 			#{orderDeliveryTime},
-			#{orderState.sateId},
+			#{orderState.stateId},
 			#{orderCustomer.customerId},
 			#{orderRestaurant.restaurantId}
 		)

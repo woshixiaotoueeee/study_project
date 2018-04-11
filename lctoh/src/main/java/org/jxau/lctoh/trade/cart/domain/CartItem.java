@@ -62,7 +62,7 @@ public class CartItem {
 	 */
 	public OrderItem toOrderItem(Order order){
 		OrderItem orderItem=new OrderItem();
-		orderItem.setOrderItemid(Tools.getRandomString(32));
+		orderItem.setOrderItemId(Tools.getRandomString(32));
 		orderItem.setOrderItemSum(subtotal);
 		orderItem.setOrderItemCount(dishCount);
 		orderItem.setOrderItemDish(dish);

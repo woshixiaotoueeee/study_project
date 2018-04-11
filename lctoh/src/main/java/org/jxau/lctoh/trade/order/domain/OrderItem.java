@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderItem {
 	/**订单条目ID*/
-	private String orderItemid;
+	private String orderItemId;
 	/**条目小计*/
 	private BigDecimal orderItemSum;
 	/**条目中商品数量*/
@@ -34,11 +34,12 @@ public class OrderItem {
 	private Order orderItemOrder;
 	/**最近更新时间*/
 	private Date orderItemUpdateTime;
-	public String getOrderItemid() {
-		return orderItemid;
+	
+	public String getOrderItemId() {
+		return orderItemId;
 	}
-	public void setOrderItemid(String orderItemid) {
-		this.orderItemid = orderItemid;
+	public void setOrderItemId(String orderItemId) {
+		this.orderItemId = orderItemId;
 	}
 	public BigDecimal getOrderItemSum() {
 		return orderItemSum;
@@ -73,7 +74,7 @@ public class OrderItem {
 	
 	@Override
 	public String toString() {
-		return "OrderItem [orderItemid=" + orderItemid + ", orderItemSum="
+		return "OrderItem [orderItemid=" + orderItemId + ", orderItemSum="
 				+ orderItemSum + ", orderItemCount=" + orderItemCount
 				+ ", orderItemDish=" + orderItemDish + ", orderItemOrder="
 				+ orderItemOrder + ", orderItemUpdateTime="

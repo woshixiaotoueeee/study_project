@@ -6,7 +6,7 @@
 <mapper namespace="org.jxau.lctoh.trade.order.mapper.OrderItemMapper">
 	<!-- 数据库表与实体类相对应的resultMap -->
 	<resultMap type="OrderItem" id="OrderItemResultMap">
-	    <id property="orderItemid" column="order_item_id"/>
+	    <id property="orderItemId" column="order_item_id"/>
 	    <result property="orderItemSum" column="order_item_sum"/>
 		<result property="orderItemCount" column="order_item_count"/>
 		<result property="orderItemUpdateTime" column="order_item_update_time"/>
@@ -84,7 +84,7 @@
 	</insert>
 	
 	<!--添加订单条目-->
-	<insert id="addOrderItemList" parameterType="OrderItem">
+	<insert id="addOrderItemList" parameterType="java.util.List">
 		insert into order_item(
 			order_item.order_item_id,
 			order_item.order_item_sum,
@@ -96,18 +96,15 @@
 			
 		<foreach collection="list" item="item" index="index" separator="union all">
 			select
-			#{orderItemId},
-			#{orderItemSum},
-			#{orderItemCount},
-			#{orderItemOrder.orderId},
-			#{orderItemDish.dishId},
-			#{orderItemUpdateTime}
+			#{item.orderItemId},
+			#{item.orderItemSum},
+			#{item.orderItemCount},
+			#{item.orderItemOrder.orderId},
+			#{item.orderItemDish.dishId},
+			#{item.orderItemUpdateTime}
 			from dual
 		</foreach>
 	</insert>
-	
-	
-	
 	<!--根据订单条目识别码查询订单-->
 	<select id="getSalesVolume" parameterType="String" resultType="Integer">
 		select

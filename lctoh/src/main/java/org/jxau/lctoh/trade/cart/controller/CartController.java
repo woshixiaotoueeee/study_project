@@ -10,6 +10,7 @@ import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
 import org.jxau.lctoh.trade.cart.domain.Cart;
 import org.jxau.lctoh.trade.cart.exception.CartException;
 import org.jxau.lctoh.trade.cart.service.CartService;
+import org.jxau.lctoh.trade.order.service.OrderService;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class CartController extends BaseController{
 	@Autowired
 	private CartService cartService;
-	
+	@Autowired
+	private OrderService orderService;
 	/**
 	 * 获取session中的购物车
 	 * @param session
@@ -215,8 +217,8 @@ public class CartController extends BaseController{
 			if(orderCustomer==null){
 				responseData.failInfo(ErrorMSG.loginTimerOut);
 			}else{
-				
-				responseData.successInfo(cartService.putCartToOrder(cart, orderCustomer));
+				String id=cartService.putCartToOrder(cart, orderCustomer);
+				responseData.successInfo(orderService.findOrderByOrderId(id));
 			}
 		} catch (CartException e) {
 			e.printStackTrace();

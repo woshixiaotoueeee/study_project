@@ -6,7 +6,10 @@ import java.util.List;
 import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQureyModel;
 import org.jxau.lctoh.datastatistics.orderstatistics.mapper.OrderStatisticsMapper;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
+import org.jxau.lctoh.trade.dish.domain.Dish;
+import org.jxau.lctoh.trade.dish.domain.DishCategory;
 import org.jxau.lctoh.trade.dish.mapper.DishCategoryMapper;
+import org.jxau.lctoh.trade.dish.mapper.DishMapper;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.jxau.lctoh.user.restaurant.domain.RestaurantWebModel;
 import org.jxau.lctoh.user.restaurant.mapper.RestaurantMapper;
@@ -21,6 +24,16 @@ public class RestaurantDao extends BaseDao {
 	private RestaurantMapper restaurantMapper;
 	@Autowired
 	private DishCategoryMapper dishCategoryMapper;
+	@Autowired
+	private DishMapper dishMapper;
+	public DishMapper getDishMapper() {
+		return dishMapper;
+	}
+	public void setDishMapper(DishMapper dishMapper) {
+		this.dishMapper = dishMapper;
+	}
+
+
 	@Autowired
 	private OrderStatisticsMapper orderStatisticsMapper;
 	public OrderStatisticsMapper getOrderStatisticsMapper() {
@@ -43,6 +56,7 @@ public class RestaurantDao extends BaseDao {
 	}
 	@Override
 	public void puttMapper() {
+		dishMapper = this.getMapper(DishMapper.class);
 		restaurantMapper=this.getMapper(RestaurantMapper.class);
 		dishCategoryMapper=this.getMapper(DishCategoryMapper.class);
 		orderStatisticsMapper=this.getMapper(OrderStatisticsMapper.class);
@@ -66,8 +80,22 @@ public class RestaurantDao extends BaseDao {
 	 * @return
 	 */
 	private Restaurant loadRestaurantDishCategory(Restaurant restaurant) {
-		restaurant.setDishCategory(dishCategoryMapper.findDishCategoryByRestaurantId(restaurant.getRestaurantId()));
+		List<DishCategory> dishCategoryList=dishCategoryMapper.findDishCategoryByRestaurantId(restaurant.getRestaurantId());
+		restaurant.setDishCategory(loadDishCategoryListDish(dishCategoryList));
 		return restaurant;
+	}
+	
+	private List<DishCategory> loadDishCategoryListDish(
+			List<DishCategory> dishCategoryList) {
+		for(int i=0;i<dishCategoryList.size();i++){
+			dishCategoryList.set(i, loadDishCategoryListDish(dishCategoryList.get(i)));
+		}
+		return dishCategoryList;
+	}
+	private DishCategory loadDishCategoryListDish(DishCategory dishCategory) {
+		List<Dish> dishList=dishMapper.findDishByDishCategoryId(dishCategory.getDishCategoryId());
+		dishCategory.setDishList(dishList);
+		return dishCategory;
 	}
 	/**
 	 * 加载多个店家的菜肴分类信息
