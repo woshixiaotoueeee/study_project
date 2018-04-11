@@ -82,8 +82,8 @@ ul li{
 }
 .contain_left .nearby_store{
 	margin-top:16px;
+	overflow-y:scroll;
 }
-
 /*..store_one  单个店家*/
 .contain_left .nearby_store .store_one {
 	margin-bottom:10px;
