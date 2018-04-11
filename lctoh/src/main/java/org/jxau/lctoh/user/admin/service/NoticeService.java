@@ -28,7 +28,7 @@ public class NoticeService {
 	 * @param stateId
 	 * @return
 	 */
-	public Notice findNoticeByStateId(Integer stateId){
+	public List<Notice> findNoticeByStateId(Integer stateId){
 		return noticeDao.findNoticeByStateId(stateId);
 	}
 	/**

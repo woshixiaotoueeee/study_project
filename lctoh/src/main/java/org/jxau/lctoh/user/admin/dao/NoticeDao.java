@@ -41,7 +41,7 @@ public class NoticeDao extends BaseDao {
 	 * @param stateId
 	 * @return
 	 */
-	public Notice findNoticeByStateId(Integer stateId){
+	public List<Notice> findNoticeByStateId(Integer stateId){
 		return noticeMapper.findNoticeByStateId(stateId);
 	}
 	/**

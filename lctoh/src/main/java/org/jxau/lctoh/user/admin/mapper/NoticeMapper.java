@@ -21,7 +21,7 @@ public interface NoticeMapper {
 	 * @param stateId
 	 * @return
 	 */
-	public Notice findNoticeByStateId(@Param("stateId")Integer stateId);
+	public List<Notice> findNoticeByStateId(@Param("stateId")Integer stateId);
 	/**
 	 * 查询所有公告信息
 	 * @return

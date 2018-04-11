@@ -108,7 +108,7 @@ public class CartService {
 	 * @throws CartException
 	 */
 	@Transactional(rollbackFor = Exception.class)
-	public Order  putCartToOrder(Cart cart,Customer orderCustomer ) throws CartException{
+	public String  putCartToOrder(Cart cart,Customer orderCustomer ) throws CartException{
 		
 		Order order=cart.toOrder(orderCustomer);
 		
@@ -129,7 +129,8 @@ public class CartService {
 		//harvestAddressDao.addHarvestAddress(order.getOrderHarvestAddress());
 		orderItemDao.addOrderItemList(order.getOrderItemList());
 		dispatchingDao.addDispatching(dispatching);
-		return order;
+		
+		return order.getOrderId();
 	}
 	
 	
