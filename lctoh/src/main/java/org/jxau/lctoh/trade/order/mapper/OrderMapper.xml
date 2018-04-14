@@ -8,7 +8,7 @@
 	<resultMap type="Order" id="OrderResultMap">
 	    <id property="orderId" column="order_id"/>
 	    <result property="orderCreatTime" column="order_creat_time"/>
-		<result property="order_price" column="orderPrice"/>
+		<result property="orderPrice" column="order_price"/>
 		<result property="orderUpdateTiame" column="order_update_tiame"/>
 		<result property="orderDeliveryTime" column="order_delivery_time"/>
 		<association property="orderState" column="order_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
