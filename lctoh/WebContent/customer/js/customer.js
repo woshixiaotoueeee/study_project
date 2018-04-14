@@ -36,7 +36,8 @@ function loadRestaurantHtml(){
    function changePage(){
 		   /*点击地址进入店家详情*/
 	   $('.cont_shop').click(function(){
-		   var str='<iframe src="./storeCenter.html" name="iframe_a" scrolling="no"></iframe>';
+		   var rtid=$(this).attr("value");
+		   var str='<iframe src="./storeCenter.html?rtid='+rtid+'" name="iframe_a" scrolling="no"></iframe>';
 		   $('#section_change').html(str); 
 		   $('footer').css('margin-top','-5px'); 
 	   })
@@ -49,7 +50,7 @@ function loadRestaurantHtml(){
    /*点击地址进入店家详情*/
    changePage();
    /* 点击店家分类获取店家的接口   （参数  城市 city 店家分类id ）*/
-   $('#all_shop').click(function(){
+  /* $('#all_shop').click(function(){
 	   $.ajax({
 		   type: "post",
 		   url:Common.getRestaurant,
@@ -67,7 +68,7 @@ function loadRestaurantHtml(){
 			   alert('未知错误请联系管理员');
 		   }
 	   }) 
-   })  
+   })  */
    /* /UserController/loginbasic 登录地址*/
 }
  

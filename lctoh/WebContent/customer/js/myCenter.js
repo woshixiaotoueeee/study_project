@@ -1,15 +1,15 @@
 var customer=null;
 var addressList=null;
-
+var orderList=null;
 var map = new BMap.Map();//初始化地图
 $(function(){
 	init();
 	
 })
 function init(){
-	getRestaurantCategoryData();
+	getLoginInfo();
 	getAddressData(customer);
-	setAddressListToHtml(addressList);
+	queryOrder(1);
 	initHtml(customer);
 	setCustomerToHtml(customer);
 }
@@ -43,12 +43,17 @@ function initHtml(_customer){
    })
    /*点击显示订单详情*/
    $('.my_order .ord_click input').click(function(){
-	    order_detail();
+	    order_detail( $(this).attr('id'));
    })
    /*订单统计过程线图*/
    order_graph();
    /*个人中心 我的收藏 我的订单 我的订单切换*/ 
    my_center_list();
+   
+   $('.query').click(function(){
+	   queryOrder( $(this).attr('value'));
+  })
+   
 }
   /*编辑头像*/
 function edit_portrait(_customer) {
@@ -96,7 +101,7 @@ function edit_portrait(_customer) {
 	         success: function (returndata) {  
 	        	 layer.msg(returndata.responseInfo, {time:2500});
 	        	 layer.close(layerIndex);
-	        	 getRestaurantCategoryData();
+	        	 getLoginInfo();
 	        	 setCustomerToHtml(customer);
 	        	 
 	         },  
@@ -189,7 +194,7 @@ function edit_name_eail(_customer){
 	         success: function (returndata) {  
 	        	 layer.msg(returndata.responseInfo, {time:2500});
 	        	 layer.close(layerIndex);
-	        	 getRestaurantCategoryData();
+	        	 getLoginInfo();
 	        	 setCustomerToHtml(customer);
 	         },  
 	         error: function (returndata) {  
@@ -246,7 +251,7 @@ function edit_password(_customer){
 		         success: function (returndata) {  
 		        	 layer.msg(returndata.responseInfo, {time:2500});
 		        	 layer.close(layerIndex);
-		        	 getRestaurantCategoryData();
+		        	 getLoginInfo();
 		        	 setCustomerToHtml(customer);
 		         },  
 		         error: function (returndata) {  
@@ -387,8 +392,8 @@ function delete_address(_this){
 	 });
 }
 /*订单详情*/
-function order_detail(){
-	 var str='./orderDetail.html';
+function order_detail(orderId){
+	 var str='./orderDetail.html?orderId='+orderId;
      layer.open({
 		  title: ['订单详情', 'font-size:18px;'],
 		  type: 2,
@@ -447,7 +452,7 @@ function center_tabs(_this){
 /**
  * 获取客户信息
  * */
-function getRestaurantCategoryData(){
+function getLoginInfo(){
 	$.ajax({
 	   type: "post",
 	   url:Common.getLoginInfo,
@@ -474,12 +479,13 @@ function getAddressData(_customer){
 	$.ajax({
 	   type: "post",
 	   url:Common.findAddressByCustomerId,
-	   async: false,
+	  // async: false,
 	   data: {'customerId':_customer.customerId}, 
 	   dataType: "json",
 	   success:function(data){
 		   if(data.state==1){
 			   addressList=data.responseInfo;
+			   setAddressListToHtml(addressList);
 		   }
 		   else{
 			   layer.msg(data.responseInfo, {time:2500});
@@ -490,6 +496,64 @@ function getAddressData(_customer){
 	   }
 	})
 }
+//查询
+function queryOrder(type){
+	
+	var querydata={};
+	var stm,etm;
+	var nowdate=new Date();
+	etm=dateFtt("yyyy-MM-dd hh:mm:ss",nowdate);
+	if(type==1){
+		stm=dateFtt("yyyy-MM-dd hh:mm:ss",new Date(nowdate.toLocaleDateString()));
+	}else if(type==2){
+		var timerLong=nowdate.getTime;
+		timerLong=timerLong-1000*60*60*24*30;
+		stm=dateFtt("yyyy-MM-dd hh:mm:ss",new Date(timerLong));
+	}else if(type==3){
+		var timerLong=nowdate.getTime;
+		timerLong=timerLong-1000*60*60*24*30*3;
+		stm=dateFtt("yyyy-MM-dd hh:mm:ss",new Date(timerLong));
+	}
+	querydata.stm=stm;
+	querydata.etm=etm;
+	querydata.customerId=customer.customerId;
+	
+	getOrderData(querydata);
+	
+}
+
+
+
+
+
+
+
+/**
+ * 获取客户订单信息
+ * */
+function getOrderData(querydata){
+	$.ajax({
+	   type: "post",
+	   url:Common.findOrder,
+	  // async: false,
+	   data:querydata, 
+	   dataType: "json",
+	   success:function(data){
+		   if(data.state==1){
+			   orderList=data.responseInfo;
+			   setOrderListToHtml(orderList);
+		   }
+		   else{
+			   layer.msg(data.responseInfo, {time:2500});
+		   }
+	   },
+	   error:function(errordate){
+		   layer.msg('未知错误请刷新页面或联系管理员', {time:2500});
+	   }
+	})
+}
+
+
 /**
  * 设置客户信息
  * */
@@ -519,3 +583,76 @@ function setAddressListToHtml(_addressList){
 	
 	
 }
+
+
+/**
+ * 设置订单信息
+ * */
+function setOrderListToHtml(_orderList){
+	if(_orderList==null)return;
+	var orderHtml='';
+	
+	
+	$(".order_detaile").html('');
+	
+	
+	for(var i=0;i<_orderList.length;i++){
+		if(i==0){
+			orderHtml+="<div class='order_one' ><div class='ord_time'><div class='time_show'>" +
+			"<span>"+getDate(_orderList[i].orderCreatTime)+"</span><span>"+getTime(_orderList[i].orderCreatTime)+"</span></div></div>" +
+			"<div class='pic_img'></div><div class='border_bot'><div class='ord_cont'>" +
+			"<div class='ord_title'>"+_orderList[i].orderRestaurant.restaurantName+"</div><div class='ord_inf'>尖椒肉丝盖浇饭1份 等3个菜品</div>" +
+			"<div class='ord_number'><span>订单号：</span><span>"+_orderList[i].orderId+"</span></div>  </div><div class='ord_state'> " +
+			"<span>"+_orderList[i].orderState.stateInfo+"</span> </div><div class='ord_money'> <span>"+_orderList[i].orderPrice+"元</span>" +
+			"<span>在线支付</span></div><div class='ord_click' ><input class='first_ord order_button' id='"+_orderList[i].orderId+"' type='butto' name='' value='订单详情'></div></div></div>";
+		}
+		else{
+			orderHtml+="<div class='order_one' ><div class='ord_time'><div class='time_show'>" +
+			"<span>"+getDate(_orderList[i].orderCreatTime)+"</span><span>"+getTime(_orderList[i].orderCreatTime)+"</span></div></div>" +
+			"<div class='pic_img'></div><div class='border_bot'><div class='ord_cont'>" +
+			"<div class='ord_title'>"+_orderList[i].orderRestaurant.restaurantName+"</div><div class='ord_inf'>尖椒肉丝盖浇饭1份 等3个菜品</div>" +
+			"<div class='ord_number'><span>订单号：</span><span>"+_orderList[i].orderId+"</span></div>  </div><div class='ord_state'> " +
+			"<span>"+_orderList[i].orderState.stateInfo+"</span> </div><div class='ord_money'> <span>"+_orderList[i].orderPrice+"元</span>" +
+			"<span>在线支付</span></div><div class='ord_click' ><input class='order_button' id='"+_orderList[i].orderId+"' type='butto' name='' value='订单详情'></div></div></div>";
+		}
+		
+	}
+	$(".order_detaile").html(orderHtml);
+	initHtml(customer);
+}
+//格式化日期
+function getDate(dateTime){
+	var date=new Date(dateTime);
+	
+	return date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate();
+}
+function getTime(dateTime){
+	var date=new Date(dateTime);
+	return date.getHours()+':'+date.getMinutes();
+}
+//格式化时间：2011-12-31 00:00:00
+function getDateTime(dateTime){
+	
+	return date.getFullYear()+'/'+date.getMonth()+'/'+date.getDate();
+}
+
+
+
+function dateFtt(fmt,date)   
+{ //author: meizz   
+  var o = {   
+    "M+" : date.getMonth()+1,                 //月份   
+    "d+" : date.getDate(),                    //日   
+    "h+" : date.getHours(),                   //小时   
+    "m+" : date.getMinutes(),                 //分   
+    "s+" : date.getSeconds(),                 //秒   
+    "q+" : Math.floor((date.getMonth()+3)/3), //季度   
+    "S"  : date.getMilliseconds()             //毫秒   
+  };   
+  if(/(y+)/.test(fmt))   
+    fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));   
+  for(var k in o)   
+    if(new RegExp("("+ k +")").test(fmt))   
+  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
+  return fmt;   
+} 
