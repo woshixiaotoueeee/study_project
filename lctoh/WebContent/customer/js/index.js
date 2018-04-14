@@ -94,28 +94,6 @@ function loadRestaurantHtml(){
 	    $('footer').css('margin-top','-5px');    
    }
 	changePage();
-   /* 点击店家分类获取店家的接口   （参数  城市 city 店家分类id ）*/
-   $('#all_shop').click(function(){
-	   $.ajax({
-		   type: "post",
-		   url:Common.getRestaurant,
-		   dataType: "json",
-		   success:function(data){
-			   if(data.state==1){
-				   alert(99);
-				   alert(data);
-			   }
-			   else{
-				   alert('访问后台失败');
-			   }
-	        
-		   },
-		   error:function(errordate){
-			   alert('未知错误请联系管理员');
-		   }
-	   }) 
-   })  
-   /* /UserController/loginbasic*/
 }
  
  

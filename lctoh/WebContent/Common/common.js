@@ -19,8 +19,32 @@ Common.updatePasswordByUserId=projectDirectory+'/UserController/updatePasswordBy
 Common.updateCustomer=projectDirectory+'/CustomerController/updateCustomer';
 //获取地址信息
 Common.findAddressByCustomerId=projectDirectory+'/AddressController/findAddressByCustomerId';
+//获取根据城市ID获取店家信息
+Common.getRestaurantCityId=projectDirectory+'/RestaurantController/getRestaurantCityId';
+//获取定位信息
+Common.getLocation=projectDirectory+'/LocationController/getLocation';
+//获取系统公告
+Common.findNoticeByStateId=projectDirectory+'/NoticeController/findNoticeByStateId';
+//获取店家信息
+Common.getRestaurantByRestaurantId=projectDirectory+'/RestaurantController/getRestaurantByRestaurantId';
+//添加菜肴至购物车
+Common.addDishCart=projectDirectory+'/CartController/addDishCart';
+//查询订单
+Common.findOrder=projectDirectory+'/OrderController/findOrder';
+//查询订单(id)
+Common.findOrderByOrderId=projectDirectory+'/OrderController/findOrderByOrderId';
+//获取地址栏参数
+function GetQueryString(name)
+{
+	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	var r = window.location.search.substr(1).match(reg);
+	if(r!=null)return  unescape(r[2]); return null;
+}
 
-testsql();
+
+var timeid = window.setInterval(function(){ 
+	testsql();
+},100000);
 function testsql(){
 	$.ajax({
 		   type: "post",
@@ -29,7 +53,7 @@ function testsql(){
 		   dataType: "json",
 		   success:function(data){
 			   
-			   setTimeout(testsql,90000);
+			   
 		   },
 		   error:function(errordate){
 			   layer.msg('未知错误请刷新页面或联系管理员', {time:2500});

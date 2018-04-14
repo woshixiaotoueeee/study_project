@@ -3,15 +3,17 @@
 <head>
 	<title>订单详情</title>
 	<link rel="stylesheet" type="text/css" href="./css/orderDetail.css">
+	<script src="http://127.0.0.1/lctoh/Common/jquery-1.8.3.js"></script>
+	<script src="http://127.0.0.1/lctoh/Common/common.js"></script>
 </head>
 <body>
    <div class='orderDetail'>
       <div class='banner'>
           <div class='ban_img'>
-              <div style='display:none;'><img src="./images/my_order/pnding_order.png"></div>
-	          <div style='display:block;'><img src="./images/my_order/rider_com.png"></div>
-	          <div style='display:none;'><img src="./images/my_order/haste_eat.png"></div>
-	          <div style='display:none;'><img src="./images/my_order/order_cancel.png"></div>
+              <div id='100002' style='display:none;'><img src="./images/my_order/pnding_order.png"></div>
+	          <div id='100003' style='display:block;'><img src="./images/my_order/rider_com.png"></div>
+	          <div id='100004' style='display:none;'><img src="./images/my_order/haste_eat.png"></div>
+	          <div id='100005' style='display:none;'><img src="./images/my_order/order_cancel.png"></div>
           </div>
           <div>
              <ol>
@@ -46,11 +48,11 @@
               <div class='order_num'>
                  <div class='number_one'>
                      <span>订单号：</span>
-                     <span>12232345</span>
+                     <span class='orderId'>12232345</span>
                  </div>
                  <div class='phone_st'>
                      <span>商家联系电话：</span>
-                     <span>010-1235&nbsp;/&nbsp;12434534444</span>
+                     <span class='phone_restaurant'>010-1235&nbsp;/&nbsp;12434534444</span>
                  </div>
               </div>
           </div>
@@ -59,7 +61,7 @@
           <div class='my_dish'>
               <div class='cont_infor'>
                  <label>我的菜单</label>
-                 <div class='detail_cont'>
+                 <div class='detail_cont detail_cont_1'>
                      <div class='order_entry  order_title'>
                          <div class='ord_dishes'>菜品</div>
                          <div class='ord_num'>数量</div>
@@ -89,7 +91,7 @@
                      <div class='order_entry'></div>
                  </div>
                  <div class='total'>
-                     <span>总计<mask>58</mask>元</span>
+                     <span>总计<mask class='orderdetail'>58</mask>元</span>
                  </div>
               </div>
           </div>
@@ -118,4 +120,5 @@
       </div>
    </div>
 </body>
+<script type="text/javascript" src='./js/orderDetail.js'></script>
 </html>
