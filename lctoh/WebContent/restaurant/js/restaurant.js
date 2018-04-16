@@ -1,13 +1,25 @@
 $(function(){
 	 /*初始化数据*/
 	 init();
-	 /*统计饼图*/
-	 pie_chart();
+	
 })
 /*
  * 初始化数据
  * */
 function init(){
+	edit_notice();      //修改公告代码
+	load_data();        //获取加载数据（订单数据和今日总览）
+	edit_address();      //切换地址
+    /*统计饼图*/
+	pie_chart();
+}
+function  edit_notice(){ //修改公告代码
+	 
+}
+function load_data(){   //获取加载数据（订单数据和今日总览）
+	
+}
+function edit_address(){  //切换地址
 	
 }
 function  pie_chart(){
