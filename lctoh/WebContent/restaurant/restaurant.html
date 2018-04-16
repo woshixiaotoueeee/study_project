@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>店家首页</title>
+	<link rel="stylesheet" type="text/css" href="./css/restaurant.css">
+  	<script src="http://127.0.0.1/lctoh/Common/jquery-1.8.3.js"></script>
+    <script src="http://127.0.0.1/lctoh/Common/layer/layer.js"> </script>
+    <script src="http://127.0.0.1/lctoh/Common/echarts.common.min.js"></script>
+    <script src="http://127.0.0.1/lctoh/Common/common.js"></script>
+    <script src='./js/restaurant.js'></script>
+</head>
+<body>
+   <div class='content'>
+       <div class='notice_show'>
+            <div class='notice_pic'>
+               <img src="./images/gonggao_icon.png">
+            </div>
+            <div class='notice_cont'>
+                <iframe src="../ownShare/sysNotice.html" name="iframe_a" scrolling="no"></iframe>
+            </div> 
+       </div>
+   <section>
+       <div class='sec_loca'>
+            <span>当前位置:</span>
+            <span>江西省南昌市经济开发区...</span>
+            <span>|</span>
+            <span class='last_loca'>切换地址</span>
+       </div>
+       <div class='cont_left'>
+            <div class='pending_order'>
+               <label for="">待处理订单</label>
+               <div class='cont_center'>
+                   <div><span class='new_order'>5</span><span>新订单</span></div>
+                   <div><span class='send_order'>2</span><span>正在派送订单</span></div>
+                   <div><span class='back_order'>0</span><span>退单</span></div>
+               </div>
+            </div>
+            <div class='feedback_order'>
+               <label for="">待处理反馈订单</label>
+                <div class='cont_center'>
+                    <div><span class='back_scroe'>40</span><span>未回复评价</span></div>
+                    <div><span class='back_no'>2</span><span>未回复差评</span></div>
+                </div>             
+            </div>
+            <div class='overview'>
+                 <label for="">今日总览</label>
+                 <div class='cont_center'>
+                     <div><span class='now_order'>125</span><span>今日订单</span></div>
+                     <div><span class='now_turnover'>644</span><span>今日营业额</span></div>
+                 </div>
+                 
+            </div>
+            <div class='order_pie'>
+                 <label for="">今日饼状图</label>
+                 <div class='cont_center'>
+                     <div class='pie_graph'> 
+                        <div id="mainTwo"></div>
+                     </div>
+                 </div>
+            </div>
+            <div class='res_notice'>
+                 <label for="">商家公告
+                     <div class='pic_save'>
+                         <div class='img_nito'><img src="./images/shan_1.png" alt=""></div>
+                         <div class='img_nito'><img src="./images/save_1.png" alt=""></div>
+                         <div class='img_nito'><img src="./images/write_1.png" alt=""></div>
+                     </div>
+                 </label>
+                 <div class='cont_center'>
+                       <textarea >最近推出新产品，打折优惠促销</textarea>  
+                 </div>
+            </div>
+       </div>
+       <div class='cont_right'>
+           <div></div>
+       </div>
+   </section>
+   </div>
+</body>
+</html>
