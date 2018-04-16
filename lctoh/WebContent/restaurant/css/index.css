@@ -1,0 +1,242 @@
+body,
+html {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  color: #666;
+  font-family: '宋体';
+}
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+p,
+h4,
+h3,
+hr {
+  padding: 0;
+  margin: 0;
+}
+ul li {
+  float: left;
+}
+input {
+  outline: none;
+  border: none;
+  text-align: center;
+  border-radius: 2px;
+  margin: 0;
+  font-size: 12px;
+}
+input:hover {
+  cursor: pointer;
+}
+img {
+  width: 100%;
+}
+/*头部*/
+header {
+  width: 100%;
+  min-width: 1204px;
+  height: 50px;
+  background: #fa7c03;
+}
+header .header-wrap {
+  height: 100%;
+  width: 1204px;
+  margin: 0 auto ;
+}
+header .header-wrap > div {
+  float: left;
+}
+header .logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 2px 2px 2px #aaa;
+  text-align: center;
+  line-height: 36px;
+  margin-top: 5px;
+  margin-left: 20px;
+  color: black;
+}
+/*标题*/
+header .title {
+  color: white;
+  font-size: 20px;
+  line-height: 50px;
+  margin-left: 30px;
+  font-family: 'CoolType Version 1.0-GB2312';
+}
+/*导航条*/
+header .header-wrap .nav {
+  height: 100%;
+  font-size: 14px;
+  margin-left: 20px;
+}
+header .nav > ul {
+  height: 100%;
+  line-height: 50px;
+  color: #fff;
+}
+header .nav > ul > li {
+  height: 100%;
+  width: 90px;
+  text-align: center;
+  margin-right: 54px;
+}
+header .nav > ul > li:hover {
+  background: #ef7e11;
+  cursor:pointer;
+}
+header .nav > ul .frist_show{
+  background: #df6e0b;
+}
+/*搜索框*/
+header .header-wrap .query_btn {
+  /*border:1px solid red;*/
+  width: 160px;
+  height: 24px;
+  margin-top: 13px;
+  position: relative;
+}
+header .header-wrap .query_btn input {
+  height: 20px;
+  width: 160px;
+  border: 1px solid #a0a0a0;
+  border-radius: 2px;
+  font-size: 12px;
+  color: #999;
+  outline: none;
+}
+header .header-wrap .query_btn .click_btn {
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  top: 5px;
+  line-height: 20px;
+  text-align: center;
+  right: 5px;
+}
+header .header-wrap .query_btn .click_btn img {
+  width: 100%;
+}
+/*搜索框*/
+header .header-wrap .set_list {
+  float: right;
+  width: 120px;
+  position: relative;
+  line-height: 50px;
+  text-align: center;
+  color: #fff;
+}
+header .header-wrap .set_list span {
+  text-align: center;
+}
+header .header-wrap .set_list .small_up {
+  height: 20px;
+  width: 20px;
+  background: #f26608;
+  float: right;
+  margin-top: 15px;
+  margin-right: 20px;
+  position: relative;
+}
+header .header-wrap .set_list .small_up:hover {
+	cursor:pointer;
+}
+header .header-wrap .set_list .small_up::before {
+  position: absolute;
+  top: 6px;
+  right: 4px;
+  content: '';
+  border: 6px solid transparent;
+  height: 0;
+  width: 0;
+  border-top-color: #fff;
+}
+header .header-wrap .set_list .set_up {
+  position: absolute;
+  height: 160px;
+  width: 90px;
+  top: 50px;
+  text-align: center;
+  font-size: 14px;
+  right: 12px;
+  background: #fff;
+  box-shadow: 2px 2px 4px #aaa;
+  color: #333;
+  border-radius: 2px;
+  z-index: 199;
+  /*display: none;*/
+}
+header .set_list .set_up::before {
+  position: absolute;
+  top: -16px;
+  right: 10px;
+  content: '';
+  border: 8px solid transparent;
+  height: 0;
+  width: 0;
+  border-bottom-color: #fff;
+}
+header .set_list .set_up ul {
+  height: 100%;
+  width: 100%;
+  /*border:1px solid black;*/
+}
+header .set_list .set_up ul li {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 3px;
+  height: 22%;
+  line-height: 40px;
+  border-bottom: 1px solid #ccc;
+  border-radius: 3px;
+}
+header .set_list .set_up ul li .img_list {
+  width: 12px;
+  height: 12px;
+  margin-left: 3px;
+  margin-top: 1px;
+  float: left;
+}
+header .set_list .set_up ul li .img_list img {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+header .set_list .set_up ul li:nth-of-type(4) {
+  border: none;
+}
+header .set_list .set_up ul li:hover {
+  background: #cccccc;
+}
+/*头部*/
+.content {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+.content section {
+  width: 100%;
+  height:940px
+}
+.content iframe {
+  height: 100%;
+  width: 100%;
+  border: none;
+  /*iframe的边框设置为没有*/
+  margin: 0;
+  padding: 0;
+}
+iframe[name="iframe_bot"]{
+  height:240px;
+}
