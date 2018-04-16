@@ -71,6 +71,8 @@ function loadRestaurantHtml(){
 	   })
 	    /*点击地址进入定位页面*/
 	   $('#last_loca').click(function(){
+		   $('#section_change').css('width','100%');
+		   $('.notice_show').css('display','none');
 		   var str='<iframe src="../location/address_confirm.html" name="iframe_a" scrolling="no"></iframe>';
 		   $('#section_change').html(str); 
 	   })
