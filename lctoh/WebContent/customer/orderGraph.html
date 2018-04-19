@@ -6,23 +6,26 @@
 	<link rel="stylesheet" type="text/css" href="http://127.0.0.1/lctoh/Common/easyui/themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="http://127.0.0.1/lctoh/Common/easyui/themes/icon.css">
 	<script type="text/javascript" src="http://127.0.0.1/lctoh/Common/easyui/jquery.min.js"></script>
-	<script src="http://127.0.0.1/lctoh/Common/echarts.common.min.js"></script>
-	<script src="http://127.0.0.1/lctoh/Common/layer/layer.js"> </script>
-	<script src="http://127.0.0.1/lctoh/Common/common.js"></script>
 	<script type="text/javascript" src="http://127.0.0.1/lctoh/Common/easyui/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src='./js/orderGraph.js'></script>	
+		
+	<script src="http://127.0.0.1/lctoh/Common/layer/layer.js"> </script>	
+	<script src="http://127.0.0.1/lctoh/Common/common.js"></script>
+	<script src="http://127.0.0.1/lctoh/Common/echarts.common.min.js"></script>	 
+	
+	
 </head>
 <body>
-      <div class='order_graph'>
-         <div class='order_tm'>
-            <span class="input-group-addon">选择时间</span> 
-            <input style='width:100px;' id='stm'  class="easyui-datebox" data-options="sharedCalendar:'#cc'">           
-			<div class='time_font'>至</div> 
-			 <input style='width:100px;' id='etm'  class="easyui-datebox" data-options="sharedCalendar:'#cc'">
-			<!-- <input type="text"  class="form-control tm" id="etm" name="etm" require="true"  /> -->
-            <div id="cc" class="easyui-calendar"></div>
-            <div id='tyy'> <input type="text"  class="form-control tm" id="etm" name="etm"   /></div>
-         </div>
+      
+      <div class='order_time'>
+		                 选择时间
+			    <input style='width:100px;' id='stm'  class="easyui-datebox" data-options="sharedCalendar:'#cc'">
+		      至
+			    <input style='width:100px;' id='etm' class="easyui-datebox" data-options="sharedCalendar:'#cc'">
+		      <!--  新的内容
+		      	    <input id="dd" type="text" class="easyui-datebox" okText='确认' closeText='取消' required="required"> -->
+			 <div id="cc" class="easyui-calendar"></div>
+      </div>
+	 <div class='order_graph'>
          <div class='order_pie'> 
             <div id="mainTwo"></div>
          </div>
@@ -30,5 +33,6 @@
              <div id="mainGraph"></div>
          </div>
       </div>
+	<script type="text/javascript" src='./js/orderGraph.js'></script>	
 </body>
 </html>
