@@ -1,3 +1,5 @@
+//初始化时间  必须写在外面  日期控件依赖    lctoh/Common/easyui/jquery.min.js
+initDate();
 $(function(){
 	 /*初始化数据*/
 	 init();
@@ -6,7 +8,8 @@ $(function(){
 	 /*统计饼图*/
 	 pie_chart();
 	 /*统计过程线*/
-	 line_chart();	 
+	 line_chart();	
+	
 })
 /*
  * 初始化数据
@@ -18,9 +21,10 @@ function init(){
  * 获取时间
  * */
 function getTm(){
-	initDate();
+		
 }
 function initDate(){
+	
 	var buttons = $.extend([], $.fn.datebox.defaults.buttons);
 	buttons.splice(1, 0, {
 		text: 'MyBtn',
@@ -28,7 +32,7 @@ function initDate(){
 			alert('click MyBtn');
 		}
 	});
-
+	 alert('dsdsdd'+999);
 	var str='';
 	var now=new Date();
 	/*alert(now);*/
@@ -37,10 +41,9 @@ function initDate(){
 	var month=now.getMonth()+1;//月，从下标0计算
 	var date=now.getDate();//日
     str=month+'/'+date+'/'+year;
-    
+
     $('#etm').val(str);
-    $('#tyy').css('color','red');
-    $('#tyy').val('red');
+
      var strs='';
     var newDate = now - 9*24 * 60 * 60 * 1000; //备注 如果是往前计算日期则为减号 否则为加号
     newDate = new Date(newDate);
