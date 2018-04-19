@@ -8,21 +8,17 @@ body,html{
 	
 }
 /*选择时间*/
-.order_graph .order_tm{
+ .order_time{
 	margin-top:20px;
+	margin-left:20px;
 	width:100%;
-	height:30px;
-	line-height:30px;
 	display:inline-block;
 }
 /* .order_graph .order_tm input{
 	float:left;
 	margin-top:5px;
 } */
-.order_graph .order_tm span{
-	float:left;
-	margin-right:8px;
-}
+
 /* 日期中间的至*/
 .order_graph .order_tm .time_font{
     margin:0 8px;
