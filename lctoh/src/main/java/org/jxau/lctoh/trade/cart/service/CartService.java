@@ -56,7 +56,6 @@ public class CartService {
 		//找到想要添加的菜肴
 		Dish dish=dishDao.findDishByDishId(dishId);
 		if(dish==null)throw new CartException(ErrorMSG.selectFail);
-		//生成并补全订单条目
 		CartItem cartItem=new CartItem();
 		cartItem.setDish(dish);
 		cartItem.setDishCount(dishCount);

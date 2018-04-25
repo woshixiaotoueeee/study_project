@@ -55,8 +55,10 @@ public class OrderStatisticsService {
 	/**补全统计信息*/
 	private OrderStatisticsQureyModel getorderStatisticsQureyModel(OrderStatisticsQureyModel orderStatisticsQureyModel){
 		long timeDifference;
+		//补全时间
 		try{
-			timeDifference=Tools.getTimeDifferenceFromDate(Tools.StringToDate(orderStatisticsQureyModel.getStm()), Tools.StringToDate(orderStatisticsQureyModel.getEtm()));
+			timeDifference=Tools.getTimeDifferenceFromDate(Tools.StringToDate(orderStatisticsQureyModel.getStm()),
+					Tools.StringToDate(orderStatisticsQureyModel.getEtm()));
 		}catch(Exception e){
 			e.printStackTrace();
 			Date now=new Date();
@@ -64,6 +66,7 @@ public class OrderStatisticsService {
 			orderStatisticsQureyModel.setStm(Tools.DateToString(Tools.CalculationDate(now,-1,Tools.year)));
 			timeDifference=1000*60*60*24*366;
 		}
+		//设置统计方式
 		if(timeDifference<=Statistical.dayNode){
 			orderStatisticsQureyModel.setStatisticsType(1);
 		}else if(timeDifference>Statistical.dayNode&&timeDifference<Statistical.weekNode){
