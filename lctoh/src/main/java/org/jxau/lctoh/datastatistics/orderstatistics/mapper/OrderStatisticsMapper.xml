@@ -7,23 +7,14 @@
 	
 	<!--根据状态码查询状态信息 -->
 	<select id="orderStatistics"  resultType="OrderStatistics">
-		SELECT
-			count(orders.order_id) count, 
-			ifnull(SUM(order_price),0) amount ,
-			<if test="statisticsType==1" >
-				DATE_FORMAT(rt.recording_time_id, '%Y年%m月%d日') AS tm
-			</if>
-			<if test="statisticsType==2" >
-				DATE_FORMAT(rt.recording_time_id, '%Y年%m月%u周') AS tm
-			</if>
-			<if test="statisticsType==3" >
-				DATE_FORMAT(rt.recording_time_id, '%Y年%m月') AS tm
-			</if>
+		SELECT count(orders.order_id) count,  ifnull(SUM(order_price),0) amount ,
+			<if test="statisticsType==1" > DATE_FORMAT(rt.recording_time_id, '%Y年%m月%d日') AS tm </if>
+			<if test="statisticsType==2" > DATE_FORMAT(rt.recording_time_id, '%Y年%m月%u周') AS tm </if>
+			<if test="statisticsType==3" > DATE_FORMAT(rt.recording_time_id, '%Y年%m月') AS tm </if>
 			<if test="statisticsType==4" >
 				CONCAT(DATE_FORMAT(rt.recording_time_id, '%Y年'),CONCAT(quarter( rt.recording_time_id),'季度')) as tm
 			</if>
-		FROM
-			recording_time rt left join orders 
+		FROM recording_time rt left join orders 
 		on 
 			<if test="statisticsType==1" >
 				DATE_FORMAT(rt.recording_time_id, "%Y年%m月%d日")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月%d日")
@@ -35,11 +26,11 @@
 				DATE_FORMAT(rt.recording_time_id, "%Y年%m月")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月")
 			</if>
 			<if test="statisticsType==4" >
-				CONCAT(DATE_FORMAT(rt.recording_time_id, '%Y年'),CONCAT(quarter( rt.recording_time_id),'季度'))=CONCAT(DATE_FORMAT(orders.order_creat_time, '%Y年'),CONCAT(quarter(orders.order_creat_time),'季度'))
+				CONCAT(DATE_FORMAT(rt.recording_time_id, '%Y年'),CONCAT(quarter( rt.recording_time_id),'季度'))
+				=CONCAT(DATE_FORMAT(orders.order_creat_time, '%Y年'),CONCAT(quarter(orders.order_creat_time),'季度'))
 			</if>
 			and orders.order_state_id=100004
-		where
-			rt.recording_time_id&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
+		where rt.recording_time_id&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
 			and rt.recording_time_id&lt;=str_to_date(#{etm},'%Y-%m-%d %H:%i:%s')
 			<if test="customerId != null and customerId !=''" >
 				and orders.order_customer_id=#{customerId}

@@ -43,16 +43,12 @@ public class OrderStatisticsController extends BaseController{
 	 * 	}
 	 * }
 	 * </pre>
-	 * 
 	 * @see org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatistics
-	 * 
 	 */
 	@ResponseBody
 	@RequestMapping(value="/orderStatistics",produces=EncodingConfig.produces)
 	public String orderStatistics(OrderStatisticsQureyModel orderStatisticsQureyModel){
 		try{
-			//orderStatisticsQureyModel.setEtm(new Date("2016-03-05 12:03:56.468"));
-			//orderStatisticsQureyModel.setStm(new Date());
 			responseData.successInfo(orderStatisticsService.orderStatistics(orderStatisticsQureyModel));
 		}catch(Exception e){
 			e.printStackTrace();
