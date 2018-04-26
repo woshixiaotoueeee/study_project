@@ -17,42 +17,49 @@ function initHtml(_customer){
 	if(_customer==null)return;
 	
     /* 点击编辑头像*/
+	$("#edit_portrait").unbind("click"); 
 	$('#edit_portrait').click(function(){
 		edit_portrait(_customer);
 	})	
 	/* 点击编辑个人资料*/
+	$("#edit_infor").unbind("click"); 
 	$('#edit_infor').click(function(){
 		edit_name_eail(_customer);	
 	})	
 	/* 点击修改密码*/
+	$("#edit_password").unbind("click"); 
 	$('#edit_password').click(function(){
 		edit_password(_customer);
 	})
-   //我的地址  新增地址 
-   $('#add_new').click(function(){
+	//我的地址  新增地址 
+	$("#add_new").unbind("click"); 
+	$('#add_new').click(function(){
 	   add_address();
-   })
-   // 修改地址
-   $('.modify_address').click(function(){
+	})
+	// 修改地址
+	$(".modify_address").unbind("click"); 
+	$('.modify_address').click(function(){
 	   edit_address();
 	   
-   })
-   // 删除地址
-   $('.delete_address').click(function(){
+	})
+	// 删除地址
+	$(".delete_address").unbind("click"); 
+	$('.delete_address').click(function(){
 	   delete_address(this);
-   })
-   /*点击显示订单详情*/
-   $('.my_order .ord_click input').click(function(){
+	})
+	/*点击显示订单详情*/
+	$(".my_order .ord_click input").unbind("click"); 
+	$('.my_order .ord_click input').click(function(){
 	    order_detail( $(this).attr('id'));
-   })
-   /*订单统计过程线图*/
-   order_graph();
-   /*个人中心 我的收藏 我的订单 我的订单切换*/ 
-   my_center_list();
-   
-   $('.query').click(function(){
+	})
+	/*订单统计过程线图*/
+	order_graph();
+	/*个人中心 我的收藏 我的订单 我的订单切换*/ 
+	my_center_list();
+	$(".query").unbind("click"); 
+	$('.query').click(function(){
 	   queryOrder( $(this).attr('value'));
-  })
+	})
    
 }
   /*编辑头像*/
@@ -411,6 +418,7 @@ function order_graph(){
 	 $('.pic_line').mouseout(function(){
 	 	  $(this).find('img').attr('src','./images/my_order/tubiao.png');
 	 })
+	 $('.pic_line').unbind("click"); 
 	 $('.pic_line').click(function(){
 	      layer.open({
 			  type: 2,
@@ -571,6 +579,7 @@ function setCustomerToHtml(_customer){
  * 设置地址信息
  * */
 function setAddressListToHtml(_addressList){
+	/*
 	if(_addressList==null)return;
 	var addressHtml='';
 	
@@ -581,7 +590,7 @@ function setAddressListToHtml(_addressList){
 	//var addressDiv=
 	$(".my_address .edit_cont .edit_infor").html(addressHtml);
 	
-	
+	*/
 }
 
 
