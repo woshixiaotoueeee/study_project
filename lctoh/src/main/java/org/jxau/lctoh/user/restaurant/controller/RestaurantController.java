@@ -475,4 +475,50 @@ public class RestaurantController extends BaseController {
 		}
 		return toGsonString();
 	}
+	
+	/**
+	 * 更新店家信息
+	 * @param user restaurant
+	 * <pre>
+	 * 	user 说明：{
+	 * 		String userSex 性别
+	 *  	String userEmail 邮箱
+	 *  	String userPhone 电话
+	 * 	}
+	 * restaurant{
+	 * 	 BigDecimal restaurantDeliveryFee 配送费
+	 * 	 String restaurantName 店名
+	 * 	 String restaurantPhone 店家联系方式
+	 *	 String restaurantNotice 公告
+	 * 	}
+	 * </pre>
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为成功的信息 String 字符串
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 */
+	@ResponseBody
+	@RequestMapping(value="/updateRestaurantNotice",produces=EncodingConfig.produces)
+	public String updateRestaurantNotice(String notice,HttpSession session){
+		Restaurant _restaurant=(Restaurant) session.getAttribute(ConversationConfig.restaurantSession);
+		if (notice==null) {
+			responseData.failInfo(ErrorMSG.parameterIsNull);
+		} else {
+			_restaurant.setRestaurantNotice(notice);
+			try{
+				restaurantService.updateRestaurant(_restaurant);
+				responseData.successInfo(SuccessMSG.updateSuccessMSG);
+			}catch(Exception e){
+				e.printStackTrace();
+				responseData.failInfo(ErrorMSG.updateFail);
+			}
+		}
+		return toGsonString();
+	}
 }
