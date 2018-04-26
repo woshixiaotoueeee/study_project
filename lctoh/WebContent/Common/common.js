@@ -33,6 +33,9 @@ Common.addDishCart=projectDirectory+'/CartController/addDishCart';
 Common.findOrder=projectDirectory+'/OrderController/findOrder';
 //查询订单(id)
 Common.findOrderByOrderId=projectDirectory+'/OrderController/findOrderByOrderId';
+//订单过程线统计接口
+Common.orderStatistics=projectDirectory+'/OrderStatisticsController/orderStatistics';
+
 //获取地址栏参数
 function GetQueryString(name)
 {
