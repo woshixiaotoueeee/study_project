@@ -30,6 +30,13 @@ import org.springframework.stereotype.Component;
 @Alias("Cart")
 @Scope("prototype")
 public class Cart {
+	
+	public Cart(){
+		this.total=BigDecimal.valueOf(0);
+		this.map=new LinkedHashMap<String,CartItem>();
+	}
+	
+	
 	/**
 	 * 携带一个标记位
 	 * @see org.jxau.lctoh.user.restaurant.domain.Restaurant
@@ -43,7 +50,7 @@ public class Cart {
 	 * 购物车中的条目
 	 * @see org.jxau.lctoh.trade.cart.domain.CartItem
 	 * */
-	private Map<String ,CartItem> map=new LinkedHashMap<String,CartItem>();
+	private Map<String ,CartItem> map;
 	public Restaurant getRestaurant() {
 		return restaurant;
 	}

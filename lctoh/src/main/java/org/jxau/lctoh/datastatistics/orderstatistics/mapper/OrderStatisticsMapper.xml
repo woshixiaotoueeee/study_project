@@ -8,13 +8,22 @@
 	<!--根据状态码查询状态信息 -->
 	<select id="orderStatistics"  resultType="OrderStatistics">
 		SELECT count(orders.order_id) count,  ifnull(SUM(order_price),0) amount ,
-			<if test="statisticsType==1" > DATE_FORMAT(rt.recording_time_id, '%Y年%m月%d日') AS tm </if>
+			rt.tm
+		FROM  (
+		select 
+		 	<if test="statisticsType==1" > DATE_FORMAT(rt.recording_time_id, '%Y年%m月%d日') AS tm </if>
 			<if test="statisticsType==2" > DATE_FORMAT(rt.recording_time_id, '%Y年%m月%u周') AS tm </if>
 			<if test="statisticsType==3" > DATE_FORMAT(rt.recording_time_id, '%Y年%m月') AS tm </if>
 			<if test="statisticsType==4" >
 				CONCAT(DATE_FORMAT(rt.recording_time_id, '%Y年'),CONCAT(quarter( rt.recording_time_id),'季度')) as tm
 			</if>
-		FROM recording_time rt left join 
+		from recording_time rt
+		
+		where rt.recording_time_id&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
+			and rt.recording_time_id&lt;=str_to_date(#{etm},'%Y-%m-%d %H:%i:%s')
+		GROUP BY
+			tm
+		)rt left join 
 			(select * from orders
 				where  orders.order_state_id=100004
 				<if test="customerId != null and customerId !=''" >
@@ -24,22 +33,19 @@
 					and orders.order_restaurant_id=#{restaurantId}
 				</if>) orders
 		on 
+			tm=
 			<if test="statisticsType==1" >
-				DATE_FORMAT(rt.recording_time_id, "%Y年%m月%d日")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月%d日")
+				DATE_FORMAT(orders.order_creat_time, "%Y年%m月%d日")
 			</if>
 			<if test="statisticsType==2" >
-				DATE_FORMAT(rt.recording_time_id, "%Y年%m月%u周")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月%u周")
+				DATE_FORMAT(orders.order_creat_time, "%Y年%m月%u周")
 			</if>
 			<if test="statisticsType==3" >
-				DATE_FORMAT(rt.recording_time_id, "%Y年%m月")=DATE_FORMAT(orders.order_creat_time, "%Y年%m月")
+				DATE_FORMAT(orders.order_creat_time, "%Y年%m月")
 			</if>
 			<if test="statisticsType==4" >
-				CONCAT(DATE_FORMAT(rt.recording_time_id, '%Y年'),CONCAT(quarter( rt.recording_time_id),'季度'))
 				=CONCAT(DATE_FORMAT(orders.order_creat_time, '%Y年'),CONCAT(quarter(orders.order_creat_time),'季度'))
 			</if>
-		where rt.recording_time_id&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
-			and rt.recording_time_id&lt;=str_to_date(#{etm},'%Y-%m-%d %H:%i:%s')
-			
 		GROUP BY
 			tm
 		order by 
@@ -51,41 +57,42 @@
 	<select id="dispatchingStatistics"  resultType="OrderStatistics">
 		SELECT
 			count(dispatching.dispatching_id) count,
-			<if test="statisticsType==1" >
-				DATE_FORMAT(rt.recording_time_id, '%Y年%m月%d日') AS tm
-			</if>
-			<if test="statisticsType==2" >
-				DATE_FORMAT(rt.recording_time_id, '%Y年%m月%u周') AS tm
-			</if>
-			<if test="statisticsType==3" >
-				DATE_FORMAT(rt.recording_time_id, '%Y年%m月') AS tm
-			</if>
+			rt.tm
+		FROM
+			(
+		select 
+		 	<if test="statisticsType==1" > DATE_FORMAT(rt.recording_time_id, '%Y年%m月%d日') AS tm </if>
+			<if test="statisticsType==2" > DATE_FORMAT(rt.recording_time_id, '%Y年%m月%u周') AS tm </if>
+			<if test="statisticsType==3" > DATE_FORMAT(rt.recording_time_id, '%Y年%m月') AS tm </if>
 			<if test="statisticsType==4" >
 				CONCAT(DATE_FORMAT(rt.recording_time_id, '%Y年'),CONCAT(quarter( rt.recording_time_id),'季度')) as tm
 			</if>
-		FROM
-			recording_time rt left join (select * from dispatching
+		from recording_time rt
+		
+		where rt.recording_time_id&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
+			and rt.recording_time_id&lt;=str_to_date(#{etm},'%Y-%m-%d %H:%i:%s')
+		GROUP BY
+			tm
+		) rt left join (select * from dispatching
 				where  dispatching.dispatching_state_id=110004
 				<if test="riderId != null and riderId !=''" >
 				and dispatching.dispatching_rider_id=#{riderId}
 				</if>) dispatching 
 		on 
+			tm=
 			<if test="statisticsType==1" >
-				DATE_FORMAT(rt.recording_time_id, "%Y年%m月%d日")=DATE_FORMAT(dispatching.dispatching_update_time, "%Y年%m月%d日")
+				DATE_FORMAT(dispatching.dispatching_update_time, "%Y年%m月%d日")
 			</if>
 			<if test="statisticsType==2" >
-				DATE_FORMAT(rt.recording_time_id, "%Y年%m月%u周")=DATE_FORMAT(dispatching.dispatching_update_time, "%Y年%m月%u周")
+				DATE_FORMAT(dispatching.dispatching_update_time, "%Y年%m月%u周")
 			</if>
 			<if test="statisticsType==3" >
-				DATE_FORMAT(rt.recording_time_id, "%Y年%m月")=DATE_FORMAT(dispatching.dispatching_update_time, "%Y年%m月")
+				DATE_FORMAT(dispatching.dispatching_update_time, "%Y年%m月")
 			</if>
 			<if test="statisticsType==4" >
-				CONCAT(DATE_FORMAT(rt.recording_time_id, '%Y年'),CONCAT(quarter( rt.recording_time_id),'季度'))=CONCAT(DATE_FORMAT(dispatching.dispatching_update_time, '%Y年'),CONCAT(quarter(dispatching.dispatching_update_time),'季度'))
+				CONCAT(DATE_FORMAT(dispatching.dispatching_update_time, '%Y年'),CONCAT(quarter(dispatching.dispatching_update_time),'季度'))
 			</if>
-		where
-			rt.recording_time_id&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
-			and rt.recording_time_id&lt;=str_to_date(#{etm},'%Y-%m-%d %H:%i:%s')
-			
+		
 		GROUP BY
 			tm
 		order by 
