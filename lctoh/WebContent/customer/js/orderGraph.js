@@ -1,10 +1,10 @@
 //初始化时间  必须写在外面  日期控件依赖    lctoh/Common/easyui/jquery.min.js
 initDate();
 $(function(){
+	
 	 /*初始化数据*/
 	 init();
-	 /*获取时间*/
-	 getTm();
+	 
 	 /*统计饼图*/
 	 pie_chart();
 	 /*统计过程线*/
@@ -15,13 +15,34 @@ $(function(){
  * 初始化数据
  * */
 function init(){
-	
+	var requestdata=getTm();
+	requestdata.customerId=GetQueryString('customerId');
+	$.ajax({
+		   type: "post",
+		   url:Common.orderStatistics,
+		   data:requestdata, 
+		   dataType: "json",
+		   success:function(data){
+			   if(data.state==1){
+				   line_chart(data.responseInfo);
+			   }
+			   else{
+				   layer.msg(data.responseInfo, {time:2500});
+			   }
+		   },
+		   error:function(errordate){
+			   layer.msg('未知错误请刷新页面或联系管理员', {time:2500});
+		   }
+		})
 }
 /*
  * 获取时间
  * */
 function getTm(){
-		
+	var timeObj={};
+	timeObj.etm=dateFtt("yyyy-MM-dd hh:mm:ss",new Date("23:59:59 "+$('#etm').val()));
+	timeObj.stm=dateFtt("yyyy-MM-dd hh:mm:ss",new Date($('#stm').val()));
+	return timeObj;
 }
 function initDate(){
 	
@@ -32,11 +53,8 @@ function initDate(){
 			alert('click MyBtn');
 		}
 	});
-	 alert('dsdsdd'+999);
 	var str='';
 	var now=new Date();
-	/*alert(now);*/
-	// console.log(now);//当前系统的时间对象
 	var year=now.getFullYear();//年
 	var month=now.getMonth()+1;//月，从下标0计算
 	var date=now.getDate();//日
@@ -51,7 +69,6 @@ function initDate(){
 	var months=newDate.getMonth()+1;//月，从下标0计算
 	var dates=newDate.getDate();//日
     var strs=months+'/'+dates+'/'+years;
-    alert(newDate);
     $('#stm').val(strs);
 }
 /*
@@ -118,7 +135,7 @@ function  pie_chart(){
 /*
  * 统计过程线
  * */
-function  line_chart(){
+function  line_chart(dataList){
 	var myGraph=echarts.init(document.getElementById('mainGraph'));
     var dataList=[
           {
