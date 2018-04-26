@@ -35,12 +35,25 @@ function setOrderToHtml(order){
 	$('.phone_restaurant').html(order.orderRestaurant.restaurantPhone);
 	$('.orderId').html(order.orderId);
 	
-	setOrderItemList(order.orderItemList,order.orderRestaurant);
+	setOrderItemList(order.orderItemList,order.orderRestaurant,order.orderPrice);
+	setDispatchingInfoToHtml(order.orderHarvestAddress,order.orderDeliveryTime);
+}
+
+function setDispatchingInfoToHtml(orderHarvestAddress,orderDeliveryTime){
+	
+	$('.psfs .info').html("联创配送");
+	if(orderDeliveryTime!=null){
+		$('.wcsj .info').html(getDate(orderDeliveryTime)+" "+getTime(orderDeliveryTime));
+	}
+	$('.addressPhone .info').html(orderHarvestAddress.harvestAddressName);
+	$('.addressPhone .info').html(orderHarvestAddress.harvestAddressPhone);
+	$('.addressInfo .info').html(orderHarvestAddress.harvestAddressInfo);
 	
 }
 
-function setOrderItemList(orderItemList,orderRestaurant){
-	
+
+function setOrderItemList(orderItemList,orderRestaurant,orderPrice){
+	$('.orderdetail').html(orderPrice);
 	var orderdetail_cont=$('.detail_cont_1');
 	orderdetail_cont.html('');
 	var dishHtml='';
@@ -54,5 +67,6 @@ function setOrderItemList(orderItemList,orderRestaurant){
 	}
 	dishHtml+="<div class='order_entry'><div class='ord_dishes'>配送费</div><div class='ord_num'></div><div class='ord_price'></div>" +
 			"<div class='ord_subt'>"+orderRestaurant.restaurantDeliveryFee+"</div> </div>";
+	
 	orderdetail_cont.html(dishHtml);
 }
