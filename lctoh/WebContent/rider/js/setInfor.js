@@ -72,27 +72,29 @@ function edit_rider_infor(){ //修改基础信息
 		    <div class='lay_infor'>
 			   <span>我的邮箱</span>
 			   <input type='text' placeholder="请绑定您的邮箱"/>	
-		    </div>
-		    <div class='lay_infor state_infor'>
-			   <span>状态</span>
-			   <div class='edit_state'>
-				   <input type='radio' class='state' name='state' checked/>
-				   <span>上班</span>
-				   <input type='radio' class='state' name='state'/>
-				   <span>下班</span>
-			   </div>  
-		    </div>
+		    </div>	   
 		    <div class='lay_infor save_cancel'>
 			    <input type='button' class='edit_save' id='rider_save' value='保存'/>
 			    <input type='button' class='edit_cancel' id='rider_cancel' value='取消'/>
 		    </div>			   
 		</div>
 	</form>`;
+	 /*<div class='lay_infor state_infor'>
+	   <span>状态</span>
+	   <div class='edit_state'>
+		   <input type='radio' class='state' name='state' checked/>
+		   <span>上班</span>
+		   <input type='radio' class='state' name='state'/>
+		   <span>下班</span>
+	   </div>  
+	 </div>*/
+	
+	
 	$('#edit_infor').click(function(){	
 		var layer_infor=layer.open({
 		  title: ['修改信息', 'font-size:18px;'],
 		  type: 1,
-		  area: ['544px', '430px'], //宽高
+		  area: ['544px', '380px'], //宽高
 		  content: strEdit
 		});
 		rider_save_cancel(layer_infor); //骑手信息设置的保存取消函数
