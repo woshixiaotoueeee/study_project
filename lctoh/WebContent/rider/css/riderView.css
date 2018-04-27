@@ -159,7 +159,7 @@ img{
     text-overflow: ellipsis;
 }
 .show_order .order_infor .order_idnum {
-	display:inline-block;
+  display:inline-block;
   margin-left: 80px;
   width:140px;
   overflow: hidden;
