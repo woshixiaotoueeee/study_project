@@ -260,6 +260,10 @@ img {
   font-size: 12px;
   margin-top: 6px;
   color: #999999;
+  width:170px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .order_detaile .order_one .border_bot .ord_state {
   margin-left: 15px;

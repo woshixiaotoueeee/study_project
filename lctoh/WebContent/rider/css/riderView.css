@@ -152,6 +152,12 @@ img{
   font-size: 12px;
   color: #999;
 }
+.order_one .order_id {
+	width:94px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 .show_order .order_infor .order_idnum {
   margin-left: 80px;
 }

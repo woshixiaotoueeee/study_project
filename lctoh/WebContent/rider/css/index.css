@@ -144,7 +144,7 @@ ul li {
 }
 .content header .header-wrap .set_list .set_up {
   position: absolute;
-  height: 95px;
+  height: 145px;
   width: 90px;
   top: 50px;
   text-align: center;
@@ -175,7 +175,7 @@ ul li {
   width: 90%;
   margin-left: 5%;
   margin-top: 3px;
-  height: 45%;
+  height: 30%;
   line-height: 40px;
   border-bottom: 1px solid #ccc;
   border-radius: 3px;
@@ -186,6 +186,10 @@ ul li {
   margin-left: 3px;
   margin-top: 1px;
   float: left;
+}
+#myState .img_list{
+  width: 14px;
+  height: 16px;
 }
 .content header .set_list .set_up ul li .img_list img {
   width: 100%;

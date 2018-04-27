@@ -110,10 +110,13 @@ input:hover {
   font-size: 16px;
   float: left;
 }
-.orderDetail .store_infor .right_inf .number_store {
-  width: 166px;
+.orderDetail .store_infor .right_inf .number_store{
+  width: 346px;
   float: left;
   margin-left: 180px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .orderDetail .store_infor .right_inf input {
   margin-top: 1px;
