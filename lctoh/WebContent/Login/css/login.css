@@ -12,6 +12,9 @@
 	ul{
 		list-style:none;
 	}
+	img{
+	width:100%;
+	}
 	.general{	
 		width:100%;
         height:100%;
