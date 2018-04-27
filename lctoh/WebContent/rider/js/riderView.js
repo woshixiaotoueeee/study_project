@@ -15,7 +15,7 @@ function order_details(){ //点击订单列表显示订单详情
 	var str_send_order=`<div class='show_order'>
 		    <div class='order_infor'>
 			   <label>订单号</label>
-			   <span class='order_idnum'>32874857</span>
+			   <span class='order_idnum'>328344sss2226dsdsds67787874857</span>
 		    </div>
 		    <div class='order_infor'>
 			   <label>顾客信息</label>
