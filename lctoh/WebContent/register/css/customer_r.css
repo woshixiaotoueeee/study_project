@@ -27,6 +27,9 @@
        margin-left:265px;
        line-height: 150px;
 	}
+	img{
+	width:100%;
+	}
 	.content .register{
          margin: 100px auto;
          width:400px;
