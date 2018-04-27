@@ -1,0 +1,198 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: #eee;
+  color: #666;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ul li {
+  float: left;
+}
+p,
+h2,
+h3 {
+  padding: 0;
+  margin: 0;
+}
+input {
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  margin: 0;
+  font-size: 12px;
+}
+img{
+	width:100%;
+}
+.cont_rider {
+  height: 100%;
+  width: 1204px;
+  background: #eee;
+  margin: 0 auto;
+  overflow:hidden;
+}
+.cont_rider .rider_left {
+  float: left;
+  width: 320px;
+  background: #f8f8f8;
+  border: 1px solid #aaa;
+  height: 100%;
+}
+.cont_rider .rider_left > div {
+  height: 50%;
+  width: 100%;
+  position: relative;
+}
+.cont_rider .rider_left > div .order_state {
+  height: 36px;
+  width: 100%;
+  color: #fa7c03;
+}
+.cont_rider .rider_left > div .order_state label {
+  line-height: 36px;
+  display: inline-block;
+  float: left;
+  margin-left: 20px;
+}
+.cont_rider .rider_left .order_list {
+  width: 100%;
+  height: calc(100% - 36px);
+  overflow-y: auto;
+}
+.cont_rider .rider_left .order_list .order_one {
+  width: calc(100% - 20px);
+  border: 1px solid #fa7c03;
+  border-radius: 2px;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+.cont_rider .rider_left .order_list .order_one .img_shop {
+  width: 65px;
+  height: 45px;
+/*   border: 1px solid red; */
+  float: left;
+}
+.cont_rider .rider_left .order_list .order_one .img_shop img{
+	width:100%;
+	height:100%；
+}
+.cont_rider .rider_left .order_list .order_one .order_title {
+  margin-left: 10px;
+  margin-top: 15px;
+  float: left;
+}
+.cont_rider .rider_left .order_same {
+  font-size: 12px;
+  width: 100%;
+  display: inline-block;
+  margin-top: 5px;
+  color: #999;
+  margin-left: 5px;
+}
+.cont_rider .rider_left .order_same > div {
+  float: left;
+}
+.cont_rider .rider_left .order_same .order_tm {
+  float: right;
+  margin-right: 20px;
+}
+.cont_rider .rider_left .order_same .order_custer_address {
+  float: right;
+  margin-right: 20px;
+  width: 162px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.cont_rider .rider_left .order_top {
+  color: #666;
+}
+.cont_rider .rider_left .order_title {
+  font-size: 14px;
+}
+.cont_rider .rider_right {
+  width: calc(100% - 322px);
+  background: #f8f8f8;
+  height: 100%;
+  float: left;
+  position:relative;
+}
+.cont_rider .rider_right #rider_map{
+	width:100%;
+	height:100%;
+}
+.show_order {
+  width: calc(100% - 20px);
+  margin-left: 10px;
+  height: 95%;
+  /* border:1px solid yellow; */
+  position: relative;
+}
+.show_order .order_infor {
+  width: calc(100% - 40px);
+  margin-left: 20px;
+  margin-top: 10px;
+  position: relative;
+  /* border:1px solid blue; */
+  /*顾客信息*/
+}
+.show_order .order_infor > div {
+  width: calc(100% - 40px);
+  margin-left: 20px;
+  /* border:1px solid red; */
+}
+.show_order .order_infor span {
+  font-size: 12px;
+  color: #999;
+}
+.show_order .order_infor .order_idnum {
+  margin-left: 80px;
+}
+.show_order .order_infor .custer_phone,
+.show_order .order_infor .store_phone {
+  float: right;
+  margin-right: 40px;
+}
+.show_order .order_infor .custer_phone {
+  color: #fa7c03;
+}
+.show_order .order_infor .order_total,
+.show_order .order_infor .order_dist {
+  float: right;
+  margin-right: 40px;
+  width: 80px;
+  text-align: center;
+  color: #fa7c03;
+}
+.show_order .order_infor .order_tm {
+  position: relative;
+}
+.show_order .order_infor .order_tm span {
+  display: block;
+  width: 100%;
+  text-align: center;
+  color: #fa7c03;
+}
+.show_order .order_infor input {
+  color: #fff;
+  width: 60px;
+  height: 24px;
+  line-height: 24px;
+  background: #aaa;
+  border: 1px solid #aaa;
+  text-align: center;
+  border-radius: 2px;
+  padding: 0px;
+  margin-left: calc(50% - 30px);
+}
+.show_order .order_infor input:hover {
+  background: #fa7c03;
+  border-color: #fa7c03;
+}
