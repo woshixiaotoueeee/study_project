@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>DateBox Buttons - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="./themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="./themes/icon.css">
+	<script type="text/javascript" src="./jquery.min.js"></script>
+	<script type="text/javascript" src="./jquery.easyui.min.js"></script>
+</head>
+<body>
+	选择时间
+	    <input style='width:100px;' id='stm'  class="easyui-datebox" data-options="sharedCalendar:'#cc'">
+      至
+	    <input style='width:100px;' id='etm' class="easyui-datebox" data-options="sharedCalendar:'#cc'">
+      <!--  新的内容
+      	    <input id="dd" type="text" class="easyui-datebox" okText='确认' closeText='取消' required="required"> -->
+	<div id="cc" class="easyui-calendar"></div>
+	<script>
+	    
+		var buttons = $.extend([], $.fn.datebox.defaults.buttons);
+		buttons.splice(1, 0, {
+			text: 'MyBtn',
+			handler: function(target){
+				alert('click MyBtn');
+			}
+		});
+
+		var str='';
+		var now=new Date();
+		/*alert(now);*/
+		// console.log(now);//当前系统的时间对象
+		var year=now.getFullYear();//年
+		var month=now.getMonth()+1;//月，从下标0计算
+		var date=now.getDate();//日
+        str=month+'/'+date+'/'+year;
+
+        $('#etm').val(str);
+
+         var strs='';
+        var newDate = now - 9*24 * 60 * 60 * 1000; //备注 如果是往前计算日期则为减号 否则为加号
+        newDate = new Date(newDate);
+        var years=newDate.getFullYear();//年
+		var months=newDate.getMonth()+1;//月，从下标0计算
+		var dates=newDate.getDate();//日
+        var strs=months+'/'+dates+'/'+years;
+        alert(newDate);
+        $('#stm').val(strs);
+
+	</script>
+</body>
+</html>
