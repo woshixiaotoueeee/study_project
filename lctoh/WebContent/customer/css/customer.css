@@ -212,6 +212,7 @@ iframe{
 	width:210px;
 	height:158px;
 	margin: 5px;
+	overflow:hidden;
 	/*border:1px solid red;*/
 }
 .content>section .sec_hotel_content .cont_shop .img_shop img{
