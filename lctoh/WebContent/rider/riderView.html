@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>骑手首页</title>
+	<link rel="stylesheet" type="text/css" href="./css/riderView.css">
+	<!-- 。。。。。。。。。。。图标logo。。。。。。。。。。。 -->
+	<link rel="icon" type="image/gif" href="/lctoh/images/lczxlg.gif" >
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=YnD4uKaLCm3OxKqa7poZPFMNamRbzh2S" ></script>
+   
+    <script src="/lctoh/Common/jquery-1.8.3.js"></script>
+    <script src="/lctoh/Common/layer/layer.js"> </script>
+	<script src="/lctoh/Common/common.js"></script>
+  
+    <script src='./js/riderView.js'></script>
+</head>
+<body>
+   <div class='cont_rider'>
+      <div class='rider_left'> 
+           <div class='send_order'>
+               <div class='order_state'><label>可配送订单</label></div>
+               <div class='order_list'>
+                    <div class='order_one'> 
+                        <div class='order_same order_top'>
+                            <div class='img_shop'>
+                                <img src="./images/store_1.png">
+                            </div> 
+                            <div class='order_title'>外婆家</div>
+                        </div>
+                        <div class='order_same order_bot' >    
+                           <div class='order_id'>订单号:<span>239844</span></div> 
+                           <div class='order_tm'>订单时间：<span>2018-05-01 16:00</span></div>
+                        </div> 
+                        <div class='order_same order_cont'> 
+                            <div class='order_custer'>顾客：<span>刘贵平</span></div> 
+                            <div class='order_custer_address'>地址：<span>昌平沙河老牛湾6号道7栋301</span></div>
+                        </div>
+                        <div class='order_same order_cont'> 
+                           <div class='order_store_address'>商家地址：<span>昌平沙河老牛湾3道外婆家店</span></div>
+                        </div>           
+                    </div>
+                    <div class='order_one'> 
+                        <div class='order_same order_top'>
+                            <div class='img_shop'>
+                                <img src="./images/store_1.png">
+                            </div> 
+                            <div class='order_title'>老余家</div>
+                        </div>
+                        <div class='order_same order_bot' >    
+                           <div class='order_id'>订单号:<span>239844</span></div> 
+                           <div class='order_tm'>订单时间：<span>2018-05-01 16:00</span></div>
+                        </div> 
+                        <div class='order_same order_cont'> 
+                            <div class='order_custer'>顾客：<span>刘贵平</span></div> 
+                            <div class='order_custer_address'>地址：<span>昌平沙河老牛湾6号道7栋301</span></div>
+                        </div>
+                        <div class='order_same order_cont'> 
+                           <div class='order_store_address'>商家地址：<span>昌平沙河老牛湾3道外婆家店</span></div>
+                        </div>           
+                    </div>
+                    <div class='order_one'> 
+                        <div class='order_same order_top'>
+                            <div class='img_shop'>
+                                <img src="./images/store_1.png">
+                            </div> 
+                            <div class='order_title'>老余酸菜汤</div>
+                        </div>
+                        <div class='order_same order_bot' >    
+                           <div class='order_id'>订单号:<span>233339844</span></div> 
+                           <div class='order_tm'>订单时间：<span>2018-05-01 16:00</span></div>
+                        </div> 
+                        <div class='order_same order_cont'> 
+                            <div class='order_custer'>顾客：<span>刘贵平</span></div> 
+                            <div class='order_custer_address'>地址：<span>昌平沙河老牛湾6号道7栋301</span></div>
+                        </div>
+                        <div class='order_same order_cont'> 
+                           <div class='order_store_address'>商家地址：<span>昌平沙河老牛湾3道外婆家店</span></div>
+                        </div>           
+                    </div>
+               </div>
+           </div>
+           <div class='being_order'>
+                <div class='order_state'><label>正在配送订单</label></div>
+                <div class='order_list'>
+                     <div class='order_one'> 
+                        <div class='order_same order_top'>
+                            <div class='img_shop'>
+                                <img src="./images/store_1.png">
+                            </div> 
+                            <div class='order_title'>老鱼头</div>
+                        </div>
+                        <div class='order_same order_bot' >    
+                           <div class='order_id'>订单号:<span>2333329844</span></div> 
+                           <div class='order_tm'>订单时间：<span>2018-05-01 16:00</span></div>
+                        </div> 
+                        <div class='order_same order_cont'> 
+                            <div class='order_custer'>顾客：<span>刘贵平</span></div> 
+                            <div class='order_custer_address'>地址：<span>昌平沙河老牛湾6号道7栋301</span></div>
+                        </div>
+                        <div class='order_same order_cont'> 
+                           <div class='order_store_address'>商家地址：<span>昌平沙河老牛湾3道外婆家店</span></div>
+                        </div>           
+                     </div>
+
+                </div>
+           </div>
+      </div>
+      <div class='rider_right'>
+            <div class='contain_right'>
+                <div id="rider_map"></div>
+            </div>
+      </div>
+   </div>
+</body>
+</html>
