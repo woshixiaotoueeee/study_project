@@ -11,8 +11,55 @@ function init(){
 	getAddressData(customer);
 	queryOrder(1);
 	initHtml(customer);
+	getCollectRestaurant();
 	setCustomerToHtml(customer);
 }
+
+function getCollectRestaurant(){
+	$.ajax({  
+		url: Common.getCollectRestaurant,  
+		type: 'POST',  
+		data: null, 
+		dataType: "json",
+		success: function (returndata) {  
+			if(returndata.state==1){
+				setCollectRestaurant(returndata.responseInfo);
+			}
+			else{
+				layer.msg(returndata.responseInfo, {time:2500});
+			}
+        	 
+		},  
+		error: function (returndata) {  
+        	 layer.msg('未知错误，请刷新页面重试', {time:2500}); 
+        	 layer.close(layerIndex);
+		}  
+    });
+}
+function setCollectRestaurant(restaurantList){
+	var divContent=$(".collect_restaurant");
+	divContent.html("");
+	var strRes='';
+	for(var i=0;i<restaurantList.length;i++){
+		strRes+="<div id='"+restaurantList[i].restaurantId+"' class='cont_shop'> <div class='img_shop'> " +
+				"<img src='../"+restaurantList[i].restaurantImage+"'> </div>  <div class='shop_same shop_title'>"+restaurantList[i].restaurantName+"</div>" +
+				"<div class='shop_same shop_cont'>****共售<span>"+restaurantList[i].orderCount+"份</span> </div>" +
+				"<div class='shop_same shop_bot' > <ul> <li> 起送：<span>"+restaurantList[i].restaurantOfferPrice+"￥</span></li> <li> 配送费：<span>"+restaurantList[i].restaurantDeliveryFee+"￥</span></li>" +
+				"<li><span>30分钟</span></li> </ul></div> </div>";
+	}
+
+	divContent.html(strRes);
+	
+	$('.cont_shop').click(function(){
+		var rtid=$(this)["0"].id;
+		var str='<iframe src="./storeCenter.html?rtid='+rtid+'" name="iframe_a" scrolling="no"></iframe>';
+		
+		$('#section_change').html(str); 
+		$('footer').css('margin-top','-5px'); 
+	})
+}
+
+
 function initHtml(_customer){
 	if(_customer==null)return;
 	

@@ -35,6 +35,10 @@ Common.findOrder=projectDirectory+'/OrderController/findOrder';
 Common.findOrderByOrderId=projectDirectory+'/OrderController/findOrderByOrderId';
 //订单过程线统计接口
 Common.orderStatistics=projectDirectory+'/OrderStatisticsController/orderStatistics';
+//添加收藏店家
+Common.addCollectRestaurant=projectDirectory+'/RestaurantController/addCollectRestaurant';
+//查看收藏店家
+Common.getCollectRestaurant=projectDirectory+'/RestaurantController/findCollectRestaurant';
 
 //获取地址栏参数
 function GetQueryString(name)

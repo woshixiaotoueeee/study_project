@@ -8,7 +8,29 @@ window.onload=function(){
 	}else{
 		getrestaurantInfo(rtid);
 	}
+	
+	$('.coll_store').click(function(){
+		addCollectRestaurant(restaurant.restaurantId);
+    })
 }
+/**添加收藏店家*/
+function addCollectRestaurant(restaurantId){
+	$.ajax({
+		   type: "post",
+		   data:{'restaurantId':restaurantId},
+		   url:Common.addCollectRestaurant,
+		   dataType: "json",
+		   success:function(data){
+			   layer.msg(data.responseInfo, {time:2500});
+		   },
+		   error:function(errordate){
+			   layer.msg('未知错误请刷新页面或联系管理员', {time:2500});
+		   }
+		})
+}
+
+
+
 //获取店家信息
 function getrestaurantInfo(rtid){
 	$.ajax({
