@@ -248,6 +248,11 @@ body,html{
    width:100px;
    color:#666;
 }
+.car_cont .ord_car .car_one .price_one{
+   margin-left: 40px;
+   float:left;
+   color:#fa7c03;
+}
 .car_cont .ord_car .car_one>span:last-child{
    float:right;
    margin-right: 20px;
