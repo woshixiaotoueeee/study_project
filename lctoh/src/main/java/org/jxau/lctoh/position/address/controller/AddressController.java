@@ -13,6 +13,7 @@ import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
 import org.jxau.lctoh.tool.config.conversation.ConversationConfig;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
 import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
+import org.jxau.lctoh.user.basis.exception.UserException;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -90,7 +91,36 @@ public class AddressController extends BaseController{
 		}
 		return toGsonString();
 	}
-	
+	/**
+	 * 根据客户识别码查询地址信息
+	 * @param customerId 客户识别码 String 字符串
+	 * @return 
+	 * <pre>
+	 * json字符串{	
+	 * 	说明：{			
+	 * 		Integer state;			//状态码（整形数字）	
+	 * 		Object responseInfo;	//成功：为  List&lt;Address&gt;类型对象可理解为Address数组,具体属性参考 Addresss实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 * @see org.jxau.lctoh.position.address.domain.Address
+	 */
+	@ResponseBody
+	@RequestMapping(value="/findAddressByCustomer",produces=EncodingConfig.produces)
+	public String findAddressByCustomer(HttpSession session ){
+		Customer customer=(Customer) session.getAttribute(ConversationConfig.customerSession);
+		if(customer==null)responseData.failInfo(ErrorMSG.loginTimerOut);
+		else{
+			try{
+				responseData.successInfo(addressService.findAddressByCustomerId(customer.getCustomerId()));
+			}catch(Exception e){
+				e.printStackTrace();
+				responseData.failInfo(ErrorMSG.selectFail);
+			}
+		}
+		return toGsonString();
+	}
 	
 	/**
 	 * 更新地址信息
@@ -216,8 +246,8 @@ public class AddressController extends BaseController{
 	@RequestMapping(value="/addAddress",produces=EncodingConfig.produces)
 	public String addAddress(Address address,HttpSession session){
 		//验证前台信息
-		if(address==null||address.getAddressId()==null||
-				address.getAddressLatitude()==null||address.getAddressLongitude()==null
+		if(address==null||address.getAddressLatitude()==null||
+				address.getAddressLongitude()==null
 				){
 			responseData.failInfo(ErrorMSG.notKnow);
 		}else if(address.getAddressCity()==null||address.getAddressProvince()==null){

@@ -64,17 +64,17 @@
 			harvest_address_info,
 			harvest_address_latitude,
 			harvest_address_longitude,
-			harvest_address_update_time
+			harvest_address_update_time)
 		values(
 			#{harvestAddressId},
 			#{harvestAddressName},
 			#{harvestAddressProvince},
 			#{harvestAddressCity},
-			#{harvestAddressInfo},
 			#{harvestAddressPhone},
+			#{harvestAddressInfo},
 			#{harvestAddressLatitude},
 			#{harvestAddressLongitude},
-			#{harvestAddressUpdateTime}
+			#{harvestAddressUpdateTime})
 	</insert>
 	
 </mapper>
