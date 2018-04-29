@@ -99,7 +99,7 @@ function  pie_chart(){
 		    title : {
 		        text: '配送订单饼图',
 		        x:'center',
-		        y:'6px',
+		        y:'3px',
 		        textStyle: {
 		            fontSize: 16,
 		            //fontWeight: 'bolder',
@@ -226,7 +226,7 @@ function  line_chart(dataList){
        	 title:{
             text:'完成订单过程线',
             x:'center',
-            top: '5px',
+            top: '0px',
             left: 'center',
             textStyle: {
                 fontSize: 16,
