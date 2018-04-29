@@ -23,6 +23,7 @@
 		               <ul>
 		                  <li class='frist_show' id='my_page'>首页</li>
 		                  <li id='my_order'>我的订单</li>
+		                  <li id='my_shopping_car'>我的购物车</li>
 		                  <li id='contact_us'>联系我们</li>	                
 		               </ul>
 		          </div>
@@ -38,39 +39,30 @@
                            <ul>
                                <li  id='my_center'><div class='img_list'>
                                    <img src="./images/list_1.png">
-                                   </div>个人中心
+                                   </div>个人资料
                                </li>
-                               <li><div class='img_list'><img src="./images/list_2.png"></div>我的收藏
+                               <li id='my_coll'><div class='img_list'><img src="./images/list_2.png"></div>我的收藏
                                </li>
-                               <li><div class='img_list'><img src="./images/list_3.png"></div>我的地址
+                               <li id='my_adress'><div class='img_list'><img src="./images/list_3.png"></div>我的地址
                                </li>
-                               <li><div class='img_list'><img src="./images/list_4.png"></div>退出登录
+                               <li id='sign_out'><div class='img_list'><img src="./images/list_4.png"></div>退出登录
                                </li>
                            </ul>
                        </div> 
 		          </div>
               </div>                                  
          </header>
-         <section id='section_change' style='z-index: 66;position: relative;'>
-            <iframe src="./customer.html" name="iframe_a" scrolling="no"></iframe>           
+         <section id='section_change' >
+              <iframe src="./customer.html" name="iframe_a" scrolling="no"></iframe>           
          </section>
          <div class='notice_show'>
               <div class='notice_pic'>
                  <img src="./images/notice_img/gonggao_icon.png">
               </div>
-              <div class='notice_cont'>
+              <div class='notice_cont' style='display:none'>
                   <iframe src="../ownShare/sysNotice.html?type=120001" name="iframe_a" scrolling="no"></iframe>
               </div> 
-         </div>
-         <div class='shopping_car' style='position: absolute;top:230px;right:313px;z-index:19;height:120px;width:298px;'>
-             <div style='position: relative;z-index: 19;width:260px;'>
-                 <iframe src="./shopingCar.html" ></iframe> 
-             </div>
-             <div class='click_car' id='click_car'>
-                  <span>购物车</span>
-                  <span class='greater'>&rsaquo;</span>
-             </div>             
-         </div>
+         </div> 
          <div class='sec_right'>            
               <div class='img_sec qr_code'><div><img src="./images/code.png"></div></div>
               <div class='img_sec contact_our'>

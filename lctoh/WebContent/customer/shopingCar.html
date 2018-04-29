@@ -5,6 +5,10 @@
 	<!-- 。。。。。。。。。。。图标logo。。。。。。。。。。。 -->
 	<link rel="icon" type="image/gif" href="/lctoh/images/lczxlg.gif" >
     <link rel="stylesheet" type="text/css" href="./css/shopingCar.css">
+    
+    <script src="/lctoh/Common/jquery-1.8.3.js"></script>
+    <script src="/lctoh/Common/layer/layer.js"> </script>
+    <script type="text/javascript" src='./js/shopingCar.js'></script>
 </head>
 <body>
     <div class='car_shop'> 
@@ -13,41 +17,130 @@
         </div>
         <div class='car_cont'> 
             <div class='car_edit'>
-                <label>购物车</label>
-                <span>[清空]</span>
+                <label>购物订单</label>
+               <!--  <span>[清空]</span> -->
                 <div class='pic_car'><img src="./images/shopping_car/buy_1.png"></div>
+            </div>
+            <div class='store_infor'>
+                <div class='menu_single'>
+                          <div class='img_single'>
+		                     <img  src="./images/store_detail/store_pic1.png" style='width:100%;'>
+		                  </div>             
+		                  <div class='single_same'>
+		                     <div class='single_tit'>
+		                        <label >外婆家</label>
+  			                 </div>
+  			                 <div class='single_sales'>
+  			                     <div class='img_score'>
+                                   <img src="./images/store_detail/xingxing.png">
+                                 </div>  			                    
+                             </div> 
+                             <div class='single_price'>				                      
+  			                                                                              配送费<span class='shop_state'>￥25</span>
+  			                     
+  			                 </div>	
+                  </div> 
             </div>
             <div class='ord_car'>
                  <div class='car_one'>
                      <span>鱼香肉丝</span>
-                     <div>
+                     <div class='add_order'>
                          <ul>
                              <li>-</li>
                              <li>2</li>
                              <li>+</li>
                          </ul>
                      </div>
-                     <span>￥60</span>
+                     <span class='unit_price'>￥60</span>
                  </div>
                  <div class='car_one'>
+                     <span>麻婆豆腐</span>
+                     <div class='add_order'>
+                         <ul>
+                             <li>-</li>
+                             <li>2</li>
+                             <li>+</li>
+                         </ul>
+                     </div>
+                     <span class='unit_price'>￥90</span>
                  </div>
                  <div class='car_one'>
+                     <span>肉丝抄蛋</span>
+                     <div class='add_order'>
+                         <ul>
+                             <li>-</li>
+                             <li>2</li>
+                             <li>+</li>
+                         </ul>
+                     </div>
+                     <span class='unit_price'>￥80</span>
                  </div>
             </div>
-            <div class='edit_set'>
-               <div class='pic_car'>
-                  <img src="./images/shopping_car/buy_2.png">
-               </div>
-               <div>
-                  <input type="button" name="" value='结算'>
-               </div>
-            </div>
-        </div>       
-        <!-- <div class='click_car' id='click_car'>
-            <span>购物车</span>
-            <span>&rsaquo;</span>
-        </div> -->
-       
+	            <div class='edit_set'>
+	               <div class='pic_car'>
+	                  <img src="./images/shopping_car/buy_2.png">
+	               </div>
+	               <div class='order_ledger'>￥<span class='ledger_num'>139.90</span></div>
+	                                                
+	            </div>
+          </div> 
+        </div>          
     </div>   
+    <div class='car_address'>
+         <label>收货地址</label> 
+         <div class='edit_infor'>
+              <div class='address_one address_ck'>
+                  <div class='add_name add_show'>
+                      <div class='name_sex'>
+                          <span>王老三</span>
+                          <span>先生</span>
+                          <span class='add_phone add_show'>18770189087</span>
+                      </div>                   
+                  </div>
+                  <div class='add_ress add_show'>
+                        <span>北京市昌平区沙河镇沙阳路18号7区8单元666</span>
+                  </div>
+                  
+              </div>
+              <!-- <div class='address_one address_ck'>
+                  <div class='add_name add_show'>
+                      <div class='name_sex'>
+                          <span>王老三</span>
+                          <span>先生</span>
+                           <span class='add_phone add_show'>18770189087</span>
+                      </div>
+                     
+                  </div>
+                  <div class='add_ress add_show'>
+                     <span>北京市昌平区沙河镇沙阳路18号7区8单元666</span>
+                  </div>
+              </div> -->
+               <div class='address_one address_ck'>
+                  <div class='add_name add_show'>
+                      <div class='name_sex'>
+                          <span>王老三</span>
+                          <span>先生</span>
+                          <span class='add_phone add_show'>18770189087</span>
+                      </div>
+                  </div>
+                  <div class='add_ress add_show'>
+                     <span>北京市昌平区沙河镇沙阳路18号7区8单元666</span>
+                  </div>
+                
+              </div>
+              <div class='address_one address_new'>
+                       <div  id='add_new'>
+                           <div class='ck_img'>
+                               +
+                           </div>
+                           <div class='add_new'>添加新地址</div>
+                       </div>
+              </div>
+         </div>
+         <div class='btn_place_order'>
+             <input type="button" id='place_order' name="" value='确认下单'>
+         </div>
+    </div>	
+   
 </body>
 </html>
