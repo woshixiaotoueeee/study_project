@@ -3,9 +3,64 @@ var addressList=null;
 var orderList=null;
 var map = new BMap.Map();//初始化地图
 $(function(){
+	change_page();//接收参数不同时 跳转到不同的页面（个人资料 1 我的订单2 我的收藏3 我的地址4）
 	init();
 	
 })
+function change_page(){
+	var urlmy=window.location.href;
+    //alert(urlmy+'iframe地址栏'); 
+    //alert(window.location.search);
+    
+   var Request = new Object(); 
+    Request = GetRequest(); 
+    var num_page; 
+    num_page = Request.num; 
+    var len=$('.dec_span').length;
+    //传入参数不同时显示的不一样
+    // $('.dec_span').eq(num_page-1).css('display','block').siblings().css('display','none');
+    if(num_page==1){
+    	/*alert('进入个人资料')*/
+    	$('.infor_left ul li').eq(1).find('.dec_span').css('display','block');
+	    $('.infor_left ul li').eq(1).siblings().find('.dec_span').css('display','none');
+    	//$('.dec_span').eq(0).css('display','block').siblings().css('display','none');
+    	$('.center_cont').eq(0).css('display','block').siblings().css('display','none');
+    }
+    if(num_page==2){
+    	/*alert('进入我的订单')*/
+    	$('.infor_left ul li').eq(2).find('.dec_span').css('display','block');
+	    $('.infor_left ul li').eq(2).siblings().find('.dec_span').css('display','none');
+    	//$('.dec_span').eq(1).css('display','block').siblings().css('display','none');
+    	$('.center_cont').eq(1).css('display','block').siblings().css('display','none');
+    }
+    if(num_page==3){
+    	/*alert('进入我的收藏')*/
+    	$('.infor_left ul li').eq(3).find('.dec_span').css('display','block');
+	    $('.infor_left ul li').eq(3).siblings().find('.dec_span').css('display','none');
+    	//$('.dec_span').eq(2).css('display','block').siblings().css('display','none');
+    	$('.center_cont').eq(2).css('display','block').siblings().css('display','none');
+    }
+    if(num_page==4){
+    	/*alert('进入我的地址')*/
+    	$('.infor_left ul li').eq(4).find('.dec_span').css('display','block');
+	    $('.infor_left ul li').eq(4).siblings().find('.dec_span').css('display','none');
+    	//$('.dec_span').eq(3).css('display','block').siblings().css('display','none');
+    	$('.center_cont').eq(3).css('display','block').siblings().css('display','none');
+    }
+    
+}
+function GetRequest() {   //转化地址参数的函数
+	var url = window.location.search; //获取url中"?"符后的字串 
+	var theRequest = new Object(); 
+	if (url.indexOf("?") != -1) { 
+	var str = url.substr(1); 
+	strs = str.split("&"); 
+	for(var i = 0; i < strs.length; i ++) { 
+		theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]); 
+		} 
+	} 
+	return theRequest; 
+} 
 function init(){
 	getLoginInfo();
 	getAddressData(customer);
@@ -13,6 +68,7 @@ function init(){
 	initHtml(customer);
 	getCollectRestaurant();
 	setCustomerToHtml(customer);
+	
 }
 
 function getCollectRestaurant(){
@@ -323,112 +379,30 @@ function edit_password(_customer){
 }
 /*编辑修改地址*/
 function edit_address(){
-	 var add_new=`<div class='edit_name edit_address'>
-		    <div class='lay_infor'>
-			   <span>姓名</span>
-			   <input type='text' placeholder="请输入您的姓名"/>	
-		    </div>	
-		    <div class='lay_infor sex_infor'>
-			   <span>性别</span>
-			   <div class='edit_sex'>
-				   <input type='radio' class='sex' name='sex' checked/>
-				   <span>先生</span>
-				   <input type='radio' class='sex' name='sex'/>
-				   <span>女士</span>
-			   </div>  
-		    </div>
-		    <div class='lay_infor'>
-			   <span>位置</span>
-			   <select id='sel_address'>
-				  <option value ="volvo">请输入小区或路名</option>
-				  <option value ="saab">Saab</option>
-				  <option value="opel">Opel</option>
-				  <option value="audi">Audi</option>
-			   </select>	
-		    </div>
-		    <div class='lay_infor'>
-			   <span>详细地址</span>
-			   <input type='text' />	
-		    </div>
-		    <div class='lay_infor'>
-			   <span>手机号码</span>
-			   <input type='text' placeholder="请输入您的手机号码"/>	
-		    </div>		    
-		    <div class='lay_infor save_cancel'>
-			    <input type='button' class='edit_save' value='保存'/>
-			    <input type='button' class='edit_cancel' value='取消'/>
-		    </div>			   
-		</div>`;
-	 layer.open({
-		  title: ['修改地址', 'font-size:18px;'],
-		  type: 1,
-		  area: ['544px', '480px'], //宽高
-		  content: add_new
-		});	 	 
+	
+	 var add_edit='./editAddress.html';
+	    layer.open({
+			  title: ['修改地址', 'font-size:18px;'],
+			  type: 2,
+			  shadeClose: true,
+			  shade: 0.2,
+			  area: ['560px', '450px'],
+			  content: add_edit  //iframe的url
+		 }); 
 }
 /*添加新地址*/
 function add_address(){
-	 var add_new=`<div class='edit_name edit_address'>
-		    <div class='lay_infor'>
-			   <span>姓名</span>
-			   <input type='text' placeholder="请输入您的姓名"/>	
-		    </div>	
-		    <div class='lay_infor'>
-			   <span>位置</span>
-			   <input type="text" id="sel_address" />
-			   <div id="searchResultPanel11" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
-		    </div>
-		    <div class='lay_infor'>
-			   <span>详细地址</span>
-			   <input type='text' />	
-		    </div>
-		    <div class='lay_infor'>
-			   <span>手机号码</span>
-			   <input type='text' placeholder="请输入您的手机号码"/>	
-		    </div>	
-		    <div id="r-result">请输入:<input type="text" id="suggestId" size="20" value="1111111" style="width:150px;" /></div>
-			<div class='lay_infor save_cancel'>
-			    <input type='button' class='edit_save' value='保存'/>
-			    <input type='button' class='edit_cancel' value='取消'/>
-		    </div>	
-		    
-		</div>`;
-	 layer.open({
-		  title: ['新添地址', 'font-size:18px;'],
-		  type: 1,
-		  area: ['544px', '480px'], //宽高
-		  content: add_new
-		});	
-	 var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
-				{"input" : "suggestId"
-				,"location" : map
-			});
 
-	ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
-		var str = "";
-		var _value = e.fromitem.value;
-		var value = "";
-		if (e.fromitem.index > -1) {
-			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
-		}    
-		str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
-		
-		value = "";
-		if (e.toitem.index > -1) {
-			_value = e.toitem.value;
-			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
-		}    
-		str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
-		//$("#searchResultPanel").html(str);
-	});
-
-	var myValue;
-	ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
-		var _value = e.item.value;
-		myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
-		//$("#searchResultPanel").html("onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue);
-		//setPlace();
-	});
+	 var add_new='./addAddress.html';
+	    layer.open({
+			  title: ['添加新地址', 'font-size:18px;'],
+			  type: 2,
+			  shadeClose: true,
+			  shade: 0.2,
+			  area: ['560px', '450px'],
+			  content: add_new  //iframe的url
+		 }); 
+	    	
 }
 /*删除地址*/
 function delete_address(_this){
@@ -499,7 +473,7 @@ function center_tabs(_this){
 	   var index=$(_this).index();
 	   if(index==0){
 	     	  return false;
-	       }
+	      }
 	   $(_this).find('>span').css('display','block');
 	   $(_this).siblings().find('>span').css('display','none');
 	      
