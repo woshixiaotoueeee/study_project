@@ -1,22 +1,52 @@
  //骑手订单管理页面
+var rider;
+initDate();
  $(function(){
-     /*初始化数据*/
-	 init();
-	 /*获取时间*/
-	 getTm();
-	 /*骑手订单统计饼图*/
-	 pie_chart();
-	 /*骑手订单统计过程线*/
-	 line_chart();	
 	//初始化时间  必须写在外面  日期控件依赖    lctoh/Common/easyui/jquery.min.js
-	 initDate();
+	// initDate();
+	 
+	 
+
     //点击查询按钮事件
     query_order_chart();
     //订单列表选项卡
- 	order_list_query();
+    order_list_query();
+    
+    
+    qureyLineInfo();
+	 /*骑手订单统计饼图*/
+	// pie_chart();
+	 /*骑手订单统计过程线*/
+	 //line_chart();	
+	
+    
+ 	//
     
  })
- initDate();
+ function init_rider(){
+	$.ajax({
+		   type: "post",
+		   data:null,
+		   url:Common.getRiderLoginInfo,
+		   dataType: "json",
+		   async: false,
+		   success:function(data){
+			   if(data.state==1){
+				   rider=data.responseInfo;
+				   //setRidertoHtml(rider);
+			   }
+			   else{
+				   layer.msg(data.responseInfo, {time:2500});
+				   top.location.href=projectDirectory+"/Login/login.html";
+			   }
+		   },
+		   error:function(errordate){}
+		})
+}
+ 
+ 
+ 
+ 
 //订单列表选项卡函数
  function order_list_query(){
     $(".policy-tabs").tabs({
@@ -29,24 +59,16 @@
     $('.tabs-panels').css('border-color','#eee');
     $('.tabs').find('a').css({'height':'30px','line-height':'28px'});
     
-    //点击显示订单详情
-    $('.order_all .ord_click input').click(function(){
-    	var orderId=123;
-    	order_detail(orderId);//订单详情弹窗页面显示
-    })
-    
  }
- /*
- * 初始化数据
- * */
-function init(){
-	
-}
+
 /*
  * 获取时间
  * */
 function getTm(){
-	/*alert('获取时间');*/
+	var timeObj={};
+	timeObj.etm=dateFtt("yyyy-MM-dd hh:mm:ss",new Date("23:59:59 "+$('#etm').val()));
+	timeObj.stm=dateFtt("yyyy-MM-dd hh:mm:ss",new Date($('#stm').val()));
+	return timeObj;
 }
 /*
  * 点击查询事件
@@ -54,15 +76,107 @@ function getTm(){
 function query_order_chart(){  //点击事件 查询订单画过程线及饼状图
 
 	$('#btn_qurey').click(function(){
-        
-         /*获取时间*/
-	     getTm();
-		 /*骑手订单统计饼图*/
-		 pie_chart();
-		 /*骑手订单统计过程线*/
-		 line_chart();	
+        qureyLineInfo();
 	})
 }
+function qureyLineInfo(){
+	/*获取时间*/
+    var data=getTm();
+    data.riderId=rider.riderId;
+    //过程线
+    $.ajax({
+		   type: "post",
+		   data:data,
+		   url:Common.dispatchingStatistics,
+		   dataType: "json",
+		   success:function(data){
+			   if(data.state==1){
+				   line_chart(data.responseInfo);
+			   }
+			   else{
+				   layer.msg(data.responseInfo, {time:2500});
+			   }
+		   },
+		   error:function(errordate){}
+		})
+	//饼状
+    $.ajax({
+		   type: "post",
+		   data:data,
+		   url:Common.dispatchingStatisticsByState,
+		   dataType: "json",
+		   success:function(data){
+			   if(data.state==1){
+				   pie_chart(data.responseInfo);
+			   }
+			   else{
+				   layer.msg(data.responseInfo, {time:2500});
+			   }
+		   },
+		   error:function(errordate){}
+		})
+    //列表
+    $.ajax({
+		   type: "post",
+		   data:data,
+		   url:Common.findDispatching,
+		   dataType: "json",
+		   success:function(data){
+			   if(data.state==1){
+				   dispatchingToHtml(data.responseInfo);
+			   }
+			   else{
+				   layer.msg(data.responseInfo, {time:2500});
+			   }
+		   },
+		   error:function(errordate){}
+		})
+}
+
+function dispatchingToHtml(dispatchList){
+	var zzps=$("#zzps .tab_content .order_detaile");
+	var zzpsStr='';
+	var pswc=$("#pswc .tab_content .order_detaile");
+	var pswcStr='';
+	var ycdd=$("#ycdd .tab_content .order_detaile");
+	var ycddStr='';
+	
+	var order;
+	var res;
+	var state;
+	for(var i=0;i<dispatchList.legth;i++){
+		order=dispatchList[i].dispatchingOrder;
+		state=dispatchList[i].dispatchingState;
+		res=order.orderRestaurant;
+		var str;
+		str="<div class='order_one' ><div class='ord_time'><div class='time_show'>" +
+			"<span>"+getDate(order.orderCreatTime)+"</span><span>"+getTime(order.orderCreatTime)+"</span>" +
+			"</div></div><div class='pic_img'></div><div class='border_bot'><div class='ord_cont'> " +
+			"<div class='ord_title'>"+res.restaurantName+"</div><div class='ord_inf'></div><div class='ord_number'>" +
+			"<span>订单号：</span> <span >"+order.orderId+"</span></div></div><div class='ord_state'> <span>"+state.stateInfo+"</span>" +
+			"</div><div class='ord_money'><span>"+order.orderPrice+"元</span><span>在线支付</span></div>" +
+			"<div class='ord_click ' ><input class='first_ord' id='"+order.orderId+"' type='button' name='' value='订单详情'></div></div></div>";
+		if(state.stateId<110004){
+			zzpsStr+=str;
+		}else if(state.stateId=110004){
+			pswcStr+=str;
+		}else if(state.stateId>110004){
+			ycddStr+=str;
+		}
+	}
+	zzps.html(zzpsStr);
+	pswc.html(pswcStr);
+	ycdd.html(ycddStr);
+	
+	//点击显示订单详情
+    $('.order_all .ord_click input').click(function(){
+    	var orderId=$(this)[0].id;
+    	order_detail(orderId);//订单详情弹窗页面显示
+    })
+	
+}
+
+
 /*
  * 初始化时间
  * */
@@ -98,26 +212,32 @@ function initDate(){
 /*
  * 统计饼图
  * */
-function  pie_chart(){
-	   var data=[
-	              {
-		            psnm:"配送中",
-		            tm:"2018-05-13 12:00",
-		            num:"23"
-		         },
-		         {
-		            psnm:"已完成配送",
-		            tm:"2018-05-13 12:00",
-		            num:"13"
-		         },
-		         {
-		            psnm:"未完成配送",
-		            tm:"2018-05-13 12:00",
-		            num:"3"
-		         }
-
-	          ];
-	       //alert(data[1].psnm);
+function  pie_chart(typelist){
+	
+	var pszDispatching={
+            psnm:"配送中",
+            num:"0"
+         };
+	var zapsDispatching={
+            psnm:"配送中",
+            num:"0"
+         };
+	var ycDispatching={
+            psnm:"异常订单",
+            num:"0"
+         };
+	for(var i=0;i<typelist;i++){
+		if(typelist[i].type<110004){
+			pszDispatching.num+=typelist[i].count;
+		}else if(typelist[i].type=110004){
+			zapsDispatching.num+=typelist[i].count;
+		}else if(typelist[i].type>110004){
+			ycDispatching.num+=typelist[i].count;
+		}
+		
+	}
+	
+	   var data=[pszDispatching,zapsDispatching,ycDispatching];
 	       var myChartTwo = echarts.init(document.getElementById('mainTwo'));
 	       var optionTwo = {
 		    title : {
@@ -182,9 +302,9 @@ function  pie_chart(){
 /*
  * 统计过程线
  * */
-function  line_chart(){
+function  line_chart(dataList){
 	var myGraph=echarts.init(document.getElementById('mainGraph'));
-    var dataList=[
+    /*var dataList=[
           {
              "ordps": 36, 
              "ordww": 3, 
@@ -227,13 +347,14 @@ function  line_chart(){
 		     "ordid": "30427800", 
 		     "tm": "2018-03-26"
 		 }
-       ]; 
+       ]; */
        //数据处理
     	var ordwcList = [];    //已完成的订单
     	var tms = [];
+    	var item;
     	for(var i=0;i<dataList.length;i++){
-    		var item = dataList[i];
-    		ordwcList.push(item.ordwc) 
+    		item = dataList[i];
+    		ordwcList.push(item.count) 
     		tms.push(item.tm);
     	}
       var optionGragh={
@@ -324,7 +445,7 @@ function  line_chart(){
 
 /*显示订单详情*/
 function order_detail(orderId){
-	 var str='./orderDetail.html';
+	 var str='./orderDetail.html?orderId='+orderId;
      layer.open({
 		  title: ['订单详情', 'font-size:18px;'],
 		  type: 2,

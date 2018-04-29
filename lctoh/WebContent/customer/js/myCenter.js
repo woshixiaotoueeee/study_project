@@ -258,7 +258,7 @@ function edit_name_eail(_customer){
 	//补全信息
 	var str=strEdit.replace("#customerNickname#",_customer.customerNickname);
 	str=str.replace(/#phone#/g,_customer.customerUser.userPhone);
-	str=str.replace("#email#",_customer.customerUser.userEmail);
+	str=str.replace(/#email#/g,_customer.customerUser.userEmail);
 	//性别			_customer.customerUser.userSex
 	_customer.customerUser.userSex='女';
 	str=str.replace("#email#",_customer.customerUser.userEmail);
@@ -631,7 +631,7 @@ function setOrderListToHtml(_orderList){
 			orderHtml+="<div class='order_one' ><div class='ord_time'><div class='time_show'>" +
 			"<span>"+getDate(_orderList[i].orderCreatTime)+"</span><span>"+getTime(_orderList[i].orderCreatTime)+"</span></div></div>" +
 			"<div class='pic_img'></div><div class='border_bot'><div class='ord_cont'>" +
-			"<div class='ord_title'>"+_orderList[i].orderRestaurant.restaurantName+"</div><div class='ord_inf'>尖椒肉丝盖浇饭1份 等3个菜品</div>" +
+			"<div class='ord_title'>"+_orderList[i].orderRestaurant.restaurantName+"</div><div class='ord_inf'></div>" +
 			"<div class='ord_number'><span>订单号：</span><span>"+_orderList[i].orderId+"</span></div>  </div><div class='ord_state'> " +
 			"<span>"+_orderList[i].orderState.stateInfo+"</span> </div><div class='ord_money'> <span>"+_orderList[i].orderPrice+"元</span>" +
 			"<span>在线支付</span></div><div class='ord_click' ><input class='first_ord order_button' id='"+_orderList[i].orderId+"' type='butto' name='' value='订单详情'></div></div></div>";
@@ -640,7 +640,7 @@ function setOrderListToHtml(_orderList){
 			orderHtml+="<div class='order_one' ><div class='ord_time'><div class='time_show'>" +
 			"<span>"+getDate(_orderList[i].orderCreatTime)+"</span><span>"+getTime(_orderList[i].orderCreatTime)+"</span></div></div>" +
 			"<div class='pic_img'></div><div class='border_bot'><div class='ord_cont'>" +
-			"<div class='ord_title'>"+_orderList[i].orderRestaurant.restaurantName+"</div><div class='ord_inf'>尖椒肉丝盖浇饭1份 等3个菜品</div>" +
+			"<div class='ord_title'>"+_orderList[i].orderRestaurant.restaurantName+"</div><div class='ord_inf'></div>" +
 			"<div class='ord_number'><span>订单号：</span><span>"+_orderList[i].orderId+"</span></div>  </div><div class='ord_state'> " +
 			"<span>"+_orderList[i].orderState.stateInfo+"</span> </div><div class='ord_money'> <span>"+_orderList[i].orderPrice+"元</span>" +
 			"<span>在线支付</span></div><div class='ord_click' ><input class='order_button' id='"+_orderList[i].orderId+"' type='butto' name='' value='订单详情'></div></div></div>";
