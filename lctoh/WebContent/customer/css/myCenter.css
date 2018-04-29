@@ -531,11 +531,9 @@ iframe{
   border: none;
   text-align:center;
 }
-.my_center .my_infor .infor_right .my_order .edit_title label:first-child {
-  color: #fa7c03;
-}
 .my_center .my_infor .infor_right .my_order .edit_title label:hover {
   color: #fa7c03;
+  cursor:pointer;
 }
 .my_center .my_infor .infor_right .my_order .edit_title .pic_line {
   float: right;
