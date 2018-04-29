@@ -4,8 +4,9 @@
 	<title>添加地址</title>
 	<link rel="stylesheet" type="text/css" href="./css/addAddress.css">
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=YnD4uKaLCm3OxKqa7poZPFMNamRbzh2S" ></script>
-	<script src="/lctoh/Common/common.js"></script>
+	
 	<script src="/lctoh/Common/jquery-1.8.3.js"></script>
+	<script src="/lctoh/Common/layer/layer.js"> </script>
 	<script src="/lctoh/Common/common.js"></script>
 	<script type="text/javascript" src='./js/addAddress.js'></script>
 	
@@ -14,19 +15,15 @@
     <div class='edit_name edit_address'>
 	    <div class='lay_infor'>
 		   <span>姓名</span>
-		   <input type='text' placeholder="请输入您的姓名"/>	
+		   <input type='text' placeholder="请输入您的姓名" id="addressName"/>	
 	    </div>	
 	    <div class='lay_infor'>
 		   <span>位置</span>
-		   <div id="r-result"><input type="text" id="suggestId" size="20" value="1111111"  /></div>
-	    </div>
-	    <div class='lay_infor'>
-		   <span>详细地址</span>
-		   <input type='text' />	
+		   <div id="r-result"><input type="text" id="suggestId" size="20" value=""  /></div>
 	    </div>
 	    <div class='lay_infor'>
 		   <span>手机号码</span>
-		   <input type='text' placeholder="请输入您的手机号码"/>	
+		   <input type='text' placeholder="请输入您的手机号码" id="addressPhone"/>	
 	    </div>	    
 	    <div class='lay_infor save_cancel'>
 		    <input type='button' class='edit_save' value='保存'/>
