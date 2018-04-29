@@ -19,10 +19,18 @@ Common.updatePasswordByUserId=projectDirectory+'/UserController/updatePasswordBy
 Common.updateCustomer=projectDirectory+'/CustomerController/updateCustomer';
 //获取地址信息
 Common.findAddressByCustomerId=projectDirectory+'/AddressController/findAddressByCustomerId';
+//获取地址信息(id)
+Common.findAddressByAddressId=projectDirectory+'/AddressController/findAddressByAddressId';
 
+
+//添加地址信息
+Common.addAddress=projectDirectory+'/AddressController/addAddress';
 //获取地址信息
 Common.findAddressByCustomer=projectDirectory+'/AddressController/findAddressByCustomer';
-
+//删除地址信息
+Common.deleteAddress=projectDirectory+'/AddressController/deleteAddress';
+//更新地址信息
+Common.updateAddress=projectDirectory+'/AddressController/updateAddress';
 //获取根据城市ID获取店家信息
 Common.getRestaurantCityId=projectDirectory+'/RestaurantController/getRestaurantCityId';
 //获取定位信息
