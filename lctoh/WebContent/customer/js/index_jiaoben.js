@@ -37,7 +37,7 @@ function loadRestaurantCategoryData(rtcList){
 	var rtclength=rtcList.length;
 	var rtcHtml="<li class='first_list restaurant_category' id='all_shop' value='-1'>" +
 				"<div class='img_list' >" +
-				"<img src='./images/bus_type/food_1_1.png'>" +
+				"<img src='./images/bus_type/food_1.png'>" +
 				"</div>全部商家</li>";
 	for(var i=0 ;i<rtclength;i++){
 		rtcHtml+="<li class='restaurant_category' value="+rtcList[i].restaurantCategoryId+">" +

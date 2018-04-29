@@ -6,22 +6,8 @@ function init(){
 	  /*加载主页主体页面*/
 	/* var initStr='<iframe src="./customer.html" name="iframe_a" scrolling="no"></iframe>';
 	 $('#section_change').html(initStr);
-	 $('footer').css('margin-top','-5px'); */
+	 $('footer').css('margin-top','-5px'); */	
 	
-	 //购物车移动
-	 var isLeft=1;
-     $('#click_car').click(function(){
-        if(isLeft==1){
-          $('.shopping_car').animate({right:'0px'},2000);  
-          $(this).find('.greater').html('&lsaquo;');         
-          isLeft=2;
-       }
-       else{
-           $('.shopping_car').animate({right:'22px'},2000); 
-           $(this).find('.greater').html('&rsaquo;');              
-           isLeft=1;
-       }
-     })
 	
 }
 function loadRestaurantHtml(){
@@ -36,19 +22,32 @@ function loadRestaurantHtml(){
 	$('.set_up').mouseover(function(){
 		$('.set_up').css('display','block');
 	})
-   
+    //var num=null; //var url='./个人信息.html?num='+num 一个参数  跳转到我的个人中心时要传的参数
+	
 	//点击我的设置进行调整事件
 	$('.set_up ul li').click(function(){
 		$(this).css('background','#ccc').siblings().css('background','#fff');
 	})
-	$('#my_center').click(function(){ //个人中心
-		//alert('跳到个人中心');     
+	$('#my_center').click(function(){ //个人资料
+		  var num=1;   //1代表进入我的资料页面
+		  //var url='./myCenter.html?num='+num 一个参数
+		  var url='./myCenter.html?num='+num;
+		  var str='<iframe src='+url+' id="iframe_mycoll"  name="iframe_a" scrolling="no"></iframe>'; 
+		  $('#section_change').html(str);
 	})
 	$('#my_coll').click(function(){  //我的收藏
-	   //alert('跳到我的收藏')
+		  var num=3;   //2代表进入我的订单页面
+		  //var url='./myCenter.html?num='+num 一个参数
+		  var url='./myCenter.html?num='+num;
+		  var str='<iframe src='+url+' id="iframe_mycoll"  name="iframe_a" scrolling="no"></iframe>';
+		  $('#section_change').html(str);
 	})
 	$('#my_adress').click(function(){ //我的地址
-	   //alert('跳到我的地址')
+		  var num=4;   //2代表进入我的订单页面
+		  //var url='./myCenter.html?num='+num 一个参数
+		  var url='./myCenter.html?num='+num;
+		  var str='<iframe src='+url+' id="iframe_mycoll"  name="iframe_a" scrolling="no"></iframe>';
+		  $('#section_change').html(str);
 	})
 	$('#sign_out').click(function(){  //退出登录
 	   //alert('跳到登录页面')
@@ -59,16 +58,25 @@ function loadRestaurantHtml(){
    function changePage(){
 	   /*点击我的订单进入我的订单信息*/
 	   $('#my_order').click(function(){
-		   var str='<iframe src="./myCenter.html" name="iframe_a" scrolling="no"></iframe>';
+		    var num=2;   //2代表进入我的订单页面
+		    //var url='./个人信息.html?num='+num 一个参数
+		    var url='./myCenter.html?num='+num;
+		    var str='<iframe src='+url+' id="iframe_mycoll"  name="iframe_a" scrolling="no"></iframe>';
+		   
+		   //var str='<iframe src='+url+' id="iframe_order" name="iframe_a" scrolling="no"></iframe>';
 		   $('#section_change').html(str);
 		   $(this).addClass('frist_show').siblings().removeClass('frist_show');
+		   $('#section_change').css('height','920px');
 	   })
-	    /*点击个人中心进入我的个人信息*/
+	   /* 点击个人中心进入我的个人信息
 	   $('#my_center').click(function(){
 		   var str='<iframe src="./myCenter.html" name="iframe_a" scrolling="no"></iframe>';
 		   $('#section_change').html(str); 
 		   $(this).addClass('frist_show').siblings().removeClass('frist_show');
-	   })
+		   $('#section_change').css('height','920px');
+		   
+	   })*/
+	   
 	    /*点击地址进入定位页面*/
 	   $('#last_loca').click(function(){
 		   $('#section_change').css('width','100%');
@@ -80,22 +88,43 @@ function loadRestaurantHtml(){
 	   $('.cont_shop').click(function(){
 		   var str='<iframe src="./storeCenter.html" name="iframe_a" scrolling="no"></iframe>';
 		   $('#section_change').html(str); 
+		   $('#section_change').css('height','960px');
 	   })
 	    /*点击跳转首页*/
 	    $('#my_page').click(function(){
+	    	$(this).addClass('frist_show').siblings().removeClass('frist_show');
 	        var initStr='<iframe src="./customer.html" name="iframe_a" scrolling="no"></iframe>';
 	   	    $('#section_change').html(initStr);
-	   	   $(this).addClass('frist_show').siblings().removeClass('frist_show');
+	   	 
+	   	    $('#section_change').css('height','860px');
+	   	    
+	    })
+	     /*点击跳转我的购物车页面*/
+	    $('#my_shopping_car').click(function(){
+	    	 $(this).addClass('frist_show').siblings().removeClass('frist_show');
+	         var initStr='<iframe src="./shopingCar.html" name="iframe_a" scrolling="no"></iframe>';
+	   	     $('#section_change').html(initStr);
+	   	     $('#section_change').css('height','760px');
 	    })
 	    /*点击到联系我们*/
 	    $('#contact_us').click(function(){	    
 	        var str='<iframe src="../ownShare/connect.html" name="iframe_a" scrolling="no"></iframe>';
 	   	    $('#section_change').html(str);
 	   	    $(this).addClass('frist_show').siblings().removeClass('frist_show');
+	   	    $('#section_change').css({'height':'860px','width':'100%','margin-left':'0px'});
 	    })
-	    $('footer').css('margin-top','-5px');    
+	   /* $('footer').css('margin-top','-5px');  */  
    }
 	changePage();
+}
+//iframe的高度
+function setIframeHeight(iframe){
+    if(iframe){
+        var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+        if(iframeWin.document.body){
+            iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+        }
+    }
 }
  
  
