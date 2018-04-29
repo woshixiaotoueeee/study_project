@@ -63,7 +63,7 @@ function GetRequest() {   //转化地址参数的函数
 } 
 function init(){
 	getLoginInfo();
-	getAddressData(customer);
+	getAddressData();
 	queryOrder(1);
 	initHtml(customer);
 	getCollectRestaurant();
@@ -134,6 +134,7 @@ function initHtml(_customer){
 	$('#edit_password').click(function(){
 		edit_password(_customer);
 	})
+	
 	//我的地址  新增地址 
 	$("#add_new").unbind("click"); 
 	$('#add_new').click(function(){
@@ -142,7 +143,8 @@ function initHtml(_customer){
 	// 修改地址
 	$(".modify_address").unbind("click"); 
 	$('.modify_address').click(function(){
-	   edit_address();
+		
+	   edit_address($(this)[0].id);
 	   
 	})
 	// 删除地址
@@ -150,6 +152,7 @@ function initHtml(_customer){
 	$('.delete_address').click(function(){
 	   delete_address(this);
 	})
+	
 	/*点击显示订单详情*/
 	$(".my_order .ord_click input").unbind("click"); 
 	$('.my_order .ord_click input').click(function(){
@@ -378,16 +381,19 @@ function edit_password(_customer){
 		
 }
 /*编辑修改地址*/
-function edit_address(){
+function edit_address(id){
 	
-	 var add_edit='./editAddress.html';
+	 var add_edit='./editAddress.html?addressId='+id;
 	    layer.open({
 			  title: ['修改地址', 'font-size:18px;'],
 			  type: 2,
 			  shadeClose: true,
 			  shade: 0.2,
 			  area: ['560px', '450px'],
-			  content: add_edit  //iframe的url
+			  content: add_edit,  //iframe的url
+			  end: function () {
+				  getAddressData();
+	            }
 		 }); 
 }
 /*添加新地址*/
@@ -400,19 +406,35 @@ function add_address(){
 			  shadeClose: true,
 			  shade: 0.2,
 			  area: ['560px', '450px'],
-			  content: add_new  //iframe的url
+			  content: add_new,  //iframe的url
+			  end: function () {
+				  getAddressData();
+	            }
 		 }); 
 	    	
 }
 /*删除地址*/
 function delete_address(_this){
-	aler(_this);
 	layer.open({
 		  title: ['删除地址', 'font-size:14px;'],
 		  content: '是否确认删除？'
 		  ,btn: ['确认',  '取消']
 		  ,yes: function(index, layero){
-		    //按钮【按钮一】的回调
+			  $.ajax({  
+			         url: Common.deleteAddress,  
+			         type: 'POST',  
+			         data: {'addressId':$(this)[0].id}, 
+			         dataType: "json",
+			         success: function (returndata) {
+			        	 layer.msg(returndata.responseInfo, {time:2500});
+			        	 if(returndata.state==1){
+			        		 getAddressData();
+			        	 }
+			         },  
+			         error: function (returndata) {  
+			        	 layer.msg('未知错误请刷新页面重试', {time:2500}); 
+			         }  
+			    });
 		  }
 		  ,cancel: function(){ 
 		    //右上角关闭回调
@@ -503,13 +525,13 @@ function getLoginInfo(){
 /**
  * 获取客户地址信息
  * */
-function getAddressData(_customer){
+function getAddressData(){
 	if(_customer==null)return;
 	$.ajax({
 	   type: "post",
-	   url:Common.findAddressByCustomerId,
+	   url:Common.findAddressByCustomer,
 	  // async: false,
-	   data: {'customerId':_customer.customerId}, 
+	   data: null, 
 	   dataType: "json",
 	   success:function(data){
 		   if(data.state==1){
@@ -600,18 +622,40 @@ function setCustomerToHtml(_customer){
  * 设置地址信息
  * */
 function setAddressListToHtml(_addressList){
-	/*
+	
 	if(_addressList==null)return;
 	var addressHtml='';
-	
-	
+	for(var i=0;i<_addressList.length;i++){
+		addressHtml+="<div class='address_one'><div class='add_name add_show'><div class='name_sex'><span>"+_addressList[i].addressName+"</span>" +
+				"<span></span></div><div class='modify_del'><span class='modify_address' id='"+_addressList[i].addressId+"'>修改</span>" +
+				"<span class='delete_address' id='"+_addressList[i].addressId+"'>删除</span></div></div><div class='add_ress add_show'>" +
+				"<span>"+_addressList[i].addressProvince+_addressList[i].addressCity+_addressList[i].addressInfo+"</span></div><div class='add_phone add_show'>" +
+				"<span>"+_addressList[i].addressPhone+"</span></div></div>";
+		
+	}
+
 	addressHtml+="<div class='address_one address_new'>" +
 			"<div  id='add_new'><div class='ck_img'>+</div><div class='add_new'>添加新地址</div></div>"+
 			"</div>";
-	//var addressDiv=
 	$(".my_address .edit_cont .edit_infor").html(addressHtml);
 	
-	*/
+	//我的地址  新增地址 
+	$("#add_new").unbind("click"); 
+	$('#add_new').click(function(){
+	   add_address();
+	})
+	// 修改地址
+	$(".modify_address").unbind("click"); 
+	$('.modify_address').click(function(){
+		
+	   edit_address($(this)[0].id);
+	   
+	})
+	// 删除地址
+	$(".delete_address").unbind("click"); 
+	$('.delete_address').click(function(){
+	   delete_address(this);
+	})
 }
 
 
