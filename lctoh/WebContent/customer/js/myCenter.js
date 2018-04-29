@@ -445,8 +445,8 @@ function order_graph(){
 			  type: 2,
 			  title: ['订单统计图表','font-size:18px;'],
 			  shadeClose: true,
-			  shade: 0.8,
-			  area: ['780px', '500px'],
+			  shade: 0.2,
+			  area: ['820px', '480px'],
 			  content: 'orderGraph.html?customerId='+customer.customerId  //iframe的url
 			}); 
 	 })  
