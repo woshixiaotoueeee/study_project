@@ -66,7 +66,7 @@
 			rider.rider_update_time=#{riderUpdateTime},
 			rider.rider_user_id=#{riderUser.userId},
 			rider.rider_city_id=#{riderCity.cityId},
-			rider.rider_state_id={riderState.stateId}
+			rider.rider_state_id=#{riderState.stateId}
 		where
 			rider.rider_id=#{riderId}
 	</update>

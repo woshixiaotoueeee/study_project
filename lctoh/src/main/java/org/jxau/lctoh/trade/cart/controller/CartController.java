@@ -210,14 +210,14 @@ public class CartController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/cartToOrder",produces=EncodingConfig.produces)
-	public String cartToOrder(Cart cart,HttpSession session){
+	public String cartToOrder(Cart cart,String addressId,HttpSession session){
 		try {
 			cart = getCartInSession(session);
 			Customer orderCustomer=(Customer)session.getAttribute(ConversationConfig.customerSession);
 			if(orderCustomer==null){
 				responseData.failInfo(ErrorMSG.loginTimerOut);
 			}else{
-				String id=cartService.putCartToOrder(cart, orderCustomer);
+				String id=cartService.putCartToOrder(cart, orderCustomer,addressId);
 				responseData.successInfo(orderService.findOrderByOrderId(id));
 			}
 		} catch (CartException e) {

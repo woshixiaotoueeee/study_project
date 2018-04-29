@@ -14,6 +14,7 @@ import org.jxau.lctoh.trade.order.dao.HarvestAddressDao;
 import org.jxau.lctoh.trade.order.dao.OrderDao;
 import org.jxau.lctoh.trade.order.dao.OrderItemDao;
 import org.jxau.lctoh.trade.order.domain.Order;
+import org.jxau.lctoh.user.customer.dao.CustomerDao;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.rider.dao.DispatchingDao;
 import org.jxau.lctoh.user.rider.domain.Dispatching;
@@ -32,6 +33,8 @@ public class CartService {
 	
 	@Autowired
 	private OrderDao orderDao;
+	@Autowired
+	private CustomerDao customerDao;
 	@Autowired
 	private OrderItemDao orderItemDao;
 	@Autowired
@@ -104,20 +107,23 @@ public class CartService {
 	 * 将购物车中的商品生成订单
 	 * @param cart
 	 * @param orderCustomer
+	 * @param addressId 
 	 * @throws CartException
 	 */
 	@Transactional(rollbackFor = Exception.class)
-	public String  putCartToOrder(Cart cart,Customer orderCustomer ) throws CartException{
+	public String  putCartToOrder(Cart cart,Customer orderCustomer, String addressId ) throws CartException{
 		
-		Order order=cart.toOrder(orderCustomer);
+		Address address=addressDao.findAddressByAddressId(addressId);
 		
-		/*
+		Order order=cart.toOrder(orderCustomer,address);
+		
+		
 		if(orderCustomer.getCustomerBalance().doubleValue()<order.getOrderPrice().doubleValue()){
 			throw new CartException(ErrorMSG.insufficienFunds);
 		}
 		orderCustomer.setCustomerBalance(orderCustomer.getCustomerBalance().subtract(order.getOrderPrice()));
 		customerDao.updateCustomer(orderCustomer);
-		*/
+		order.setOrderState(new State(100001));
 		Dispatching dispatching=new Dispatching();
 		dispatching.setDispatchingOrder(order);
 		
@@ -125,7 +131,7 @@ public class CartService {
 		dispatching.setDispatchingState(dispatchingState);
 		
 		orderDao.addOrder(order);
-		//harvestAddressDao.addHarvestAddress(order.getOrderHarvestAddress());
+		harvestAddressDao.addHarvestAddress(order.getOrderHarvestAddress());
 		orderItemDao.addOrderItemList(order.getOrderItemList());
 		dispatchingDao.addDispatching(dispatching);
 		
