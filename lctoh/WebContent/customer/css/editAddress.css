@@ -1,0 +1,90 @@
+.edit_name {
+  width: 100%;
+  height: 100%;
+/*   border:1px solid red; */
+}
+.edit_name .lay_infor {
+  /*混合代码*/
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  position: relative;
+  margin-top: 20px;
+}
+.edit_name .lay_infor span {
+  font-size: 14px;
+  width: 100px;
+  display: block;
+  float: left;
+  height: 42px;
+  line-height: 42px;
+  margin-left: 20px;
+  text-align: right;
+}
+.edit_name .lay_infor input {
+  font-size: 12px;
+  width: 300px;
+  display: block;
+  float: left;
+  height: 36px;
+  line-height: 36px;
+  color: #999999;
+  margin-left: 21px;
+  outline: none;
+  padding: 3px 10px;
+}
+.edit_name .lay_infor .edit_sex span {
+  width: 30px;
+  margin-left: 3px;
+  line-height: 20px;
+}
+.edit_name .lay_infor .sex {
+  width: 14px;
+  height: 14px;
+  margin-top: 3px;
+}
+.edit_name .lay_infor .save_cancel {
+  margin-top: 30px;
+}
+.edit_name .lay_infor .edit_save {
+  width: 146px;
+  height: 42px;
+  text-align: center;
+  font-size: 18px;
+  margin-right: 40px;
+  margin-left: 90px;
+  background: #fa7c03;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.edit_name .lay_infor .edit_cancel {
+  width: 146px;
+  height: 42px;
+  text-align: center;
+  font-size: 18px;
+  background: #e0e0e0;
+  color: #333333;
+  border: none;
+  cursor: pointer;
+}
+.edit_name .sex_infor {
+  height: 20px;
+}
+.edit_name .sex_infor span {
+  line-height: 20px;
+}
+/* 新增地址 位置下拉列表*/
+#sel_address {
+  font-size: 12px;
+  width: 324px;
+  display: block;
+  float: left;
+  height: 42px;
+  line-height: 42px;
+  color: #999999;
+  margin-left: 21px;
+  outline: none;
+  padding: 3px 10px;
+}
+/*我的地址*/

@@ -129,6 +129,9 @@ input:hover {
 }
 .orderDetail .store_infor .right_inf .order_num .number_one {
   width: 266px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .orderDetail .store_infor .right_inf .order_num .phone_st {
   margin-left: 20px;
