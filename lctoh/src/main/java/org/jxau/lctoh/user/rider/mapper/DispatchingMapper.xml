@@ -99,4 +99,45 @@
 			and dispatching.dispatching_rider_id=#{dispatchingRiderId}
 		order by dispatching.dispatching_update_time
 	</select>
+	
+	
+	<select id="getRiderDispatching"  resultMap="DispatchingResultMap">
+		SELECT
+			dispatching.dispatching_id,
+			dispatching.dispatching_rider_id,
+			dispatching.dispatching_state_id,
+			dispatching.dispatching_update_time
+		FROM
+			dispatching
+		where
+			dispatching.dispatching_delete_or_not=1
+			and dispatching.dispatching_state_id&gt;110001
+			and dispatching.dispatching_state_id&lt;110004
+			and dispatching.dispatching_rider_id=#{dispatchingRiderId}
+		order by dispatching.dispatching_update_time
+	</select>
+	
+	<!-- 时间段+客户或店家识别码 -->
+	<select id="findDispatching"  resultMap="DispatchingResultMap">
+		SELECT
+			dispatching.dispatching_id,
+			dispatching.dispatching_rider_id,
+			dispatching.dispatching_state_id,
+			dispatching.dispatching_update_time
+		FROM
+			dispatching
+		where
+			dispatching.dispatching_delete_or_not=1
+			<if test="stm != null and stm ==''" >
+				and dispatching.dispatching_update_time&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
+			</if>
+			<if test="etm != null and etm ==''" >
+				and dispatching.dispatching_update_time&lt;=str_to_date(#{etm},'%Y-%m-%d %H:%i:%s')
+			</if>
+			<if test="riderId != null and riderId ==''" >
+				and dispatching.dispatching_rider_id=#{riderId}
+			</if>
+		order by dispatching.dispatching_update_time desc
+	</select>
+	
 </mapper>

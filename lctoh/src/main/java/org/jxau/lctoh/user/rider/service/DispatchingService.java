@@ -3,6 +3,7 @@ package org.jxau.lctoh.user.rider.service;
 
 import java.util.List;
 
+import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQureyModel;
 import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
 import org.jxau.lctoh.trade.order.dao.OrderDao;
@@ -126,5 +127,16 @@ public class DispatchingService {
 	 */
 	public List<Dispatching> getDispatchingByRiderAndState(Integer dispatchingStateId,String dispatchingRiderId){
 		return dispatchingDao.getDispatchingByRiderAndState(dispatchingStateId, dispatchingRiderId);
+	}
+	
+	
+	
+	public List<Dispatching> getRiderDispatching(String riderId) {
+		return dispatchingDao.getRiderDispatching(riderId);
+		
+	}
+
+	public List<Dispatching> findDispatching(OrderStatisticsQureyModel osqm) {
+		return dispatchingDao.findDispatching(osqm);
 	}
 }

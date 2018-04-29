@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQureyModel;
 import org.jxau.lctoh.tool.base.dao.BaseDao;
 import org.jxau.lctoh.user.rider.domain.Dispatching;
 import org.jxau.lctoh.user.rider.mapper.DispatchingMapper;
@@ -84,6 +85,14 @@ public class DispatchingDao extends BaseDao {
 	 */
 	public List<Dispatching> getDispatchingByRiderAndState(Integer dispatchingStateId,String dispatchingRiderId){
 		return dispatchingMapper.getDispatchingByRiderAndState(dispatchingStateId, dispatchingRiderId);
+	}
+	public List<Dispatching> getRiderDispatching(String riderId) {
+		
+		return dispatchingMapper.getRiderDispatching( riderId);
+	}
+	public List<Dispatching> findDispatching(OrderStatisticsQureyModel osqm) {
+		
+		return dispatchingMapper.findDispatching( osqm);
 	}
 
 }

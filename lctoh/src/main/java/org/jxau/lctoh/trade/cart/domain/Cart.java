@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.type.Alias;
+import org.jxau.lctoh.position.address.domain.Address;
 import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.config.error.ErrorMSG;
@@ -160,10 +161,11 @@ public class Cart {
 	/**
 	 * 根据购物车生成订单
 	 * @param orderCustomer
+	 * @param address 
 	 * @param harvestAddress
 	 * @return Order
 	 */
-	public Order toOrder(Customer orderCustomer){
+	public Order toOrder(Customer orderCustomer, Address address){
 		// 创建订单对象
 		Order order = new Order();
 		order.setOrderId(Tools.getRandomString(32));// 设置订单编号
@@ -173,7 +175,9 @@ public class Cart {
 		order.setOrderState(orderState);			//设置未付款状态
 		
 		order.setOrderCustomer(orderCustomer);		//订单所属用户
-		//order.setOrderHarvestAddress(harvestAddress);//配送地址
+		
+		order.setOrderHarvestAddress(address.toHarvestAddress(order.getOrderId()));//配送地址
+		
 		order.setOrderRestaurant(restaurant);		//订单所属餐馆
 		// 创建订单条目
 		List<OrderItem> orderItemList = new ArrayList<OrderItem>();

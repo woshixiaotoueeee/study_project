@@ -3,6 +3,7 @@ package org.jxau.lctoh.user.rider.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQureyModel;
 import org.jxau.lctoh.user.rider.domain.Dispatching;
 
 public interface DispatchingMapper {
@@ -50,4 +51,8 @@ public interface DispatchingMapper {
 	 * @return
 	 */
 	public List<Dispatching> getDispatchingByRiderAndState(@Param("dispatchingStateId")Integer dispatchingStateId,@Param("dispatchingRiderId")String dispatchingRiderId);
+
+	public List<Dispatching> getRiderDispatching(@Param("dispatchingRiderId")String dispatchingRiderId);
+
+	public List<Dispatching> findDispatching(OrderStatisticsQureyModel osqm);
 }

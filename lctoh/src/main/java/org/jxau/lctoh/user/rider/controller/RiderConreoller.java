@@ -1,11 +1,12 @@
 package org.jxau.lctoh.user.rider.controller;
 
-import java.math.BigDecimal;
+
 import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQureyModel;
 import org.jxau.lctoh.position.region.domain.City;
 import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.tool.base.controller.BaseController;
@@ -244,8 +245,10 @@ public class RiderConreoller extends BaseController {
 				session.setAttribute(ConversationConfig.riderSession, _rider);
 				ServletContext servletContext=session.getServletContext();
 				Map map=(Map) servletContext.getAttribute(ConversationConfig.riderContext);
-				map.put(_rider.getRiderId(), _rider);
-				servletContext.setAttribute(ConversationConfig.riderContext, map);
+				if(map.get(_rider.getRiderId())!=null){
+					map.put(_rider.getRiderId(), _rider);
+					servletContext.setAttribute(ConversationConfig.riderContext, map);
+				}
 				responseData.successInfo(SuccessMSG.successMSG);
 			}
 		} catch (RiderException e) {
@@ -267,7 +270,7 @@ public class RiderConreoller extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/updateRiderState",produces=EncodingConfig.produces)
-	private String updateRiderState(Rider rider,Integer stateType, HttpSession session){
+	public String updateRiderState(Rider rider,Integer stateType, HttpSession session){
 		try {
 			rider=getRiderInSession(session);
 			if(stateType==null){
@@ -321,10 +324,10 @@ public class RiderConreoller extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/updateRider",produces=EncodingConfig.produces)
-	private String updateRider(Rider rider,City city,User user, HttpSession session){
+	public String updateRider(Rider rider,City city,User user, HttpSession session){
 		try {
 			Rider _rider=getRiderInSession(session);
-			if(rider.getRiderName()==null||city.getCityId()==null||
+			if(rider.getRiderName()==null||//city.getCityId()==null||
 					user.getUserEmail()==null||user.getUserPhone()==null||
 					user.getUserSex()==null
 					){
@@ -332,7 +335,7 @@ public class RiderConreoller extends BaseController {
 			}else{
 				
 				_rider.setRiderName(rider.getRiderName());
-				_rider.setRiderCity(city);
+				//_rider.setRiderCity(city);
 				User _user=_rider.getRiderUser();
 				_user.setUserEmail(user.getUserEmail());
 				_user.setUserPhone(user.getUserPhone());
@@ -370,5 +373,69 @@ public class RiderConreoller extends BaseController {
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping(value="/getRiderLoginInfo",produces=EncodingConfig.produces)
+	public String getRiderLoginInfo(HttpSession session){
+		try {
+			responseData.successInfo(getRiderInSession(session));
+		} catch (RiderException e) {
+			e.printStackTrace();
+			responseData.failInfo(e.getMessage());
+		}
+		
+		return toGsonString();
+	}
+	/**获取正在配送的订单*/
+	@ResponseBody
+	@RequestMapping(value="/getRiderDispatching",produces=EncodingConfig.produces)
+	public String getRiderDispatching(Rider rider,HttpSession session){
+		try {
+			rider=getRiderInSession(session);
+			;
+			
+			
+			responseData.successInfo(dispatchingService.getRiderDispatching(rider.getRiderId()));
+		} catch (RiderException e) {
+			e.printStackTrace();
+			responseData.failInfo(e.getMessage());
+		}
+		
+		return toGsonString();
+	}
+	/**
+	 * 查询订单（根据时间）
+	 * @param orderStatisticsQureyModel
+	 * <pre>
+	 * orderStatisticsQureyModel 说明
+	 * orderStatisticsQureyModel{
+	 * 	stm String 统计开始时间	格式：2011-12-31 00:00:00
+	 * 	etm Date 统计结束时间 格式：2011-12-31 00:00:00
+	 *riderId  String
+	 * }
+	 * </pre>
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 */
+	@ResponseBody
+	@RequestMapping(value="/findDispatching",produces=EncodingConfig.produces)
+	public String findDispatching(OrderStatisticsQureyModel osqm){
+		try{
+			responseData.successInfo(dispatchingService.findDispatching(osqm));
+		}catch(Exception e){
+			e.printStackTrace();
+			responseData.failInfo(ErrorMSG.selectFail);
+		}
+			
+		
+		return toGsonString();
+	}
 	
 }
