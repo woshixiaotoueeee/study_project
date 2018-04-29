@@ -19,6 +19,10 @@ Common.updatePasswordByUserId=projectDirectory+'/UserController/updatePasswordBy
 Common.updateCustomer=projectDirectory+'/CustomerController/updateCustomer';
 //获取地址信息
 Common.findAddressByCustomerId=projectDirectory+'/AddressController/findAddressByCustomerId';
+
+//获取地址信息
+Common.findAddressByCustomer=projectDirectory+'/AddressController/findAddressByCustomer';
+
 //获取根据城市ID获取店家信息
 Common.getRestaurantCityId=projectDirectory+'/RestaurantController/getRestaurantCityId';
 //获取定位信息
@@ -29,6 +33,11 @@ Common.findNoticeByStateId=projectDirectory+'/NoticeController/findNoticeByState
 Common.getRestaurantByRestaurantId=projectDirectory+'/RestaurantController/getRestaurantByRestaurantId';
 //添加菜肴至购物车
 Common.addDishCart=projectDirectory+'/CartController/addDishCart';
+//获取购物车信息购物车
+Common.getCart=projectDirectory+'/CartController/getCart';
+//生成订单
+Common.cartToOrder=projectDirectory+'/CartController/cartToOrder';
+
 //查询订单
 Common.findOrder=projectDirectory+'/OrderController/findOrder';
 //查询订单(id)
