@@ -1,7 +1,7 @@
  //骑手订单管理页面
 var rider;
 initDate();
- $(function(){
+$(function(){
 	//初始化时间  必须写在外面  日期控件依赖    lctoh/Common/easyui/jquery.min.js
 	// initDate();
 	 
