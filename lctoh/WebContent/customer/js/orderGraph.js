@@ -87,7 +87,7 @@ function  pie_chart(){
 		            num:"13"
 		         },
 		         {
-		            psnm:"未完成配送",
+		            psnm:"异常订单",
 		            tm:"2018-05-13 12:00",
 		            num:"3"
 		         }
@@ -98,15 +98,22 @@ function  pie_chart(){
 	       var optionTwo = {
 		    title : {
 		        text: '配送订单饼图',
-		        x:'center'
+		        x:'center',
+		        y:'6px',
+		        textStyle: {
+		            fontSize: 16,
+		            //fontWeight: 'bolder',
+		            color: '#333'          // 主标题文字颜色
+		        }
 		    },
 		    tooltip : {
 		        trigger: 'item',
 		        formatter: "{a} <br/>{b} : {c} ({d}%)"
 		    },
 		    legend: {
-		        orient: 'vertical',
-		        left: 'left',
+		        //orient: 'vertical',
+		        bottom: 6,
+                left: 'center',
 		        data: [data[0].psnm,data[1].psnm,data[2].psnm]
 		    },
 		    series : [
@@ -116,10 +123,28 @@ function  pie_chart(){
 		            radius : '55%',
 		            center: ['50%', '60%'],
 		            data:[
-		                {value:data[0].num, name:data[0].psnm},
-		                {value:data[1].num, name:data[1].psnm},
-		                {value:data[2].num, name:data[2].psnm}
-		            ],
+		                {value:data[0].num, name:data[0].psnm,
+		                 itemStyle: {
+	                      normal: {
+	                      	 color: "#FFFF00"
+	                          }
+	                      }
+	                    },
+		                {value:data[1].num, name:data[1].psnm,
+	                     itemStyle: {
+	                      normal: {
+	                      	 color: "green"
+	                          }
+	                      }
+		                },
+		                {value:data[2].num, name:data[2].psnm,
+	                      itemStyle: {
+	                         normal: {
+	                      	   color: "#ef4a1e"
+	                            }
+	                       }
+		                }
+		              ],
 		            itemStyle: {
 		                emphasis: {
 		                    shadowBlur: 10,
@@ -142,6 +167,7 @@ function  line_chart(dataList){
              "ordps": 36, 
              "ordww": 3, 
 		     "ordwc": 145, 
+		     "ordprice": 165, 
 		     "ordid": "30427800", 
 		     "tm": "2018-03-21  "
 		 },
@@ -149,6 +175,7 @@ function  line_chart(dataList){
              "ordps": 26, 
              "ordww": 0, 
 		     "ordwc": 165, 
+		     "ordprice": 155, 
 		     "ordid": "30427800", 
 		     "tm": "2018-03-22 "
 		 },
@@ -156,6 +183,7 @@ function  line_chart(dataList){
              "ordps": 37, 
              "ordww": 6, 
 		     "ordwc": 145, 
+		     "ordprice": 145, 
 		     "ordid": "30427800", 
 		     "tm": "2018-03-23"
 		 },
@@ -163,6 +191,7 @@ function  line_chart(dataList){
              "ordps": 7, 
              "ordww": 0, 
 		     "ordwc": 135, 
+		     "ordprice": 115, 
 		     "ordid": "30427800", 
 		     "tm": "2018-03-24"
 		 },
@@ -170,6 +199,7 @@ function  line_chart(dataList){
              "ordps": 9, 
              "ordww": 0, 
 		     "ordwc": 145, 
+		     "ordprice": 145, 
 		     "ordid": "30427800", 
 		     "tm": "2018-03-25"
 		 },
@@ -177,16 +207,19 @@ function  line_chart(dataList){
              "ordps": 6, 
              "ordww": 0, 
 		     "ordwc": 125, 
+		     "ordprice": 185, 
 		     "ordid": "30427800", 
 		     "tm": "2018-03-26"
 		 }
        ]; 
        //数据处理
     	var ordwcList = [];    //已完成的订单
+    	var ordprice=[];       //消费额
     	var tms = [];
     	for(var i=0;i<dataList.length;i++){
     		var item = dataList[i];
-    		ordwcList.push(item.ordwc) 
+    		ordwcList.push(item.ordwc);
+    		ordprice.push(item.ordprice);
     		tms.push(item.tm);
     	}
       var optionGragh={
@@ -221,12 +254,14 @@ function  line_chart(dataList){
   		    				var table = '<table border="1"  bordercolor="#a0c6e5" style="width:100%;text-align:center"><tbody><tr bgcolor="lightgray">'
   		    					
   		    						  + '<td>时间</td>'
-  		    						  + '<td>' + series[0].name + '</td>'		          		    						  
+  		    						  + '<td>' + series[0].name + '</td>'
+  		    						  + '<td>' + series[1].name + '</td>'	
   		    						  + '</tr>';
   		    				for(var i=0,l=axisData.length; i<l; i++){
   		    					table += '<tr>'
   		    						  + '<td>' + axisData[i] + '</td>'
-  		    						  + '<td>' + series[0].data[i] + '</td>'  		    						          		    						
+  		    						  + '<td>' + series[0].data[i] + '</td>'
+  		    						  + '<td>' + series[1].data[i] + '</td>' 
   		    						  + '</tr>';
   		    				}
   		    				table += '</tbody></table>';
@@ -244,7 +279,7 @@ function  line_chart(dataList){
 	    legend: {
 	       
 	        top: 30, 
-	        data: '已完成订单'
+	        data: ['已完成订单','消费额']
 	    },
 	    xAxis: {
 	    	type: 'category',
@@ -260,16 +295,27 @@ function  line_chart(dataList){
                 formatter: '{value} 单'
               }				         
 	    },
-	    series: {
+	    series:[ {
 		            name: '已完成订单',
+		            type:'line', 
+		            itemStyle: {
+		                normal: {
+		                    color: "#008000"
+		                  }
+		                },
+		            data: ordwcList
+		       },
+		       {
+		            name: '消费额',
 		            type:'line', 
 		            itemStyle: {
 		                normal: {
 		                    color: "#FF6666"
 		                  }
 		                },
-		            data: ordwcList
-		       }
+		             data: ordprice
+		         }
+		       ]
 
        }
     myGraph.setOption(optionGragh);
