@@ -22,10 +22,10 @@ ul li {
   float: left;
 }
 iframe{
-	height:auto;
+	height:100%;
 	width: 100%;
 	border:none; /*iframe的边框设置为没有*/		
-	overflow: hidden;
+	/* overflow: hidden; */
 	margin: 0;
 	padding: 0;
 }
@@ -33,7 +33,7 @@ iframe{
   height: auto;
   width:1204px;
   margin: 0 auto;
-  background: #fff;
+  background: #eee;
  /*  border: 1px solid red; */
   font-size: 14px;
   position: relative;
@@ -594,6 +594,8 @@ iframe{
 }
 .my_center .my_infor .infor_right .my_order .order_infor .order_detaile {
   width: 100%;
+  height:400px;
+  overflow-y:auto;
 }
 .my_center .my_infor .infor_right .my_order .order_infor .order_detaile .order_one {
   height: 118px;
@@ -637,7 +639,7 @@ iframe{
   float: left;
   display: inline-block;
   height: 100%;
-  width: 862px;
+  width: 842px;
   margin-left: 38px;
   border-bottom: 2px solid #ccc;
 }
@@ -727,7 +729,7 @@ iframe{
 }
 .my_center .my_infor .infor_right .my_collection .collect_restaurant{
 	overflow-y:auto;
-	height:400px;
+	height:440px;
 }
 .my_center .my_infor .infor_right .my_collection .cont_shop {
   width: 276px;
@@ -794,10 +796,14 @@ iframe{
   border: 1px solid #dddbdb;
 }
 .my_center .my_infor .infor_right .my_address {
-  height: 400px;
+  height: 502px;
   display: none;
 }
-.my_center .my_infor .infor_right .my_address .edit_infor .address_one {
+.my_center .my_infor .infor_right .my_address .address_list {
+  height: 440px;
+  overflow-y:auto;
+}
+.my_center .my_infor .infor_right .my_address .edit_infor .address_one{
   width: 256px;
   height: 110px;
   margin-top: 20px;
@@ -828,6 +834,12 @@ iframe{
 }
 .my_center .my_infor .infor_right .my_address .edit_infor .address_one .add_name .modify_del span:hover {
   cursor: pointer;
+}
+.my_center .my_infor .infor_right .my_address .edit_infor .address_one .add_ress span{
+	width:206px;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .my_center .my_infor .infor_right .my_address .edit_infor .address_one .add_phone {
   margin-top: 6px;
