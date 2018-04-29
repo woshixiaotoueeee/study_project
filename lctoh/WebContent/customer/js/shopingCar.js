@@ -1,10 +1,7 @@
 //结算购物车
 $(function(){
 	//初始化数据  订单及地址数据刷新
-	init_shopping_car();
-	
-	//点击确认下单函数
-	place_order();
+	init_shopping_car();	
 	
 	//清空购物车
 	clear_car();
@@ -12,6 +9,8 @@ $(function(){
 	confirm_address();
 	//添加新地址
 	add_address();
+	//点击确认下单函数
+	place_order();
 	
 })
 function init_shopping_car(){
@@ -27,7 +26,18 @@ function place_order(){
 		  btn: ['确认','取消'],//按钮
 		  shade: 0.2,
 			}, function(){
-			  layer.msg('下单成功', {icon: 1, time: 1000});
+				alert($('.unit_price').html());
+				var cust_obj={};
+				//配送客户的名字
+				cust_obj.name=$('.address_checked').find('.cust_name').html();
+				//配送客户的电话
+				cust_obj.phone=$('.address_checked').find('.cust_phone').html();
+				//配送客户的地址
+				cust_obj.address=$('.address_checked').find('.cust_address').html();
+				alert(cust_obj.address);
+				alert(cust_obj.name);
+			    layer.msg('下单成功', {icon: 1, time: 1000});
+			    
 			  
 			}, function(){
 			    layer.msg('取消成功', {
@@ -43,7 +53,8 @@ function clear_car(){//清空购物车
 }
 function confirm_address(){//地址的选择
 	$('.edit_infor').find('.address_ck').click(function(){
-		$(this).css({'border-color':'#fa7c03','box-shadow':'0px 0px 2px #fa7c03'}).siblings().css({'border-color':'#dddbdb','box-shadow':'0px 0px 2px #aaa'});
+	
+		$(this).addClass("address_checked").siblings().removeClass("address_checked");
 	})
 }
 function add_address(){//添加新地址
