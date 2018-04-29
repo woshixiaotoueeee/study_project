@@ -19,6 +19,10 @@ ul li{
 	font-family: 宋体;
 	color:#fff;
 	position: relative;
+	
+}
+img{
+	width:100%;
 }
 /*头部*/
 /*头部*/
@@ -138,9 +142,9 @@ ul li{
 	right:4px;
 	content:'';
 	border: 6px solid transparent;
-          height: 0;
-          width: 0;
-          border-top-color: #fff;
+    height: 0;
+    width: 0;
+    border-top-color: #fff;
 }
 .content header  .header-wrap .set_list .set_up{
 	position: absolute;
@@ -163,9 +167,9 @@ ul li{
 	right:10px;
 	content: '';
 	border: 8px solid transparent;
-          height: 0;
-          width: 0;
-          border-bottom-color: #fff;
+    height: 0;
+    width: 0;
+    border-bottom-color: #fff;
 }
 .content header   .set_list .set_up ul{
 	height:100%;
@@ -182,11 +186,11 @@ ul li{
 	border-radius: 3px;			
 }
 .content header  .set_list .set_up ul li .img_list{
-          width:12px;
-          height:12px;
-          margin-left:3px;
-          margin-top: 1px;
-          float:left;
+     width:12px;
+     height:12px;
+     margin-left:3px;
+     margin-top: 1px;
+     float:left;
 }
 .content header  .set_list .set_up ul li .img_list img{
 	width:100%;
@@ -361,7 +365,7 @@ footer .footer_bot{
   box-shadow: 0 2px 2px rgba(78,69,69,0.5);
   border-radius: 2px;
 }
-.notice_show  .notice_cont iframe{
+.notice_show  .notice_cont>iframe{
       height:230px;
       width: 100%;
       border:none;/*iframe的边框设置为没有*/    
@@ -372,17 +376,18 @@ footer .footer_bot{
 /*购物车   公告*/
 /*.......主体内容.......*/
 .content>section{
-	height:auto;
+	height:860px;
 	width: 1204px;
 	margin-left:calc(50% - 602px);
 	background: #eeeeee;
-	display:inline-block;	
+	display:block;	 
+	/* border:1px solid red; */
+	overflow:hidden;
 }
 section iframe{
-	height:900px;
+	height:100%;
 	width: 100%;
 	border:none; /*iframe的边框设置为没有*/		
-	overflow: hidden;
 	margin: 0;
 	padding: 0;
 }

@@ -34,13 +34,13 @@ iframe{
   width:1204px;
   margin: 0 auto;
   background: #fff;
-  /* border: 1px solid red;*/
+ /*  border: 1px solid red; */
   font-size: 14px;
   position: relative;
 }
 /*banner图*/
 .my_center .banner {
-  height: 330px;
+  height: 390px;
   width: 100%;
   background: #eee;
   position: relative;
@@ -48,7 +48,7 @@ iframe{
 }
 .my_center .banner .ban_img{
 	width:100%;
-	height:330px;
+	height:390px;
 	position:absolute;
 	top:0;
 	left:0;
@@ -73,7 +73,7 @@ iframe{
   background: black;
 }
 .my_center .my_infor {
-  height: 480px;
+  height: 502px;
   width: 100%;
   margin-top: 10px;
   background: #f7f7f7;
@@ -284,7 +284,7 @@ iframe{
 }
 .my_center .my_infor .infor_right .my_data .edit_cont .edit_infor .infor_list .infor_fixed {
   width: 35%;
-  margin-left: 10%;
+  margin-left: 15%;
   margin-right: 5%;
   text-align: center;
 }
@@ -526,9 +526,10 @@ iframe{
   display: block;
   font-size: 18px;
   height: 56px;
-  width: 100px;
+  width: 140px;
   line-height: 56px;
   border: none;
+  text-align:center;
 }
 .my_center .my_infor .infor_right .my_order .edit_title label:first-child {
   color: #fa7c03;
@@ -578,16 +579,20 @@ iframe{
   text-align: left;
 }
 .my_center .my_infor .infor_right .my_order .order_infor .header .ord_state {
-  margin-left: 30px;
+  margin-left: 70px;
   width: 124px;
 }
 .my_center .my_infor .infor_right .my_order .order_infor .header .ord_money {
-  margin-left: 30px;
+  margin-left: 70px;
   width: 104px;
 }
 .my_center .my_infor .infor_right .my_order .order_infor .header .ord_click {
-  margin-left: 30px;
+  margin-left: 70px;
   width: 104px;
+  
+}
+.my_center .my_infor .infor_right .my_order .order_infor .header .ord_click input{
+	text-align:center;
 }
 .my_center .my_infor .infor_right .my_order .order_infor .order_detaile {
   width: 100%;
@@ -634,7 +639,7 @@ iframe{
   float: left;
   display: inline-block;
   height: 100%;
-  width: 672px;
+  width: 862px;
   margin-left: 38px;
   border-bottom: 2px solid #ccc;
 }
@@ -658,9 +663,13 @@ iframe{
   font-size: 12px;
   margin-top: 9px;
   color: #999999;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  
 }
 .my_center .my_infor .infor_right .my_order .order_infor .order_detaile .order_one .border_bot .ord_state {
-  margin-left: 30px;
+  margin-left: 70px;
   width: 124px;
 }
 .my_center .my_infor .infor_right .my_order .order_infor .order_detaile .order_one .border_bot .ord_state span {
@@ -668,7 +677,7 @@ iframe{
   color: #999999;
 }
 .my_center .my_infor .infor_right .my_order .order_infor .order_detaile .order_one .border_bot .ord_money {
-  margin-left: 30px;
+  margin-left: 70px;
   width: 104px;
 }
 .my_center .my_infor .infor_right .my_order .order_infor .order_detaile .order_one .border_bot .ord_money span {
@@ -688,7 +697,7 @@ iframe{
   font-weight: bold;
 }
 .my_center .my_infor .infor_right .my_order .order_infor .order_detaile .order_one .border_bot .ord_click {
-  margin-left: 30px;
+  margin-left: 70px;
   width: 104px;
 }
 .my_center .my_infor .infor_right .my_order .order_infor .order_detaile .order_one .border_bot .ord_click input {
@@ -699,6 +708,7 @@ iframe{
   width: 72px;
   height: 27px;
   margin-top: 44px;
+  text-align:center;
 }
 .my_center .my_infor .infor_right .my_order .order_infor .order_detaile .order_one .border_bot .ord_click .first_ord {
   background: #fa7c03;
@@ -717,9 +727,13 @@ iframe{
   /*.cont_shop 每个店铺*/
   /*起送，配送，距离时间*/
 }
+.my_center .my_infor .infor_right .my_collection .collect_restaurant{
+	overflow-y:auto;
+	height:400px;
+}
 .my_center .my_infor .infor_right .my_collection .cont_shop {
-  width: 220px;
-  height: 260px;
+  width: 276px;
+  height: 300px;
   background: #f6f2ef;
   float: left;
   boeder: 1px solid #ccc;
@@ -733,17 +747,18 @@ iframe{
 .my_center .my_infor .infor_right .my_collection .edit_infor > div:nth-of-type(1) {
   margin-left: 32px;
 }
-.my_center .my_infor .infor_right .my_collection .edit_infor > div:nth-of-type(4n) {
+.my_center .my_infor .infor_right .my_collection .edit_infor > div:nth-of-type(3n+1) {
   margin-left: 32px;
 }
 .my_center .my_infor .infor_right .my_collection .cont_shop .img_shop {
-  width: 210px;
-  height: 158px;
+  width: 266px;
+  height: 199px;
   margin: 5px;
   /*border:1px solid red;*/
 }
 .my_center .my_infor .infor_right .my_collection .cont_shop .img_shop img {
   width: 100%;
+  height:100%;
 }
 .my_center .my_infor .infor_right .my_collection .cont_shop .shop_same {
   margin-top: 10px;
