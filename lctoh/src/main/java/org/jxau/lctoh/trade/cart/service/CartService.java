@@ -123,7 +123,7 @@ public class CartService {
 		}
 		orderCustomer.setCustomerBalance(orderCustomer.getCustomerBalance().subtract(order.getOrderPrice()));
 		customerDao.updateCustomer(orderCustomer);
-		order.setOrderState(new State(100001));
+		order.setOrderState(new State(100002));
 		Dispatching dispatching=new Dispatching();
 		dispatching.setDispatchingOrder(order);
 		

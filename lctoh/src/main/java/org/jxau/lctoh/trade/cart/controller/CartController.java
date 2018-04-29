@@ -10,6 +10,7 @@ import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
 import org.jxau.lctoh.trade.cart.domain.Cart;
 import org.jxau.lctoh.trade.cart.exception.CartException;
 import org.jxau.lctoh.trade.cart.service.CartService;
+import org.jxau.lctoh.trade.order.domain.Order;
 import org.jxau.lctoh.trade.order.service.OrderService;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -218,7 +219,11 @@ public class CartController extends BaseController{
 				responseData.failInfo(ErrorMSG.loginTimerOut);
 			}else{
 				String id=cartService.putCartToOrder(cart, orderCustomer,addressId);
-				responseData.successInfo(orderService.findOrderByOrderId(id));
+				//Order order=orderService.findOrderByOrderId(id);
+				Order order=orderService.findOrderByOrderId(id);
+				orderCustomer.setCustomerBalance(orderCustomer.getCustomerBalance().subtract(order.getOrderPrice()));
+				session.setAttribute(ConversationConfig.customerSession,orderCustomer);
+				responseData.successInfo(order);
 			}
 		} catch (CartException e) {
 			e.printStackTrace();
