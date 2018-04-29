@@ -39,6 +39,7 @@ function change_page(){
 	    $('.infor_left ul li').eq(3).siblings().find('.dec_span').css('display','none');
     	//$('.dec_span').eq(2).css('display','block').siblings().css('display','none');
     	$('.center_cont').eq(2).css('display','block').siblings().css('display','none');
+    	
     }
     if(num_page==4){
     	/*alert('进入我的地址')*/
@@ -105,14 +106,16 @@ function setCollectRestaurant(restaurantList){
 	}
 
 	divContent.html(strRes);
-	
+	//点击我的收藏店家跳转到店家详情页面
 	$('.cont_shop').click(function(){
 		var rtid=$(this)["0"].id;
-		var str='<iframe src="./storeCenter.html?rtid='+rtid+'" name="iframe_a" scrolling="no"></iframe>';
+		var str='<iframe src="./storeCenter.html?rtid='+rtid+'" name="iframe_a" scrolling="no"></iframe>';		
+		$('#my_center').html(str); 
+		$('#my_center').css('height','800px');
 		
-		$('#section_change').html(str); 
-		$('footer').css('margin-top','-5px'); 
 	})
+	
+	
 }
 
 
