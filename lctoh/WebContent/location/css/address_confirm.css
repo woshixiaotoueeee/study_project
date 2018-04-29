@@ -12,6 +12,7 @@ body, html {
 }
 .contain{
     width:100%;
+   
 }
 input {
   outline: none;
@@ -32,7 +33,7 @@ ul li{
 /*左侧显示选择面板  */
 .contain_left {
     width:290px;
-    height:600px;
+    height:860px;
     float:left;
     border:2px solid #ccc;
     box-shadow: 0 0 4px #ccc;
@@ -82,13 +83,14 @@ ul li{
    border:1px solid #aaa;
 }
 .contain_left .nearby_store{
+	height:720px;
 	margin-top:16px;
 	overflow-y:auto;
 }
 /*..store_one  单个店家*/
 .contain_left .nearby_store .store_one {
 	margin-bottom:10px;
-    width:272px;
+    width:268px;
     height:66px;
     background: #f6f2ef;
     float: left;
@@ -108,6 +110,7 @@ ul li{
 }
 .contain_left .nearby_store .store_one .img_shop img{
 	width:100%;
+	height:100%;
 }
 .contain_left .nearby_store .store_one  .shop_same{
   float:left;
@@ -151,7 +154,7 @@ ul li{
 }
 .contain_left .nearby_store .store_one  .shop_bot ul li{
 	width:36%;
-  float:left;
+   float:left;
 	text-align: left;
 }
 .contain_left .nearby_store .store_one  .shop_bot ul li:nth-of-type(2){
@@ -165,12 +168,12 @@ ul li{
 /* 地图交互 */
 .contain_right{
 	width: calc(100% - 294px);
-	height: auto;
-	 float:left;
+	height: 860px;
+	float:left;
 }
 #allmap{
     width:100%; 
-	height:600px;
+	height:860px;
 /*  border:1px solid black; */
    
 }
