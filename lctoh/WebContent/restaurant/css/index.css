@@ -161,7 +161,7 @@ header .header-wrap .set_list .small_up::before {
 }
 header .header-wrap .set_list .set_up {
   position: absolute;
-  height: 160px;
+  height: 120px;
   width: 90px;
   top: 50px;
   text-align: center;
@@ -193,7 +193,7 @@ header .set_list .set_up ul li {
   width: 90%;
   margin-left: 5%;
   margin-top: 3px;
-  height: 22%;
+  height: 30%;
   line-height: 40px;
   border-bottom: 1px solid #ccc;
   border-radius: 3px;
@@ -211,7 +211,7 @@ header .set_list .set_up ul li .img_list img {
   margin: 0;
   padding: 0;
 }
-header .set_list .set_up ul li:nth-of-type(4) {
+header .set_list .set_up ul li:last-child {
   border: none;
 }
 header .set_list .set_up ul li:hover {
