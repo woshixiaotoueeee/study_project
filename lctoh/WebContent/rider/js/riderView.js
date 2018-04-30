@@ -1,9 +1,10 @@
 //地图
 var map;
+var riderMapMk;
 window.onload=function(){
 	setMap();
 	dingwei();
-	//getdispatching();
+	getdispatching();
 	var timeid = window.setInterval(function(){
 		dingwei();
 		//getdispatching();
@@ -12,24 +13,24 @@ window.onload=function(){
 	//order_details();
 }
 
-function setDispatchingzzps(){
+function setDispatchingzzps(dispatchingzzpsList){
 	var sendOrder= $('.being_order').find('.order_list');
 	sendOrder.html('');
 	var strHtm='';
 	var res;
 	var address;
-	for(var i=0;i<dispatchingdpsList.length;i++){
-		res=dispatchingdpsList[i].dispatchingOrder.orderRestaurant;
-		address=dispatchingdpsList[i].dispatchingOrder.orderHarvestAddress;
-		strHtm+="<div class='order_one'><div class='order_same order_top'><div class='img_shop'>" +
+	for(var i=0;i<dispatchingzzpsList.length;i++){
+		res=dispatchingzzpsList[i].dispatchingOrder.orderRestaurant;
+		address=dispatchingzzpsList[i].dispatchingOrder.orderHarvestAddress;
+		strHtm+="<div class='order_one'  order_id='"+dispatchingzzpsList[i].dispatchingOrder.orderId+"'><div class='order_same order_top'><div class='img_shop'>" +
 				"<img src='../"+res.restaurantImage+"'></div> <div class='order_title'>"+res.restaurantName+"</div>" +
-				"</div><div class='order_same order_bot' ><div class='order_id'>订单号:<span class='order_number'>"+dispatchingdpsList[i].dispatchingOrder.orderId+"</span></div>" +
-				"<div class='order_tm'>下单时间：<span>"+dateFtt("yyyy-MM-dd hh:mm",new Date(dispatchingdpsList[i].dispatchingOrder.orderCreatTime))+"</span></div>" +
+				"</div><div class='order_same order_bot' ><div class='order_id'>订单号:<span class='order_number'>"+dispatchingzzpsList[i].dispatchingOrder.orderId+"</span></div>" +
+				"<div class='order_tm'>下单时间：<span>"+dateFtt("yyyy-MM-dd hh:mm",new Date(dispatchingzzpsList[i].dispatchingOrder.orderCreatTime))+"</span></div>" +
 				"</div><div class='order_same order_cont'><div class='order_custer'>顾客：<span>" +address.harvestAddressName+
 				"</span></div><div class='order_custer_address'>地址：<span>" +address.harvestAddressInfo+
 				"</span></div></div><div class='order_same order_cont'><div class='order_store_address'>商家地址：<span>"+res.restaurantAddressInfo+"</span></div></div></div>";
 	}
-	
+	sendOrder.html(strHtm);
 	//可配送订单  .being_order
 	$('.being_order').find('.order_list .order_one').click(function(){
 		var id=$(this).find('.order_same .order_id .order_number').html();
@@ -93,16 +94,21 @@ function getdispatching(){
 		})
 }
 function setDispatchingzzpstoMap(dispatchingzzps){
+	
+	var customerIcon = new BMap.Icon("/lctoh/images/p.png", new BMap.Size(50,50));
+	var restaurantIcon = new BMap.Icon("/lctoh/images/shop.png", new BMap.Size(50,50));
+	
 	var res=dispatchingzzps.dispatchingOrder.orderRestaurant;
 	var address=dispatchingzzps.dispatchingOrder.orderHarvestAddress;
-	var customermk=new BMap.Marker(new BMap.Point(address.harvestAddressLongitude,res.harvestAddressLatitude));
+	var customermk=new BMap.Marker(new BMap.Point(address.harvestAddressLongitude,address.harvestAddressLatitude),{icon:customerIcon});
 	map.addOverlay(customermk);
-	var resmk=new BMap.Marker(new BMap.Point(res.restaurantLongitude,res.restaurantLatitude));
+	var resmk=new BMap.Marker(new BMap.Point(res.restaurantLongitude,res.restaurantLatitude),{icon:restaurantIcon});
 	map.addOverlay(resmk);
-	
-	openlayerzzps(res,address,dispatchingzzps.dispatchingOrder);
+	var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+	driving.search(new BMap.Point(res.restaurantLongitude,res.restaurantLatitude), new BMap.Point(address.harvestAddressLongitude,address.harvestAddressLatitude));
+	openlayerzzps(res,address,dispatchingzzps.dispatchingOrder,dispatchingzzps.dispatchingState.stateId);
 }
-function openlayerzzps(res,address,order){
+function openlayerzzps(res,address,order,stateId){
 	var str_being_order=`<div class='show_order'>
 			    <div class='order_infor'>
 				   <label>订单号</label>
@@ -130,13 +136,14 @@ function openlayerzzps(res,address,order){
 				   </div>	
 			    </div>
 			    <div class='order_infor taking_refuse'>
-				    <input type='button' statetype='#statetype#' orderId="#order_id#" class='order_taking' id='order_taking' value='#button_value#'/>
+				    <input type='button' statetype='#statetype#' orderId="#order_id#" class='order_taking #order_id#' id='order_taking' value='#button_value#'/>
 			    </div>	
 			</div>`;
 			
 		
 	str_being_order=str_being_order.replace("#orderId#",order.orderId);
-	str_being_order=str_being_order.replace("#order_id#",order.orderId);				
+	str_being_order=str_being_order.replace("#order_id#",order.orderId);
+	str_being_order=str_being_order.replace("#order_id#",order.orderId);
 	str_being_order=str_being_order.replace("#customerName#",address.harvestAddressName);	
 	str_being_order=str_being_order.replace("#customerPhone#",address.harvestAddressPhone);	
 	str_being_order=str_being_order.replace("#customerAddress#",address.harvestAddressInfo);
@@ -150,8 +157,8 @@ function openlayerzzps(res,address,order){
 	str_being_order=str_being_order.replace("#orderPrice#",order.orderPrice);
 	str_being_order=str_being_order.replace("#orderTime#",dateFtt("yyyy-MM-dd hh:mm",new Date(order.orderCreatTime)));	
 	
-	var _state=order.orderState.stateId;
-	if(_state==110002){
+	
+	if(stateId==110002){
 		str_being_order=str_being_order.replace("#button_value#",'取餐');	
 		str_being_order=str_being_order.replace("#statetype#",2);
 	}else if(_state==110003){
@@ -168,8 +175,8 @@ function openlayerzzps(res,address,order){
 		content: str_being_order
 	});
 	
-	$("#"+order.orderId).click(function(){
-		var id=$(this).attr('order_id');
+	$("."+order.orderId).click(function(){
+		var id=$(this).attr('orderId');
 		var state=$(this).attr('statetype');
 		$.ajax({
 			   type: "post",
@@ -207,7 +214,7 @@ function setDispatchingdps(dispatchingdpsList){
 	for(var i=0;i<dispatchingdpsList.length;i++){
 		res=dispatchingdpsList[i].dispatchingOrder.orderRestaurant;
 		address=dispatchingdpsList[i].dispatchingOrder.orderHarvestAddress;
-		strHtm+="<div class='order_one'><div class='order_same order_top'><div class='img_shop'>" +
+		strHtm+="<div class='order_one' order_id='"+dispatchingdpsList[i].dispatchingOrder.orderId+"'><div class='order_same order_top'><div class='img_shop'>" +
 				"<img src='../"+res.restaurantImage+"'></div> <div class='order_title'>"+res.restaurantName+"</div>" +
 				"</div><div class='order_same order_bot' ><div class='order_id'>订单号:<span class='order_number'>"+dispatchingdpsList[i].dispatchingOrder.orderId+"</span></div>" +
 				"<div class='order_tm'>下单时间：<span>"+dateFtt("yyyy-MM-dd hh:mm",new Date(dispatchingdpsList[i].dispatchingOrder.orderCreatTime))+"</span></div>" +
@@ -215,10 +222,11 @@ function setDispatchingdps(dispatchingdpsList){
 				"</span></div><div class='order_custer_address'>地址：<span>" +address.harvestAddressInfo+
 				"</span></div></div><div class='order_same order_cont'><div class='order_store_address'>商家地址：<span>"+res.restaurantAddressInfo+"</span></div></div></div>";
 	}
-	
+	sendOrder.html(strHtm);
 	//可配送订单  .send_order
 	$('.send_order').find('.order_list .order_one').click(function(){
-		var id=$(this).attr('order_id');
+		//var id=$(this).attr('order_id');
+		var id=$(this).find('.order_same .order_id .order_number').html();
 		$.ajax({
 			   type: "post",
 			   data:{'dispatchingId':id},
@@ -239,13 +247,19 @@ function setDispatchingdps(dispatchingdpsList){
 	})
 }
 function setDispatchingdpstoMap(dispatchingdps){
+
+	var customerIcon = new BMap.Icon("/lctoh/images/p.png", new BMap.Size(50,50));
+	var restaurantIcon = new BMap.Icon("/lctoh/images/shop.png", new BMap.Size(50,50));
+	
+	
 	var res=dispatchingdps.dispatchingOrder.orderRestaurant;
 	var address=dispatchingdps.dispatchingOrder.orderHarvestAddress;
-	var customermk=new BMap.Marker(new BMap.Point(address.harvestAddressLongitude,res.harvestAddressLatitude));
+	var customermk=new BMap.Marker(new BMap.Point(address.harvestAddressLongitude,address.harvestAddressLatitude),{icon:customerIcon});
 	map.addOverlay(customermk);
-	var resmk=new BMap.Marker(new BMap.Point(res.restaurantLongitude,res.restaurantLatitude));
+	var resmk=new BMap.Marker(new BMap.Point(res.restaurantLongitude,res.restaurantLatitude),{icon:restaurantIcon});
 	map.addOverlay(resmk);
-	
+	var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+	driving.search(new BMap.Point(res.restaurantLongitude,res.restaurantLatitude), new BMap.Point(address.harvestAddressLongitude,address.harvestAddressLatitude));
 	openlayer(res,address,dispatchingdps.dispatchingOrder);
 }
 function openlayer(res,address,order){
@@ -276,13 +290,14 @@ function openlayer(res,address,order){
 				   </div>	
 			    </div>
 			    <div class='order_infor taking_refuse'>
-				    <input type='button' orderId="#order_id#" class='order_taking' id='order_taking' value='接单'/>
+				    <input type='button' orderId="#order_id#" class='order_taking #order_id#' id='order_taking' value='接单'/>
 			    </div>	
 			</div>`;
 			
 		
 	str_send_order=str_send_order.replace("#orderId#",order.orderId);
-	str_send_order=str_send_order.replace("#order_id#",order.orderId);				
+	str_send_order=str_send_order.replace("#order_id#",order.orderId);
+	str_send_order=str_send_order.replace("#order_id#",order.orderId);
 	str_send_order=str_send_order.replace("#customerName#",address.harvestAddressName);	
 	str_send_order=str_send_order.replace("#customerPhone#",address.harvestAddressPhone);	
 	str_send_order=str_send_order.replace("#customerAddress#",address.harvestAddressInfo);
@@ -305,8 +320,8 @@ function openlayer(res,address,order){
 		content: str_send_order
 	});
 	
-	$("#"+order.orderId).click(function(){
-		var id=$(this).find('.order_same .order_id .order_number').html();
+	$("."+order.orderId).click(function(){
+		var id=$(this).attr('orderId');
 		$.ajax({
 			   type: "post",
 			   data:{'dispatchingId':id,"state":1},
@@ -334,17 +349,24 @@ function dingwei(){
 	var geolocation = new BMap.Geolocation();
 	geolocation.getCurrentPosition(function(r){
 		if(this.getStatus() == BMAP_STATUS_SUCCESS){
-			var mk = new BMap.Marker(r.point);
+			//清除覆盖物
+			map.removeOverlay(riderMapMk);
+			var myIcon = new BMap.Icon("/lctoh/images/gogo.png", new BMap.Size(50,50));
+			
+			riderMapMk = new BMap.Marker(r.point,{icon:myIcon});
 			if(r.address.province==''||r.address.city==''){
 				alert("请选择正确的位置");
 				return;
 			}
 			var _location={};
-			//清除覆盖物
-			map.clearOverlays();
-			map.addOverlay(mk);
+			
+			
+			
+			
+			//map.clearOverlays();
+			map.addOverlay(riderMapMk);
 			//map.panTo(r.point);
-			mk.setAnimation(BMAP_ANIMATION_BOUNCE);
+			riderMapMk.setAnimation(BMAP_ANIMATION_BOUNCE);
 			_location.riderLongitude=r.point.lng;
 			_location.riderLatitude=r.point.lat;
 			sendTosession(_location);
