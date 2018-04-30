@@ -142,7 +142,7 @@ public class OrderController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/payment",produces=EncodingConfig.produces)
-	public String payment(String orderId,Address address, HttpSession session){
+	public String payment(String orderId , HttpSession session){
 		if(orderId==null){
 			responseData.failInfo(ErrorMSG.notKnow);
 		}else{
@@ -151,7 +151,7 @@ public class OrderController extends BaseController{
 				responseData.failInfo(ErrorMSG.loginTimerOut);
 			}else{
 				try{
-					customer=orderService.payment(orderId,customer,address);
+					customer=orderService.payment(orderId,customer);
 					session.setAttribute(ConversationConfig.customerSession, customer);
 					responseData.successInfo(SuccessMSG.successMSG);
 				}catch(OrderException e){

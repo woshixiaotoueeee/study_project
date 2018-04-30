@@ -14,7 +14,7 @@
 		<association property="orderState" column="order_state_id" select="org.jxau.lctoh.state.mapper.StateMapper.findStateByStateId"/>
 		<association property="orderCustomer" column="order_customer_id" select="org.jxau.lctoh.user.customer.mapper.CustomerMapper.findCustomerByCustomerId"/>
 		<association property="orderRestaurant" column="order_restaurant_id" select="org.jxau.lctoh.user.restaurant.mapper.RestaurantMapper.findRestaurantByRestaurantId"/>
-		<association property="orderHarvestAddress" column="orderId" select="org.jxau.lctoh.trade.order.mapper.HarvestAddressMapper.findHarvestAddressByhaid"/>
+		<association property="orderHarvestAddress" column="order_id" select="org.jxau.lctoh.trade.order.mapper.HarvestAddressMapper.findHarvestAddressByhaid"/>
 	</resultMap>
 	
 	<sql id="OrderColumns">
