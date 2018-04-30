@@ -92,11 +92,11 @@ public class OrderService {
 	 * @throws OrderException 
 	 */
 	@Transactional(rollbackFor = Exception.class)
-	public Customer payment(String orderId, Customer customer, Address address) throws OrderException {
+	public Customer payment(String orderId, Customer customer ) throws OrderException {
 		Order order=orderDao.findOrderByOrderId(orderId);
 		Customer _customer=order.getOrderCustomer();
-		address=addressService.findAddressByAddressId(address.getAddressId());
-		if(address==null)throw new OrderException(ErrorMSG.addressError);
+		
+		
 		if(_customer.getCustomerId().equals(customer.getCustomerId()))
 			throw new OrderException(ErrorMSG.noPower);
 		if(_customer.getCustomerBalance().doubleValue()<order.getOrderPrice().doubleValue()){
@@ -110,12 +110,9 @@ public class OrderService {
 		if(state.getStateId()!=100001)throw new OrderException(ErrorMSG.notKnow);
 		
 		state.setStateId(100002);
-		HarvestAddress harvestAddress= address.toHarvestAddress(order.getOrderId());
-		harvestAddressDao.addHarvestAddress(harvestAddress);
+		
 		order.setOrderState(state);
 		
-		
-		order.setOrderHarvestAddress(harvestAddress);
 		orderDao.updateOrder(order);
 		return _customer;
 	}
