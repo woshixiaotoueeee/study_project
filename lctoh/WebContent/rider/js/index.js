@@ -9,16 +9,30 @@ window.onload=function(){
 	},60000);
 	setriderstate();
 	init();//初始化  渲染html
+	user_setting();//用户设置下拉的隐藏与显示
 	jump_click(); //跳转链接
+	
 }
 function init(){
    
    //点击换颜色(首页 统计管理 )
    $('.header-wrap .nav ul li').click(function(){
-    alert($(this).index());
+
    	   $(this).addClass('frist_show').siblings().removeClass('frist_show');
    })
    
+}
+function user_setting(){
+	$('.small_up').click(function(){
+		$('.set_up').css('display','block');
+		
+	})
+	$('.set_up').mouseout(function(){
+		$('.set_up').css('display','none');
+	})
+	$('.set_up').mouseover(function(){
+		$('.set_up').css('display','block');
+	})
 }
 function jump_click(){
 
@@ -37,12 +51,12 @@ function jump_click(){
   	})
     //点击个人信息跳转到设置查看个人信息页面
     $('#myDataInfor').click(function(){
-       alert('个人信息');
+    	$('.header-wrap .nav ul li').removeClass('frist_show');
         $('#iframe_a').attr('src','./setInfor.html');
     })
     //点击退出登录跳转到登录页面
     $('#signOut').click(function(){
-
+    	window.location.href=projectDirectory+'/Login/login.html'; 
     })
    
 }
