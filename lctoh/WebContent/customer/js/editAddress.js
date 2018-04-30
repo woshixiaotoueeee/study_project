@@ -22,7 +22,7 @@ function getAddress(addressId){
 		   success:function(data){
 			   if(data.state==1){
 				   address=data.responseInfo;
-				   initaddress(_address);
+				   initaddress(address);
 			   }else{
 				   layer.msg(data.responseInfo, {time:2500});
 			   }

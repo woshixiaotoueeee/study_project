@@ -35,9 +35,59 @@ function setOrderToHtml(order){
 	$('.phone_restaurant').html(order.orderRestaurant.restaurantPhone);
 	$('.orderId').html(order.orderId);
 	
+	var caozuobtn=caozuobtn;
+	caozuobtn.attr('id',order.orderId);
+	caozuobtn.attr('stateInfo',order.orderState.stateId);
+	if(order.orderState.stateId==100001){
+		caozuobtn.val('付款');
+	}else if(order.orderState.stateId==100002){
+		caozuobtn.val('配送中');
+	}else if(order.orderState.stateId==100003){
+		caozuobtn.val('确认收货');
+	}else if(order.orderState.stateId==100004){
+		caozuobtn.val('已完成');
+	}else if(order.orderState.stateId==100005){
+		caozuobtn.val('异常订单');
+	}
+	
+	if(order.orderState.stateId==100001||order.orderState.stateId==100003){
+		
+		caozuobtn.prop("disable",false);
+		caozuobtn.unbind("click"); 
+		caozuobtn.click(function(){
+			 caozuoOrder($(this));
+		});
+	}else{
+		caozuobtn.unbind("click"); 
+		caozuobtn.prop("disable",true);
+	}
+	
 	setOrderItemList(order.orderItemList,order.orderRestaurant,order.orderPrice);
 	setDispatchingInfoToHtml(order.orderHarvestAddress,order.orderDeliveryTime);
 }
+
+function caozuoOrder(querybtn){
+	var url;
+	if(querybtn.attr('stateInfo')==100001){
+		url=Common.payment;
+	}else if(querybtn.attr('stateInfo')==100003){
+		url=Common.confirmationReceipt;
+	}
+	$.ajax({  
+        url: Common.payment,  
+        type: 'POST',  
+        data: {'orderId':querybtn.attr('id')}, 
+        dataType: "json",
+        success: function (returndata) {
+        	layer.msg(returndata.responseInfo, {time:2500});
+        	getOrder(GetQueryString('orderId'));
+        },  
+        error: function (returndata) {  
+       	 layer.msg('获取订单信息失败，请稍后再试', {time:2500}); 
+        }  
+   });
+}
+
 
 function setDispatchingInfoToHtml(orderHarvestAddress,orderDeliveryTime){
 	
@@ -45,7 +95,8 @@ function setDispatchingInfoToHtml(orderHarvestAddress,orderDeliveryTime){
 	if(orderDeliveryTime!=null){
 		$('.wcsj .info').html(getDate(orderDeliveryTime)+" "+getTime(orderDeliveryTime));
 	}
-	$('.addressPhone .info').html(orderHarvestAddress.harvestAddressName);
+	
+	$('.addressName .info').html(orderHarvestAddress.harvestAddressName);
 	$('.addressPhone .info').html(orderHarvestAddress.harvestAddressPhone);
 	$('.addressInfo .info').html(orderHarvestAddress.harvestAddressInfo);
 	

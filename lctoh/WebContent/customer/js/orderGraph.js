@@ -10,6 +10,9 @@ $(function(){
 	 /*统计过程线*/
 	 line_chart();	
 	
+	 $("#btn_query").click(function(){
+		 init();
+		});
 })
 /*
  * 初始化数据
@@ -34,6 +37,26 @@ function init(){
 			   layer.msg('未知错误请刷新页面或联系管理员', {time:2500});
 		   }
 		})
+		
+	$.ajax({
+		   type: "post",
+		   url:Common.orderStatisticsByState,
+		   data:requestdata, 
+		   dataType: "json",
+		   success:function(data){
+			   if(data.state==1){
+				   pie_chart(data.responseInfo);
+			   }
+			   else{
+				   layer.msg(data.responseInfo, {time:2500});
+			   }
+		   },
+		   error:function(errordate){
+			   layer.msg('未知错误请刷新页面或联系管理员', {time:2500});
+		   }
+		})	
+		
+		
 }
 /*
  * 获取时间
@@ -74,26 +97,46 @@ function initDate(){
 /*
  * 统计饼图
  * */
-function  pie_chart(){
-	   var data=[
+function  pie_chart(dataList){
+	   /*var data=[
 	              {
 		            psnm:"配送中",
-		            tm:"2018-05-13 12:00",
 		            num:"23"
 		         },
 		         {
 		            psnm:"已完成配送",
-		            tm:"2018-05-13 12:00",
 		            num:"13"
 		         },
 		         {
 		            psnm:"异常订单",
-		            tm:"2018-05-13 12:00",
 		            num:"3"
 		         }
 
-	          ];
-	       //alert(data[1].psnm);
+	          ];*/
+	   var pszDispatching={
+	            psnm:"配送中",
+	            num:"0"
+	         };
+		var zapsDispatching={
+	            psnm:"完成配送",
+	            num:"0"
+	         };
+		var ycDispatching={
+	            psnm:"异常订单",
+	            num:"0"
+	         };
+		for(var i=0;i<typelist;i++){
+			if(typelist[i].type<100004){
+				pszDispatching.num+=typelist[i].count;
+			}else if(typelist[i].type=100004){
+				zapsDispatching.num+=typelist[i].count;
+			}else if(typelist[i].type>100004){
+				ycDispatching.num+=typelist[i].count;
+			}
+			
+		}
+		
+		var data=[pszDispatching,zapsDispatching,ycDispatching];
 	       var myChartTwo = echarts.init(document.getElementById('mainTwo'));
 	       var optionTwo = {
 		    title : {
@@ -162,7 +205,8 @@ function  pie_chart(){
  * */
 function  line_chart(dataList){
 	var myGraph=echarts.init(document.getElementById('mainGraph'));
-    var dataList=[
+   /*
+	var dataList=[
           {
              "ordps": 36, 
              "ordww": 3, 
@@ -211,15 +255,15 @@ function  line_chart(dataList){
 		     "ordid": "30427800", 
 		     "tm": "2018-03-26"
 		 }
-       ]; 
+       ]; */
        //数据处理
     	var ordwcList = [];    //已完成的订单
     	var ordprice=[];       //消费额
     	var tms = [];
     	for(var i=0;i<dataList.length;i++){
     		var item = dataList[i];
-    		ordwcList.push(item.ordwc);
-    		ordprice.push(item.ordprice);
+    		ordwcList.push(item.count);
+    		ordprice.push(item.amount);
     		tms.push(item.tm);
     	}
       var optionGragh={
