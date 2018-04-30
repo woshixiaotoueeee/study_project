@@ -154,7 +154,7 @@ ul li {
   box-shadow: 2px 2px 4px #aaa;
   color: #333;
   border-radius: 2px;
-  /*display: none;*/
+  display: none;
 }
 .content header .set_list .set_up::before {
   position: absolute;

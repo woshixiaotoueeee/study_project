@@ -78,18 +78,20 @@ img {
 }
 .cont_summary .cont_right .conditions_sel .tm_check {
   width: 380px;
-  margin-left: 90px;
-   line-height:20px;
+  margin-left: 20px;
+  line-height:20px;
+  margin-top:20px;
 }
 .cont_summary .cont_right .conditions_sel .tm_check input {
   width: 100px;
- 
   margin-left: 20px;
   padding-left: 10px;
   corlor: #999;
+
 }
 .cont_summary .cont_right .conditions_sel .btn_qurey {
-  padding-left: 25px;
+  margin-right:60px;
+  float:right;
 }
 .cont_summary .cont_right .conditions_sel .btn_qurey input {
   height: 24px;

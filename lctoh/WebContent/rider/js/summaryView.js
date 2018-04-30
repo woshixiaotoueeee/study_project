@@ -6,7 +6,7 @@ $(function(){
 	// initDate();
 	 
 	 
-
+	init_rider();
     //点击查询按钮事件
     query_order_chart();
     //订单列表选项卡
@@ -235,68 +235,68 @@ function  pie_chart(typelist){
 			ycDispatching.num+=typelist[i].count;
 		}
 		
-	}
+	 }
 	
-	   var data=[pszDispatching,zapsDispatching,ycDispatching];
-	       var myChartTwo = echarts.init(document.getElementById('mainTwo'));
-	       var optionTwo = {
-		    title : {
-		        text: '配送订单饼图',
-		        textStyle: {
-                fontSize: 14,
-                //fontStyle: 'lighter',
-                color:'#000033'              			                
-               },
-		        x:'center'
-		    },
-		    tooltip : {
-		        trigger: 'item',
-		        formatter: "{a} <br/>{b} : {c} ({d}%)"
-		    },
-		    legend: {
-		        orient: 'vertical',
-		        left: 'right',
-		        data: [data[0].psnm,data[1].psnm,data[2].psnm]
-		    },
-		    series : [
-		        {
-		            name: '配送信息',
-		            type: 'pie',
-		            radius : '55%',
-		            center: ['50%', '60%'],
-		           data:[
-		                {value:data[0].num, name:data[0].psnm,
-		                 itemStyle: {
-                             normal: {
-                             	 color: "#FFFF00"
-                                 }
+       var data=[pszDispatching,zapsDispatching,ycDispatching];
+       var myChartTwo = echarts.init(document.getElementById('mainTwo'));
+       var optionTwo = {
+	    title : {
+	        text: '配送订单饼图',
+	        textStyle: {
+            fontSize: 14,
+            //fontStyle: 'lighter',
+            color:'#000033'              			                
+           },
+	        x:'center'
+	    },
+	    tooltip : {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	    },
+	    legend: {
+	        orient: 'vertical',
+	        left: 'right',
+	        data: [data[0].psnm,data[1].psnm,data[2].psnm]
+	    },
+	    series : [
+	        {
+	            name: '配送信息',
+	            type: 'pie',
+	            radius : '55%',
+	            center: ['50%', '60%'],
+	           data:[
+	                {value:data[0].num, name:data[0].psnm,
+	                 itemStyle: {
+                         normal: {
+                         	 color: "#FFFF00"
                              }
-                        },
-		                {value:data[1].num, name:data[1].psnm,
-                            itemStyle: {
-                             normal: {
-                             	 color: "green"
-                                 }
+                         }
+                    },
+	                {value:data[1].num, name:data[1].psnm,
+                        itemStyle: {
+                         normal: {
+                         	 color: "green"
                              }
-		                },
-		                {value:data[2].num, name:data[2].psnm,
-                             itemStyle: {
-                                normal: {
-                             	   color: "#ef4a1e"
-                                   }
-                              }
-		                }
-		            ],
-		            itemStyle: {
-		                emphasis: {
-		                    shadowBlur: 10,
-		                    shadowOffsetX: 0,
-		                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-		                }
-		            }
-		        }
-		    ]
-		}
+                         }
+	                },
+	                {value:data[2].num, name:data[2].psnm,
+                         itemStyle: {
+                            normal: {
+                         	   color: "#ef4a1e"
+                               }
+                          }
+	                }
+	            ],
+	            itemStyle: {
+	                emphasis: {
+	                    shadowBlur: 10,
+	                    shadowOffsetX: 0,
+	                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+	                }
+	            }
+	        }
+	    ]
+	}
 		myChartTwo.setOption(optionTwo);
 }
 /*
