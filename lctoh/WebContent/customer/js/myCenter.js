@@ -529,7 +529,7 @@ function getLoginInfo(){
  * 获取客户地址信息
  * */
 function getAddressData(){
-	if(_customer==null)return;
+	if(customer==null)return;
 	$.ajax({
 	   type: "post",
 	   url:Common.findAddressByCustomer,

@@ -50,6 +50,13 @@ Common.cartToOrder=projectDirectory+'/CartController/cartToOrder';
 Common.findOrder=projectDirectory+'/OrderController/findOrder';
 //查询订单(id)
 Common.findOrderByOrderId=projectDirectory+'/OrderController/findOrderByOrderId';
+//付款
+Common.payment=projectDirectory+'/OrderController/payment';
+//确认订单
+Common.confirmationOrder=projectDirectory+'/OrderController/confirmationOrder';
+//确认收货
+Common.confirmationReceipt=projectDirectory+'/OrderController/confirmationReceipt';
+
 //订单过程线统计接口
 Common.orderStatistics=projectDirectory+'/OrderStatisticsController/orderStatistics';
 //配送过程线统计接口
