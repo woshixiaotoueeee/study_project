@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>产品列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="style/adminStyle.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery.js"></script>
+<script src="js/edit_res_image.js"></script>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="add"></i><em>编辑/添加产品</em></span>
+    <span class="modular fr"><a href="dish_list.html" class="pt-link-btn">产品列表</a></span>
+  </div>
+  <form id="uploadForm">
+  <table class="list-style">
+  
+   
+   <tr>
+    <td style="text-align:right;">产品缩图片：</td>
+    <td>
+     <input type="file" id="suoluetu" name="file" class="hide"/>
+     <label for="suoluetu" class="labelBtnAdd">+</label>
+    </td>
+   </tr>
+   
+   <tr>
+    <td style="text-align:right;">店家原图：</td>
+   </tr>
+   <tr>
+    <td style="text-align:right;"></td>
+    <td>
+     <img src="#" width="150" height="150"/>
+    </td>
+   </tr>
+   
+  
+    <td style="text-align:right;"></td>
+    <td><input type="button" value="更改店家图片" onclick="doUpload()" class="tdBtn"/></td>
+   </tr>
+  </table>
+  </form>
+ </div>
+</body>
+</html>

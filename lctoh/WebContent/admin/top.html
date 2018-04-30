@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>header</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="style/adminStyle.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery.js"></script>
+</head>
+<body>
+<div class="header">
+ <div class="logo">
+  <img src="images/admin_logo.png" title="在哪儿"/>
+ </div>
+ <div class="fr top-link">
+ <a href="javascript:" onclick="updatestate()" title="清除缓存"><i class="clearIcon"></i><span>清除缓存</span></a>
+  </div>
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+var project="/takeawayplatform";//项目名
+var restaurant;
+var _dishList;
+//加载初始数据
+window.onload=function(){ 
+	$.post(project+"/RestaurantController/getRestaurant",{},function(data){
+		if(data==null){
+			if(top.location.href!=self.location.href){
+				top.location.href=project+"/res/login.html";
+			}
+			top.location.href=project+"/res/login.html";
+		}else{
+			restaurant=data;
+			putstate(data.rtstate);
+		}
+	},"JSON");
+}
+
+function putstate(rtstate){
+	var biaoqian=$("div.top-link a");
+	//biaoqian.eq(2).attr("value",1000);
+	if(rtstate==1){
+		biaoqian.eq(0).attr("rtstate",rtstate);
+		$("div.top-link a span").eq(0).html("关店")
+	}
+	if(rtstate==0){
+		biaoqian.eq(0).attr("rtstate",rtstate);
+		$("div.top-link a span").eq(0).html("开店")
+	}
+}
+
+
+
+function updatestate(){
+	var biaoqian=$("div.top-link a");
+	if(biaoqian.eq(0).attr("rtstate")==1)updateresstate(restaurant.rtaccount,0);
+	else updateresstate(restaurant.rtaccount,1);
+}
+
+function updateresstate(rtaccount,rtstate){
+	$.post(project+"/RestaurantController/updateRestaurantState",{"rtaccount":rtaccount,"rtstate":rtstate},function(data){
+		if(data==null||data==0){alert("操作失败")}
+		else if(data==1){
+			alert("操作成功")
+			setTimeout(function(){top.location.href=project+"/restaurant_admin/index.html";},1000);
+		}
+	},"JSON");
+	
+}
+
+</script>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html {
+			width: 100%;
+			height: 100%;
+			margin:0;
+			padding:0;
+			overflow: hidden;
+			font-family:"微软雅黑";
+			background:url('../index_img/timg.jfif');
+			background-size:cover;
+		}
+		h2{
+		    width:200px;
+		    margin:50px auto;
+            color:black;
+		    text-align:center;
+		}
+		#allmap{
+		    width: 60%;
+			height: 60%;
+		    margin:50px auto;
+		    border:1px solid black;
+		}
+		#dingwei{
+		    position:absolute;
+		    top:140px;
+		    left:400px;
+		    color:red;
+		}
+	</style>
+	<script src="js/jquery.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=YnD4uKaLCm3OxKqa7poZPFMNamRbzh2S"></script>
+	<title>选择位置</title>
+</head>
+<body id="body">
+	<h2>外卖</h2>
+	<div id="allmap"></div>
+	<button id="dingwei" onclick='dingwei()'>自动定位</button>
+</body>
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var project="/takeawayplatform";//项目名
+	var map = new BMap.Map("allmap");
+	var point = new BMap.Point(116.331398,39.897445);
+	map.centerAndZoom(point,11);
+	map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+	map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+	var cityname;
+	var lng ;
+	var lat ;
+	
+	function dingwei(){
+		var geolocation = new BMap.Geolocation();
+		geolocation.getCurrentPosition(function(r){
+			if(this.getStatus() == BMAP_STATUS_SUCCESS){
+				var mk = new BMap.Marker(r.point);
+				map.addOverlay(mk);
+				map.panTo(r.point);
+				cityname=r.address.city;
+				
+				lng =r.point.lng;
+				lat =r.point.lat;
+				
+				if(confirm('你的位置为：'+r.address.province + ", " + r.address.city + ", " + r.address.district + ", " + r.address.street + ", " +r.address.street_number +'是否确认?')){
+					Loction();
+				}
+				//document.getE22lementById("body").innerHTML+=r.point.lng+','+r.point.lat;
+				
+				//跳转页面
+				//self.location='index.jsp'; 
+			}
+			else {
+				alert('failed'+this.getStatus());
+			}        
+		},{enableHighAccuracy: true})
+	}
+	//鼠标定位
+	var geoc = new BMap.Geocoder();
+	map.addEventListener("click", function(e){        
+		var pt = e.point;
+		geoc.getLocation(pt, function(rs){
+			var addComp = rs.addressComponents;
+			
+			cityname=addComp.city;
+			
+			lng =pt.lng;
+			lat =pt.lat;
+			
+			
+			if(confirm('你的位置为：'+addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber+'是否确认?')){
+				Loction();
+			}
+			
+			//alert(pt.lng+",,"+pt.lat);
+			//document.getElementById("body").innerHTML+=pt.lng+','+pt.lat;
+			
+		});        
+	});
+	
+	//自动定位城市
+	function myFun(result){
+		var cityName = result.name;
+		map.setCenter(cityName);
+		//alert("当前定位城市:"+cityName);
+	}
+	var myCity = new BMap.LocalCity();
+	myCity.get(myFun);
+	
+	
+	
+	
+	function Loction(){
+		$.post(project+"/RestaurantController/updateRestaurant",{"lng":lng,"lat":lat},function(data){
+			if(data==null||data==0)alert("定位失败");
+			if(data==1)alert("定位成功");
+		});
+	}	
+	
+	
+	
+	
+	//关于状态码
+	//BMAP_STATUS_SUCCESS	检索成功。对应数值“0”。
+	//BMAP_STATUS_CITY_LIST	城市列表。对应数值“1”。
+	//BMAP_STATUS_UNKNOWN_LOCATION	位置结果未知。对应数值“2”。
+	//BMAP_STATUS_UNKNOWN_ROUTE	导航结果未知。对应数值“3”。
+	//BMAP_STATUS_INVALID_KEY	非法密钥。对应数值“4”。
+	//BMAP_STATUS_INVALID_REQUEST	非法请求。对应数值“5”。
+	//BMAP_STATUS_PERMISSION_DENIED	没有权限。对应数值“6”。(自 1.1 新增)
+	//BMAP_STATUS_SERVICE_UNAVAILABLE	服务不可用。对应数值“7”。(自 1.1 新增)
+	//BMAP_STATUS_TIMEOUT	超时。对应数值“8”。(自 1.1 新增)
+</script>
