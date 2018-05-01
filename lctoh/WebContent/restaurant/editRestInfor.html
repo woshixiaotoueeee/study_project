@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>添加地址</title>
+	<link rel="stylesheet" type="text/css" href="./css/editRestInfor.css">
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=YnD4uKaLCm3OxKqa7poZPFMNamRbzh2S" ></script>
+	
+	<script src="/lctoh/Common/jquery-1.8.3.js"></script>
+	<script src="/lctoh/Common/layer/layer.js"> </script>
+	<script src="/lctoh/Common/common.js"></script>
+	<script type="text/javascript" src='./js/editRestInfor.js'></script>
+	
+</head>
+<body>
+    <div class='edit_name'>
+	    <div class='lay_infor'>
+		   <span>店家名称</span>
+		   <input id='upcustomerNickname' type='text' placeholder="请输入您的昵称" value='#customerNickname#'/>	
+	    </div>	
+	    <div class='lay_infor'>
+		   <span>配送费</span>
+		   <input  type='text' placeholder="请输入配送费" value=''/>	
+	    </div>
+	    <div class='lay_infor'>
+		   <span>起送费</span>
+		   <input  type='text' placeholder="请输入起送费" value=''/>	
+	    </div>
+	    <div class='lay_infor'>
+		   <span>手机号码</span>
+		   <input id='upphone' type='text' placeholder="#phone#" value="#phone#"/>	
+	    </div>
+	    <div class='lay_infor'>
+		   <span>邮箱</span>
+		   <input id='upemail' type='text' placeholder="#email#" value="#email#"/>	
+	    </div>
+	    <div class='lay_infor'>
+		   <span>店家地址</span>
+		   <div id="r-result"><input type="text" id="suggestId" size="20" value=""  /></div>
+	    </div>    
+	   <div class='lay_infor'>
+		   <span>店家简介</span>
+		   <div class='dishes_brief'><textarea id='dishes_brief'>菜品由最新鲜的材料及最美味的调料料理而成</textarea></div> 	
+	    </div>
+	    <div class='lay_infor save_cancel'>
+		    <input type='button' class='edit_save' value='保存'/>
+		    <input type='button' class='edit_cancel' value='取消'/>
+	    </div>			   
+	</div>
+</body>
+</html>
