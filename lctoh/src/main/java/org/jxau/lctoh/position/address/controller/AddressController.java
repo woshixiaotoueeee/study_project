@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.jxau.lctoh.position.address.domain.Address;
 import org.jxau.lctoh.position.address.service.AddressService;
+import org.jxau.lctoh.state.domain.State;
 import org.jxau.lctoh.tool.Tools;
 import org.jxau.lctoh.tool.base.controller.BaseController;
 import org.jxau.lctoh.tool.config.charEncoding.EncodingConfig;
@@ -169,6 +170,7 @@ public class AddressController extends BaseController{
 				responseData.failInfo(ErrorMSG.loginTimerOut);
 			}else{
 				//更新
+				address.setAddressState(new State(60003));
 				address.setAddressCustomer(customer);
 				try{
 					addressService.updateAddress(address);
