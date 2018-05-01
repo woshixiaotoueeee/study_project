@@ -220,5 +220,15 @@ public class RestaurantService {
 	public RestaurantWebModel findRestaurantWebModelByRestaurantId(String restaurantId){
 		return restaurantDao.findRestaurantWebModelByRestaurantId(restaurantId);
 	}
+
+
+	public void updateRestaurant_2(Restaurant _restaurant,String cityName) throws UserException {
+		List<City> cityList=cityDao.findCityByCityName(cityName);
+		if(cityList==null||cityList.size()==0)
+			throw new UserException(ErrorMSG.addressError);
+		_restaurant.setRestaurantCity(cityList.get(0));
+		
+		restaurantDao.updateRestaurant(_restaurant);
+	}
 }
 
