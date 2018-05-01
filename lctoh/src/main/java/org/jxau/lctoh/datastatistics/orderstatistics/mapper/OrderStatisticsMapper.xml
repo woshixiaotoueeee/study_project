@@ -44,7 +44,7 @@
 				DATE_FORMAT(orders.order_creat_time, "%Y年%m月")
 			</if>
 			<if test="statisticsType==4" >
-				=CONCAT(DATE_FORMAT(orders.order_creat_time, '%Y年'),CONCAT(quarter(orders.order_creat_time),'季度'))
+				CONCAT(DATE_FORMAT(orders.order_creat_time, '%Y年'),CONCAT(quarter(orders.order_creat_time),'季度'))
 			</if>
 		GROUP BY
 			tm
