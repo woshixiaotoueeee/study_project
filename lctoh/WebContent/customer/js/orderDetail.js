@@ -35,7 +35,7 @@ function setOrderToHtml(order){
 	$('.phone_restaurant').html(order.orderRestaurant.restaurantPhone);
 	$('.orderId').html(order.orderId);
 	
-	var caozuobtn=caozuobtn;
+	var caozuobtn=$('.caozuo');
 	caozuobtn.attr('id',order.orderId);
 	caozuobtn.attr('stateInfo',order.orderState.stateId);
 	if(order.orderState.stateId==100001){

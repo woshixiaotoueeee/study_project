@@ -6,9 +6,9 @@ $(function(){
 	 init();
 	 
 	 /*统计饼图*/
-	 pie_chart();
+	 //pie_chart();
 	 /*统计过程线*/
-	 line_chart();	
+	 //line_chart();	
 	
 	 $("#btn_query").click(function(){
 		 init();
@@ -125,13 +125,13 @@ function  pie_chart(dataList){
 	            psnm:"异常订单",
 	            num:"0"
 	         };
-		for(var i=0;i<typelist;i++){
-			if(typelist[i].type<100004){
-				pszDispatching.num+=typelist[i].count;
-			}else if(typelist[i].type=100004){
-				zapsDispatching.num+=typelist[i].count;
-			}else if(typelist[i].type>100004){
-				ycDispatching.num+=typelist[i].count;
+		for(var i=0;i<dataList.length;i++){
+			if(dataList[i].type<100004){
+				pszDispatching.num+=dataList[i].count;
+			}else if(dataList[i].type=100004){
+				zapsDispatching.num+=dataList[i].count;
+			}else if(dataList[i].type>100004){
+				ycDispatching.num+=dataList[i].count;
 			}
 			
 		}
@@ -333,10 +333,10 @@ function  line_chart(dataList){
 	    },
 	    yAxis: {
             type: 'value',
-            name: '数量',							            							           
+            name: '数量（单|元）',							            							           
             position: 'left',							           
             axisLabel: {
-                formatter: '{value} 单'
+                formatter: '{value} '
               }				         
 	    },
 	    series:[ {

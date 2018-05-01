@@ -123,10 +123,22 @@ function save_address(){
 		  onSearchComplete: myFun
 		});
 		local.search(address.addressInfo);
+		address.addressCustomer=null;
+		address.addressState=null;
+		
+		var addressInfo={};
+		addressInfo.addressId=address.addressId;
+		addressInfo.addressName=address.addressName;
+		addressInfo.addressProvince=address.addressProvince;
+		addressInfo.addressCity=address.addressCity;
+		addressInfo.addressInfo=address.addressInfo;
+		addressInfo.addressPhone=address.addressPhone;
+		addressInfo.addressLatitude=address.addressLatitude;
+		addressInfo.addressLongitude=address.addressLongitude;
 		$.ajax({
 			   type: "post",
 			   url:Common.updateAddress,
-			   data:address, 
+			   data:addressInfo, 
 			   dataType: "json",
 			   success:function(data){
 					layer.msg(data.responseInfo, {time:2500});
