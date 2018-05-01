@@ -426,7 +426,7 @@ function delete_address(_this){
 			  $.ajax({  
 			         url: Common.deleteAddress,  
 			         type: 'POST',  
-			         data: {'addressId':$(this)[0].id}, 
+			         data: {'addressId':$(_this)[0].id}, 
 			         dataType: "json",
 			         success: function (returndata) {
 			        	 layer.msg(returndata.responseInfo, {time:2500});

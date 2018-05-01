@@ -125,6 +125,7 @@ function place_order(){
 					   success:function(data){
 						   if(data.state==1){
 							   layer.msg('下单成功', {icon: 1, time: 2500});
+							   init_shopping_car();
 						   }
 						   else{
 							   layer.msg(data.responseInfo, {time:2500});
