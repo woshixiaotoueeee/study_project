@@ -57,6 +57,14 @@ function add_dishes(){//添加菜肴产品
 		   <span>菜品缩略图</span>
 		   <div class='input_flie'><div class='img_dishes'><img /></div><input type='file' /></div>  	
 	    </div>
+	    <div class='lay_infor'>
+		   <span>菜品分类</span>
+		   <div class='select_list'>
+		      <select id="dish_type">
+                 <option>请选择菜肴类别</option>
+              </select>
+           </div>  	
+	    </div>
 	    <div class='lay_infor lay_brief'>
 		   <span>菜品简介</span>
 		   <div class='dishes_brief'><textarea id='dishes_brief'></textarea></div>    
@@ -70,9 +78,15 @@ function add_dishes(){//添加菜肴产品
 		var layerIndex=layer.open({
 			  title: ['添加菜肴菜品', 'font-size:16px;'],
 			  type: 1,
-			  area: ['544px', '460px'], //宽高
+			  area: ['544px', '500px'], //宽高
 			  content: addDishes
 		});	
+		//获取菜肴类别列表数据
+		 var dishList = ['蛋炒饭','盖浇饭','饮料','烧烤'];
+		 for(i in dishList){
+			 $('#dish_type ').append('<option>'+dishList[i]+'</option>'); 
+		  }
+		
 	})
 	
 	
@@ -91,6 +105,14 @@ function edit_dishes(){//编辑菜肴产品
 		   <span>菜品缩略图</span>
 		   <div class='input_flie'><div class='img_dishes'><img src='./images/dish/dish_one_1.png'/></div><input type='file' /></div>  	
 	    </div>
+	    <div class='lay_infor'>
+		   <span>菜品分类</span>
+		   <div class='select_list'>
+		      <select id="dish_type">
+                 <option>请选择菜肴类别</option>
+              </select>
+           </div>  	
+	    </div>
 	    <div class='lay_infor lay_brief'>
 		   <span>菜品简介</span>
 		   <div class='dishes_brief'><textarea id='dishes_brief'>菜品由最新鲜的材料及最美味的调料料理而成</textarea></div>    
@@ -104,9 +126,15 @@ function edit_dishes(){//编辑菜肴产品
 		var layerIndex=layer.open({
 			  title: ['编辑菜肴菜品', 'font-size:16px;'],
 			  type: 1,
-			  area: ['544px', '460px'], //宽高
+			  area: ['544px', '500px'], //宽高
 			  content: editDishes
 		});	
+		//获取菜肴类别列表数据
+		 var dishList = ['蛋炒饭','盖浇饭','饮料','烧烤'];
+		 for(i in dishList){
+			 $('#dish_type ').append('<option>'+dishList[i]+'</option>'); 
+		  }
+		
 	})
 	
 }
