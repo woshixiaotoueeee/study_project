@@ -222,6 +222,8 @@ public class CartController extends BaseController{
 				//Order order=orderService.findOrderByOrderId(id);
 				Order order=orderService.findOrderByOrderId(id);
 				orderCustomer.setCustomerBalance(orderCustomer.getCustomerBalance().subtract(order.getOrderPrice()));
+				cart.clear();
+				session.setAttribute(ConversationConfig.cartSession,cart);
 				session.setAttribute(ConversationConfig.customerSession,orderCustomer);
 				responseData.successInfo(order);
 			}
