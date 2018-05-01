@@ -118,7 +118,7 @@
 	
 	
 	<!--删除地址数据-->
-	<update id="deleteAddress" parameterType="String">
+	<update id="deleteAddress" parameterType="Address">
 		update 
 			address
 		set
