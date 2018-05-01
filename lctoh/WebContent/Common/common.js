@@ -91,6 +91,12 @@ Common.updateRider=projectDirectory+'/RiderConreoller/updateRider';
 //配送信息
 Common.findDispatching=projectDirectory+'/RiderConreoller/findDispatching';
 
+//店家获取登录信息
+Common.getRestaurantLoginInfo=projectDirectory+'/RestaurantController/getRestaurantLoginInfo';
+//店家公告修改
+Common.updateRestaurantNotice=projectDirectory+'/RestaurantController/updateRestaurantNotice';
+
+
 
 
 //获取地址栏参数
