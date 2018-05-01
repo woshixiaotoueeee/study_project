@@ -17,7 +17,9 @@
     <div class='content'>
      <header>
          <div class='header-wrap'>
-              <div class='logo'>logo</div>
+              <div class='logo'>
+                  <img src='/lctoh/images/lczxlg.png'/>
+              </div>
               <div class='title'>联创在线点餐平台</div>
               <div class='nav'>
                    <ul>
@@ -34,20 +36,22 @@
                    </div>
                    <div class='set_up' >
                            <ul>
-                               <li><div class='img_list'>
-                                   <img src="./images/list_1.png">
-                                   </div>个人中心
-                               </li>                           
-                               <li><div class='img_list'><img src="./images/list_3.png"></div>营业中
+                               <li id='rest_set'><div class='img_list'>
+                                   <img src="./images/restCenter/set_shop.png">
+                                   </div>店家设置
+                               </li> 
+                               <li id='rest_finance'><div class='img_list'><img src="./images/restCenter/money.png"></div>财务管理
+                               </li>                          
+                               <li id='rest_state'><div class='img_list'><img src="./images/list_3.png"></div>营业中
                                </li>
-                               <li><div class='img_list'><img src="./images/list_4.png"></div>退出登录
+                               <li id='sign_out'><div class='img_list'><img src="./images/list_4.png"></div>退出登录
                                </li>
                            </ul>
                   </div> 
               </div>
         </div> 
      </header>
-     <section style='z-index:66;'> 
+     <section style='z-index:66;' class='sec_iframe'> 
         <iframe src="./restaurant.html" id='iframe_a' name="iframe_a" scrolling="no"></iframe>
      </section> 
      <iframe src="../header_footer/footer.html" frameborder="0" name="iframe_bot" scrolling="no"></iframe> 
