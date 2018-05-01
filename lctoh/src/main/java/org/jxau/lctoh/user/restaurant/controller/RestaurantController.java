@@ -16,6 +16,7 @@ import org.jxau.lctoh.tool.config.error.ErrorMSG;
 import org.jxau.lctoh.tool.config.imageurl.ImagesUrl;
 import org.jxau.lctoh.tool.config.successMSG.SuccessMSG;
 import org.jxau.lctoh.user.basis.domain.User;
+import org.jxau.lctoh.user.basis.exception.UserException;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
 import org.jxau.lctoh.user.restaurant.domain.RestaurantCategory;
@@ -518,6 +519,33 @@ public class RestaurantController extends BaseController {
 				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.updateFail);
 			}
+		}
+		return toGsonString();
+	}
+	
+	
+	/**
+	 * 获取登陆信息
+	 * @return
+	 * <pre>
+	 * json字符串{
+	 * 	说明：{
+	 * 		Integer state;			//状态码（整形数字）
+	 * 		Object responseInfo;	//成功：为  Restaurant类型对象具体属性参考 Restaurant实体类
+	 *  							//失败：为失败原因的信息 String 字符串
+	 * 	}
+	 * }
+	 * </pre>
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getRestaurantLoginInfo",produces=EncodingConfig.produces)
+	public String getRestaurantLoginInfo(HttpSession session){
+		
+		Restaurant _restaurant=(Restaurant) session.getAttribute(ConversationConfig.restaurantSession);
+		if(_restaurant!=null){
+			responseData.successInfo(_restaurant);
+		}else{
+			responseData.failInfo(ErrorMSG.loginTimerOut);
 		}
 		return toGsonString();
 	}

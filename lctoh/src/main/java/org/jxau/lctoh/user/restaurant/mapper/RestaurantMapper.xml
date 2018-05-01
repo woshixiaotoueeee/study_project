@@ -116,7 +116,7 @@
 			restaurant.restaurant_state_id=#{restaurantState.stateId},
 			restaurant.restaurant_user_id=#{restaurantUser.userId},
 			restaurant.restaurant_category_id=#{restaurantCategory.restaurantCategoryId},
-			restaurant.restaurant_city_i#{restaurantCity.cityId},
+			restaurant.restaurant_city_id=#{restaurantCity.cityId},
 			restaurant.restaurant_deliveryfee=#{restaurantDeliveryFee},
 			restaurant.restaurant_income=#{restaurantIncome},
 			restaurant.restaurant_offer_price=#{restaurantOfferPrice}
