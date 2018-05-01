@@ -317,7 +317,7 @@ public class RestaurantController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/updateRestaurant",produces=EncodingConfig.produces)
-	public String updateRestaurant(Restaurant restaurant,User user,HttpSession session){
+	public String updateRestaurant(Restaurant restaurant,User user,String cityName,HttpSession session){
 		Restaurant _restaurant=(Restaurant) session.getAttribute(ConversationConfig.restaurantSession);
 		if (restaurant==null||user==null
 				||restaurant.getRestaurantDeliveryFee()==null
@@ -325,23 +325,27 @@ public class RestaurantController extends BaseController {
 				||restaurant.getRestaurantPhone()==null
 				||restaurant.getRestaurantNotice()==null
 				||user.getUserEmail()==null
-				||user.getUserPhone()==null
-				||user.getUserSex()==null
 				) {
 			responseData.failInfo(ErrorMSG.parameterIsNull);
 		} else {
 			User _user=_restaurant.getRestaurantUser();
 			_user.setUserEmail(user.getUserEmail());
-			_user.setUserSex(user.getUserSex());
-			_user.setUserPhone(user.getUserPhone());
 			_restaurant.setRestaurantUser(_user);
 			_restaurant.setRestaurantDeliveryFee(restaurant.getRestaurantDeliveryFee());
 			_restaurant.setRestaurantName(restaurant.getRestaurantName());
 			_restaurant.setRestaurantPhone(restaurant.getRestaurantPhone());
 			_restaurant.setRestaurantNotice(restaurant.getRestaurantNotice());
+			_restaurant.setRestaurantLatitude(restaurant.getRestaurantLatitude());
+			_restaurant.setRestaurantLongitude(restaurant.getRestaurantLongitude());
+			_restaurant.setRestaurantAddressInfo(restaurant.getRestaurantAddressInfo());
+			
+			
 			try{
-				restaurantService.updateRestaurant(restaurant);
+				restaurantService.updateRestaurant_2(_restaurant,cityName);
 				responseData.successInfo(SuccessMSG.updateSuccessMSG);
+			}catch(UserException e){
+				e.printStackTrace();
+				responseData.failInfo(e.getMessage());
 			}catch(Exception e){
 				e.printStackTrace();
 				responseData.failInfo(ErrorMSG.updateFail);
