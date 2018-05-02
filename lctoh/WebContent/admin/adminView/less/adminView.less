@@ -1,0 +1,196 @@
+html,body{
+	height:100%;
+	width:100%;
+	padding:0;
+	margin:0;						
+}
+ul{
+	list-style: none;
+	padding:0;
+	margin:0;
+}
+ul li{
+	float:left;
+}
+p,h2,h3{
+	padding: 0;
+	margin: 0;	
+}
+input {
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  margin: 0;
+  font-size: 12px;
+}
+.cont_rider{
+	height:600px;
+	width:1204px;
+	background: #eee;
+	margin: 0 auto;
+}
+.cont_rider .rider_left{
+	float:left;
+    width:320px;
+    background: #f8f8f8;
+    border: 1px solid #aaa;
+    height:100%;
+    >div{
+    	height:50%;
+    	width:100%;
+    	position: relative;
+    	.order_state{
+    		height:36px;
+    		width:100%;
+    		color:#fa7c03;
+    		label{
+    			line-height:36px;
+    			display:inline-block;
+    		    float:left;
+    		    margin-left:20px;
+    		}
+    	}
+    } 	
+}
+//骑手的订单列表
+.cont_rider .rider_left .order_list{
+  width:100%;
+  height:calc(~'100% - 36px');
+  overflow-y: auto;
+  .order_one{
+  	 width:calc(~'100% - 20px');
+  	 border:1px solid #fa7c03;
+	 border-radius:2px;
+	 margin-left:10px;
+	 margin-top:5px;
+     .img_shop{
+     	 float:left;
+     	 width:65px;
+         height: 45px;
+     	 border:1px solid red;
+     	 float:left;
+     	 
+     }
+     .order_title{
+          margin-left:10px;
+          margin-top:15px;
+          float:left;
+     }
+  }
+}
+//骑手查看的订单
+.cont_rider .rider_left .order_same {
+	font-size:12px;
+	width:100%;
+	display:inline-block;
+    margin-top:5px;
+    color:#999;
+    margin-left:5px;
+    >div{
+    	float:left;
+    }
+    .order_tm{
+    	float:right;
+    	margin-right:20px;
+    }
+    .order_custer_address{
+    	float:right;
+    	margin-right:20px;
+    	width:162px;
+    	overflow:hidden;
+    	white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .order_custer_address:hover{
+
+    }
+}
+.cont_rider .rider_left  .order_top{
+	color:#666;
+}
+.cont_rider .rider_left .order_title{
+	font-size:14px;
+}
+.cont_rider .rider_right{
+	 width:calc(~'100% - 322px');
+	 background: #f8f8f8;
+	 height:100%;
+	 float:left;
+}
+
+//可配送订单详情
+.show_order{
+	width:calc(~'100% - 20px');
+	margin-left:10px;
+	height:95%;
+	/* border:1px solid yellow; */
+	position: relative;
+	.order_infor{
+		width:calc(~'100% - 40px');
+		margin-left:20px;
+		margin-top:10px;
+		position: relative;
+		/* border:1px solid blue; */
+        label{
+          
+        }
+        >div{
+        	width:calc(~'100% - 40px');
+        	margin-left:20px;
+        	/* border:1px solid red; */
+        }
+        span{
+           font-size:12px;
+           color:#999;
+        }
+        .order_idnum{
+           margin-left:80px;
+        }
+        /*顾客信息*/
+        .order_cust_infor{
+          
+        }
+        .custer_phone,
+        .store_phone{
+        	float:right;
+        	margin-right:40px;
+        }
+        .custer_phone{
+        	color:#fa7c03;
+        }
+        .order_total,
+        .order_dist{
+        	float:right;
+        	margin-right:40px;
+        	width:80px;
+        	text-align:center;
+        	color:#fa7c03;
+        }
+        .order_tm {
+        	position: relative;
+        }
+        .order_tm span{
+        	display:block;
+        	width:100%;
+        	text-align:center;
+        	color:#fa7c03;
+        }
+        input{
+          color: #fff;
+		  width: 60px;
+		  height: 24px;
+		  line-height: 24px;
+		  background: #aaa;
+		  border: 1px solid #aaa;
+		  text-align: center;
+		  border-radius: 2px;
+		  padding:0px;
+		  margin-left:calc(~'50% - 30px');
+        }
+        input:hover{
+        	background: #fa7c03;
+            border-color:#fa7c03;
+        }
+        
+	}
+}

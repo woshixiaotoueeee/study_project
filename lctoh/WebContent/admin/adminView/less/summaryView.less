@@ -1,0 +1,442 @@
+/*骑手的统计管理页面*/
+body,
+html {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  color: #666;
+  background: #eee;
+  font-family: '宋体';
+}
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+p,
+h4,
+h3,
+hr {
+  padding: 0;
+  margin: 0;
+}
+ul li {
+  float: left;
+}
+input {
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  margin: 0;
+  font-size: 12px;
+}
+img {
+  width: 100%;
+}
+.cont_summary{
+  width:1204px;
+  height:100%;
+  margin:0 auto;
+  background: #f8f8f8;
+}
+.cont_summary .cont_left{
+  width:180px;
+  height:100%;
+  background: #aaa;
+  float:left;
+  position:relative;
+}
+.cont_summary .cont_right{
+  width:calc(~'100% - 180px');
+  height:100%;
+  float:left;
+  position:relative;
+  //选择条件查询
+  .conditions_sel{
+    width:100%;
+    height:60px;
+    display:inline-block;
+    >div{
+      float:left;
+      font-size:18px;
+      height:40px;
+      margin-top:10px;
+      line-height:40px;
+      margin-left:40px;
+    }
+    .show_check{
+      color:#fa7c03;
+    }
+    .tm_sta{
+       input{
+         margin-right:5px;
+       }
+    }
+    //时间选择控件
+    .tm_check{
+        width:380px;
+        margin-left:90px;
+        input{
+          height:24px;
+          width:100px;
+          margin-left:20px;
+          padding-left:10px;
+          corlor:#999;
+        }
+    }
+    //查询按钮
+    .btn_qurey{
+         padding-left:25px;
+         input{
+           height:24px;
+           width:60px;
+         }
+         input:hover{
+           background: #fa7c03;
+           color:#fff;
+           cursor:pointer;
+         }
+    }
+  }
+
+  //下方订单图表及列表
+  .order_manage{
+    border:1px solid #eee;
+    width:100%;
+    height:calc(~'100% - 60px');
+    //图表
+    .order_chart{
+       width:45%;
+       height:100%;
+       float:left;
+       border-right:1px solid #eee;
+       label{
+        float:left;
+        width:clac(~'100% - 20px');
+        margin-top:10px;
+        margin-left:20px;
+        margin-bottom:20px;
+       }
+       //饼图
+       .chart_pie{
+          width:80%;
+          height:40%;
+          margin-left:10%;
+         /*  border:1px solid red; */
+          float:left;
+          #mainTwo{
+            width:100%;
+            height:100%;
+          }
+       }
+       //过程线
+       .chart_line{
+          width:90%;
+          height:40%;
+          margin-left:5%;
+          /* border:1px solid red; */
+          float:left;
+          .graph_cont{
+             width:calc(~'100% - 20px');
+             margin:10px;
+             height:100%;
+          }
+          #mainGraph{
+             width:100%;
+             height:100%;
+          }
+       }
+    }
+    //列表
+    .order_all{
+       width:calc(~'55% - 1px');
+       height:100%;
+       position: relative;
+       float:left;
+       .tab_header {
+        display: inline-block;
+        height: 30px;
+        width: 100%;
+        background: #cccccc;
+        font-size: 14px;
+        line-height: 30px;
+      }
+      .tab_header > div {
+        float: left;
+        text-align: center;
+        /*border:1px solid red;*/
+      }
+       .tab_header .ord_time {
+        /*时间*/
+        width: 84px;
+      }
+       .tab_header .ord_cont {
+        margin-left: 58px;
+        width: 140px;
+        text-align: left;
+      }
+      .tab_header .ord_state {
+        margin-left: 15px;
+        width: 84px;
+      
+      }
+      .tab_header .ord_money {
+        margin-left: 15px;
+        width:84px;
+      }
+      .tab_header .ord_click {
+        margin-right: 10px;
+        width: 64px;
+        float:right;
+      }
+    }
+  }
+}
+//订单列表单个信息
+.order_detaile {
+  width: 100%;
+ /*  overflow-y:auto; */
+  height:100%;
+}
+.order_detaile .order_one {
+  height: 68px;
+  position: relative;
+}
+.order_detaile .order_one > div {
+  float: left;
+  text-align: center;
+  /* border:1px solid red;*/
+}
+ .order_detaile .order_one .pic_img {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 1px solid red;
+  top: 19px;
+  left:68px;
+  border-radius: 50%;
+  background: #fa7c03;
+}
+.order_detaile .order_one .ord_time {
+  /*时间*/
+  width: 84px;
+  height: 68px;
+  border-right: 1px solid #ccc;
+}
+ .order_detaile .order_one .ord_time .time_show {
+  margin-top: 20px;
+}
+.order_detaile .order_one .ord_time .time_show span {
+  display: block;
+  width: 42px;
+  margin-left: 18px;
+  text-align: center;
+}
+ .order_detaile .order_one .ord_time .time_show span:first-child{
+  margin-left: 8px;
+  font-size:12px;
+}
+ .order_detaile .order_one .border_bot {
+  float: left;
+  display: inline-block;
+  height: 68px;
+  width: 442px;
+  margin-left: 18px;
+  border-bottom: 1px solid #ccc;
+}
+ .order_detaile .order_one .border_bot > div {
+  float: left;
+}
+.order_detaile .order_one .border_bot .ord_cont {
+  width: 170px;
+  height:100%;
+  text-align: left;
+  margin-left:10px;
+}
+.order_detaile .order_one .border_bot .ord_cont .ord_title {
+  color:#666;
+  margin-top:5px;
+  font-size: 14px;
+}
+ .order_detaile .order_one .border_bot .ord_cont .ord_inf {
+  font-size: 12px;
+  margin-top: 9px;
+  color: #999999;
+}
+ .order_detaile .order_one .border_bot .ord_cont .ord_number {
+  font-size: 12px;
+  margin-top: 6px;
+  color: #999999;
+}
+ .order_detaile .order_one .border_bot .ord_state {
+  margin-left: 15px;
+  width: 84px;
+  margin-top:27px;
+}
+.order_detaile .order_one .border_bot .ord_state span {
+ 
+  color: #999999;
+}
+.order_detaile .order_one .border_bot .ord_money {
+  margin-left: 15px;
+  width: 84px;
+}
+.order_detaile .order_one .border_bot .ord_money span {
+  display: block;
+  font-size: 12px;
+  width: 100%;
+  color: #999999;
+}
+ .order_detaile .order_one .border_bot .ord_money span:first-child {
+  display: block;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 20px;
+  color: #333;
+}
+.order_detaile .order_one .border_bot .ord_money span:nth-of-type(2){
+  margin-top:5px;
+}
+ .order_detaile .order_one .border_bot .ord_click {
+   margin-right: 0px;
+   width: 64px;
+   float:right;
+}
+.order_detaile .order_one .border_bot .ord_click input {
+  font-size: 12px;
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  width: 60px;
+  height: 24px;
+  margin-top:22px;
+  background: #eee;
+}
+ .order_detaile .order_one .border_bot .ord_click input:hover {
+  background: #fa7c03;
+  color: #fff;
+  cursor: pointer;
+}
+
+
+
+
+
+//tabs选项样式美化
+.body_cont{
+  width:100%;
+  height:100%;
+  position: absolute;
+  top: 0;
+  left:0;
+
+}
+.body_cont .item-container{
+  width: 400px;
+  height:100%;
+  float: left;
+  box-shadow: 0px 0px 2px #aaa;
+}
+.body_cont .policy-tabs,
+.body_cont .policy_tab{
+  width:100%;
+  height:100%;
+}
+  /* 选项卡样式(改变原有样式) */
+.tabs-panels{
+   border-color:#eee;
+}
+.tabs-panels .panel-htop{
+  border-color: #eee;
+}
+.theme-tab-blue-block .tabs-header{
+  border:1px solid #eee;
+  height:42px;
+}
+.theme-tab-blue-block .tabs-wrap{
+  height:100%;
+  background: #fff;
+}
+
+.theme-tab-blue-block .tabs-wrap ul{
+   padding: 0 0 0 0;
+   width:100%;
+   height:40px;
+   border:none;
+}
+.theme-tab-blue-block .tabs li{
+    float: left;
+    display: inline-block;
+    margin: 2px 6px 0px 0px;
+    padding: 0;
+    position: relative;
+    border: 0;
+}
+.theme-tab-blue-block .tabs li:first-child{
+  margin-left:6px;
+}
+.theme-tab-blue-block .tabs-header-left .tabs li{
+  margin: 0 -1px 2px 0;
+}
+.theme-tab-blue-block .tabs-header-right .tabs li{
+  margin: 0 0 2px -1px;
+}
+.theme-tab-blue-block .tabs-header-bottom .tabs li{
+  margin: -1px 2px 0 0;
+}
+.theme-tab-blue-block .tabs li a.tabs-inner{
+  background:#e2e2e2;
+  border:none;
+}
+.theme-tab-blue-block .tabs li .tabs-inner{
+  height:30px;
+}
+.theme-tab-blue-block .tabs li.tabs-selected a.tabs-inner{
+  background:#1b8cf2; 
+  color:#fff; 
+}
+.theme-tab-blue-block .tabs li a.tabs-inner{
+  width:60px;
+  border:1px solid transparent; 
+  border-bottom:1px solid #c5c5c5;
+  border-radius:3px;
+  font-family:宋体;
+  margin-top:2px;
+  line-height:30px;
+}
+.theme-tab-blue-block .tabs-header-left li a.tabs-inner{
+  border:1px solid transparent; 
+  border-left:1px solid #c5c5c5;
+}
+.theme-tab-blue-block .tabs li.tabs-selected a.tabs-inner{  border:1px solid transparent; border-bottom:1px solid #1b8cf2;}
+.theme-tab-blue-block .tabs-header-left li.tabs-selected a.tabs-inner{ border:1px solid transparent; border-right:1px solid #1b8cf2;}
+.theme-tab-blue-block .tabs-header-right li.tabs-selected a.tabs-inner{ border:1px solid transparent; border-left:1px solid #1b8cf2;}
+.theme-tab-blue-block .tabs-header-bottom li.tabs-selected a.tabs-inner{ border:1px solid transparent; border-top:1px solid #1b8cf2;}
+.theme-tab-line-bold.theme-tab-blue-block .tabs{ border:0; border-bottom:3px solid #1b8cf2;}
+.theme-tab-line-bold.theme-tab-blue-block .tabs-header-left{ border:0; border-right:3px solid #1b8cf2;}
+.theme-tab-line-bold.theme-tab-blue-block .tabs-header-right{ border:0; border-left:3px solid #1b8cf2;}
+.theme-tab-line-bold.theme-tab-blue-block .tabs li a.tabs-inner{ border:1px solid transparent; border-bottom:0;}
+.theme-tab-line-bold.theme-tab-blue-block .tabs-header-left li a.tabs-inner{ border:1px solid transparent; border-right:0;}
+.theme-tab-line-bold.theme-tab-blue-block .tabs-header-right li a.tabs-inner{ border:1px solid transparent; border-left:0;}
+.theme-tab-line-bold.theme-tab-blue-block .tabs-header-bottom li a.tabs-inner{ border:0; border-top:4px solid #1b8cf2;}
+.theme-tab-line-bold.theme-tab-blue-block .tabs-tool { border-bottom:3px solid #1b8cf2;}
+.theme-tab-blue-block .tabs-pill,.theme-tab-blue-block .tabs-header-bottom .tabs-pill{
+  height: 39px !important;
+}
+.theme-tab-blue-block .tabs-header-left .tabs-pill,.theme-tab-blue-block .tabs-header-right .tabs-pill{
+  height:inherit !important;
+}
+.theme-tab-blue-block .tabs-header-left .tabs-pill li{margin: 0 0 2px 4px;}
+.theme-tab-blue-block .tabs-header-bottom .tabs li{margin: -1px 2px 0 0;}
+.theme-tab-blue-block .tabs-header-left .tabs-pill li,.theme-tab-blue-block .tabs-header-right .tabs-pill li{
+  width: 95%;
+}
+.theme-tab-blue-block .tabs-pill li a.tabs-inner
+{border: 1px solid transparent;}
+.theme-tab-blue-block .tabs-tool,
+.theme-tab-blue-line .tabs-tool
+{ background:transparent; }
+
+/* .body_cont{border:1px solid red;} */

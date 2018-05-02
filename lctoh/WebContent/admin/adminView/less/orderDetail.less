@@ -1,0 +1,247 @@
+body,html{
+	padding:0;
+	margon:0;
+	width:100%;
+	height:100%;
+	color:#666;
+}
+ul,ol{
+   list-style: none;
+   padding: 0;
+   margin: 0;
+}
+p,h4,h3,hr{
+	padding: 0;
+	margin: 0;
+}
+ul li{
+   float: left;
+}
+input {
+	outline: none;
+	border:none;
+	text-align: center;
+	border-radius: 2px;
+	margin: 0;
+    font-size: 12px;
+}
+input:hover{
+	cursor: pointer;
+}
+.orderDetail{
+	/* 轮播图*/
+	width:780px;
+	height:560px;
+	border:1px solid blue;
+   .banner{
+     height:162px;
+     width:740px;
+     margin-left: 20px;
+     .ban_img{
+         position: relative;
+     	>div{
+         position: absolute;
+         top:0;
+         left:0;
+     	}
+     }
+   }
+   /* 订单状态*/
+   .ps_state{
+     margin-left: 20px;
+   	 width:100%;
+     margin-top: 19px;
+     height:40px;
+     /*text-align: center;*/
+     display: inline-block;
+     .state_1{
+     	float:left;
+     	display: block;
+     	margin-left: 105px;
+     	width:80px;
+     	text-align: center;
+     	span{
+     		color:#666;
+     	}
+     	span:first-child{
+     		color:#333;
+     	}
+     }
+     .state_1:first-child{
+       margin-left:  140px;
+     }
+     .state_1:last-child{
+     	margin-left: 110px;
+     }
+
+   }
+   /* 商家信息*/
+   .store_infor{
+   	 margin-top: 19px;
+     height:64px;
+     width:740px;
+     margin-left: 20px;
+   /*  border:1px solid red;*/
+     .pic_por{
+     	float:left;
+        width: 65px;
+        height: 65px;
+        margin-left: 20px;
+        img{
+        	width: 100%;
+        }
+     }
+     .right_inf{
+       float:left;
+       width: 640px;
+       margin-left: 10px;
+       label{
+       	 font-size: 16px;
+         float:left;
+       }
+       /*订单号*/
+       .number_store{
+          width: 166px;
+          float:left;
+          margin-left:180px;
+       }
+       input{
+       	 margin-top: 1px;
+         padding: 4px 6px;
+         color:#f8f8f8;        
+       }
+       input:nth-of-type(1){
+       	 background: #a0a0a0; 
+       	 margin-left: 18px;
+       }
+       input:nth-of-type(2){
+         background: #ff8633;
+         margin-left: 18px;
+       }
+       /*商家地址、手机号*/
+       .order_num{
+       	 margin-top:42px;
+         height:30px;
+         width:100%;
+         >div{
+         	float:left;
+         }
+         .number_one{
+          float:left;
+         	width: 266px;
+         }
+         .phone_st{
+         	margin-left: 56px;
+         }
+       }
+     }
+   }
+   /* 订单详情*/
+   .order_inf{
+   	 width:740px;
+     margin-left: 20px;
+   	 margin-top: 19px;
+     height:212px;
+     /*border:1px solid black;*/
+     >div{
+       float:left;
+       width: 360px;
+       height: 211px;
+       background-image: url('../images/my_order/bgord.png');
+       background-size: 100%;
+       background-repeat:no-repeat;
+     }
+     .my_dish{
+       .cont_infor{
+       	 width:calc(~'100% - 35px');
+       	 margin-left: 35px;
+       	 label{
+       	 	display: block;
+       	 	margin-top:15px;
+       	 	margin-bottom: 2px;
+       	 	color:#888;
+       	 	font-weight: bold;
+       	 }
+       	 .detail_cont{
+       	 	height: 132px;
+       	 	width:calc(~'100% - 15px');
+       	 	border-top:1px solid #999999;
+       	 	border-bottom:1px solid #999999;
+       	 	overflow-y: scroll;
+       	 	display: inline-block;
+       	 	.order_entry{
+       	 	  width: 100%;
+       	 	  height:32px;
+              color:#999; 
+              display: inline-block;           
+              >div{
+              	width: 16%;
+              	float: left;
+              	margin-top: 4px;
+              	text-align: right;	
+              }
+              .ord_dishes{
+              	width: 48%;
+              	text-align: left;	
+              }
+       	 	}
+       	 	.order_title{
+              font-weight: bold;
+       	 	}
+       	 }
+       	 .total{
+       	 	width: 100%;
+       	 	span{
+       	 	   display: block;
+       	 	   float:right;
+       	 	   margin-right: 15px;
+       	 	   line-height: 32px;
+               mask{
+               	color:red;
+               }
+       	 	}
+       	 }
+       }
+     }
+     .order_ps{
+         margin-left: 20px;
+        .cont_infor{
+       	  width:calc(~'100% - 35px');
+       	  margin-left: 35px;
+       	  label{
+       	 	display: block;
+       	 	margin-top:15px;
+       	 	margin-bottom: 2px;
+       	 	color:#888;
+       	 	font-weight: bold;
+       	   }
+       	   .detail_cont{
+	       	   	height: 100%;
+	       	 	width:calc(~'100% - 15px');
+	       	 	border-top:1px solid #999999;
+	       	 	display: inline-block;
+	       	 	.order_entry{
+	       	 		height: 16px;
+	       	 		margin-top:15px;
+	       	 	}
+	       	 	.order_entry:first-child{
+	       	 		margin-top:6px;
+	       	 	}
+       	   }
+       	}
+     }
+   }
+   /* 地址*/
+   .address{
+   	 width:740px;
+     margin-left: 20px;
+     height:30px;
+     margin-top: 10px;
+    /* border:1px solid black;*/
+     span{
+     	display: block;
+     	float:right;
+     	margin-right: 16px;
+     }
+   }
+} 
