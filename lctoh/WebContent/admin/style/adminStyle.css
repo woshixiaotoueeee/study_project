@@ -39,8 +39,8 @@ input,button,select,img{vertical-align:middle;}
 .loginform li input:-ms-input-placeholder {color: #fff !important;}
 /*start*/
 .header{background:#3d3d3d;color:#fff;height:75px;border-bottom:1px #383838 solid;}
-.logo{float:left;margin:0 20px;}
-.logo img{height:75px;}
+.logo{float:left;margin:5px 20px;width:270px;height:65px;}
+.logo img{height:65px;width:100%;}
 .top-link{height:75px;line-height:75px;}
 .top-link a{display:inline-block;margin:0 0 0 8px;padding:0 10px;color:#fff;cursor:pointer;}
 .top-link a:hover{color:#d6d6d6;}
