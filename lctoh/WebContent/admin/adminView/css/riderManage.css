@@ -1,0 +1,176 @@
+body,
+html {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  color: #666;
+  background: #fff;
+  overflow:hidden;
+  font-family: '宋体';
+}
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+p,
+h4,
+h3,
+hr {
+  padding: 0;
+  margin: 0;
+}
+ul li {
+  float: left;
+}
+input {
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  margin: 0;
+  font-size: 12px;
+}
+input:hover {
+  cursor: pointer;
+}
+img {
+  width: 100%;
+}
+.cont_rider{
+  background: #fff;
+  height:100%;
+  width:100%;
+  font-size: 14px;
+  display:inline-block;
+}
+.cont_rider .edit_cont{
+  width:100%;
+  height:100%;
+  /* border: 1px solid black;*/
+}
+/*我的个人中心主体内容*/
+.cont_rider  .infor_right{
+  width:100%;
+  height:100%;
+  font-size: 14px;
+  background: #f8f8f8;
+  box-shadow: 0px 2px 2px #aaa;
+  color: #333;
+  border-radius: 2px;
+  border: 1px solid #dddbdb;
+  position: relative;
+}
+.cont_rider  .infor_right .pic_infor_right{
+  position:absolute;
+  top:0;
+  right:0;
+  height:150px;
+  width:100px;
+  z-index:120;
+}
+.cont_rider  .infor_right .pic_infor_right img{
+  width:100%；
+}
+.cont_rider  .infor_right .center_cont {
+  height:100%;
+  width: 100%;
+  background: #fff;
+}
+.cont_rider  .infor_right .center_cont .edit_cont {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.cont_rider  .infor_right .center_cont label {
+  display: block;
+  font-size: 18px;
+  height: 56px;
+  width: calc(100% - 20px);
+  line-height: 56px;
+  padding-left:20px;
+  border-bottom: 1px solid #aaa;
+}
+/*订单的样式*/
+.edit_infor .rider_infor {
+  display: inline-block;
+  width: 100%;
+}
+.edit_infor .rider_infor .header {
+  display: inline-block;
+  height: 38px;
+  width: 100%;
+  background: #cccccc;
+  border-radius: 2px;
+  font-size: 16px;
+  line-height: 38px;
+}
+.edit_infor .rider_infor .header > div {
+  float: left;
+  width: 185px;
+  text-align: center;
+  /*border:1px solid red;*/
+}
+.edit_infor .rider_infor .header > div:last-child{
+   width: 210px;
+}
+
+.edit_infor .rider_infor .header .rider_account {
+
+}
+.edit_infor .rider_infor .header .ord_cont {
+
+}
+.edit_infor .rider_infor .header .ord_state {
+
+}
+.edit_infor .rider_infor .header .ord_money {
+
+}
+
+.edit_infor .rider_infor .header .ord_click {
+
+  
+}
+.edit_infor .rider_infor .rider_detaile {
+  width: 100%;
+  height:520px;
+  overflow-y:auto;
+}
+.edit_infor .rider_infor .rider_detaile .rider_one {
+  height: 68px;
+  position: relative;
+  line-height: 68px;
+}
+.edit_infor .rider_infor .rider_detaile .rider_one > div {
+  float: left;
+  width: 185px;
+  text-align: center;
+  /* border:1px solid red;*/
+}
+.edit_infor .rider_infor .rider_detaile .rider_one > div:last-child{
+  width:210px;
+}
+.edit_infor .rider_infor .rider_detaile .rider_one  .rider_operation input{
+  padding:4px 10px;
+}
+.edit_infor .rider_infor .rider_detaile .rider_one  .rider_operation input:hover{
+  cursor:pointer;
+  color:#fa7c03;
+}
+/*客户头像*/
+.edit_infor .rider_infor .rider_detaile .rider_one  .rider_portrait .rider_pic{
+   width:40px;
+   height:40px;
+   margin:0px auto;
+   margin-top:14px;
+   border:1px solid red;
+
+}
+.edit_infor .rider_infor .rider_detaile .rider_one  .rider_portrait .rider_pic img{
+  width:100%;
+  height: 100%;
+}
+
+

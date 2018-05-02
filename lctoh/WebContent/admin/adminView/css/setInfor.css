@@ -1,0 +1,261 @@
+/*骑手的个人资料页面*/
+body,
+html {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  color: #666;
+  background: #fff;
+  font-family: '宋体';
+}
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+p,
+h4,
+h3,
+hr {
+  padding: 0;
+  margin: 0;
+}
+ul li {
+  float: left;
+}
+input {
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  margin: 0;
+  font-size: 12px;
+}
+img {
+  width: 100%;
+}
+.content_setInfor {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  overflow:hidden;
+}
+.content_setInfor > div {
+  float: left;
+}
+.content_setInfor label {
+  display: block;
+  font-size: 18px;
+  height: 56px;
+  width: 96%;
+  margin-left: 2%;
+  padding-left:20px;
+  line-height: 56px;
+  border-bottom: 1px solid #aaa;
+}
+.content_setInfor .decorate_img {
+  width: 180px;
+  height: 200px;
+  border-radius: 5px;
+}
+.content_setInfor .decorate_img img {
+  border-radius: 5px;
+  height: 100%;
+}
+.my_infor {
+  width: 700px;
+  height: 420px;
+  margin-left: calc(50% - 350px);
+  display: inline-block;
+  margin-top: 60px;
+}
+.my_infor .edit_infor {
+  height: 100%;
+  float: right;
+  width: 100%;
+  background: #eee;
+  box-shadow: 0px 0px 2px #aaa;
+  color: #333;
+  border-radius: 3px;
+  border: 1px solid #dddbdb;
+}
+.my_infor .edit_infor .infor_list {
+  display: inline-block;
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  text-align: left;
+  position: relative;
+  margin-top: 18px;
+}
+.my_infor .edit_infor .infor_list > div {
+  float: left;
+  /* border:1px solid red;*/
+  width: 25%;
+  text-align: center;
+}
+.my_infor .edit_infor .infor_list .infor_fixed {
+  width: 25%;
+  margin-left: 20%;
+  margin-right: 5%;
+  text-align: center;
+}
+.my_infor .edit_infor .infor_list input {
+  color: #fff;
+  width: 70px;
+  height: 24px;
+  line-height: 24px;
+  background: #aaa;
+  border: 1px solid #aaa;
+  text-align: center;
+  border-radius: 2px;
+  padding: 0px;
+}
+.my_infor .edit_infor .infor_list input:hover {
+  cursor: pointer;
+  background: #fa7c03;
+  border: 1px solid #fa7c03;
+}
+/*..................修改密码.................*/
+.edit_password {
+  width: 100%;
+  height: 100%;
+}
+.edit_password .lay_infor {
+  /*混合代码*/
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  position: relative;
+  margin-top: 20px;
+}
+.edit_password .lay_infor span {
+  font-size: 14px;
+  width: 100px;
+  display: block;
+  float: left;
+  height: 42px;
+  line-height: 42px;
+  margin-left: 20px;
+  text-align: right;
+}
+.edit_password .lay_infor input {
+  font-size: 12px;
+  width: 300px;
+  display: block;
+  float: left;
+  height: 36px;
+  line-height: 36px;
+  color: #999999;
+  margin-left: 21px;
+  border: 1px solid #eee;
+  padding-left: 5px;
+}
+.edit_password .lay_infor .save_cancel {
+  margin-top: 30px;
+}
+.edit_password .lay_infor .edit_save {
+  width: 146px;
+  height: 42px;
+  text-align: center;
+  font-size: 18px;
+  margin-right: 40px;
+  margin-left: 90px;
+  background: #fa7c03;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.edit_password .lay_infor .edit_cancel {
+  width: 146px;
+  height: 42px;
+  text-align: center;
+  font-size: 18px;
+  background: #e0e0e0;
+  color: #333333;
+  border: none;
+  cursor: pointer;
+}
+/*..................修改密码.................*/
+/*..................修改基础信息，姓名，状态.................*/
+.edit_name {
+  width: 100%;
+  height: 100%;
+}
+.edit_name .lay_infor {
+  /*混合代码*/
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  position: relative;
+  margin-top: 20px;
+}
+.edit_name .lay_infor span {
+  font-size: 14px;
+  width: 100px;
+  display: block;
+  float: left;
+  height: 42px;
+  line-height: 42px;
+  margin-left: 20px;
+  text-align: right;
+}
+.edit_name .lay_infor input {
+  font-size: 12px;
+  width: 300px;
+  display: block;
+  float: left;
+  height: 36px;
+  line-height: 36px;
+  color: #999999;
+  border: 1px solid #eee;
+  margin-left: 21px;
+  padding: 3px 10px;
+}
+.edit_name .lay_infor .edit_sex span,
+.edit_name .lay_infor .edit_state span {
+  width: 30px;
+  margin-left: 3px;
+  line-height: 20px;
+}
+.edit_name .lay_infor .sex,
+.edit_name .lay_infor .state {
+  width: 14px;
+  height: 14px;
+  margin-top: 3px;
+}
+.edit_name .lay_infor .save_cancel {
+  margin-top: 30px;
+}
+.edit_name .lay_infor .edit_save {
+  width: 146px;
+  height: 42px;
+  text-align: center;
+  font-size: 18px;
+  margin-right: 40px;
+  margin-left: 90px;
+  background: #fa7c03;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.edit_name .lay_infor .edit_cancel {
+  width: 146px;
+  height: 42px;
+  text-align: center;
+  font-size: 18px;
+  background: #e0e0e0;
+  color: #333333;
+  border: none;
+  cursor: pointer;
+}
+.edit_name .sex_infor,
+.edit_name .state_infor {
+  height: 20px;
+}
+.edit_name .sex_infor span,
+.edit_name .state_infor span {
+  line-height: 20px;
+}
+/*..................编辑姓名，性别，手机号.................*/
