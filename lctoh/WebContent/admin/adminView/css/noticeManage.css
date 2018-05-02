@@ -1,0 +1,283 @@
+body,
+html {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  color: #666;
+  background: #fff;
+  font-family: '宋体';
+  overflow:hidden;
+}
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+p,
+h4,
+h3,
+hr {
+  padding: 0;
+  margin: 0;
+}
+ul li {
+  float: left;
+}
+input {
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  margin: 0;
+  font-size: 12px;
+}
+input:hover {
+  cursor: pointer;
+}
+img {
+  width: 100%;
+}
+.cont_notice{
+  width: 100%;  
+  background: #fff;
+  height:100%;
+  font-size: 14px;
+  display:inline-block;
+}
+.cont_notice .edit_cont{
+  width:100%;
+  height:100%;
+  /* border: 1px solid black;*/
+}
+/*我的个人中心主体内容*/
+.cont_notice  .infor_right{
+  width:100%;
+  height:100%;
+  font-size: 14px;
+  background: #fff;
+  box-shadow: 0px 2px 2px #aaa;
+  color: #333;
+  border-radius: 2px;
+  border: 1px solid #dddbdb;
+  position: relative;
+}
+
+.cont_notice  .infor_right .pic_infor_right{
+  position:absolute;
+  top:0;
+  right:0;
+  height:150px;
+  width:100px;
+  z-index:120;
+}
+.cont_notice  .infor_right .pic_infor_right img{
+  width:100%；
+}
+.cont_notice  .infor_right .center_cont {
+  height:100%;
+  width: 100%;
+  background: #fff;
+}
+.cont_notice  .infor_right .center_cont .edit_cont {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.cont_notice  .infor_right .center_cont label {
+  display: block;
+  font-size: 18px;
+  height: 56px;
+  width: calc(100% - 20px);
+  line-height: 56px;
+  padding-left:20px;
+
+  border-bottom: 1px solid #aaa;
+}
+/*订单的样式*/
+.edit_infor .notice_infor {
+  display: inline-block;
+  width: 100%;
+}
+.edit_infor .notice_infor .header {
+  display: inline-block;
+  height: 38px;
+  width: 100%;
+  background: #888;
+  border-radius: 2px;
+  font-size: 16px;
+  line-height: 38px;
+  color:#fff;
+}
+.edit_infor .notice_infor .header > div {
+  float: left;
+  width: 185px;
+  text-align: center;
+  /*border:1px solid red;*/
+}
+.edit_infor .notice_infor .header > div:last-child{
+   width: 210px;
+}
+
+.edit_infor .notice_infor .header .notice_account {
+
+}
+.edit_infor .notice_infor .header .ord_cont {
+
+}
+.edit_infor .notice_infor .header .ord_state {
+
+}
+.edit_infor .notice_infor .header .ord_money {
+
+}
+
+.edit_infor .notice_infor .header .ord_click {
+
+  
+}
+.edit_infor .notice_infor .notice_detaile {
+  width: 100%;
+  height:540px;
+  overflow-y:auto;
+}
+.edit_infor .notice_infor .notice_detaile .notice_one {
+  height: 68px;
+  position: relative;
+  line-height: 68px;
+}
+.edit_infor .notice_infor .notice_detaile .notice_one > div {
+  float: left;
+  width: 185px;
+  text-align: center;
+  /* border:1px solid red;*/
+}
+.edit_infor .notice_infor .notice_detaile .notice_one > div:last-child{
+  width:210px;
+}
+.edit_infor .notice_infor .header .notice_operation {
+	position:relative;
+}
+/*添加公告图片*/
+.edit_infor .notice_infor  .notice_operation .add_notice{
+	position:absolute;
+	top:3px;
+	right:46px;
+	width:16px;
+	height:16px;
+	float:right;
+}
+.edit_infor .notice_infor  .notice_operation .add_notice img{
+	width:100%;
+	padding:0;
+	margin:0;
+}
+.edit_infor .notice_infor  .notice_operation .add_notice img:hover{
+	cursor:pointer;
+}
+.edit_infor .notice_infor .notice_detaile .notice_one  .notice_operation input{
+  padding:4px 10px;
+}
+.edit_infor .notice_infor .notice_detaile .notice_one  .notice_operation input:hover{
+  cursor:pointer;
+  color:#fa7c03;
+}
+/*客户头像*/
+.edit_infor .notice_infor .notice_detaile .notice_one  .notice_portrait .notice_pic{
+   width:40px;
+   height:40px;
+   margin:0px auto;
+   margin-top:14px;
+   border:1px solid red;
+
+}
+.edit_infor .notice_infor .notice_detaile .notice_one  .notice_portrait .notice_pic img{
+  width:100%;
+  height: 100%;
+}
+/*..................编辑公告.................*/
+.edit_notice {
+  width: 100%;
+  height: 100%;
+}
+.edit_notice .lay_infor {
+  /*混合代码*/
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  position: relative;
+  margin-top: 20px;
+}
+.edit_notice .lay_infor span {
+  font-size: 14px;
+  width: 100px;
+  display: block;
+  float: left;
+  height: 32px;
+  line-height: 32px;
+  margin-left: 20px;
+  text-align: right;
+}
+.edit_notice .lay_infor input {
+  font-size: 12px;
+  width: 300px;
+  display: block;
+  float: left;
+  height: 30px;
+  line-height: 30px;
+  color: #999999;
+  margin-left: 21px;
+  outline: none;
+  padding: 3px 10px;
+  border:1px solid #eee;
+}
+
+.edit_notice .lay_infor .save_cancel {
+  margin-top: 30px;
+}
+.edit_notice .lay_infor .edit_save {
+  width: 106px;
+  height: 32px;
+  text-align: center;
+  font-size: 18px;
+  margin-right: 40px;
+  margin-left: 120px;
+  background: #fa7c03;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.edit_notice .lay_infor .edit_cancel {
+  width: 106px;
+  height: 32px;
+  text-align: center;
+  font-size: 18px;
+  background: #e0e0e0;
+  color: #333333;
+  border: none;
+  cursor: pointer;
+  margin-left: 60px;
+}
+.edit_notice  .lay_infor .notice_cont{
+     height: 100px;
+     width: 322px;
+     float:left;
+     margin-left:20px;
+     background: #fff;
+     border:1px solid #eee;
+}
+.edit_notice  .lay_infor textarea{
+  height: 100px;
+  width: 322px;
+  background: #fff;
+  line-height: 26px;
+  border: none;
+  text-indent: 2em;
+  vetical-align: top;
+  outline: none;
+  padding:0;
+  text-align:left;
+  color:#999;
+}
+/*..................编辑公告.................*/
+
