@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>商家图表</title>	
+	<link rel="stylesheet" type="text/css" href="./css/riderGraph.css">
+	<link rel="stylesheet" type="text/css" href="/lctoh/Common/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/lctoh/Common/easyui/themes/icon.css">
+	<script type="text/javascript" src="/lctoh/Common/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="/lctoh/Common/easyui/jquery.easyui.min.js"></script>
+		
+	<script src="/lctoh/Common/layer/layer.js"> </script>	
+	<script src="/lctoh/Common/common.js"></script>
+	<script src="/lctoh/Common/echarts.common.min.js"></script>	 
+	
+	
+</head>
+<body>
+      
+      <div class='rider_time'>
+		                 选择时间
+			    <input style='width:100px;' id='stm'  class="easyui-datebox" data-options="sharedCalendar:'#cc'">
+		      至
+			    <input style='width:100px;' id='etm' class="easyui-datebox" data-options="sharedCalendar:'#cc'">
+		      <!--  新的内容
+		      	    <input id="dd" type="text" class="easyui-datebox" okText='确认' closeText='取消' required="required"> -->
+			 <div id="cc" class="easyui-calendar"></div>
+			 <div class='btn_query'><input id='btn_query' type='button' value='查询'/></div>
+      </div>
+	 <div class='rider_graph'>
+         <div class='rider_pie'> 
+            <div id="mainTwo"></div>
+         </div>
+         <div class='rider_line'> 
+             <div id="mainGraph"></div>
+         </div>
+      </div>
+	<script type="text/javascript" src='./js/riderGraph.js'></script>	
+</body>
+</html>
