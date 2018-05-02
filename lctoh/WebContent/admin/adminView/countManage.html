@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>商家的个人中心</title>
+	<link rel="stylesheet" type="text/css" href="./css/countManage.css">
+
+    <link rel="stylesheet" type="text/css" href="/lctoh/Common/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/lctoh/Common/easyui/themes/icon.css">
+	<script type="text/javascript" src="/lctoh/Common/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="/lctoh/Common/easyui/jquery.easyui.min.js"></script>
+		
+	<script src="/lctoh/Common/layer/layer.js"> </script>	
+	<script src="/lctoh/Common/common.js"></script>
+	<script src="/lctoh/Common/echarts.common.min.js"></script>	  	   
+</head>
+<body>
+   <div class='my_center'> 
+      <div class='my_infor'>
+	     <div class='infor_right'>
+	        <div class='center_cont my_finance' style='display: block;'>
+	            <div class='edit_cont'>
+                    <label>统计管理</label>
+                    <div class='edit_infor'>
+                            <div class='conditions_sel'>
+				                <div class='tm_check'>
+							                 选择时间
+								    <input style='width:100px;' id='stm'  class="easyui-datebox" data-options="sharedCalendar:'#cc'">
+							      至
+								    <input style='width:100px;' id='etm' class="easyui-datebox" data-options="sharedCalendar:'#cc'">
+							      
+								   <div id="cc" class="easyui-calendar"></div>
+				                </div>
+				                <div class='btn_qurey'><input type="button" id='btn_qurey'  value='查询'></div>      
+				            </div>
+                            <div class='order_manage'>
+					           <div class='order_chart'>
+					                <div class='chart_pie'>
+				                       <div id="userPie"></div>
+					                </div>
+                                    <div class='chart_pie'>
+                                       <div id="mainPie"></div>
+                                    </div>					               
+					            </div>
+					        </div>
+					        <div class='turnover_manage'>
+					            <div class='turnover_chart'>
+                                    <div class='chart_line'>
+                                        <div id="lineGraph"></div>
+                                    </div>  
+					               <div class='chart_bar'>
+					                    <div id="barGraph"></div>
+					               </div>  
+					            </div>
+					        </div>
+					   </div>
+                    </div>
+                </div>
+	        </div>
+	     </div>
+	  </div>
+   </div>
+   <script src='./js/countManage.js'></script>
+</body>
+</html>
