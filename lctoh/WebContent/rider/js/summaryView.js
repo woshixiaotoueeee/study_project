@@ -450,7 +450,7 @@ function order_detail(orderId){
 		  title: ['订单详情', 'font-size:18px;'],
 		  type: 2,
 		  shadeClose: true,
-		  shade: 0.8,
+		  shade: 0.2,
 		  area: ['800px', '630px'],
 		  content: str  //iframe的url
 	 }); 

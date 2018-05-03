@@ -37,15 +37,11 @@ ul li {
   float: left;
 }
 .content header .logo {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 2px 2px 2px #aaa;
-  text-align: center;
-  line-height: 36px;
-  margin-top: 5px;
-  margin-left: 20px;
+    width:196px;
+	height:44px; 	
+	text-align: center;
+	margin-top:3px; 
+	margin-left: 20px;
 }
 .content header .logo img{
 	width:100%;
@@ -78,7 +74,8 @@ ul li {
   margin-right: 54px;
 }
 .content header .nav > ul > li:hover {
-  background: #ef7e11;
+  background: #ee7524;
+  cursor:pointer;
 }
 .content header .nav > ul  .frist_show {
   background: #df6e0b;
@@ -210,12 +207,6 @@ ul li {
   margin: 0;
   position: relative;
 }
-.content > section {
-  height: 100%;
-  width: 1204px;
-  margin: 0 auto ;
-  background: #ccc;
-}
 /*底部*/
 footer {
   color: #999;
@@ -337,6 +328,10 @@ footer .footer_bot {
   width: 100%;
   height: 100%;
 }
+/* 联系我们的高度*/
+.content .sec_connect{
+	 height: 852px;
+}
 .content iframe {
   height: 100%;
   width: 100%;
@@ -344,6 +339,9 @@ footer .footer_bot {
   /*iframe的边框设置为没有*/
   margin: 0;
   padding: 0;
+}
+#iframe_a{
+ /*  border:3px solid red; */
 }
 iframe[name="iframe_bot"] {
   height: 240px;

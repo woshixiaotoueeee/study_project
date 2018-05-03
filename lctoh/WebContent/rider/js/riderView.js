@@ -171,7 +171,7 @@ function openlayerzzps(res,address,order,stateId){
 		title: ['可配送订单详情', 'font-size:14px;'],
 		type: 1,
 		area: ['344px', '370px'], //宽高
-		shade:0,
+		shade:0.2,
 		content: str_being_order
 	});
 	
@@ -316,7 +316,7 @@ function openlayer(res,address,order){
 		title: ['可配送订单详情', 'font-size:14px;'],
 		type: 1,
 		area: ['344px', '370px'], //宽高
-		shade:0,
+		shade:0.2,
 		content: str_send_order
 	});
 	
@@ -450,7 +450,7 @@ function order_details(){ //点击订单列表显示订单详情
 		  title: ['可配送订单详情', 'font-size:14px;'],
 		  type: 1,
 		  area: ['344px', '370px'], //宽高
-		  shade:0,
+		  shade:0.2,
 		  content: str_send_order
 		});
    	   receipt_refuse(layer_order)  //接单或拒绝订单
