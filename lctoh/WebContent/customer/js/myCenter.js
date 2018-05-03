@@ -72,7 +72,7 @@ function banner_change(){
 	   }
 	   //添加定时器
 	   var timer=null;
-	   timer=setInterval(autoPlay1,2000);
+	   timer=setInterval(autoPlay1,1500);
 
 	   //大盒子移入移出
 	   //
@@ -81,7 +81,7 @@ function banner_change(){
 	   }
 	   wSlider.onmouseout=function(){
 	     clearInterval(timer);
-	     timer=(setInterval(autoPlay1,1000));
+	     timer=(setInterval(autoPlay1,1500));
 	   }
 	   function autoPlay(){
 	           animate(imgs[iNow],{'left':scrollWidth});//当前去右边，
