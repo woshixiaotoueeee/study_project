@@ -48,7 +48,11 @@ img {
   background: #aaa;
   float: left;
   position: relative;
-   overflow:hidden;
+  overflow:hidden;
+}
+.cont_summary .cont_left img{
+	width:100%;
+	height: 100%;
 }
 .cont_summary .cont_right {
   width: calc(100% - 180px);
