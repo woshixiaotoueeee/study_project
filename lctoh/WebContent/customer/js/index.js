@@ -25,6 +25,14 @@ function loadRestaurantHtml(){
 	$('.set_up').mouseover(function(){
 		$('.set_up').css('display','block');
 	})
+	//公告显示
+	$('.notice_pic').click(function(){
+		$('.notice_cont').css('display','block');
+	})
+	$('.notice_cont').mouseout(function(){
+		$(this).css('display','none');
+	})
+	
     //var num=null; //var url='./个人信息.html?num='+num 一个参数  跳转到我的个人中心时要传的参数
 	
 	//点击我的设置进行调整事件
