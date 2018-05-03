@@ -4,11 +4,120 @@ var orderList=null;
 var map = new BMap.Map();//初始化地图
 $(function(){
 	change_page();//接收参数不同时 跳转到不同的页面（个人资料 1 我的订单2 我的收藏3 我的地址4）
-	init();
-	
-	banner_change();
+	init();    
+	banner_change(); 
 })
-function banner_change(){
+function change_page(){   //在点击用户设置时 跳转不同页面（个人信息 我的收藏等）
+	var urlmy=window.location.href;
+    //alert(urlmy+'iframe地址栏'); 
+    //alert(window.location.search);
+    
+   var Request = new Object(); 
+    Request = GetRequest(); 
+    var num_page; 
+    num_page = Request.num; 
+    var len=$('.dec_span').length;
+    //传入参数不同时显示的不一样
+    // $('.dec_span').eq(num_page-1).css('display','block').siblings().css('display','none');
+    if(num_page==1){
+    	/*alert('进入个人资料')*/
+    	$('.infor_left ul li').eq(1).find('.dec_span').css('display','block');
+	    $('.infor_left ul li').eq(1).siblings().find('.dec_span').css('display','none');
+    	//$('.dec_span').eq(0).css('display','block').siblings().css('display','none');
+    	$('.center_cont').eq(0).css('display','block').siblings().css('display','none');
+    }
+    if(num_page==2){
+    	/*alert('进入我的订单')*/
+    	$('.infor_left ul li').eq(2).find('.dec_span').css('display','block');
+	    $('.infor_left ul li').eq(2).siblings().find('.dec_span').css('display','none');
+    	//$('.dec_span').eq(1).css('display','block').siblings().css('display','none');
+    	$('.center_cont').eq(1).css('display','block').siblings().css('display','none');
+    }
+    if(num_page==3){
+    	/*alert('进入我的收藏')*/
+    	$('.infor_left ul li').eq(3).find('.dec_span').css('display','block');
+	    $('.infor_left ul li').eq(3).siblings().find('.dec_span').css('display','none');
+    	//$('.dec_span').eq(2).css('display','block').siblings().css('display','none');
+    	$('.center_cont').eq(2).css('display','block').siblings().css('display','none');
+    	
+    }
+    if(num_page==4){
+    	/*alert('进入我的地址')*/
+    	$('.infor_left ul li').eq(4).find('.dec_span').css('display','block');
+	    $('.infor_left ul li').eq(4).siblings().find('.dec_span').css('display','none');
+    	//$('.dec_span').eq(3).css('display','block').siblings().css('display','none');
+    	$('.center_cont').eq(3).css('display','block').siblings().css('display','none');
+    }
+    
+}
+function GetRequest() {   //转化地址参数的函数
+	var url = window.location.search; //获取url中"?"符后的字串 
+	var theRequest = new Object(); 
+	if (url.indexOf("?") != -1) { 
+	var str = url.substr(1); 
+	strs = str.split("&"); 
+	for(var i = 0; i < strs.length; i ++) { 
+		theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]); 
+		} 
+	} 
+	return theRequest; 
+} 
+function init(){
+	getLoginInfo();
+	getAddressData();
+	queryOrder(1);
+	initHtml(customer);
+	getCollectRestaurant();
+	setCustomerToHtml(customer);
+	
+}
+function getCollectRestaurant(){
+	$.ajax({  
+		url: Common.getCollectRestaurant,  
+		type: 'POST',  
+		data: null, 
+		dataType: "json",
+		success: function (returndata) {  
+			if(returndata.state==1){
+				setCollectRestaurant(returndata.responseInfo);
+			}
+			else{
+				layer.msg(returndata.responseInfo, {time:2500});
+			}
+        	 
+		},  
+		error: function (returndata) {  
+        	 layer.msg('未知错误，请刷新页面重试', {time:2500}); 
+        	 layer.close(layerIndex);
+		}  
+    });
+}
+function setCollectRestaurant(restaurantList){
+	var divContent=$(".collect_restaurant");
+	divContent.html("");
+	var strRes='';
+	for(var i=0;i<restaurantList.length;i++){
+		strRes+="<div id='"+restaurantList[i].restaurantId+"' class='cont_shop'> <div class='img_shop'> " +
+				"<img src='../"+restaurantList[i].restaurantImage+"'> </div>  <div class='shop_same shop_title'>"+restaurantList[i].restaurantName+"</div>" +
+				"<div class='shop_same shop_cont'>****共售<span>"+restaurantList[i].orderCount+"份</span> </div>" +
+				"<div class='shop_same shop_bot' > <ul> <li> 起送：<span>"+restaurantList[i].restaurantOfferPrice+"￥</span></li> <li> 配送费：<span>"+restaurantList[i].restaurantDeliveryFee+"￥</span></li>" +
+				"<li><span>30分钟</span></li> </ul></div> </div>";
+	}
+
+	divContent.html(strRes);
+	//点击我的收藏店家跳转到店家详情页面
+	$('.cont_shop').click(function(){
+		var rtid=$(this)["0"].id;
+		var str='<iframe src="./storeCenter.html?rtid='+rtid+'" name="iframe_a" scrolling="no"></iframe>';		
+		$('#my_center').html(str); 
+		$('#my_center').css('height','800px');
+		
+	})
+	
+	
+}
+
+function banner_change(){ //轮播图函数
 	 var wSlider=document.querySelector('.w-slider');
 	   var sliderMain=document.querySelector('.slider-main');
 	   var imgs=sliderMain.children;//子元素节点
@@ -101,118 +210,6 @@ function banner_change(){
 	              hightLight();
 	   }
 }
-function change_page(){
-	var urlmy=window.location.href;
-    //alert(urlmy+'iframe地址栏'); 
-    //alert(window.location.search);
-    
-   var Request = new Object(); 
-    Request = GetRequest(); 
-    var num_page; 
-    num_page = Request.num; 
-    var len=$('.dec_span').length;
-    //传入参数不同时显示的不一样
-    // $('.dec_span').eq(num_page-1).css('display','block').siblings().css('display','none');
-    if(num_page==1){
-    	/*alert('进入个人资料')*/
-    	$('.infor_left ul li').eq(1).find('.dec_span').css('display','block');
-	    $('.infor_left ul li').eq(1).siblings().find('.dec_span').css('display','none');
-    	//$('.dec_span').eq(0).css('display','block').siblings().css('display','none');
-    	$('.center_cont').eq(0).css('display','block').siblings().css('display','none');
-    }
-    if(num_page==2){
-    	/*alert('进入我的订单')*/
-    	$('.infor_left ul li').eq(2).find('.dec_span').css('display','block');
-	    $('.infor_left ul li').eq(2).siblings().find('.dec_span').css('display','none');
-    	//$('.dec_span').eq(1).css('display','block').siblings().css('display','none');
-    	$('.center_cont').eq(1).css('display','block').siblings().css('display','none');
-    }
-    if(num_page==3){
-    	/*alert('进入我的收藏')*/
-    	$('.infor_left ul li').eq(3).find('.dec_span').css('display','block');
-	    $('.infor_left ul li').eq(3).siblings().find('.dec_span').css('display','none');
-    	//$('.dec_span').eq(2).css('display','block').siblings().css('display','none');
-    	$('.center_cont').eq(2).css('display','block').siblings().css('display','none');
-    	
-    }
-    if(num_page==4){
-    	/*alert('进入我的地址')*/
-    	$('.infor_left ul li').eq(4).find('.dec_span').css('display','block');
-	    $('.infor_left ul li').eq(4).siblings().find('.dec_span').css('display','none');
-    	//$('.dec_span').eq(3).css('display','block').siblings().css('display','none');
-    	$('.center_cont').eq(3).css('display','block').siblings().css('display','none');
-    }
-    
-}
-function GetRequest() {   //转化地址参数的函数
-	var url = window.location.search; //获取url中"?"符后的字串 
-	var theRequest = new Object(); 
-	if (url.indexOf("?") != -1) { 
-	var str = url.substr(1); 
-	strs = str.split("&"); 
-	for(var i = 0; i < strs.length; i ++) { 
-		theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]); 
-		} 
-	} 
-	return theRequest; 
-} 
-function init(){
-	getLoginInfo();
-	getAddressData();
-	queryOrder(1);
-	initHtml(customer);
-	getCollectRestaurant();
-	setCustomerToHtml(customer);
-	
-}
-
-function getCollectRestaurant(){
-	$.ajax({  
-		url: Common.getCollectRestaurant,  
-		type: 'POST',  
-		data: null, 
-		dataType: "json",
-		success: function (returndata) {  
-			if(returndata.state==1){
-				setCollectRestaurant(returndata.responseInfo);
-			}
-			else{
-				layer.msg(returndata.responseInfo, {time:2500});
-			}
-        	 
-		},  
-		error: function (returndata) {  
-        	 layer.msg('未知错误，请刷新页面重试', {time:2500}); 
-        	 layer.close(layerIndex);
-		}  
-    });
-}
-function setCollectRestaurant(restaurantList){
-	var divContent=$(".collect_restaurant");
-	divContent.html("");
-	var strRes='';
-	for(var i=0;i<restaurantList.length;i++){
-		strRes+="<div id='"+restaurantList[i].restaurantId+"' class='cont_shop'> <div class='img_shop'> " +
-				"<img src='../"+restaurantList[i].restaurantImage+"'> </div>  <div class='shop_same shop_title'>"+restaurantList[i].restaurantName+"</div>" +
-				"<div class='shop_same shop_cont'>****共售<span>"+restaurantList[i].orderCount+"份</span> </div>" +
-				"<div class='shop_same shop_bot' > <ul> <li> 起送：<span>"+restaurantList[i].restaurantOfferPrice+"￥</span></li> <li> 配送费：<span>"+restaurantList[i].restaurantDeliveryFee+"￥</span></li>" +
-				"<li><span>30分钟</span></li> </ul></div> </div>";
-	}
-
-	divContent.html(strRes);
-	//点击我的收藏店家跳转到店家详情页面
-	$('.cont_shop').click(function(){
-		var rtid=$(this)["0"].id;
-		var str='<iframe src="./storeCenter.html?rtid='+rtid+'" name="iframe_a" scrolling="no"></iframe>';		
-		$('#my_center').html(str); 
-		$('#my_center').css('height','800px');
-		
-	})
-	
-	
-}
-
-
 function initHtml(_customer){
 	if(_customer==null)return;
 	
