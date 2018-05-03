@@ -22,7 +22,7 @@ public class ImagesUrl{
 	public final static String RestaurantPortraitUrl="restaurant/images/portrait/";
 	
 	/**菜肴图片路径*/
-	public final static String DishPortraitUrl="restaurant/dish/images/portrait/";
+	public final static String DishPortraitUrl="dish/images/portrait/";
 	
 	
 	
