@@ -115,20 +115,20 @@ function  pie_chart(dataList){
 	          ];*/
 	   var pszDispatching={
 	            psnm:"配送中",
-	            num:"0"
+	            num:0
 	         };
 		var zapsDispatching={
 	            psnm:"完成配送",
-	            num:"0"
+	            num:0
 	         };
 		var ycDispatching={
 	            psnm:"异常订单",
-	            num:"0"
+	            num:0
 	         };
 		for(var i=0;i<dataList.length;i++){
 			if(dataList[i].type<100004){
 				pszDispatching.num+=dataList[i].count;
-			}else if(dataList[i].type=100004){
+			}else if(dataList[i].type==100004){
 				zapsDispatching.num+=dataList[i].count;
 			}else if(dataList[i].type>100004){
 				ycDispatching.num+=dataList[i].count;
