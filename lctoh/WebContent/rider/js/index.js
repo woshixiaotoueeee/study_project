@@ -35,22 +35,25 @@ function user_setting(){
 	})
 }
 function jump_click(){
-
     //点击首页跳转到首页页面
 	 $('#home_page').click(function(){
+	   $('.sec_cont').removeClass('sec_connect');
    	   $('#iframe_a').attr('src','./riderView.html');
   	})
   	//点击统计管理跳转到统计管理页面
    	$('#comp_manage').click(function(){
-   	     $('#iframe_a').attr('src','./summaryView.html');
+   		$('.sec_cont').removeClass('sec_connect');
+   	    $('#iframe_a').attr('src','./summaryView.html');
   	})
  	  //点击联系我们跳转到联系我们页面
   	$('#contact_us').click(function(){
+  		$('.sec_cont').addClass('sec_connect')
   	    $('#iframe_a').attr('src','../ownShare/connect.html');   
          
   	})
     //点击个人信息跳转到设置查看个人信息页面
     $('#myDataInfor').click(function(){
+  		$('.sec_cont').removeClass('sec_connect');
     	$('.header-wrap .nav ul li').removeClass('frist_show');
         $('#iframe_a').attr('src','./setInfor.html');
     })

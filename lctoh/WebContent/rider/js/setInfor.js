@@ -70,6 +70,7 @@ function edit_password(){ //修改密码
 		var layer_password=layer.open({
 		  title:['修改密码', 'font-size:18px;'],
 		  type: 1,
+		  shade:0.2,
 		  area: ['544px', '360px'], //宽高
 		  content: str
 		});
@@ -144,6 +145,7 @@ function edit_rider_infor(){ //修改基础信息
 		var layer_infor=layer.open({
 		  title: ['修改信息', 'font-size:18px;'],
 		  type: 1,
+		  shade:0.2,
 		  area: ['544px', '380px'], //宽高
 		  content: strEdit
 		});
