@@ -144,12 +144,11 @@ function dispatchingToHtml(dispatchList){
 	var order;
 	var res;
 	var state;
-	for(var i=0;i<dispatchList.legth;i++){
+	for(var i=0;i<dispatchList.length;i++){
 		order=dispatchList[i].dispatchingOrder;
 		state=dispatchList[i].dispatchingState;
 		res=order.orderRestaurant;
-		var str;
-		str="<div class='order_one' ><div class='ord_time'><div class='time_show'>" +
+		var str="<div class='order_one' ><div class='ord_time'><div class='time_show'>" +
 			"<span>"+getDate(order.orderCreatTime)+"</span><span>"+getTime(order.orderCreatTime)+"</span>" +
 			"</div></div><div class='pic_img'></div><div class='border_bot'><div class='ord_cont'> " +
 			"<div class='ord_title'>"+res.restaurantName+"</div><div class='ord_inf'></div><div class='ord_number'>" +
@@ -158,7 +157,7 @@ function dispatchingToHtml(dispatchList){
 			"<div class='ord_click ' ><input class='first_ord' id='"+order.orderId+"' type='button' name='' value='订单详情'></div></div></div>";
 		if(state.stateId<110004){
 			zzpsStr+=str;
-		}else if(state.stateId=110004){
+		}else if(state.stateId==110004){
 			pswcStr+=str;
 		}else if(state.stateId>110004){
 			ycddStr+=str;
@@ -216,28 +215,28 @@ function  pie_chart(typelist){
 	
 	var pszDispatching={
             psnm:"配送中",
-            num:"0"
+            num:0
          };
-	var zapsDispatching={
-            psnm:"配送中",
-            num:"0"
+	var wcDispatching={
+            psnm:"配送完成",
+            num:0
          };
 	var ycDispatching={
             psnm:"异常订单",
-            num:"0"
+            num:0
          };
-	for(var i=0;i<typelist;i++){
+	for(var i=0;i<typelist.length;i++){
 		if(typelist[i].type<110004){
 			pszDispatching.num+=typelist[i].count;
-		}else if(typelist[i].type=110004){
-			zapsDispatching.num+=typelist[i].count;
+		}else if(typelist[i].type==110004){
+			wcDispatching.num+=typelist[i].count;
 		}else if(typelist[i].type>110004){
 			ycDispatching.num+=typelist[i].count;
 		}
 		
 	 }
 	
-       var data=[pszDispatching,zapsDispatching,ycDispatching];
+       var data=[pszDispatching,wcDispatching,ycDispatching];
        var myChartTwo = echarts.init(document.getElementById('mainTwo'));
        var optionTwo = {
 	    title : {
