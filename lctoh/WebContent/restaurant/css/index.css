@@ -53,16 +53,11 @@ header .header-wrap > div {
   float: left;
 }
 header .logo {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 2px 2px 2px #aaa;
-  text-align: center;
-  line-height: 36px;
-  margin-top: 5px;
-  margin-left: 20px;
-  color: black;
+	width:196px;
+	height:44px; 	
+	text-align: center;
+	margin-top:3px; 
+	margin-left: 20px;
 }
 /*标题*/
 header .title {
@@ -90,7 +85,7 @@ header .nav > ul > li {
   margin-right: 54px;
 }
 header .nav > ul > li:hover {
-  background: #ef7e11;
+  background: #ee7524;
   cursor:pointer;
 }
 header .nav > ul .frist_show{
