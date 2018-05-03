@@ -100,12 +100,21 @@ function setDispatchingzzpstoMap(dispatchingzzps){
 	
 	var res=dispatchingzzps.dispatchingOrder.orderRestaurant;
 	var address=dispatchingzzps.dispatchingOrder.orderHarvestAddress;
-	var customermk=new BMap.Marker(new BMap.Point(address.harvestAddressLongitude,address.harvestAddressLatitude),{icon:customerIcon});
+	
+	var customerPoint=new BMap.Point(address.harvestAddressLongitude,address.harvestAddressLatitude);
+	var customermk=new BMap.Marker(customerPoint,{icon:customerIcon});
+	
 	map.addOverlay(customermk);
-	var resmk=new BMap.Marker(new BMap.Point(res.restaurantLongitude,res.restaurantLatitude),{icon:restaurantIcon});
+	
+	var resPoint=new BMap.Point(res.restaurantLongitude,res.restaurantLatitude);
+	var resmk=new BMap.Marker(resPoint,{icon:restaurantIcon});
 	map.addOverlay(resmk);
+	
+	
+	
+	
 	var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
-	driving.search(new BMap.Point(res.restaurantLongitude,res.restaurantLatitude), new BMap.Point(address.harvestAddressLongitude,address.harvestAddressLatitude));
+	driving.search(resPoint, customerPoint);
 	openlayerzzps(res,address,dispatchingzzps.dispatchingOrder,dispatchingzzps.dispatchingState.stateId);
 }
 function openlayerzzps(res,address,order,stateId){
@@ -161,7 +170,7 @@ function openlayerzzps(res,address,order,stateId){
 	if(stateId==110002){
 		str_being_order=str_being_order.replace("#button_value#",'取餐');	
 		str_being_order=str_being_order.replace("#statetype#",2);
-	}else if(_state==110003){
+	}else if(stateId==110003){
 		str_being_order=str_being_order.replace("#button_value#",'确认送达');	
 		str_being_order=str_being_order.replace("#statetype#",3);
 	}
@@ -254,12 +263,15 @@ function setDispatchingdpstoMap(dispatchingdps){
 	
 	var res=dispatchingdps.dispatchingOrder.orderRestaurant;
 	var address=dispatchingdps.dispatchingOrder.orderHarvestAddress;
-	var customermk=new BMap.Marker(new BMap.Point(address.harvestAddressLongitude,address.harvestAddressLatitude),{icon:customerIcon});
+	var customerPoint=new BMap.Point(address.harvestAddressLongitude,address.harvestAddressLatitude);
+	var customermk=new BMap.Marker(customerPoint,{icon:customerIcon});
 	map.addOverlay(customermk);
-	var resmk=new BMap.Marker(new BMap.Point(res.restaurantLongitude,res.restaurantLatitude),{icon:restaurantIcon});
+	
+	var resPoint=new BMap.Point(res.restaurantLongitude,res.restaurantLatitude);
+	var resmk=new BMap.Marker(resPoint,{icon:restaurantIcon});
 	map.addOverlay(resmk);
 	var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
-	driving.search(new BMap.Point(res.restaurantLongitude,res.restaurantLatitude), new BMap.Point(address.harvestAddressLongitude,address.harvestAddressLatitude));
+	driving.search(resPoint, customerPoint);
 	openlayer(res,address,dispatchingdps.dispatchingOrder);
 }
 function openlayer(res,address,order){
