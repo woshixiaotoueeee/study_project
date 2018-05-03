@@ -74,7 +74,7 @@ function caozuoOrder(querybtn){
 		url=Common.confirmationReceipt;
 	}
 	$.ajax({  
-        url: Common.payment,  
+        url: url,  
         type: 'POST',  
         data: {'orderId':querybtn.attr('id')}, 
         dataType: "json",

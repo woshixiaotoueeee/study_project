@@ -409,3 +409,7 @@ section > div {
   border: none;
   cursor: pointer;
 }
+form#add_dish{
+	width: 100%;
+  	height: 100%;
+}

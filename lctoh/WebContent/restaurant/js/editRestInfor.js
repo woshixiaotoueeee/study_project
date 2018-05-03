@@ -1,51 +1,62 @@
 //添加新地址页面
 var map = new BMap.Map();//初始化地图
-var address;
+var restaurant;
+var cityName;
 $(function(){
-	getAddress(GetQueryString("addressId"));
+	getLogininfo();
 	
+	init_update();
 	
-	init_add_address();//初始化修改店家信息页面
-	
-	//保存修改信息
+	//initRestaurantToHtml(restaurant);
 	save_infor();
 	//取消修改信息
 	cancel_infor();
 })
-function getAddress(addressId){
+
+
+function initRestaurantToHtml(_restaurant){
+	$("#upcustomerNickname").val(_restaurant.restaurantName);
+	
+	$("#restaurantDeliveryFee").val(restaurant.restaurantDeliveryFee);
+	
+	$("#restaurantOfferPrice").val(_restaurant.restaurantOfferPrice);
+	
+	$("#upphone").val(_restaurant.restaurantPhone);
+	
+	$("#upemail").val(_restaurant.restaurantUser.userEmail);
+	
+	$("#suggestId").val(_restaurant.restaurantAddressInfo);
+	
+	$("#dishes_brief").html(_restaurant.restaurantNotice);
+	
+	
+}
+
+
+
+function getLogininfo(){
 	$.ajax({
 		   type: "post",
-		   url:Common.findAddressByAddressId,
-		   data:{'addressId':addressId}, 
+		   data:null,
+		   url: Common.getRestaurantLoginInfo,
 		   dataType: "json",
 		   async: false,
 		   success:function(data){
 			   if(data.state==1){
-				   address=data.responseInfo;
-				   initaddress(address);
-			   }else{
+				   restaurant=data.responseInfo;
+				   initRestaurantToHtml(restaurant);
+			   }
+			   else{
 				   layer.msg(data.responseInfo, {time:2500});
 			   }
 		   },
 		   error:function(errordate){
-			   layer.msg('未知错误请刷新页面或联系管理员', {time:2500});
-			   parent.layer.closeAll();
+			 //  layer.msg('未知错误请刷新页面或联系管理员', {time:2500});
 		   }
 		})
 }
-function initaddress(_address){
-	
-	$('#addressName').val(_address.addressName);
-	$('#suggestId').val(_address.addressInfo);
-	$('#addressPhone').val(_address.addressPhone);
-}
 
-
-
-
-function init_add_address(){
-	//
-	
+function init_update(){
 	//加载地图数据选择地址列表
 	var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
 			{"input" : "suggestId"
@@ -77,19 +88,21 @@ function init_add_address(){
 		$("#searchResultPanel").html("onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue);
 		
 		
-		
 		function myFun(){
 			var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
 			
-			address.addressLatitude=pp.lat;
-			address.addressLongitude=pp.lng;
-			
+			//address.addressLatitude=pp.lat;
+			//address.addressLongitude=pp.lng;
+			/**经度*/
+			restaurant.restaurantLongitude=pp.lng;
+			/**纬度*/
+			restaurant.restaurantLatitude=pp.lat;
 			var geoc = new BMap.Geocoder();    
 			geoc.getLocation(pp, function(rs){
 				var addComp = rs.addressComponents;
-				address.addressProvince=addComp.province;
-				address.addressCity=addComp.city;
-				
+				//address.addressProvince=addComp.province;
+				//address.addressCity=addComp.city;
+				cityName=addComp.city;
 			}); 
 		}
 		var local = new BMap.LocalSearch(map, { //智能搜索
@@ -101,32 +114,45 @@ function init_add_address(){
 function save_infor(){ 
 	//信息修改
 	$('.edit_save').click(function(){
-		address.addressName=$('#addressName').val();
-		address.addressInfo=$('#suggestId').val();
-		address.addressPhone=$('#addressPhone').val();
-		
 		function myFun(){
 			var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
 			
-			address.addressLatitude=pp.lat;
-			address.addressLongitude=pp.lng;
+			/**经度*/
+			restaurant.restaurantLongitude=pp.lng;
+			/**纬度*/
+			restaurant.restaurantLatitude=pp.lat;
 			
 			var geoc = new BMap.Geocoder();    
 			geoc.getLocation(pp, function(rs){
 				var addComp = rs.addressComponents;
-				address.addressProvince=addComp.province;
-				address.addressCity=addComp.city;
+				cityName=addComp.city;
 				
 			}); 
 		}
 		var local = new BMap.LocalSearch(map, { //智能搜索
 		  onSearchComplete: myFun
 		});
-		local.search(address.addressInfo);
+		local.search($("#suggestId").val());
+		
+		var resData={};
+		resData.cityName=cityName;
+		resData.restaurantLongitude=restaurant.restaurantLongitude;
+		resData.restaurantLatitude=restaurant.restaurantLongitude;
+		resData.restaurantName=$("#upcustomerNickname").val();
+		resData.restaurantDeliveryFee=$("#restaurantDeliveryFee").val();
+		
+		resData.restaurantOfferPrice=$("#restaurantOfferPrice").val();
+		resData.restaurantPhone=$("#upphone").val();
+		resData.userEmail=$("#upemail").val();
+		resData.restaurantAddressInfo=$("#suggestId").val();
+		
+		resData.restaurantNotice=$("#dishes_brief").html();
+		
+		
 		$.ajax({
 			   type: "post",
-			   url:Common.updateAddress,
-			   data:address, 
+			   url:Common.updateRestaurant,
+			   data:resData, 
 			   dataType: "json",
 			   success:function(data){
 					layer.msg(data.responseInfo, {time:2500});

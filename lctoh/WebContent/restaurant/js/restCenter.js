@@ -1,18 +1,20 @@
  //商家的个人中心页面
-var restCenter;
+var restaurant;
 initDate();//初始化时间  必须写在外面  日期控件依赖    lctoh/Common/easyui/jquery.min.js
 $(function(){
 	 
 	change_page();//接收参数不同时 跳转到不同的页面（店家设置 1 统计管理2 ）
-
+	getLogininfo();
 	//初始化商家个人中心的信息数据
 	init_restCenter();
-
+	
     //点击查询统计信息按钮事件
     query_chart();
-  
     
-    qureyChartInfo();
+    $("#btn_qurey").click(function(){
+    	query_chart();
+	});
+   // qureyChartInfo();
 	 /*订单统计饼图*/
 	 // pie_chart();
 	 /*订单统计过程线*/
@@ -22,6 +24,55 @@ $(function(){
     
     
  })
+ 
+ function getLogininfo(){
+	$.ajax({
+		   type: "post",
+		   data:null,
+		   url: Common.getRestaurantLoginInfo,
+		   dataType: "json",
+		   async: false,
+		   success:function(data){
+			   if(data.state==1){
+				   restaurant=data.responseInfo;
+				   initRestaurantToHtml(restaurant);
+			   }
+			   else{
+				   layer.msg(data.responseInfo, {time:2500});
+			   }
+		   },
+		   error:function(errordate){
+			 //  layer.msg('未知错误请刷新页面或联系管理员', {time:2500});
+		   }
+		})
+}
+function initRestaurantToHtml(_restaurant){
+	$(".portrait img").attr("src","../"+_restaurant.restaurantImage);
+	
+	//$("#my_balance").html(_restaurant.restaurantIncome);
+	
+
+	$("#account").html(_restaurant.restaurantUser.userAccount);
+	
+	$("#customerNickname").html(_restaurant.restaurantName);
+	
+	$("#restaurantDeliveryFee").html(_restaurant.restaurantDeliveryFee+"￥");
+	
+	$("#restaurantOfferPrice").html(_restaurant.restaurantOfferPrice+"￥");
+	
+	$("#phone").html(_restaurant.restaurantPhone);
+	
+	$("#email").html(_restaurant.restaurantUser.userEmail);
+	
+	$("#addressInfo").html(_restaurant.restaurantAddressInfo);
+	
+	$(".rest_brief").html(_restaurant.restaurantNotice);
+}
+
+
+
+
+
 function change_page(){
 	var urlmy=window.location.href;
     //alert(urlmy+'iframe地址栏'); 
@@ -130,12 +181,12 @@ function center_tabs(_this){
  * */
 function my_data_edit(){  //店家信息设置
    
-     var  _restaurant=null;
+    
      
     /* 点击编辑头像*/
 	$("#edit_portrait").unbind("click"); 
 	$('#edit_portrait').click(function(){
-		edit_portrait(_restaurant);
+		edit_portrait();
 	})	
 	/* 点击编辑店家信息*/
 	$("#edit_infor").unbind("click"); 
@@ -145,11 +196,11 @@ function my_data_edit(){  //店家信息设置
 	/* 点击修改密码*/
 	$("#edit_password").unbind("click"); 
 	$('#edit_password').click(function(){
-		edit_password(_restaurant);
+		edit_password();
 	})
 }
  /*编辑头像*/
-function edit_portrait(_restaurant) {
+function edit_portrait() {
 	var str=`<div class='portrait_lay'>
 	    <div class='lay_infor'>
 	        <div class='pic_img'>
@@ -170,18 +221,48 @@ function edit_portrait(_restaurant) {
 	    </div>	    
 	</div>`;
 	
-	//str=str.replace("#portrait#",'../'+_restaurant.customerPortrait);
+	str=str.replace("#portrait#",'../'+restaurant.restaurantImage);
 	var layerIndex=layer.open({
 	  title:['编辑头像', 'font-size:18px;'],
 	  type: 1,
 	  area: ['500px', '450px'], //宽高
 	  content: str
 	});
+	$(".pic_save").click(function(){
+		if($('#file').val().length==0){
+			layer.msg('请选择文件', {time:2500}); 
+			return;
+		}
+		var image = new FormData($("#updatePortrait")[0]);  
+	    $.ajax({  
+	         url: Common.updateRestaurantPortrait,  
+	         type: 'POST',  
+	         data: image, 
+	         dataType: "json",
+	         cache: false,  
+	         contentType: false,  
+	         processData: false, 
+	         success: function (returndata) {  
+	        	 layer.msg(returndata.responseInfo, {time:2500});
+	        	 layer.close(layerIndex);
+	        	 getLogininfo();
+	        	 
+	         },  
+	         error: function (returndata) {  
+	        	 layer.msg('文件过大或文件格式不对', {time:2500}); 
+	        	 layer.close(layerIndex);
+	         }  
+	    });
+	});
+	$(".pic_cancel").click(function(){
+		layer.close(layerIndex);
+	});
+	
+	
 }
 /*编辑店家信息*/
 function edit_rest_infor(){
-	var id='';
-	 var edit_rest='./editRestInfor.html?addressId='+id;
+	 var edit_rest='./editRestInfor.html';
 	    layer.open({
 			  title: ['修改店家信息', 'font-size:18px;'],
 			  type: 2,
@@ -190,7 +271,7 @@ function edit_rest_infor(){
 			  area: ['560px', '600px'],
 			  content: edit_rest,  //iframe的url
 			  end: function () {
-				  getAddressData();
+				  getLogininfo();
 	            }
 		 }); 
 }
@@ -220,39 +301,135 @@ function edit_password(_restaurant){
 		  area: ['544px', '360px'], //宽高
 		  content: str
 		});
+		
+		
+		$(".edit_save").click(function(){
+			var pwd={};
+			pwd.oldPassword=$('#oldpwd').val();
+			pwd.newPassword=$('#newpwd').val();
+			pwd._newPassword=$('#_newpwd').val();
+			pwd.userId=restaurant.restaurantUser.userId;
+			
+		    $.ajax({  
+		         url: Common.updatePasswordByUserId,  
+		         type: 'POST',  
+		         data: pwd, 
+		         dataType: "json",
+		         success: function (returndata) {  
+		        	 layer.msg(returndata.responseInfo, {time:2500});
+		        	 layer.close(layerIndex);
+		        	 getLogininfo();
+		         },  
+		         error: function (returndata) {  
+		        	 layer.msg('未知错误请刷新页面重试', {time:2500}); 
+		        	 layer.close(layerIndex);
+		         }  
+		    });
+		});
+		
+		$(".edit_cancel").click(function(){
+			layer.close(layerIndex);
+		});
+		
 }
 /*
  *统计管理函数
  **/
 function query_chart(){  //点击统计管理的查询按钮
-
+	var queryData=getTm();
+	queryData.restaurantId=restaurant.restaurantId;
+	
+	$.ajax({
+		   type: "post",
+		   url:Common.orderStatistics,
+		   data:queryData, 
+		   dataType: "json",
+		   success:function(data){
+			   if(data.state==1){
+				   line_chart(data.responseInfo);
+				   bar_chart(data.responseInfo);
+			   }
+			   else{
+				   layer.msg(data.responseInfo, {time:2500});
+			   }
+		   },
+		   error:function(errordate){
+			   layer.msg('未知错误请刷新页面或联系管理员', {time:2500});
+		   }
+		})
+		
+	$.ajax({
+		   type: "post",
+		   url:Common.orderStatisticsByState,
+		   data:queryData, 
+		   dataType: "json",
+		   success:function(data){
+			   if(data.state==1){
+				   pie_chart(data.responseInfo);
+			   }
+			   else{
+				   layer.msg(data.responseInfo, {time:2500});
+			   }
+		   },
+		   error:function(errordate){
+			   layer.msg('未知错误请刷新页面或联系管理员', {time:2500});
+		   }
+		})	
+	
+	
+}
+/*
+ * 获取时间
+ * */
+function getTm(){
+	var timeObj={};
+	timeObj.etm=dateFtt("yyyy-MM-dd hh:mm:ss",new Date("23:59:59 "+$('#etm').val()));
+	timeObj.stm=dateFtt("yyyy-MM-dd hh:mm:ss",new Date($('#stm').val()));
+	return timeObj;
 }
 function qureyChartInfo(){//统计管理的查询事件
     /*订单统计饼图*/
-	pie_chart();
+	//pie_chart();
 	/*订单统计过程线*/
-	line_chart();	
+	//line_chart();	
 	/*营业额统计柱状图*/
-	bar_chart();
+	//bar_chart();
 }
 /*
  * 统计饼图
  * */
-function  pie_chart(){
-	
+function  pie_chart(dataList){
+	var newDispatching={
+            psnm:"订单",
+            num:"0"
+         };
 	var pszDispatching={
             psnm:"配送中",
-            num:"23"
+            num:"0"
          };
 	var zapsDispatching={
-            psnm:"配送完成",
-            num:"32"
+            psnm:"完成配送",
+            num:"0"
          };
 	var ycDispatching={
             psnm:"异常订单",
-            num:"10"
+            num:"0"
          };
-    var data=[pszDispatching,zapsDispatching,ycDispatching];
+	for(var i=0;i<dataList.length;i++){
+		if(dataList[i].type<100003){
+			newDispatching.num+=dataList[i].count;
+		}else if(dataList[i].type=100003){
+			pszDispatching.num+=dataList[i].count;
+		}else if(dataList[i].type=100004){
+			zapsDispatching.num+=dataList[i].count;
+		}else if(dataList[i].type>100004){
+			ycDispatching.num+=dataList[i].count;
+		}
+		
+	}
+	var data=[newDispatching,pszDispatching,zapsDispatching,ycDispatching];
+	   
+	
     var myChartTwo = echarts.init(document.getElementById('mainPie'));
     var optionTwo = {
 	    title : {
@@ -273,7 +450,7 @@ function  pie_chart(){
 	        orient: 'vertical',
 	        right:0,
 	        top:40,
-	        data: [data[0].psnm,data[1].psnm,data[2].psnm]
+	        data: [data[0].psnm,data[1].psnm,data[2].psnm,data[3].psnm]
 	    },
 	    series : [
 	        {
@@ -302,6 +479,13 @@ function  pie_chart(){
                          	   color: "#ef4a1e"
                                }
                           }
+	                },
+	                {value:data[3].num, name:data[3].psnm,
+                        itemStyle: {
+                           normal: {
+                        	   color: "#0000CD"
+                              }
+                         }
 	                }
 	            ],
 	            itemStyle: {
@@ -319,9 +503,9 @@ function  pie_chart(){
 /*
  * 统计过程线
  * */
-function  line_chart(){
+function  line_chart(dataList){
 	var myGraph=echarts.init(document.getElementById('lineGraph'));
-    var dataList=[
+    /*var dataList=[
           {
              "ordps": 36, 
              "ordww": 3, 
@@ -364,14 +548,14 @@ function  line_chart(){
 		     "ordid": "30427800", 
 		     "tm": "2018-03-26"
 		 }
-       ]; 
+       ]; */
        //数据处理
     	var ordwcList = [];    //已完成的订单
     	var tms = [];
     	var item;
     	for(var i=0;i<dataList.length;i++){
     		item = dataList[i];
-    		ordwcList.push(item.ordps); 
+    		ordwcList.push(item.count);
     		tms.push(item.tm);
     	}
       var optionGragh={
@@ -468,10 +652,10 @@ function  line_chart(){
 /*
  *柱状图
  */
-function  bar_chart(){
+function  bar_chart(dataList){
 
    var myGraph=echarts.init(document.getElementById('barGraph'));
-    var dataList=[
+    /*var dataList=[
           {
              "price": 336, 
 		     "tm": "2018-03-21  "
@@ -496,19 +680,19 @@ function  bar_chart(){
              "price": 126, 
 		     "tm": "2018-03-26"
 		 }
-       ]; 
+       ]; */
        //数据处理
     	var ordwcList = [];    //已完成的订单
     	var tms = [];
     	var item;
     	for(var i=0;i<dataList.length;i++){
     		item = dataList[i];
-    		ordwcList.push(item.price); 
+    		ordwcList.push(item.amount); 
     		tms.push(item.tm);
     	}
       var optionGragh={
        	 title:{
-            text:'完成订单过程线',
+            text:'营业额',
             x:'center',
             top: '5px',
             left: 'center',
