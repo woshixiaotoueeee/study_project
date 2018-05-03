@@ -727,7 +727,7 @@ function setAddressListToHtml(_addressList){
 		addressHtml+="<div class='address_one'><div class='add_name add_show'><div class='name_sex'><span>"+_addressList[i].addressName+"</span>" +
 				"<span></span></div><div class='modify_del'><span class='modify_address' id='"+_addressList[i].addressId+"'>修改</span>" +
 				"<span class='delete_address' id='"+_addressList[i].addressId+"'>删除</span></div></div><div class='add_ress add_show'>" +
-				"<span>"+_addressList[i].addressProvince+_addressList[i].addressCity+_addressList[i].addressInfo+"</span></div><div class='add_phone add_show'>" +
+				"<span>"+_addressList[i].addressInfo+"</span></div><div class='add_phone add_show'>" +
 				"<span>"+_addressList[i].addressPhone+"</span></div></div>";
 		
 	}
