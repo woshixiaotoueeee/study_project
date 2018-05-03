@@ -158,6 +158,7 @@
        	         else{
        	                alert('注册成功');      	              
        	        	    alert("你的账户为:"+data.responseInfo.userAccount);
+       	        	 top.location.href=projectDirectory+"/Login/login.html";
        	           }
         	          	           	   
           },'JSON')
