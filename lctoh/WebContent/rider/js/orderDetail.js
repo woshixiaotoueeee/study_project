@@ -31,12 +31,14 @@ function setDispatchingToHtml(dispatchingInfo){
 	$('.ban_img #'+dispatchingInfo.dispatchingState.stateId).css('display','block');
 	$('.pic_por img').attr('src','../'+dispatchingInfo.dispatchingOrder.orderRestaurant.restaurantImage);
 	$('.right_inf div.name_num label').html(dispatchingInfo.dispatchingOrder.orderRestaurant.restaurantName);
-	$('.phone_restaurant').html(order.orderRestaurant.restaurantPhone);
-	$('.orderId').html(order.orderId);
-	$('.address_restaurant').html(order.orderRestaurant.restaurantAddressInfo);
+	$('.phone_restaurant').html(dispatchingInfo.dispatchingOrder.orderRestaurant.restaurantPhone);
+	$('.orderId').html(dispatchingInfo.dispatchingOrder.orderId);
+	$('.address_restaurant').html(dispatchingInfo.dispatchingOrder.orderRestaurant.restaurantAddressInfo);
 	
-	setOrderItemList(order.orderItemList,order.orderPrice);
-	setDispatchingInfoToHtml(order.orderHarvestAddress,order.orderDeliveryTime);
+	setOrderItemList(dispatchingInfo.dispatchingOrder.orderItemList,
+			dispatchingInfo.dispatchingOrder.orderPrice,
+			dispatchingInfo.dispatchingOrder.orderRestaurant);
+	setDispatchingInfoToHtml(dispatchingInfo.dispatchingOrder.orderHarvestAddress,dispatchingInfo.dispatchingOrder.orderDeliveryTime);
 }
 
 function setDispatchingInfoToHtml(orderHarvestAddress,orderDeliveryTime){
@@ -52,7 +54,7 @@ function setDispatchingInfoToHtml(orderHarvestAddress,orderDeliveryTime){
 }
 
 
-function setOrderItemList(orderItemList,orderPrice){
+function setOrderItemList(orderItemList,orderPrice,orderRestaurant){
 	$('.order_detail').html(orderPrice);
 	var orderdetail_cont=$('.detail_cont_1');
 	orderdetail_cont.html('');
