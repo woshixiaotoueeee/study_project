@@ -149,6 +149,11 @@ img {
   text-align: center;
   /* border:1px solid red;*/
 }
+.edit_infor .rider_infor .rider_detaile .rider_one .rider_account{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 .edit_infor .rider_infor .rider_detaile .rider_one > div:last-child{
   width:210px;
 }
