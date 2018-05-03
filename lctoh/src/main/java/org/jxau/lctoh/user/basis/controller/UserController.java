@@ -182,6 +182,13 @@ public class UserController extends BaseController{
 						Customer customer=customerService.login(user);
 						session.setAttribute(ConversationConfig.customerSession, customer);
 						session.setAttribute(ConversationConfig.cartSession, new Cart());
+						Location location=new Location();
+						location.setInfo("北京");
+						location.setCity("北京");
+						location.setProvince("北京");
+						location.setLatitude(BigDecimal.valueOf(40.066841));
+						location.setLongitude(BigDecimal.valueOf(116.396938));
+						session.setAttribute(ConversationConfig.locationSession, location);
 						responseData.successInfo(SuccessMSG.customerSuccessUrl);
 						break;
 					case 2:
