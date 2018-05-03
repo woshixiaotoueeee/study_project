@@ -211,7 +211,7 @@ function edit_portrait() {
 	    	<div class='upload_img'>
 	    	  <span>上传图片</span>
 	    	  <form id='updatePortrait'>
-	    	     <input type="file" name="file" id="file" accept="image/gif,image/jpeg,image/.png" />
+	    	     <input type="file" name="file" id="file" accept="image/gif,image/jpeg,image/png" />
 	    	  </form>	
 	    	 </div>
 	    </div>
