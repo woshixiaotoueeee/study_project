@@ -59,7 +59,7 @@ public class DispatchingService {
 		
 		State state=dispatching.getDispatchingState();
 		
-		if(state.getStateId()!=110002||dispatching.getDispatchingOrder().getOrderState().getStateId()!=100003)throw new OrderException(ErrorMSG.notKnow);
+		if(state.getStateId()!=110002)throw new OrderException(ErrorMSG.notKnow);
 		state.setStateId(110003);
 		
 		dispatching.setDispatchingState(state);

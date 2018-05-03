@@ -16,7 +16,7 @@ public class ImagesUrl{
 	//public final static String PortraitUrl="image".concat(File.separator).concat("portrait");//File.separator;
 	
 	/**头像路径*/
-	public final static String CustomerPortraitUrl="custmer/images/portrait/";
+	public final static String CustomerPortraitUrl="customer/images/portrait/";
 	
 	/**店家图片路径*/
 	public final static String RestaurantPortraitUrl="restaurant/images/portrait/";
