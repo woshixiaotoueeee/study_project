@@ -268,7 +268,7 @@ function  line_chart(dataList){
     	}
       var optionGragh={
        	 title:{
-            text:'完成订单过程线',
+            text:'订单及消费额过程线',
             x:'center',
             top: '0px',
             left: 'center',

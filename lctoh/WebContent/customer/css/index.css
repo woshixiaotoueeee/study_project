@@ -41,16 +41,16 @@ img{
 	float:left;
 }
 .content header .logo{
-	width:36px;
-	height:36px;
-	border-radius: 50%;
-	background: white;
-	box-shadow:  2px 2px 2px #aaa;
+	width:196px;
+	height:44px; 	
 	text-align: center;
-	line-height: 36px;
-	margin-top:5px;
+	margin-top:3px; 
 	margin-left: 20px;
-	color:black;
+    /* line-height: 36px; */
+	/* border-radius: 50%; */
+	/* background: white; */
+	/* box-shadow:  2px 2px 2px #aaa; */
+	/* color:black; */
 }
 /*标题*/
 .content header .title{
@@ -80,7 +80,7 @@ img{
           margin-right:54px;
 }	
 .content header  .nav>ul>li:hover{
-	background: #ef7e11;
+	background: #ee7524;
 	cursor:pointer;
 }	
 .content header  .nav>ul> .frist_show{

@@ -39,14 +39,79 @@ iframe{
   position: relative;
 }
 /*banner图*/
-.my_center .banner {
+/* .my_center .banner {
   height: 390px;
   width: 100%;
   background: #eee;
   position: relative;
-  /*border: 1px solid blue; */
+  border: 1px solid blue;
+} */
+img {
+    vertical-align: top;
 }
-.my_center .banner .ban_img{
+.w-slider {
+    width: 1204px;
+    height: 390px;
+    margin:0 auto;
+    position: relative;
+    overflow: hidden;
+}
+.slider {
+    width: 1204px;
+    height: 390px;
+
+}
+.slider-main {
+    width: 1204px;
+    height: 390px;
+}
+.slider-main-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1204px;
+    height: 390px;
+}
+.slider-main-img img {
+    width: 100%;
+    height:390px;
+}
+.slider-ctrl {
+    text-align: center;
+    padding-top: 5px;
+}
+.slider-ctrl-con {
+    width: 24px;
+    height: 20px;
+    display:inline-block;
+    background:url(../images/icon.png) no-repeat -24px -782px;
+    margin: 0 5px;
+    cursor: pointer;
+    text-indent: -20em;
+    overflow: hidden;
+}
+.current {
+    background-position: -24px -762px;
+}
+.slider-ctrl-prev,
+.slider-ctrl-next {
+    position: absolute;
+    top: 50%;
+    margin-top: -35px;
+    background:url(../images/icon.png) no-repeat 6px top;
+    width: 30px;
+    height: 35px;
+    opacity: 0.8;
+    cursor: pointer;
+}
+.slider-ctrl-prev {
+    left: 0;
+}
+.slider-ctrl-next {
+    right: 0;
+    background-position: -6px -44px;
+}
+/* .my_center .banner .ban_img{
 	width:100%;
 	height:390px;
 	position:absolute;
@@ -71,7 +136,7 @@ iframe{
 }
 .my_center .banner ul .first_li {
   background: black;
-}
+} */
 .my_center .my_infor {
   height: 502px;
   width: 100%;
@@ -594,7 +659,7 @@ iframe{
 }
 .my_center .my_infor .infor_right .my_order .order_infor .order_detaile {
   width: 100%;
-  height:400px;
+  height:380px;
   overflow-y:auto;
 }
 .my_center .my_infor .infor_right .my_order .order_infor .order_detaile .order_one {
@@ -835,8 +900,8 @@ iframe{
 .my_center .my_infor .infor_right .my_address .edit_infor .address_one .add_name .modify_del span:hover {
   cursor: pointer;
 }
-.my_center .my_infor .infor_right .my_address .edit_infor .address_one .add_ress span{
-	width:206px;
+.my_center .my_infor .infor_right .my_address .edit_infor .address_one .add_ress {
+	width:230px;
 	overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

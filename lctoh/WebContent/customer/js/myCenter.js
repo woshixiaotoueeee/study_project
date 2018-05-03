@@ -6,7 +6,101 @@ $(function(){
 	change_page();//接收参数不同时 跳转到不同的页面（个人资料 1 我的订单2 我的收藏3 我的地址4）
 	init();
 	
+	banner_change();
 })
+function banner_change(){
+	 var wSlider=document.querySelector('.w-slider');
+	   var sliderMain=document.querySelector('.slider-main');
+	   var imgs=sliderMain.children;//子元素节点
+	   var sliderCtrl=document.querySelector('.slider-ctrl');
+	   for(var i=0;i<imgs.length;i++){
+	       var span=document.createElement('span'); 
+	       span.setAttribute('class','slider-ctrl-con');
+	       sliderCtrl.insertBefore(span,sliderCtrl.children[1]);//在div slider-ctrl 添加span 从第二个开始
+	       span.innerText=imgs.length-i;   
+	   }
+	   var spans=sliderCtrl.children;//获取所有的span
+	   spans[1].setAttribute('class','slider-ctrl-con current');//高亮   
+	   var scrollWidth=wSlider.clientWidth;//元素可见区域的宽度
+	   for(var i=1;i<imgs.length;i++){
+	    imgs[i].style.left=scrollWidth+'px';
+	   }//初始化图片位置
+
+	   var iNow=0;
+	   for(var k in spans){
+	     //console.log(k);//spans[k];
+	     spans[k].onclick=function(){
+
+	        if(this.className=='slider-ctrl-prev'){//左按钮
+	            autoPlay();
+
+	        }
+	        else if(this.className=='slider-ctrl-next'){
+	            //console.log('右');
+	             autoPlay1();
+	        }
+	        else{
+	            //
+	            var that=this.innerHTML-1;//按钮图片对应的索引值
+	            if(that>iNow){//同右边一样的走法
+	                animate(imgs[iNow],{'left':-scrollWidth});
+	                imgs[that].style.left=scrollWidth+'px';
+	                animate(imgs[that],{'left':0});
+
+	            }
+	            else if(that<iNow){
+	                animate(imgs[iNow],{'left':scrollWidth});
+	                imgs[that].style.left=-scrollWidth+'px';
+	                animate(imgs[that],{'left':0});
+	                
+	            }
+	            iNow=that;
+	            animate(imgs[iNow],{'left':0});
+	          
+	        }
+	         hightLight();
+	     }
+
+	   }
+	   //给1-6好添加高亮
+	   //
+	   function hightLight(){
+	    for(var i=1;i<spans.length-1;i++){
+	        spans[i].className='slider-ctrl-con';
+	    }
+	    spans[iNow+1].className='slider-ctrl-con current';
+	   }
+	   //添加定时器
+	   var timer=null;
+	   timer=setInterval(autoPlay1,2000);
+
+	   //大盒子移入移出
+	   //
+	   wSlider.onmouseover=function(){
+	          clearInterval(timer);
+	   }
+	   wSlider.onmouseout=function(){
+	     clearInterval(timer);
+	     timer=(setInterval(autoPlay1,1000));
+	   }
+	   function autoPlay(){
+	           animate(imgs[iNow],{'left':scrollWidth});//当前去右边，
+	              iNow--;
+	              if(iNow<0)
+	                iNow=imgs.length-1;
+	             imgs[iNow].style.left=-scrollWidth+'px';
+	             animate(imgs[iNow],{'left':0});//下一张去当前位置
+	   }
+
+	   function autoPlay1(){//右按钮
+	            animate(imgs[iNow],{'left':-scrollWidth});//当前去左边，
+	              iNow++;
+	              iNow%=imgs.length;
+	              imgs[iNow].style.left=scrollWidth+'px';
+	              animate(imgs[iNow],{'left':0});//下一张去当前位置
+	              hightLight();
+	   }
+}
 function change_page(){
 	var urlmy=window.location.href;
     //alert(urlmy+'iframe地址栏'); 
@@ -197,6 +291,7 @@ function edit_portrait(_customer) {
 	var layerIndex=layer.open({
 	  title:['编辑头像', 'font-size:18px;'],
 	  type: 1,
+	  shade:0.2,
 	  area: ['500px', '450px'], //宽高
 	  content: str
 	});
@@ -271,6 +366,7 @@ function edit_name_eail(_customer){
 	var layerIndex=layer.open({
 		  title: ['修改资料', 'font-size:18px;'],
 		  type: 1,
+		  shade:0.2,
 		  area: ['544px', '400px'], //宽高
 		  content: str
 		});	
@@ -347,6 +443,7 @@ function edit_password(_customer){
 		var layerIndex=layer.open({
 		  title:['修改密码', 'font-size:18px;'],
 		  type: 1,
+		  shade:0.2,
 		  area: ['544px', '360px'], //宽高
 		  content: str
 		});
@@ -420,6 +517,7 @@ function add_address(){
 function delete_address(_this){
 	layer.open({
 		  title: ['删除地址', 'font-size:14px;'],
+		  shade:0.2,
 		  content: '是否确认删除？'
 		  ,btn: ['确认',  '取消']
 		  ,yes: function(index, layero){
@@ -451,7 +549,7 @@ function order_detail(orderId){
 		  title: ['订单详情', 'font-size:18px;'],
 		  type: 2,
 		  shadeClose: true,
-		  shade: 0.8,
+		  shade: 0.2,
 		  area: ['800px', '630px'],
 		  content: str  //iframe的url
 	 }); 
