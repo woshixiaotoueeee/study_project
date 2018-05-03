@@ -88,7 +88,7 @@
 			dish.dish_delete_or_not=0
 			dish.dish_update_time=#{dishUpdateTime}
 		where
-			dish.dish.dish_id=#{dishId}
+			dish.dish_id=#{dishId}
 	</update>
 	
 	<!--更新菜肴信息-->
@@ -99,12 +99,12 @@
 			dish.dish_price=#{dishPrice},
 			dish.dish_image=#{dishImage},
 			dish.dish_intro=#{dishIntro},
-			dish.dish_quantity#{dishQuantity},
+			dish.dish_quantity=#{dishQuantity},
 			dish.dish_state_id=#{dishState.stateId},
 			dish.dish_category_id=#{dishCategory.dishCategoryId},
 			dish.dish_update_time=#{dishUpdateTime}
 		where
-			dish.dish.dish_id=#{dishId}
+			dish.dish_id=#{dishId}
 	</update>
 	
 	<!--添加菜肴分类-->

@@ -58,7 +58,7 @@
 	<update id="deleteDishCategory" parameterType="DishCategory">
 		update dish_category
 		set
-			dish_category.dish_category_delete_or_not=0
+			dish_category.dish_category_delete_or_not=0,
 			dish_category.dish_category_update_time=#{dishCategoryUpdateTime}
 		where
 			dish_category.dish_category_id=#{dishCategoryId}
@@ -78,7 +78,6 @@
 			#{dishCategoryName},
 			#{dishCategoryState.stateId},
 			#{dishCategoryUpdateTime},
-			#{dishCategoryName},
 			#{dishCategoryRestaurant.restaurantId}
 		)
 	</insert>

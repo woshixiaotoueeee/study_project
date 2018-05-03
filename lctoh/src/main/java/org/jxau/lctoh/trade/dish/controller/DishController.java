@@ -19,6 +19,7 @@ import org.jxau.lctoh.trade.dish.service.DishCategoryService;
 import org.jxau.lctoh.trade.dish.service.DishService;
 import org.jxau.lctoh.user.customer.domain.Customer;
 import org.jxau.lctoh.user.restaurant.domain.Restaurant;
+import org.jxau.lctoh.user.restaurant.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,8 @@ public class DishController extends BaseController{
 	@Autowired
 	private DishCategoryService dishCategoryService;
 	
+	@Autowired
+	private RestaurantService restaurantService;
 	/**
 	 * 根据ID获取菜肴信息
 	 * @param dishId 菜肴ID String 字符串
@@ -248,6 +251,8 @@ public class DishController extends BaseController{
 			try{
 				
 				dishCategoryService.addDishCategory(dishCategory);
+				Restaurant res=restaurantService.findRestaurantService(restaurant.getRestaurantId(),null);
+				session.setAttribute(ConversationConfig.restaurantSession,res);
 				responseData.successInfo(SuccessMSG.addSuccessMSG);
 			}catch(Exception e){
 				e.printStackTrace();
@@ -274,12 +279,17 @@ public class DishController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/updateDishCategory",produces=EncodingConfig.produces)
-	public String updateDishCategory(DishCategory dishCategory){
+	public String updateDishCategory(DishCategory dishCategory ,HttpSession session){
 		if(dishCategory==null||dishCategory.getDishCategoryName()==null||dishCategory.getDishCategoryId()==null){
 			responseData.failInfo(ErrorMSG.parameterIsNull);
 		}else{
 			try{
+				
+				Restaurant restaurant=(Restaurant) session.getAttribute(ConversationConfig.restaurantSession);
 				dishCategoryService.updateDishCategory(dishCategory);
+				Restaurant res=restaurantService.findRestaurantService(restaurant.getRestaurantId(),null);
+				session.setAttribute(ConversationConfig.restaurantSession,res);
+				
 				responseData.successInfo(SuccessMSG.updateSuccessMSG);
 			}catch(Exception e){
 				e.printStackTrace();
@@ -304,12 +314,15 @@ public class DishController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/deleteDishCategory",produces=EncodingConfig.produces)
-	public String deleteDishCategory(DishCategory dishCategory){
+	public String deleteDishCategory(DishCategory dishCategory,HttpSession session){
 		if(dishCategory==null||dishCategory.getDishCategoryId()==null){
 			responseData.failInfo(ErrorMSG.parameterIsNull);
 		}else{
 			try{
 				dishCategoryService.deleteDishCategory(dishCategory);
+				Restaurant restaurant=(Restaurant) session.getAttribute(ConversationConfig.restaurantSession);
+				Restaurant res=restaurantService.findRestaurantService(restaurant.getRestaurantId(),null);
+				session.setAttribute(ConversationConfig.restaurantSession,res);
 				responseData.successInfo(SuccessMSG.deleteSuccessMSG);
 			}catch(Exception e){
 				e.printStackTrace();
@@ -342,12 +355,12 @@ public class DishController extends BaseController{
 		if(dish==null||dishCategoryId==null||
 				dish.getDishIntro()==null||
 				dish.getDishName()==null||
-				dish.getDishPrice()==null||
-				dish.getDishQuantity()==null
+				dish.getDishPrice()==null//||
+				//dish.getDishQuantity()==null
 				){
 			responseData.failInfo(ErrorMSG.parameterIsNull);
 		}else{
-			String xpath = session.getServletContext().getRealPath(File.separator).concat(ImagesUrl.DishPortraitUrl.replace("/", File.separator));
+			String xpath = session.getServletContext().getRealPath(File.separator).concat("restaurant/").concat(ImagesUrl.DishPortraitUrl.replace("/", File.separator));
 			String fileName = file.getOriginalFilename();
 	        //后缀判断
 	        if (!fileName.endsWith(".jpg") &&! fileName.endsWith(".jpeg")    
@@ -366,7 +379,7 @@ public class DishController extends BaseController{
 		        //新文件名
 		        String imagename=session.getId()+ System.currentTimeMillis()+"."+prefix;
 		        //数据库路径
-		        String sqlurl=ImagesUrl.DishPortraitUrl.concat(imagename);
+		        String sqlurl="/".concat(ImagesUrl.DishPortraitUrl.concat(imagename));
 		        File targetFile = new File(xpath, imagename);
 		        if (!targetFile.exists()) {
 		            targetFile.mkdirs();
@@ -377,7 +390,14 @@ public class DishController extends BaseController{
 		            dish.setDishImage(sqlurl);
 		            dish.setDishCategory(new DishCategory(dishCategoryId));
 		            dish.setDishId(Tools.getRandomString(32));
+		            dish.setDishQuantity(100);
 		            dishService.addDish(dish);
+		            
+		            Restaurant restaurant=(Restaurant) session.getAttribute(ConversationConfig.restaurantSession);
+					
+					Restaurant res=restaurantService.findRestaurantService(restaurant.getRestaurantId(),null);
+					session.setAttribute(ConversationConfig.restaurantSession,res);
+					
 					responseData.successInfo(SuccessMSG.addSuccessMSG);
 		            
 		        }catch (Exception e) {
@@ -412,12 +432,12 @@ public class DishController extends BaseController{
 				dish.getDishId()==null||
 				dish.getDishIntro()==null||
 				dish.getDishName()==null||
-				dish.getDishPrice()==null||
-				dish.getDishQuantity()==null
+				dish.getDishPrice()==null//||
+				//dish.getDishQuantity()==null
 				){
 			responseData.failInfo(ErrorMSG.parameterIsNull);
 		}else{
-			String xpath = session.getServletContext().getRealPath(File.separator).concat(ImagesUrl.DishPortraitUrl.replace("/", File.separator));
+			String xpath = session.getServletContext().getRealPath(File.separator).concat("restaurant/").concat(ImagesUrl.DishPortraitUrl.replace("/", File.separator));
 			String fileName = file.getOriginalFilename();
 	        //后缀判断
 	        if (!fileName.endsWith(".jpg") &&! fileName.endsWith(".jpeg")    
@@ -436,7 +456,7 @@ public class DishController extends BaseController{
 		        //新文件名
 		        String imagename=session.getId()+ System.currentTimeMillis()+"."+prefix;
 		        //数据库路径
-		        String sqlurl=ImagesUrl.DishPortraitUrl.concat(imagename);
+		        String sqlurl="/".concat(ImagesUrl.DishPortraitUrl.concat(imagename));
 		        File targetFile = new File(xpath, imagename);
 		        if (!targetFile.exists()) {
 		            targetFile.mkdirs();
@@ -446,7 +466,16 @@ public class DishController extends BaseController{
 		            file.transferTo(targetFile);
 		            dish.setDishImage(sqlurl);
 		            dish.setDishCategory(new DishCategory(dishCategoryId));
+		            Dish _dish= dishService.findDishByDishId(dish.getDishId());
+		            dish.setDishQuantity(_dish.getDishQuantity());
 		            dishService.updateDish(dish);
+		            
+		            Restaurant restaurant=(Restaurant) session.getAttribute(ConversationConfig.restaurantSession);
+					
+					Restaurant res=restaurantService.findRestaurantService(restaurant.getRestaurantId(),null);
+					session.setAttribute(ConversationConfig.restaurantSession,res);
+					
+		            
 					responseData.successInfo(SuccessMSG.updateSuccessMSG);
 		            
 		        }catch (Exception e) {
@@ -476,12 +505,18 @@ public class DishController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/deleteDish",produces=EncodingConfig.produces)
-	public String deleteDish(Dish dish){
+	public String deleteDish(Dish dish,HttpSession session){
 		if(dish==null||dish.getDishId()==null){
 			responseData.failInfo(ErrorMSG.parameterIsNull);
 		}else{
 			try{
 				dishService.deleteDish(dish);
+				 
+	            Restaurant restaurant=(Restaurant) session.getAttribute(ConversationConfig.restaurantSession);
+				
+				Restaurant res=restaurantService.findRestaurantService(restaurant.getRestaurantId(),null);
+				session.setAttribute(ConversationConfig.restaurantSession,res);
+				
 				responseData.successInfo(SuccessMSG.deleteSuccessMSG);
 			}catch(Exception e){
 				e.printStackTrace();
