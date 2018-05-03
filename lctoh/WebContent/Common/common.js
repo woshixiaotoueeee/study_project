@@ -95,9 +95,20 @@ Common.findDispatching=projectDirectory+'/RiderConreoller/findDispatching';
 Common.getRestaurantLoginInfo=projectDirectory+'/RestaurantController/getRestaurantLoginInfo';
 //店家公告修改
 Common.updateRestaurantNotice=projectDirectory+'/RestaurantController/updateRestaurantNotice';
-
-
-
+//店家图片修改
+Common.updateRestaurantPortrait=projectDirectory+'/RestaurantController/updateRestaurantPortrait';
+//店家详细信息修改
+Common.updateRestaurant=projectDirectory+'/RestaurantController/updateRestaurant';
+//添加菜肴分类
+Common.addDishCategory=projectDirectory+'/DishController/addDishCategory';
+//更改菜肴分类
+Common.updateDishCategory=projectDirectory+'/DishController/updateDishCategory';
+//删除菜肴分类
+Common.deleteDishCategory=projectDirectory+'/DishController/deleteDishCategory';
+//添加菜肴
+Common.addDish=projectDirectory+'/DishController/addDish';
+//更新菜肴菜肴
+Common.updateDish=projectDirectory+'/DishController/updateDish';
 
 //获取地址栏参数
 function GetQueryString(name)

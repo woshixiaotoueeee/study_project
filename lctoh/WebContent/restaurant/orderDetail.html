@@ -3,15 +3,19 @@
 <head>
 	<title>订单详情</title>
 	<link rel="stylesheet" type="text/css" href="./css/orderDetail.css">
+	<script src="/lctoh/Common/jquery-1.8.3.js"></script>
+	<script src="/lctoh/Common/layer/layer.js"> </script>
+	<script src="/lctoh/Common/common.js"></script>
+	<script src="./js/orderDetail.js"></script>
 </head>
 <body>
    <div class='orderDetail'>
       <div class='banner'>
           <div class='ban_img'>
-          	  <div id='110002' style='display:none;'><img src="/lctoh/images/order/rider_com.png"></div>
-	          <div id='110003' style='display:block;'><img src="/lctoh/images/order/rider_com.png"></div>
-	          <div id='110004' style='display:none;'><img src="/lctoh/images/order/haste_eat.png"></div>
-	          <div id='110005' style='display:none;'><img src="/lctoh/images/order/order_cancel.png"></div>
+          	  <div id='100002' style='display:none;'><img src="/lctoh/images/order/pnding_order.png"></div>
+	          <div id='100003' style='display:block;'><img src="/lctoh/images/order/rider_com.png"></div>
+	          <div id='100004' style='display:none;'><img src="/lctoh/images/order/haste_eat.png"></div>
+	          <div id='100005' style='display:none;'><img src="/lctoh/images/order/order_cancel.png"></div>
 	          
           </div>
           <div>
@@ -49,8 +53,8 @@
               <div class='name_num'>
                  <label>图拉米其林甜点</label>
                  <div class='btn_confim'>
-                     <input type='button' value='接单'/>
-                     <input type='button' value='拒绝'/>
+                     <input type='button' class='caozuo' value='接单'/>
+                     <input type='button' value='取消订单'/>
                  </div>
               </div>
               <div class='order_num'>
@@ -65,7 +69,7 @@
           <div class='my_dish'>
               <div class='cont_infor'>
                  <label>菜单</label>
-                 <div class='detail_cont'>
+                 <div class='detail_cont detail_cont_1'>
                      <div class='order_entry  order_title'>
                          <div class='ord_dishes'>菜品</div>
                          <div class='ord_num'>数量</div>
@@ -95,7 +99,7 @@
                      <div class='order_entry'></div>
                  </div>
                  <div class='total'>
-                     <span>总计<mask class='order_detail'>58</mask>元</span>
+                     <span>总计<mask class='order_detail'></mask>元</span>
                  </div>
               </div>
           </div>
@@ -107,16 +111,16 @@
 	                       <span>配送方式：</span><span>联创</span>
 	                   </div>
 	                   <div class='order_entry wcsj'>
-	                       <span>送达时间：</span><span class='info'>12:20</span>
+	                       <span>送达时间：</span><span class='info'></span>
 	                   </div>
 	                    <div class='order_entry addressName'>
-	                       <span>联系人：</span><span class='info'>小兵</span>
+	                       <span>联系人：</span><span class='info'></span>
 	                   </div>
 	                   <div class='order_entry addressPhone'>
-	                       <span>联系方式：</span><span class='info'>17610829980</span>
+	                       <span>联系方式：</span><span class='info'></span>
 	                   </div>
 	                   <div class='order_entry addressInfo'>
-	                       <span>送餐地址：</span><span class='info'>北京市昌平区沙河镇沙阳路...</span>
+	                       <span>送餐地址：</span><span class='info'></span>
 	                   </div>
 	                </div>
               </div>

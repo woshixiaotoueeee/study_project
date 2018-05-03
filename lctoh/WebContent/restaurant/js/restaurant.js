@@ -163,12 +163,13 @@ function  pie_chart(dataList){
 		        trigger: 'item',
 		        formatter: "{a} <br/>{b} : {c} ({d}%)"
 		    },
+		    /*
 		    legend: {
 		        //orient: 'vertical',
 		         bottom: 0,
                  left: 'center',
 		         data: [data[0].psnm,data[1].psnm,data[2].psnm,data[3].psnm]
-		    },
+		    },*/
 		    series : [
 		        {
 		            name: '配送信息',
