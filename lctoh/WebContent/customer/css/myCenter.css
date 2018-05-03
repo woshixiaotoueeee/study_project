@@ -188,12 +188,13 @@ img {
   height: 12px;
   margin-left: 10px;
   margin-right: 10px;
+  margin-top:19px;
   float: left;
 }
 .my_center .my_infor .infor_left ul .first_infor .list_cont .img_list {
   width: 30px;
   height: 30px;
-  margin-top: 8px;
+  margin-top: 15px;
   margin-left: 0;
   margin-right: 5px;
 }
