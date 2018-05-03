@@ -98,10 +98,11 @@ function initDish(dcid){
 			}
 		}
 	}else{
-		for(var i=0;i<dishCategoryList.length&&dcid==dishCategoryList[i].dishCategoryId;i++){
-			for(var j=0;j<dishCategoryList[i].dishList.length;j++){
-				str+=dishToHtml(dishCategoryList[i].dishList[j]);
-			}
+		for(var i=0;i<dishCategoryList.length;i++){
+			if(dcid==dishCategoryList[i].dishCategoryId)
+				for(var j=0;j<dishCategoryList[i].dishList.length;j++){
+					str+=dishToHtml(dishCategoryList[i].dishList[j]);
+				}
 		}
 	}
 	dishHtml.html(str);
@@ -121,7 +122,7 @@ function dishToHtml(dish){
 			"<div class='single_sales'><div class='img_score'>" +
 			"<img src='./images/store_detail/xingxing.png'>" +
 			"</div>" +
-			"<div class='shop_num'>月售<span>264份</span></div>" +
+			"<div class='shop_num'>月售<span>"+dish.salesVolume+"份</span></div>" +
 			"</div>" +
 			"<div class='single_price'><span class='shop_state'>￥"+dish.dishPrice.toFixed(2)+"</span>" +
 			"<div class='pic_car'><img src='./images/store_detail/addbuy.png'></div>" +

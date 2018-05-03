@@ -42,7 +42,7 @@ function initAddress(addressList){
 		str+="<div class='address_one address_ck'><div class='add_name add_show'><div class='name_sex'>" +
 			"<span class='cust_name' id='"+addressList[i].addressId+"'>"+addressList[i].addressName+"</span><span></span>" +
 			"<span class='add_phone add_show cust_phone'>"+addressList[i].addressPhone+"</span></div></div>" +
-			"<div class='add_ress add_show'><span class='cust_address'>"+addressList[i].addressProvince+addressList[i].addressCity+addressList[i].addressInfo+"</span></div></div>";
+			"<div class='add_ress add_show'><span class='cust_address'>"+addressList[i].addressInfo+"</span></div></div>";
 	}
 	str+="<div class='address_one address_new'><div  id='add_new'>" +
 			"<div class='ck_img'>+</div><div class='add_new'>添加新地址</div></div></div>";
