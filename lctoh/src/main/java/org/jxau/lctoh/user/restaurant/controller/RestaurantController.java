@@ -338,6 +338,7 @@ public class RestaurantController extends BaseController {
 			_restaurant.setRestaurantLatitude(restaurant.getRestaurantLatitude());
 			_restaurant.setRestaurantLongitude(restaurant.getRestaurantLongitude());
 			_restaurant.setRestaurantAddressInfo(restaurant.getRestaurantAddressInfo());
+			_restaurant.setRestaurantOfferPrice(restaurant.getRestaurantOfferPrice());
 			
 			
 			try{

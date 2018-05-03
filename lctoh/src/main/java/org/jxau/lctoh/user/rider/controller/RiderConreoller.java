@@ -342,7 +342,7 @@ public class RiderConreoller extends BaseController {
 				_user.setUserSex(user.getUserSex());
 				_rider.setRiderUser(_user);
 				riderService.updateRider(_rider);
-				session.setAttribute(ConversationConfig.riderSession, rider);
+				session.setAttribute(ConversationConfig.riderSession, _rider);
 				ServletContext servletContext=session.getServletContext();
 				Map map=(Map) servletContext.getAttribute(ConversationConfig.riderContext);
 				map.remove(rider.getRiderId());

@@ -97,7 +97,7 @@ public class OrderService {
 		Customer _customer=order.getOrderCustomer();
 		
 		
-		if(_customer.getCustomerId().equals(customer.getCustomerId()))
+		if(!(_customer.getCustomerId().equals(customer.getCustomerId())))
 			throw new OrderException(ErrorMSG.noPower);
 		if(_customer.getCustomerBalance().doubleValue()<order.getOrderPrice().doubleValue()){
 			throw new OrderException(ErrorMSG.insufficienFunds);
@@ -126,7 +126,7 @@ public class OrderService {
 	public void confirmationOrder(String orderId, Restaurant restaurant) throws OrderException {
 		Order order=orderDao.findOrderByOrderId(orderId);
 		Restaurant _restaurant=order.getOrderRestaurant();
-		if(_restaurant.getRestaurantId().equals(restaurant.getRestaurantId()))
+		if(!(_restaurant.getRestaurantId().equals(restaurant.getRestaurantId())))
 			throw new OrderException(ErrorMSG.noPower);
 		
 		State state=order.getOrderState();
@@ -150,7 +150,7 @@ public class OrderService {
 		Order order=orderDao.findOrderByOrderId(orderId);
 		
 		Customer _customer=order.getOrderCustomer();
-		if(_customer.getCustomerId().equals(customer.getCustomerId()))
+		if(!(_customer.getCustomerId().equals(customer.getCustomerId())))
 			throw new OrderException(ErrorMSG.noPower);
 		
 		Restaurant restaurant=order.getOrderRestaurant();
