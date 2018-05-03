@@ -56,11 +56,14 @@ function jump_click(){
   		  $('.sec_iframe').css('height','680px');
 		  var num=1;   //1代表进入店家设置页面
 		  var url='./restCenter.html?num='+num;
+		  $('.nav ul li').removeClass('frist_show');
 		  $('#iframe_a').attr('src',url);
 	})
 	$('#rest_finance').click(function(){  //财务管理
 		  $('.sec_iframe').css('height','680px');
-		  var num=2;   //2代表进入我的订单页面
+		  var num=2;   //2
+		  $('.nav ul li').removeClass('frist_show');
+		  $('#finance_manage').addClass('frist_show');
 		  var url='./restCenter.html?num='+num;
 		  $('#iframe_a').attr('src',url);
 	})
