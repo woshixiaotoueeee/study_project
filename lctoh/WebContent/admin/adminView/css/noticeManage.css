@@ -152,6 +152,11 @@ img {
   text-align: center;
   /* border:1px solid red;*/
 }
+.edit_infor .notice_infor .notice_detaile .notice_one  .notice_id{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 .edit_infor .notice_infor .notice_detaile .notice_one > div:last-child{
   width:210px;
 }

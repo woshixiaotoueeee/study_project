@@ -154,6 +154,11 @@ img {
   text-align: center;
   /* border:1px solid red;*/
 }
+.edit_infor .order_infor .order_detaile .order_one .order_id{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 .edit_infor .order_infor .order_detaile .order_one > div:last-child{
   width:190px;
 }
