@@ -118,26 +118,26 @@ function load_data(){   //获取加载数据（订单数据和今日总览）
 function  pie_chart(dataList){
 		var newDispatching={
             psnm:"订单",
-            num:"0"
+            num:0
          };
 		var pszDispatching={
 	            psnm:"配送中",
-	            num:"0"
+	            num:0
 	         };
 		var zapsDispatching={
 	            psnm:"完成配送",
-	            num:"0"
+	            num:0
 	         };
 		var ycDispatching={
 	            psnm:"异常订单",
-	            num:"0"
+	            num:0
 	         };
 		for(var i=0;i<dataList.length;i++){
 			if(dataList[i].type<100003){
 				newDispatching.num+=dataList[i].count;
-			}else if(dataList[i].type=100003){
+			}else if(dataList[i].type==100003){
 				pszDispatching.num+=dataList[i].count;
-			}else if(dataList[i].type=100004){
+			}else if(dataList[i].type==100004){
 				zapsDispatching.num+=dataList[i].count;
 			}else if(dataList[i].type>100004){
 				ycDispatching.num+=dataList[i].count;

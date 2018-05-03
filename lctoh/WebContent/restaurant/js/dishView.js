@@ -22,6 +22,7 @@ function initdish(dcid){
 	for(var i=0;i<dishcategoryList.length;i++){
 		if(dcid==dishcategoryList[i].dishCategoryId){
 			var dishlist=dishcategoryList[i].dishList;
+			$('#dishes_num').html(dishlist.length);
 			for(var j=0;j<dishlist.length;j++){
 				item=dishlist[j];
 				str+="<div class='product_one'><div class='img_dish' ><img src='../restaurant"+item.dishImage+"'></div>" +

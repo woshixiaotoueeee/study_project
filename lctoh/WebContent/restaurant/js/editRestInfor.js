@@ -27,7 +27,7 @@ function initRestaurantToHtml(_restaurant){
 	
 	$("#suggestId").val(_restaurant.restaurantAddressInfo);
 	
-	$("#dishes_brief").html(_restaurant.restaurantNotice);
+	$("#dishes_brief").val(_restaurant.restaurantNotice);
 	
 	
 }
@@ -137,7 +137,7 @@ function save_infor(){
 		var resData={};
 		resData.cityName=cityName;
 		resData.restaurantLongitude=restaurant.restaurantLongitude;
-		resData.restaurantLatitude=restaurant.restaurantLongitude;
+		resData.restaurantLatitude=restaurant.restaurantLatitude;
 		resData.restaurantName=$("#upcustomerNickname").val();
 		resData.restaurantDeliveryFee=$("#restaurantDeliveryFee").val();
 		
@@ -146,7 +146,7 @@ function save_infor(){
 		resData.userEmail=$("#upemail").val();
 		resData.restaurantAddressInfo=$("#suggestId").val();
 		
-		resData.restaurantNotice=$("#dishes_brief").html();
+		resData.restaurantNotice=$("#dishes_brief").val();
 		
 		
 		$.ajax({
