@@ -1,4 +1,5 @@
 //管理员基础信息设置代码
+var admin=null;
 $(function(){
    //初始化管理员个人信息设置
    init_admin();
@@ -9,6 +10,26 @@ $(function(){
 })
 function init_admin(){
    //初始化数据
+   if(admin==null)return;
+   /* 获取管理员信息*/
+   $.ajax({
+	   type: "post",
+	   data:null,
+	   url:Common.getRiderLoginInfo,
+	   dataType: "json",
+	   success:function(data){
+		   if(data.state==1){
+			   rider=data.responseInfo;
+			   setAdmintoHtml(rider);
+		   }
+		   else{
+			  /* layer.msg(data.responseInfo, {time:2500});
+			   top.location.href=projectDirectory+"/Login/login.html";*/
+		   }
+	   },
+	   error:function(errordate){}
+	})
+	
 }
 function edit_password(){ //修改密码
    $('#edit_password').click(function(){
