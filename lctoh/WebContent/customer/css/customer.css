@@ -60,8 +60,8 @@ ul li{
 .content>section .sec_hotel_type{
 	margin-top: 10px;
 	width:100%;
-	background: #f5efea;
-	box-shadow: 1px 2px 2px #f5efea;
+	background: #f8f8f8;
+	box-shadow: 1px 2px 2px #f8f8f8;
 	font-size: 16px;
 	color:#333;
 }
@@ -152,8 +152,8 @@ ul li{
 .content>section .sec_hotel_nav{
     margin-top: 10px;
 	width:100%;
-	background: #f5efea;
-	box-shadow: 1px 2px 2px #f4efeb;
+	background: #f8f8f8;
+	box-shadow: 1px 2px 2px #f8f8f8;
 	font-size: 14px;
 	color:#333;
 }
@@ -189,12 +189,12 @@ ul li{
 }
 /*店铺矩形及全部内容.sec_hotel_content */
 .content>section .sec_hotel_content{
-	height:660px;
+    height:660px;
 	width:100%;
 	margin-top: 10px;
-	background: #f5efea;
+	background: #f8f8f8;
 	/* border:1px solid red; */
-	box-shadow: 1px 2px 2px #f5efea;
+	box-shadow: 1px 2px 2px #f8f8f8;
 	overflow-y:auto;
 }
 /*.cont_shop 每个店铺*/

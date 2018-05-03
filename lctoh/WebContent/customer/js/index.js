@@ -7,8 +7,11 @@ function init(){
 	/* var initStr='<iframe src="./customer.html" name="iframe_a" scrolling="no"></iframe>';
 	 $('#section_change').html(initStr);
 	 $('footer').css('margin-top','-5px'); */	
-	
-	
+	//input 的获取焦点事件
+	  $('.query_btn input').focus(function(){
+	    	$(this).attr('placeholder','');	
+	   })
+	 
 }
 function loadRestaurantHtml(){
   
@@ -27,6 +30,10 @@ function loadRestaurantHtml(){
 	//点击我的设置进行调整事件
 	$('.set_up ul li').click(function(){
 		$(this).css('background','#ccc').siblings().css('background','#fff');
+		 $('.query_btn').css('display','none');
+		 $('.sec_right').css('display','none');
+		 $('.nav ul li').removeClass('frist_show');
+		 $('#section_change').css('height','920px');
 	})
 	$('#my_center').click(function(){ //个人资料
 		  var num=1;   //1代表进入我的资料页面
@@ -51,6 +58,7 @@ function loadRestaurantHtml(){
 	})
 	$('#sign_out').click(function(){  //退出登录
 	   //alert('跳到登录页面')
+		window.location.href=projectDirectory+'/Login/login.html'; 
 	})
    /*
     *  跳转页面设置
@@ -62,7 +70,8 @@ function loadRestaurantHtml(){
 		    //var url='./个人信息.html?num='+num 一个参数
 		    var url='./myCenter.html?num='+num;
 		    var str='<iframe src='+url+' id="iframe_mycoll"  name="iframe_a" scrolling="no"></iframe>';
-		   
+		    $('.query_btn').css('display','none');
+		    $('.sec_right').css('display','none');	
 		   //var str='<iframe src='+url+' id="iframe_order" name="iframe_a" scrolling="no"></iframe>';
 		   $('#section_change').html(str);
 		   $(this).addClass('frist_show').siblings().removeClass('frist_show');
@@ -81,6 +90,7 @@ function loadRestaurantHtml(){
 	   $('#last_loca').click(function(){
 		   $('#section_change').css('width','100%');
 		   $('.notice_show').css('display','none');
+		   $('.query_btn').css('display','none');
 		   var str='<iframe src="../location/address_confirm.html" name="iframe_a" scrolling="no"></iframe>';
 		   $('#section_change').html(str); 
 	   })
@@ -88,6 +98,8 @@ function loadRestaurantHtml(){
 	   $('.cont_shop').click(function(){
 		   var str='<iframe src="./storeCenter.html" name="iframe_a" scrolling="no"></iframe>';
 		   $('#section_change').html(str); 
+		   $('.query_btn').css('display','none');
+		   $('.sec_right').css('display','none');	
 		   $('#section_change').css('height','960px');
 	   })
 	    /*点击跳转首页*/
@@ -95,7 +107,8 @@ function loadRestaurantHtml(){
 	    	$(this).addClass('frist_show').siblings().removeClass('frist_show');
 	        var initStr='<iframe src="./customer.html" name="iframe_a" scrolling="no"></iframe>';
 	   	    $('#section_change').html(initStr);
-	   	 
+	   	    $('.query_btn').css('display','block');
+	   	    $('.sec_right').css('display','block');	
 	   	    $('#section_change').css('height','860px');
 	   	    
 	    })
@@ -104,12 +117,17 @@ function loadRestaurantHtml(){
 	    	 $(this).addClass('frist_show').siblings().removeClass('frist_show');
 	         var initStr='<iframe src="./shopingCar.html" name="iframe_a" scrolling="no"></iframe>';
 	   	     $('#section_change').html(initStr);
+	   	     $('.sec_right').css('display','none');	
+	   	     $('.query_btn').css('display','none');
 	   	     $('#section_change').css('height','760px');
 	    })
 	    /*点击到联系我们*/
 	    $('#contact_us').click(function(){	    
 	        var str='<iframe src="../ownShare/connect.html" name="iframe_a" scrolling="no"></iframe>';
 	   	    $('#section_change').html(str);
+	   	    //隐藏不需要的
+	   	    $('.query_btn').css('display','none');
+	   	    $('.sec_right').css('display','none');	 
 	   	    $(this).addClass('frist_show').siblings().removeClass('frist_show');
 	   	    $('#section_change').css({'height':'860px','width':'100%','margin-left':'0px'});
 	    })
