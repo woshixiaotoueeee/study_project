@@ -131,7 +131,7 @@ function my_center_list(){
 	       center_tabs(_this);	
 	       /*$('.span_left').eq(index).css('display','block').siblings().css('display','none');*/
 	       $('.center_cont').eq(index-1).css('display','block').siblings().css('display','none');  
-	       $('.pic_infor_right').css('display','block');   
+	       /*$('.pic_infor_right').css('display','block');*/   
 	    })	    
 	  /*新订单 正在配送 取消订单 完成订单切换*/	 	  
 }
