@@ -114,16 +114,16 @@
 			orders
 		where
 			orders.order_delete_or_not=1
-			<if test="stm != null and stm ==''" >
+			<if test="stm != null and stm !=''" >
 				rt.recording_time_id&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
 			</if>
-			<if test="etm != null and etm ==''" >
+			<if test="etm != null and etm !=''" >
 				and rt.recording_time_id&lt;=str_to_date(#{etm},'%Y-%m-%d %H:%i:%s')
 			</if>
-			<if test="customerId != null and customerId ==''" >
+			<if test="customerId != null and customerId !=''" >
 				and orders.order_customer_id=#{customerId}
 			</if>
-			<if test="restaurantId != null and restaurantId ==''" >
+			<if test="restaurantId != null and restaurantId !=''" >
 				and orders.order_restaurant_id=#{restaurantId}
 			</if>
 		order by orders.order_creat_time desc
