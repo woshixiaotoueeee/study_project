@@ -115,10 +115,10 @@
 		where
 			orders.order_delete_or_not=1
 			<if test="stm != null and stm !=''" >
-				rt.recording_time_id&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
+				and orders.order_creat_time&gt;=str_to_date(#{stm},'%Y-%m-%d %H:%i:%s')
 			</if>
 			<if test="etm != null and etm !=''" >
-				and rt.recording_time_id&lt;=str_to_date(#{etm},'%Y-%m-%d %H:%i:%s')
+				and orders.order_creat_time&lt;=str_to_date(#{etm},'%Y-%m-%d %H:%i:%s')
 			</if>
 			<if test="customerId != null and customerId !=''" >
 				and orders.order_customer_id=#{customerId}
