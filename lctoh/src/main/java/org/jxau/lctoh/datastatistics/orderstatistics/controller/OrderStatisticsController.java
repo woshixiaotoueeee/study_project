@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.jxau.lctoh.datastatistics.orderstatistics.daomain.OrderStatisticsQureyModel;
 import org.jxau.lctoh.datastatistics.orderstatistics.service.OrderStatisticsService;
 /**
- * @author qdt_PC
+ * @author qdt_PC   
  */
 @Controller
 @RequestMapping("/OrderStatisticsController")
